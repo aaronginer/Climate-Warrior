@@ -19,8 +19,10 @@ public class InstantiateTurbineTower : MonoBehaviour
     private bool didCollide = false;
 
     private static float X_COORD_BOUND = .95f;
-    private static float X_COORD_LOSE_MIN = -0.016f;
-    private static float X_COORD_LOSE_MAX = 0.216f;
+    private static float X_COORD_LOSE_MIN = -0.1f;
+    private static float X_COORD_LOSE_MAX = 0.12f;
+
+    private List<GameObject> gameObjectsToMove = new List<GameObject>();
     
             
 
@@ -36,32 +38,64 @@ public class InstantiateTurbineTower : MonoBehaviour
 
     void Start()
     {
-        SpawnNewWallBlock();
+        gameObjectsToMove.Add(GameObject.Find("TilesGrass"));
+        gameObjectsToMove.Add(GameObject.Find("TilemapTower"));
+        SpawnNewWallBlock(true);
     }
 
-    void SpawnNewWallBlock()
+    void SpawnNewWallBlock(bool isFirstSpawn = false)
     {
         float positionX = Random.Range(-X_COORD_BOUND, X_COORD_BOUND);
 
+        if(!isFirstSpawn)
+        {
+            MoveOtherGameObjectsDown();
+        }
+            
+
         currentWallBlockToMove = Instantiate(wallBlock, new Vector3(positionX, 0.2f, 0), Quaternion.identity);
+        didCollide = false;
+        gameObjectsToMove.Add(currentWallBlockToMove);
 
         rigidbodyComponent = currentWallBlockToMove.GetComponent<Rigidbody2D>();
 
         speed += 0.01f;
         currentState = positionX > 0 ? StateEnum.movingLeft : StateEnum.movingRight;
-        didCollide = false;
+    }
+
+    void MoveOtherGameObjectsDown()
+    {
+        int numGameObjects = gameObjectsToMove.Count;
+        if (numGameObjects > 4)
+        {
+            GameObject blockOnTop = gameObjectsToMove[numGameObjects - 1];
+            GameObject blockBelowTop = gameObjectsToMove[numGameObjects - 2];
+            GameObject blockToRemove = gameObjectsToMove[numGameObjects - 3];
+            Vector3 posTopBlock = blockOnTop.transform.position;
+            Vector3 posBlockBelowTop = blockBelowTop.transform.position;
+            Vector3 posBlockToRemove = blockToRemove.transform.position;
+            Destroy(blockToRemove);
+            gameObjectsToMove.RemoveAt(numGameObjects - 3);
+            blockOnTop.transform.position = new Vector3(posTopBlock.x, posBlockBelowTop.y, posTopBlock.z);
+            blockBelowTop.transform.position = new Vector3(posBlockBelowTop.x, posBlockToRemove.y, posBlockBelowTop.z);
+        } else
+        {
+            foreach (GameObject obj in gameObjectsToMove)
+            {
+                obj.transform.position -= new Vector3(0, 0.6f, 0);
+            }
+        }
+        
     }
 
     void MoveLeft()
     {
-        Rigidbody2D rb = currentWallBlockToMove.GetComponent<Rigidbody2D>();
-        rb.MovePosition(currentWallBlockToMove.transform.position - new Vector3(1, 0, 0) * Time.deltaTime * speed);
+        rigidbodyComponent.MovePosition(currentWallBlockToMove.transform.position - new Vector3(1, 0, 0) * Time.deltaTime * speed);
     }
 
     void MoveRight()
     {
-        Rigidbody2D rb = currentWallBlockToMove.GetComponent<Rigidbody2D>();
-        rb.MovePosition(currentWallBlockToMove.transform.position + new Vector3(1, 0, 0) * Time.deltaTime * speed);
+        rigidbodyComponent.MovePosition(currentWallBlockToMove.transform.position + new Vector3(1, 0, 0) * Time.deltaTime * speed);
     }
 
     private float getCurrentX()
@@ -69,32 +103,52 @@ public class InstantiateTurbineTower : MonoBehaviour
         return currentWallBlockToMove.transform.position.x;
     }
 
-    void CheckReleaseOk()
-    {
-        float currentX = getCurrentX();
-        if(currentX < X_COORD_LOSE_MIN || currentX > X_COORD_LOSE_MAX)
-        {
-            currentState = StateEnum.lost;
-        }
-        
-    }
-
-    void CheckState()
+    void CheckMovingBound()
     {
         if (currentWallBlockToMove == null) return;
         float currentX = getCurrentX();
-        if (currentState == StateEnum.still)
-        {
-
-        } else if(currentState == StateEnum.released)
-        {
-            CheckReleaseOk();
-        } else if (currentX < -X_COORD_BOUND)
+        if (currentX < -X_COORD_BOUND)
         {
             currentState = StateEnum.movingRight;
-        } else if (currentX > X_COORD_BOUND)
+        }
+        else if (currentX > X_COORD_BOUND)
         {
             currentState = StateEnum.movingLeft;
+        }
+    }
+
+    void CheckReleaseOk()
+    {
+        float currentX = getCurrentX();
+        if (currentX < X_COORD_LOSE_MIN || currentX > X_COORD_LOSE_MAX)
+        {
+            Debug.Log("coollision x value bad, lost");
+            Debug.Log(currentX);
+            currentState = StateEnum.lost;
+        } else
+        {
+
+            Debug.Log("coollision OK, spawning new block");
+            Debug.Log(currentX);
+            SpawnNewWallBlock();
+        }
+
+    }
+
+    void CheckCollisionState()
+    {
+        Debug.Log("checking collision state");
+
+        if (currentWallBlockToMove == null) return;
+
+        Debug.Log("    currentWallBlockToMove is not null");
+
+        if (currentState == StateEnum.released && didCollide)
+        {
+            CheckReleaseOk();
+        } else if (currentState == StateEnum.still)
+        {
+
         }
     }
 
@@ -109,7 +163,31 @@ public class InstantiateTurbineTower : MonoBehaviour
         return currentWallBlockToMove != null && currentState == StateEnum.movingRight;
     }
 
+    public void onCollide()
+    {
+        didCollide = true;
+    }
+
     private void FixedUpdate()
+    {
+        if (getIsMovingLeft())
+        {
+            MoveLeft();
+            CheckMovingBound();
+        } else if (getIsMovingRight())
+        {
+            MoveRight();
+            CheckMovingBound();
+        }
+        else
+        {
+            CheckCollisionState();
+        } 
+
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         bool isMoving = getIsMovingLeft() || getIsMovingRight();
 
@@ -117,28 +195,5 @@ public class InstantiateTurbineTower : MonoBehaviour
         {
             currentState = StateEnum.released;
         }
-
-        if (getIsMovingLeft())
-        {
-            MoveLeft();
-        } else if (getIsMovingRight())
-        {
-            MoveRight();
-        }
-        else if (currentState == StateEnum.released)
-        {
-           //WaitForCollision();
-        }
-
-        CheckState();
-
-        
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //MoveLeft();
     }
 }
