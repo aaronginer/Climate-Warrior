@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using UnityEngine.UI;
 
 public class InstantiateTurbineTower : MonoBehaviour
 {
     // Start is called before the first frame update
+
+    //public Image progressBar;
 
     // Reference to the wall block Prefab.
     public GameObject wallBlock;
@@ -21,10 +24,13 @@ public class InstantiateTurbineTower : MonoBehaviour
     private static float X_COORD_BOUND = .95f;
     private static float X_COORD_LOSE_MIN = -0.1f;
     private static float X_COORD_LOSE_MAX = 0.12f;
+    private static int NUM_BLOCKS_WIN = 15;
+
+    private int blockSpawnCount = 0;
+    
 
     private List<GameObject> gameObjectsToMove = new List<GameObject>();
     
-            
 
     private enum StateEnum
     {
@@ -32,7 +38,8 @@ public class InstantiateTurbineTower : MonoBehaviour
         movingLeft,
         movingRight,
         released,
-        lost
+        lost,
+        win
     }
 
 
@@ -54,12 +61,14 @@ public class InstantiateTurbineTower : MonoBehaviour
             
 
         currentWallBlockToMove = Instantiate(wallBlock, new Vector3(positionX, 0.2f, 0), Quaternion.identity);
+        blockSpawnCount += 1;
         didCollide = false;
+
         gameObjectsToMove.Add(currentWallBlockToMove);
 
         rigidbodyComponent = currentWallBlockToMove.GetComponent<Rigidbody2D>();
 
-        speed += 0.01f;
+        speed += 0.05f;
         currentState = positionX > 0 ? StateEnum.movingLeft : StateEnum.movingRight;
     }
 
@@ -117,20 +126,32 @@ public class InstantiateTurbineTower : MonoBehaviour
         }
     }
 
+    bool CheckWin()
+    {
+        if (blockSpawnCount >= NUM_BLOCKS_WIN)
+        {
+            currentState = StateEnum.win;
+            return true;
+        }
+        return false;
+    }
+
     void CheckReleaseOk()
     {
         float currentX = getCurrentX();
         if (currentX < X_COORD_LOSE_MIN || currentX > X_COORD_LOSE_MAX)
         {
-            Debug.Log("coollision x value bad, lost");
-            Debug.Log(currentX);
+            // coollision x value bad,, lost
             currentState = StateEnum.lost;
         } else
         {
 
-            Debug.Log("coollision OK, spawning new block");
-            Debug.Log(currentX);
-            SpawnNewWallBlock();
+            // coollision OK, spawning new block
+            if(!CheckWin())
+            {
+                SpawnNewWallBlock();
+            }
+            
         }
 
     }
@@ -163,9 +184,9 @@ public class InstantiateTurbineTower : MonoBehaviour
         return currentWallBlockToMove != null && currentState == StateEnum.movingRight;
     }
 
-    public void onCollide()
-    {
-        didCollide = true;
+    void FillProgressBar()
+    { 
+        //progressBar.fillAmount
     }
 
     private void FixedUpdate()
@@ -182,7 +203,8 @@ public class InstantiateTurbineTower : MonoBehaviour
         else
         {
             CheckCollisionState();
-        } 
+        }
+        FillProgressBar();
 
     }
 
