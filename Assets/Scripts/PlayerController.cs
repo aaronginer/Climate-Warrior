@@ -69,7 +69,8 @@ public class PlayerController : MonoBehaviour
     }
 
     private bool TryMove(Vector2 direction) {
-        int count = rb.Cast(
+        if(direction != Vector2.zero) {
+            int count = rb.Cast(
                 direction,
                 movementFilter,
                 castCollisions,
@@ -77,12 +78,16 @@ public class PlayerController : MonoBehaviour
             );
 
             if (count == 0) {
-                rb.MovePosition(rb.position + movementInput * moveSpeed * Time.fixedDeltaTime);
+                rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
                 return true;           
             }
             else {
                 return false;
             }
+        } else {
+            // cant move without direction
+            return false;
+        }
 
     }
 }
