@@ -1,0 +1,5 @@
+﻿1"Hello there!"::2"Hello!"::3"Not interested."
+2"Would you like some bread? :)"::4"Sure, looks great!"::5"How much is it?"
+3"Have a nice day!"
+4"Here you go, bye!"
+5"It's 20 euros :)"::3"That's too expensive, Bye :)"::4"I'll take two!"
