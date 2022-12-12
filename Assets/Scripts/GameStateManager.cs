@@ -13,7 +13,7 @@ public class GameStateManager : MonoBehaviour
     
     private string _tmpPath = "";
     private string _persistentPath = "";
-    private GameState _gameState = null;
+    public GameState gameState = null;
 
     private void Awake()
     {
@@ -22,37 +22,41 @@ public class GameStateManager : MonoBehaviour
             Destroy(this);
             return;
         }
-        else
-        {
-            GSM = this;
-        }
+        GSM = this;
         
         DontDestroyOnLoad(this);
 
         _tmpPath = Application.dataPath + Path.AltDirectorySeparatorChar + "GameState.json";
         _persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "GameState.json";
+
+        gameState = new GameState("Aaron", 6);
+    }
+
+    private void Start()
+    {
+        SceneManager.LoadScene("Scene1", LoadSceneMode.Single);
     }
 
     public static void Save(GameState gameState)
     {
-        GSM._gameState = gameState;
+        GSM.gameState = gameState;
     }
 
     public static GameState Load()
     {
-        return GSM._gameState;
+        return GSM.gameState;
     }
     
     public static void SaveToDisk()
     {
-        if (GSM._gameState == null)
+        if (GSM.gameState == null)
         {
             Debug.Log("No game state available to save.");
             return;
         }
 
         using StreamWriter writer = new StreamWriter(GSM._tmpPath);
-        string json = JsonUtility.ToJson(GSM._gameState);
+        string json = JsonUtility.ToJson(GSM.gameState);
         writer.Write(json);
         
         Debug.Log("Game state saved.");
@@ -69,15 +73,15 @@ public class GameStateManager : MonoBehaviour
         
         using StreamReader reader = new StreamReader(GSM._tmpPath);
         string json = reader.ReadToEnd();
-        GSM._gameState = JsonUtility.FromJson<GameState>(json);
-        if (!GSM._gameState.valid)
+        GSM.gameState = JsonUtility.FromJson<GameState>(json);
+        if (!GSM.gameState.valid)
         {
             Debug.Log("Loading game state failed, game state invalid.");
             return;
         }
         
         Debug.Log("Game state loaded.");
-        GSM._gameState.PrintGameState();
+        GSM.gameState.PrintGameState();
         SceneManager.LoadScene("TitleScene", LoadSceneMode.Single);
     }
 }
