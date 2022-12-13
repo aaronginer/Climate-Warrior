@@ -54,7 +54,7 @@ namespace TitleMenus
             }
             
             GameStateManager.GSM.LoadFromDisk(selectedSave);
-            SceneManager.LoadScene("Scene1", LoadSceneMode.Single);
+            SceneManager.LoadScene("Village", LoadSceneMode.Single);
         }
 
         public void BackToMainMenu()
