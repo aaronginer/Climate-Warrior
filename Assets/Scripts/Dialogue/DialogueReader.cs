@@ -14,9 +14,11 @@ namespace Dialogue
 {
     public class DialogueReader
 {
+    public string npcName = "NPC";
+    
     private Dictionary<int, DialogueNode> _nodes = new Dictionary<int, DialogueNode>();
     private DialogueNode _currentNode;
-    
+
     public DialogueReader(string filename)
     {
         if (!ParseFile(filename))
@@ -46,6 +48,16 @@ namespace Dialogue
         string line = "";
         while ((line = reader.ReadLine()) != null)
         {
+            if (line[0] == '#')
+            {
+                var split = line.Split(":");
+                if (split.Length == 2 && split[0] == "#npc-name" && npcName == "NPC")
+                {
+                    npcName = split[1];
+                }
+                continue;
+            }
+            
             int id = -1;
             string message = "";
             Dictionary<string, int> options = new Dictionary<string, int>();

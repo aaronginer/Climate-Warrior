@@ -19,6 +19,7 @@ namespace Dialogue
         public GameObject choice4Obj;
         private TextMeshProUGUI _textBoxChoice4;
 
+        private readonly GameObject[] _choiceObjs = new GameObject[4];
         private readonly TextMeshProUGUI[] _choiceTextBoxes = new TextMeshProUGUI[4];
         
         private DialogueReader _dialogueReader;
@@ -37,21 +38,26 @@ namespace Dialogue
         // Start is called before the first frame update
         void Start()
         {
-            _textBox = textBoxObj.GetComponent<TextMeshProUGUI>();
-            _textBox.enabled = false;
-            _textBoxChoice1 = choice1Obj.GetComponent<TextMeshProUGUI>();
-            _textBoxChoice1.enabled = false;
-            _textBoxChoice2 = choice2Obj.GetComponent<TextMeshProUGUI>();
-            _textBoxChoice2.enabled = false;
-            _textBoxChoice3 = choice3Obj.GetComponent<TextMeshProUGUI>();
-            _textBoxChoice3.enabled = false;
-            _textBoxChoice4 = choice4Obj.GetComponent<TextMeshProUGUI>();
-            _textBoxChoice4.enabled = false;
+            _textBox = textBoxObj.GetComponentInChildren<TextMeshProUGUI>();
+            textBoxObj.SetActive(false);
+            _textBoxChoice1 = choice1Obj.GetComponentInChildren<TextMeshProUGUI>();
+            choice1Obj.SetActive(false);
+            _textBoxChoice2 = choice2Obj.GetComponentInChildren<TextMeshProUGUI>();
+            choice2Obj.SetActive(false);
+            _textBoxChoice3 = choice3Obj.GetComponentInChildren<TextMeshProUGUI>();
+            choice3Obj.SetActive(false);
+            _textBoxChoice4 = choice4Obj.GetComponentInChildren<TextMeshProUGUI>();
+            choice4Obj.SetActive(false);
 
             _choiceTextBoxes[0] = _textBoxChoice1;
             _choiceTextBoxes[1] = _textBoxChoice2;
             _choiceTextBoxes[2] = _textBoxChoice3;
             _choiceTextBoxes[3] = _textBoxChoice4;
+
+            _choiceObjs[0] = choice1Obj;
+            _choiceObjs[1] = choice2Obj;
+            _choiceObjs[2] = choice3Obj;
+            _choiceObjs[3] = choice4Obj;
 
             _dialogueReader = null;
             _dialogueState = State.NpcSpeak;
@@ -64,21 +70,15 @@ namespace Dialogue
             _dialogueState = State.NpcSpeak;
         }
 
+        public void OnClick(int index)
+        {
+            _choice = index;
+            DialogueUpdate();
+        }
+        
         public void Update()
         {
-            if (_dialogueState == State.PlayerSpeak)
-            {
-                for (int key = (int) KeyCode.Alpha1; key <= (int) KeyCode.Alpha4; key++)
-                {
-                    if (Input.GetKeyDown((KeyCode) key))
-                    {
-                        _choice = key - (int) KeyCode.Alpha1;
-                        DialogueUpdate();
-                        break;
-                    }
-                }
-            }
-            else if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && _dialogueState != State.PlayerSpeak)
             {
                 DialogueUpdate();
             }
@@ -97,38 +97,38 @@ namespace Dialogue
             switch (_dialogueState)
             {
                 case State.NpcSpeak:
-                    _textBox.enabled = true;
+                    textBoxObj.SetActive(true);
                     
-                    _textBox.text = "NPC: " + _dialogueReader.GetCurrent().GetMessage();
+                    _textBox.text = _dialogueReader.npcName + ": " + _dialogueReader.GetCurrent().GetMessage();
                     _dialogueState = options.Length == 0 ? State.Cleanup : State.PlayerOptions;
                     break;
                 case State.PlayerOptions:
-                    _textBox.enabled = false;
+                    textBoxObj.SetActive(false);
                     
                     for (int i = 0; i < options.Length; i++)
                     {
-                        _choiceTextBoxes[i].enabled = true;
-                        _choiceTextBoxes[i].text = i+1 + " - " + options[i];
+                        _choiceObjs[i].SetActive(true);
+                        _choiceTextBoxes[i].text = options[i];
                     }
 
                     _dialogueState = State.PlayerSpeak;
                     break;
                 case State.PlayerSpeak:
-                    foreach (TextMeshProUGUI choiceBox in _choiceTextBoxes)
+                    foreach (GameObject choiceObj in _choiceObjs)
                     {
-                        choiceBox.enabled = false;
+                        choiceObj.SetActive(false);
                     }
 
-                    _textBox.enabled = true;
+                    textBoxObj.SetActive(true);
                     _textBox.text = "You: " + options[_choice];
                     _dialogueReader.Choice(options[_choice]);
                     _dialogueState = State.NpcSpeak;
                     break;
                 case State.Cleanup:
-                    _textBox.enabled = false;
-                    foreach (TextMeshProUGUI choiceBox in _choiceTextBoxes)
+                    textBoxObj.SetActive(false);
+                    foreach (GameObject choiceObj in _choiceObjs)
                     {
-                        choiceBox.enabled = false;
+                        choiceObj.SetActive(false);
                     }
                     break;
                 case State.Finished:
