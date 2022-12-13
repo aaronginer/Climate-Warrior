@@ -132,11 +132,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8771078289067404732, guid: 832d7fa6ffe00f94f9dcbbeea85124ab, type: 3}
       propertyPath: gameState.valid
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8771078289067404732, guid: 832d7fa6ffe00f94f9dcbbeea85124ab, type: 3}
       propertyPath: gameState.playerData.name
-      value: Aaron
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8771078289067404732, guid: 832d7fa6ffe00f94f9dcbbeea85124ab, type: 3}
       propertyPath: gameState.playerData.health

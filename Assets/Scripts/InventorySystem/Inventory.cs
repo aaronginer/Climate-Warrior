@@ -38,7 +38,6 @@ namespace InventorySystem
                 }
             }
 
-            Debug.Log(this.GetHashCode());
             // add item in first available slot
             for (int i = 0; i < slots.Length; i++)
             {
@@ -49,6 +48,31 @@ namespace InventorySystem
                 }
             }
             Debug.Log("Inventory full.");
+        }
+
+        // ugly hack, change later (inventory is default initialized when saving it to disk)
+        public void CleanInventory()
+        {
+            for (int i = 0; i < slots.Length; i++)
+            {
+                if (slots[i] != null && slots[i].amount == 0)
+                {
+                    slots[i] = null;
+                }
+            }
+        }
+        
+        public void PrintInventory()
+        {
+            Debug.Log(GetHashCode());
+            for (int i = 0; i < slots.Length; i++)
+            {
+                Debug.Log(slots[i]);
+                if (slots[i] != null)
+                {
+                    Debug.Log(slots[i] + ": " + slots[i].itemType + " - " + slots[i].amount);
+                }
+            }
         }
     }
 }

@@ -14,7 +14,6 @@ namespace Items
         private void Start()
         {
             _inventoryDisplay = inventoryDisplayObj.GetComponent<InventoryDisplay>();
-            Debug.Log("Display is: " + _inventoryDisplay.GetHashCode());
         }
 
         public void OnTriggerStay2D(Collider2D col)

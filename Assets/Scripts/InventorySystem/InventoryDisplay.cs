@@ -25,10 +25,10 @@ namespace InventorySystem
         public void Start()
         {
             Debug.Log("Instantiating Display");
-            // initialize Inventory (in real game this should happen in player)
+            
             _inventory = GameStateManager.GSM.gameState.playerData.inventory;
-            Debug.Log(_inventory.GetHashCode());
-            Debug.Log(this.GetHashCode());
+            _inventory.CleanInventory();
+
             _itemImage = new Image[9];
             _itemText = new TextMeshProUGUI[9];
             
@@ -42,7 +42,7 @@ namespace InventorySystem
 
             _handImage = hand.GetComponent<Image>();
             _handText = hand.GetComponentInChildren<TextMeshProUGUI>();
-            
+
             UpdateInventory();
             ToggleInventory();
         }
@@ -76,7 +76,6 @@ namespace InventorySystem
         {
             // --------------------------------------------------
             // sprite and text setters
-            Debug.Log(_inventory.Size);
             for (var i = 0; i < _itemImage.Length; i++)
             {
                 var slot = _inventory.GetSlot(i);
@@ -134,9 +133,6 @@ namespace InventorySystem
         // wrapper that adds item to inventory and updates the display
         public void AddItem(int itemType)
         {
-            Debug.Log(this.GetHashCode());
-            Debug.Log(_inventory);
-            Debug.Log((ItemType) itemType);
             _inventory.AddItem((ItemType) itemType);
             UpdateInventory();
         }
