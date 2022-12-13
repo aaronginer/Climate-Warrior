@@ -59,7 +59,7 @@ public class GameStateManager : MonoBehaviour
             File.Delete(_openSave);
         }
         
-        var dateTime = DateTime.Now.ToString("dd/MM/yyyy_HH_MM_ss");
+        var dateTime = DateTime.Now.ToString("dd_MM_yyyy_HH_MM_ss");
         
         using StreamWriter writer = new StreamWriter(_persistentPath + "cw_save_" + dateTime + ".json");
         string json = JsonUtility.ToJson(gameState);
