@@ -173,6 +173,11 @@ public class InstantiateTurbineTower : MonoBehaviour
         }
     }
 
+    public void onCollide()
+    {
+        didCollide = true;
+    }
+
     bool getIsMovingLeft()
     {
         return currentWallBlockToMove != null && currentState == StateEnum.movingLeft;
