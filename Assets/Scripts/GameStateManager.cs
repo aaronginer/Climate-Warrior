@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Newtonsoft.Json.Serialization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,10 +12,11 @@ public class GameStateManager : MonoBehaviour
 {
     public static GameStateManager GSM { get; private set; }
     
-    private string _tmpPath = "";
+    public GameState gameState = new();
+    
     private string _persistentPath = "";
-    private GameState _gameState = null;
-
+    private string _openSave = "";
+    
     private void Awake()
     {
         if (GSM != null && GSM != this)
@@ -22,62 +24,67 @@ public class GameStateManager : MonoBehaviour
             Destroy(this);
             return;
         }
-        else
-        {
-            GSM = this;
-        }
+        GSM = this;
         
         DontDestroyOnLoad(this);
 
-        _tmpPath = Application.dataPath + Path.AltDirectorySeparatorChar + "GameState.json";
-        _persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "GameState.json";
+        _persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar;
+    }
+
+    private void Start()
+    {
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
     public static void Save(GameState gameState)
     {
-        GSM._gameState = gameState;
+        GSM.gameState = gameState;
     }
 
     public static GameState Load()
     {
-        return GSM._gameState;
+        return GSM.gameState;
     }
     
-    public static void SaveToDisk()
+    public void SaveToDisk()
     {
-        if (GSM._gameState == null)
+        if (gameState == null)
         {
             Debug.Log("No game state available to save.");
             return;
         }
 
-        using StreamWriter writer = new StreamWriter(GSM._tmpPath);
-        string json = JsonUtility.ToJson(GSM._gameState);
-        writer.Write(json);
+        if (_openSave != "") // if a save is open, delete it and create new save
+        {
+            File.Delete(_openSave);
+        }
         
+        var dateTime = DateTime.Now.ToString("dd/MM/yyyy_HH_MM_ss");
+        
+        using StreamWriter writer = new StreamWriter(_persistentPath + "cw_save_" + dateTime + ".json");
+        string json = JsonUtility.ToJson(gameState);
+
+        writer.Write(json);
+
         Debug.Log("Game state saved.");
-        SceneManager.LoadScene("TestScene", LoadSceneMode.Single);
     }
 
-    public static void LoadFromDisk()
+    public void LoadFromDisk(string saveFile)
     {
-        if (!File.Exists(GSM._tmpPath))
+        string savePath = _persistentPath + "cw_save_" + saveFile + ".json";
+
+        if (!File.Exists(savePath))
         {
-            Debug.Log("GameState.json not found.");
+            Debug.Log(savePath + " not found.");
             return;
         }
         
-        using StreamReader reader = new StreamReader(GSM._tmpPath);
+        _openSave = savePath;
+            
+        using StreamReader reader = new StreamReader(savePath);
         string json = reader.ReadToEnd();
-        GSM._gameState = JsonUtility.FromJson<GameState>(json);
-        if (!GSM._gameState.valid)
-        {
-            Debug.Log("Loading game state failed, game state invalid.");
-            return;
-        }
-        
+        gameState = JsonUtility.FromJson<GameState>(json);
+
         Debug.Log("Game state loaded.");
-        GSM._gameState.PrintGameState();
-        SceneManager.LoadScene("TitleScene", LoadSceneMode.Single);
     }
 }

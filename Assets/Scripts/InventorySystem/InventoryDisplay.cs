@@ -22,12 +22,17 @@ namespace InventorySystem
         private InventorySlot _handSlot;
         private bool _active = true;
 
-        public void Awake()
+        public void Start()
         {
-            // initialize Inventory (in real game this should happen in player)
-            _inventory = new Inventory(9);
+            Debug.Log("Instantiating Display");
+            
+            _inventory = GameStateManager.GSM.gameState.playerData.inventory;
+            _inventory.CleanInventory();
+
             _itemImage = new Image[9];
             _itemText = new TextMeshProUGUI[9];
+            
+            SpawnItem(new Vector3(0, 0, 0), ItemType.Boat);
             
             for (int i = 0; i < itemObj.Length; i++)
             {
@@ -37,7 +42,7 @@ namespace InventorySystem
 
             _handImage = hand.GetComponent<Image>();
             _handText = hand.GetComponentInChildren<TextMeshProUGUI>();
-            
+
             UpdateInventory();
             ToggleInventory();
         }
@@ -125,7 +130,7 @@ namespace InventorySystem
             UpdateInventory();
         }
 
-        // test function
+        // wrapper that adds item to inventory and updates the display
         public void AddItem(int itemType)
         {
             _inventory.AddItem((ItemType) itemType);
