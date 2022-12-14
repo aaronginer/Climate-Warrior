@@ -1,0 +1,2 @@
+#npc-name:Old man by the truck
+1"Hey, kid! You need to collect some materials before we can start building the turbine."

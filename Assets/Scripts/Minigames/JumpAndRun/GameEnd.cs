@@ -56,6 +56,7 @@ public class GameEnd : MonoBehaviour
 
     public void BackToMenu()
     {
+        GameStateManager.GSM.gameState.playerData.completeMission(0);
         SceneManager.LoadScene(returnToMenu);
     }
 

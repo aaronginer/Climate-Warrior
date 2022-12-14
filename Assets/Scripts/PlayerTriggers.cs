@@ -14,16 +14,29 @@ public class PlayerTriggers : MonoBehaviour
             {
                 SceneManager.LoadScene("JumpAndRun", LoadSceneMode.Single);
             }
+        if (col.gameObject.name == "StartTurbineMinigame")
+            {
+                if (!GameStateManager.GSM.gameState.playerData.checkMissionCompleted(0)) {
+                    DialogueReader reader = new DialogueReader("blockeddialogue.txt");
+                    dialogueObject.GetComponent<DialogueDisplay>().SetDialogueReader(reader);
+                    dialogueObject.GetComponent<DialogueDisplay>().DialogueUpdate();
+                }
+                else {
+                SceneManager.LoadScene("BuildAWindTurbine", LoadSceneMode.Single);
+                }
+            }
 
         if (Input.GetKeyDown("f"))
         {
-            if (col.gameObject.name == "StartTurbineMinigame")
-            {
-                SceneManager.LoadScene("BuildAWindTurbine", LoadSceneMode.Single);
-            }
-            else if (col.gameObject.name == "StartPathSign")
+            if (col.gameObject.name == "StartPathSign")
             {
                 DialogueReader reader = new DialogueReader("pathdialogue.txt");
+                dialogueObject.GetComponent<DialogueDisplay>().SetDialogueReader(reader);
+                dialogueObject.GetComponent<DialogueDisplay>().DialogueUpdate();
+            }
+            else if (col.gameObject.name == "StartTurbineSign")
+            {
+                DialogueReader reader = new DialogueReader("turbinedialogue.txt");
                 dialogueObject.GetComponent<DialogueDisplay>().SetDialogueReader(reader);
                 dialogueObject.GetComponent<DialogueDisplay>().DialogueUpdate();
             }

@@ -1,0 +1,2 @@
+#npc-name:A worn-down wooden sign reads
+1"Danger: turbine building zone"

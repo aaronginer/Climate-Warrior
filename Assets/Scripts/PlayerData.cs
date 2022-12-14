@@ -7,6 +7,8 @@ public class PlayerData
 {
     public Inventory inventory;
     public String name;
+    int[] missions = new int[] {0, 0};
+
 
     public PlayerData(string name)
     {
@@ -18,5 +20,11 @@ public class PlayerData
     {
         Debug.Log("PlayerData:");
         Debug.Log(" - name: " + name);
+    }
+    public void completeMission(int id) {
+        missions[id] = 1;
+    }
+    public bool checkMissionCompleted(int id) {
+        return (missions[id] == 1);
     }
 }
