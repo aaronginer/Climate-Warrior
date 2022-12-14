@@ -32,8 +32,6 @@ namespace InventorySystem
             _itemImage = new Image[9];
             _itemText = new TextMeshProUGUI[9];
             
-            SpawnItem(new Vector3(0, 0, 0), ItemType.Boat);
-            
             for (int i = 0; i < itemObj.Length; i++)
             {
                 _itemImage[i] = itemObj[i].GetComponent<Image>();

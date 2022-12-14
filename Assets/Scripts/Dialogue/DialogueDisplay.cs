@@ -99,7 +99,7 @@ namespace Dialogue
                 case State.NpcSpeak:
                     textBoxObj.SetActive(true);
                     
-                    _textBox.text = _dialogueReader.npcName + ": " + _dialogueReader.GetCurrent().GetMessage();
+                    _textBox.text = _dialogueReader.npcNamePrefix + _dialogueReader.GetCurrent().GetMessage();
                     _dialogueState = options.Length == 0 ? State.Cleanup : State.PlayerOptions;
                     break;
                 case State.PlayerOptions:

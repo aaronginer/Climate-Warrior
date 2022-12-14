@@ -8,43 +8,68 @@ using UnityEngine.SceneManagement;
 public class PlayerTriggers : MonoBehaviour
 {
     public GameObject dialogueObject;
-    private void OnTriggerStay2D(Collider2D col)
+
+    private GameObject _colliderObject = null;
+
+    public void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.name == "StartJmpNRunMinigame")
-            {
+        _colliderObject = col.gameObject;
+    }
+
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        _colliderObject = null;
+    }
+
+    private void Update()
+    {
+        if (_colliderObject == null)
+        {
+            return;
+        }
+        
+        switch (_colliderObject.gameObject.name)
+        {
+            case "StartJmpNRunMinigame":
                 SceneManager.LoadScene("JumpAndRun", LoadSceneMode.Single);
-            }
-        if (col.gameObject.name == "StartTurbineMinigame")
+                break;
+            case "StartTurbineMinigame" when !GameStateManager.GSM.gameState.playerData.checkMissionCompleted(0):
             {
-                if (!GameStateManager.GSM.gameState.playerData.checkMissionCompleted(0)) {
-                    DialogueReader reader = new DialogueReader("blockeddialogue.txt");
-                    dialogueObject.GetComponent<DialogueDisplay>().SetDialogueReader(reader);
-                    dialogueObject.GetComponent<DialogueDisplay>().DialogueUpdate();
-                }
-                else {
-                SceneManager.LoadScene("BuildAWindTurbine", LoadSceneMode.Single);
-                }
+                DialogueReader reader = new DialogueReader("blockeddialogue.txt");
+                dialogueObject.GetComponent<DialogueDisplay>().SetDialogueReader(reader);
+                dialogueObject.GetComponent<DialogueDisplay>().DialogueUpdate();
+                break;
             }
+            case "StartTurbineMinigame":
+                SceneManager.LoadScene("BuildAWindTurbine", LoadSceneMode.Single);
+                break;
+        }
 
         if (Input.GetKeyDown("f"))
         {
-            if (col.gameObject.name == "StartPathSign")
+            switch (_colliderObject.gameObject.name)
             {
-                DialogueReader reader = new DialogueReader("pathdialogue.txt");
-                dialogueObject.GetComponent<DialogueDisplay>().SetDialogueReader(reader);
-                dialogueObject.GetComponent<DialogueDisplay>().DialogueUpdate();
-            }
-            else if (col.gameObject.name == "StartTurbineSign")
-            {
-                DialogueReader reader = new DialogueReader("turbinedialogue.txt");
-                dialogueObject.GetComponent<DialogueDisplay>().SetDialogueReader(reader);
-                dialogueObject.GetComponent<DialogueDisplay>().DialogueUpdate();
-            }
-            else if (col.gameObject.name == "StartMayorDialogue")
-            {
-                DialogueReader reader = new DialogueReader("mayordialogue.txt");
-                dialogueObject.GetComponent<DialogueDisplay>().SetDialogueReader(reader);
-                dialogueObject.GetComponent<DialogueDisplay>().DialogueUpdate();
+                case "StartPathSign":
+                {
+                    DialogueReader reader = new DialogueReader("pathdialogue.txt");
+                    dialogueObject.GetComponent<DialogueDisplay>().SetDialogueReader(reader);
+                    dialogueObject.GetComponent<DialogueDisplay>().DialogueUpdate();
+                    break;
+                }
+                case "StartTurbineSign":
+                {
+                    DialogueReader reader = new DialogueReader("turbinedialogue.txt");
+                    dialogueObject.GetComponent<DialogueDisplay>().SetDialogueReader(reader);
+                    dialogueObject.GetComponent<DialogueDisplay>().DialogueUpdate();
+                    break;
+                }
+                case "StartMayorDialogue":
+                {
+                    DialogueReader reader = new DialogueReader("mayordialogue.txt");
+                    dialogueObject.GetComponent<DialogueDisplay>().SetDialogueReader(reader);
+                    dialogueObject.GetComponent<DialogueDisplay>().DialogueUpdate();
+                    break;
+                }
             }
         }
     }
