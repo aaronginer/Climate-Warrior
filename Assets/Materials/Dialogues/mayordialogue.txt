@@ -1,0 +1,4 @@
+#npc-name:Mayor
+1"Welcome to the village!"::2"Thank you!"::3"Don't feel like talking to you, old man."
+2"Have a nice day!"
+3"Youngsters these days have no manners..."
