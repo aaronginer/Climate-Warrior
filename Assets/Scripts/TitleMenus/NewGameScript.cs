@@ -21,12 +21,12 @@ namespace TitleMenus
             GameStateManager.GSM.gameState.playerData = new PlayerData(_nameTextField.text);
             GameStateManager.GSM.SaveToDisk();
 
-            SceneManager.LoadScene("Village", LoadSceneMode.Single);
+            SceneManager.LoadScene(Constants.SceneNames.village, LoadSceneMode.Single);
         }
 
         public void BackToMainMenu()
         {
-            SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+            SceneManager.LoadScene(Constants.SceneNames.mainMenu, LoadSceneMode.Single);
         }
     }
 

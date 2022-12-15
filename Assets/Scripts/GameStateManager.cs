@@ -33,7 +33,7 @@ public class GameStateManager : MonoBehaviour
 
     private void Start()
     {
-        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        SceneManager.LoadScene(Constants.SceneNames.mainMenu, LoadSceneMode.Single);
     }
 
     public static void Save(GameState gameState)

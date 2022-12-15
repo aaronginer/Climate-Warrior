@@ -54,12 +54,12 @@ namespace TitleMenus
             }
             
             GameStateManager.GSM.LoadFromDisk(selectedSave);
-            SceneManager.LoadScene("Village", LoadSceneMode.Single);
+            SceneManager.LoadScene(Constants.SceneNames.village, LoadSceneMode.Single);
         }
 
         public void BackToMainMenu()
         {
-            SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+            SceneManager.LoadScene(Constants.SceneNames.mainMenu, LoadSceneMode.Single);
         }
     }
 

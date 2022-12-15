@@ -4,31 +4,33 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameEnd : MonoBehaviour
+public class GameTurbineEnd : MonoBehaviour
 {
-    public string returnToMenu;
-    public string restartGame;
     private Button[] buttons;
-    private TMPro.TextMeshProUGUI fellText;
     private TMPro.TextMeshProUGUI timeOutText;
     private TMPro.TextMeshProUGUI lostText;
     private TMPro.TextMeshProUGUI wonText;
-    private TMPro.TextMeshProUGUI[] textFields;
 
     private void Awake()
     {
         buttons = GetComponentsInChildren<Button>();
-        textFields = GetComponentsInChildren<TMPro.TextMeshProUGUI>();
+        
+        Button backToButton = GameObject.Find("BackToButton").GetComponent<Button>();
+        backToButton.onClick.AddListener(BackToButtonClick);
+        Button restartLevelButton = GameObject.Find("RestartLevelButton").GetComponent<Button>();
+        restartLevelButton.onClick.AddListener(RestartGame);
 
-
-        fellText = GameObject.Find("FellOffText").GetComponentInChildren<TMPro.TextMeshProUGUI>();
         timeOutText = GameObject.Find("TimeOutText").GetComponentInChildren<TMPro.TextMeshProUGUI>();
         lostText = GameObject.Find("LostText").GetComponentInChildren<TMPro.TextMeshProUGUI>();
+        wonText = GameObject.Find("WonText").GetComponentInChildren<TMPro.TextMeshProUGUI>();
+        wonText = GameObject.Find("WonText").GetComponentInChildren<TMPro.TextMeshProUGUI>();
         wonText = GameObject.Find("WonText").GetComponentInChildren<TMPro.TextMeshProUGUI>();
         
         HideButtons();
         HideText();
     }
+    
+    
 
     void HideButtons()
     {
@@ -40,7 +42,6 @@ public class GameEnd : MonoBehaviour
 
     void HideText()
     {
-        fellText.gameObject.SetActive(false);
         timeOutText.gameObject.SetActive(false);
         lostText.gameObject.SetActive(false);
         wonText.gameObject.SetActive(false);
@@ -54,69 +55,32 @@ public class GameEnd : MonoBehaviour
         }
     }
 
-    public void BackToMenu()
+    public void BackToButtonClick()
     {
-        GameStateManager.GSM.gameState.playerData.completeMission(MiniGame.jumpAndRunCollectTurbineParts);
-        SceneManager.LoadScene(returnToMenu);
+        SceneManager.LoadScene(Constants.SceneNames.village);
     }
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(restartGame);
-    }
-
-    public void Fell()
-    {
-        fellText.gameObject.SetActive(true);
+        SceneManager.LoadScene(Constants.SceneNames.miniGameBuildAWindTurbine);
     }
     
     public void Won()
     {
+        ShowButtons();
+        GameStateManager.GSM.gameState.playerData.completeMission(MiniGame.buildAWindTurbine);
         wonText.gameObject.SetActive(true);
     }
 
     public void Lost()
     {
+        ShowButtons();
         lostText.gameObject.SetActive(true);
     }
 
     public void TimeOut()
     {
-        timeOutText.gameObject.SetActive(true);
-    }
-
-    public void ShowEndScreen(bool fell)
-    {
-        ScoreBoard.instance.running = false;
-        ScoreBoard.instance.timerRunning = false;
         ShowButtons();
-
-        if (ScoreBoard.instance.GetScore() >= ScoreBoard.instance.minScore)
-        {
-            this.Won();
-        }
-        else if(ScoreBoard.instance.timeRemaining <= 0f)
-        {
-            this.TimeOut();
-        }
-        else if(fell)
-        {
-            this.Fell();
-        }
-        else
-        {
-            this.Lost();
-        }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        timeOutText.gameObject.SetActive(true);
     }
 }

@@ -31,9 +31,9 @@ public class PlayerTriggers : MonoBehaviour
         switch (_colliderObject.gameObject.name)
         {
             case "StartJmpNRunMinigame":
-                SceneManager.LoadScene("JumpAndRun", LoadSceneMode.Single);
+                SceneManager.LoadScene(Constants.SceneNames.miniGameJumpAndRunCollectTurbine, LoadSceneMode.Single);
                 break;
-            case "StartTurbineMinigame" when !GameStateManager.GSM.gameState.playerData.checkMissionCompleted(0):
+            case "StartTurbineMinigame" when !GameStateManager.GSM.gameState.playerData.checkMissionCompleted(MiniGame.buildAWindTurbine):
             {
                 DialogueReader reader = new DialogueReader("blockeddialogue.txt");
                 dialogueObject.GetComponent<DialogueDisplay>().SetDialogueReader(reader);
@@ -41,7 +41,7 @@ public class PlayerTriggers : MonoBehaviour
                 break;
             }
             case "StartTurbineMinigame":
-                SceneManager.LoadScene("BuildAWindTurbine", LoadSceneMode.Single);
+                SceneManager.LoadScene(Constants.SceneNames.miniGameBuildAWindTurbine, LoadSceneMode.Single);
                 break;
         }
 

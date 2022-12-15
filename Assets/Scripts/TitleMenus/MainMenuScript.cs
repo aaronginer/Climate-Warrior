@@ -10,12 +10,12 @@ namespace TitleMenus
     {
         public void NewGame()
         {
-            SceneManager.LoadScene("NewGame", LoadSceneMode.Single);
+            SceneManager.LoadScene(Constants.SceneNames.newGame, LoadSceneMode.Single);
         }
 
         public void LoadGame()
         {
-            SceneManager.LoadScene("LoadGame", LoadSceneMode.Single);
+            SceneManager.LoadScene(Constants.SceneNames.loadGame, LoadSceneMode.Single);
         }
     }   
 }

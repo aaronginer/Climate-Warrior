@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.UI;
+using UnityEngine.UI;
 
 public class InstantiateTurbineTower : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    //public Image progressBar;
+    public Image progressBar;
 
     // Reference to the wall block Prefab.
     public GameObject wallBlock;
@@ -16,16 +16,17 @@ public class InstantiateTurbineTower : MonoBehaviour
     private Rigidbody2D rigidbodyComponent = null;
 
     private float speed = 0.3f;
+    private GameTurbineEnd gameEnd;
     
     private StateEnum currentState = StateEnum.still;
 
     private bool didCollide = false;
 
+    private static float Y_COORD_TIMEOUT = 0.05f;
     private static float X_COORD_BOUND = .95f;
     private static float X_COORD_LOSE_MIN = -0.1f;
     private static float X_COORD_LOSE_MAX = 0.12f;
     private static int NUM_BLOCKS_WIN = 15;
-
     private int blockSpawnCount = 0;
     
 
@@ -39,6 +40,7 @@ public class InstantiateTurbineTower : MonoBehaviour
         movingRight,
         released,
         lost,
+        timeout,
         win
     }
 
@@ -48,6 +50,7 @@ public class InstantiateTurbineTower : MonoBehaviour
         gameObjectsToMove.Add(GameObject.Find("TilesGrass"));
         gameObjectsToMove.Add(GameObject.Find("TilemapTower"));
         SpawnNewWallBlock(true);
+        gameEnd = GameObject.Find("EndScreen").GetComponent<GameTurbineEnd>();
     }
 
     void SpawnNewWallBlock(bool isFirstSpawn = false)
@@ -111,6 +114,12 @@ public class InstantiateTurbineTower : MonoBehaviour
     {
         return currentWallBlockToMove.transform.position.x;
     }
+    
+    private float getCurrentY()
+    {
+        return currentWallBlockToMove.transform.position.y;
+    }
+
 
     void CheckMovingBound()
     {
@@ -128,21 +137,24 @@ public class InstantiateTurbineTower : MonoBehaviour
 
     bool CheckWin()
     {
-        if (blockSpawnCount >= NUM_BLOCKS_WIN)
+        if (blockSpawnCount >= NUM_BLOCKS_WIN-1)
         {
             currentState = StateEnum.win;
+            progressBar.fillAmount = 1.0f;
+            gameEnd.Won();
             return true;
         }
         return false;
     }
 
-    void CheckReleaseOk()
+    void CheckReleaseOkAfterCollide()
     {
         float currentX = getCurrentX();
         if (currentX < X_COORD_LOSE_MIN || currentX > X_COORD_LOSE_MAX)
         {
-            // coollision x value bad,, lost
+            // collision x value bad,, lost
             currentState = StateEnum.lost;
+            gameEnd.Lost();
         } else
         {
 
@@ -158,18 +170,11 @@ public class InstantiateTurbineTower : MonoBehaviour
 
     void CheckCollisionState()
     {
-        Debug.Log("checking collision state");
 
         if (currentWallBlockToMove == null) return;
-
-        Debug.Log("    currentWallBlockToMove is not null");
-
         if (currentState == StateEnum.released && didCollide)
         {
-            CheckReleaseOk();
-        } else if (currentState == StateEnum.still)
-        {
-
+            CheckReleaseOkAfterCollide();
         }
     }
 
@@ -190,12 +195,23 @@ public class InstantiateTurbineTower : MonoBehaviour
     }
 
     void FillProgressBar()
-    { 
-        //progressBar.fillAmount
+    {
+        progressBar.fillAmount = (float)blockSpawnCount / NUM_BLOCKS_WIN;
+    }
+
+    void CheckTimeout()
+    {
+        bool isMoving = getIsMovingLeft() || getIsMovingRight();
+        if (isMoving && getCurrentY() < Y_COORD_TIMEOUT)
+        {
+            currentState = StateEnum.timeout;
+            gameEnd.TimeOut();
+        }
     }
 
     private void FixedUpdate()
     {
+        CheckTimeout();
         if (getIsMovingLeft())
         {
             MoveLeft();
