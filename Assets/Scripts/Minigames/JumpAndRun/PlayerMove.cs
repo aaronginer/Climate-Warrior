@@ -41,7 +41,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (ScoreBoard.instance.running == false)
             return;
-        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space)) rigidbodyComponent.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
+        if (IsGrounded() && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))) rigidbodyComponent.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
         if (rigidbodyComponent.velocity.y >= 0) rigidbodyComponent.gravityScale = forceUp;
         if (rigidbodyComponent.velocity.y < 0) rigidbodyComponent.gravityScale = forceDown;
 
@@ -62,7 +62,7 @@ public class PlayerMove : MonoBehaviour
 
     private void HandleMovement()
     {
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.A))
         {
             rigidbodyComponent.velocity = new Vector2(-movement, rigidbodyComponent.velocity.y);
             playerSprite.flipX = true;
@@ -71,7 +71,7 @@ public class PlayerMove : MonoBehaviour
                 animator.SetBool("isMoving", true);
             }
         }
-        else if (Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.D))
         {
             rigidbodyComponent.velocity = new Vector2(+movement, rigidbodyComponent.velocity.y);
             playerSprite.flipX = false;
