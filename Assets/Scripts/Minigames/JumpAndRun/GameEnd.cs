@@ -56,7 +56,10 @@ public class GameEnd : MonoBehaviour
 
     public void BackToMenu()
     {
-        GameStateManager.GSM.gameState.playerData.completeMission(MiniGame.jumpAndRunCollectTurbineParts);
+        if (ScoreBoard.instance.GetScore() >= ScoreBoard.instance.minScore)
+        {
+            GameStateManager.GSM.gameState.playerData.CompleteMission(MiniGame.jumpAndRunCollectTurbineParts);
+        }
         SceneManager.LoadScene(returnToMenu);
     }
 

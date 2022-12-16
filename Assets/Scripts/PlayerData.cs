@@ -16,10 +16,7 @@ public class PlayerData
     public Inventory inventory;
     public String name;
 
-    private Dictionary<MiniGame, int> missions = new Dictionary<MiniGame, int>(){
-        { MiniGame.buildAWindTurbine, 0 },
-        { MiniGame.jumpAndRunCollectTurbineParts, 0 }
-    };
+    public int[] missions = new int[2];
 
 
     public PlayerData(string name)
@@ -33,10 +30,10 @@ public class PlayerData
         Debug.Log("PlayerData:");
         Debug.Log(" - name: " + name);
     }
-    public void completeMission(MiniGame miniGame) {
-        missions[miniGame] = 1;
+    public void CompleteMission(MiniGame miniGame) {
+        missions[(int)miniGame] = 1;
     }
-    public bool checkMissionCompleted(MiniGame miniGame) {
-        return (missions[miniGame] == 1);
+    public bool CheckMissionCompleted(MiniGame miniGame) {
+        return (missions[(int)miniGame] == 1);
     }
 }

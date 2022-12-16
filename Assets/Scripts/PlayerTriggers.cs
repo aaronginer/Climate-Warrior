@@ -33,7 +33,7 @@ public class PlayerTriggers : MonoBehaviour
             case "StartJmpNRunMinigame":
                 SceneManager.LoadScene(Constants.SceneNames.miniGameJumpAndRunCollectTurbine, LoadSceneMode.Single);
                 break;
-            case "StartTurbineMinigame" when !GameStateManager.GSM.gameState.playerData.checkMissionCompleted(MiniGame.jumpAndRunCollectTurbineParts):
+            case "StartTurbineMinigame" when !GameStateManager.GSM.gameState.playerData.CheckMissionCompleted(MiniGame.jumpAndRunCollectTurbineParts):
             {
                 DialogueReader reader = new DialogueReader("blockeddialogue.txt");
                 dialogueObject.GetComponent<DialogueDisplay>().StartNewDialogue(reader);
