@@ -9,9 +9,7 @@ namespace Items
 {
     public enum ItemType
     {
-        Sword,
-        Boat,
-        Bow
+        Turbine
     }
 
     sealed class Item
@@ -19,9 +17,7 @@ namespace Items
     
         static readonly Dictionary<ItemType, Sprite> ItemsDict = new()
         {
-            {ItemType.Sword, Resources.Load<Sprite>("Items/diamond_sword")},
-            {ItemType.Boat, Resources.Load<Sprite>("Items/acacia_boat")},
-            {ItemType.Bow, Resources.Load<Sprite>("Items/bow")}
+            {ItemType.Turbine, Resources.Load<Sprite>("Items/wind_turbine")},
         };
 
         public static Sprite GetSprite(ItemType itemType)
