@@ -34,13 +34,19 @@ namespace Dialogue
      */
     private bool ParseFile(string filename)
     {
-        string dialoguePath = Application.dataPath + Path.AltDirectorySeparatorChar + "Materials/Dialogues/" +
-                              filename;
-        StreamReader reader = new StreamReader(dialoguePath);
+        string dialoguePath = "Dialogues/" + filename.Replace(".txt", "");
+        TextAsset fileContent = Resources.Load<TextAsset>(dialoguePath);
+
+        // https://stackoverflow.com/questions/1547476/easiest-way-to-split-a-string-on-newlines-in-net
+        string[] lines = fileContent.text.Split(
+            new [] { Environment.NewLine },
+            StringSplitOptions.None
+        );
+        
+        // StreamReader reader = new StreamReader(dialoguePath);
 
 
-        string line = "";
-        while ((line = reader.ReadLine()) != null)
+        foreach (string line in lines)
         {
             if (line[0] == '#')
             {

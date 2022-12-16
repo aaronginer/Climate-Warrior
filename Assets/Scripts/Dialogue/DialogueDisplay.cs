@@ -104,14 +104,12 @@ namespace Dialogue
             switch (_current)
             {
                 case State.NpcSpeak:
-                    Debug.Log(Environment.StackTrace);
                     textBoxObj.SetActive(true);
                     
                     _textBox.text = _dialogueReader.npcNamePrefix + _dialogueReader.GetCurrent().GetMessage();
                     _next = options.Length == 0 ? State.Finished : State.PlayerOptions;
                     break;
                 case State.PlayerOptions:
-                    Debug.Log(Environment.StackTrace);
                     textBoxObj.SetActive(false);
                     
                     for (int i = 0; i < options.Length; i++)
@@ -123,7 +121,6 @@ namespace Dialogue
                     _next = State.PlayerSpeak;
                     break;
                 case State.PlayerSpeak:
-                    Debug.Log(Environment.StackTrace);
                     foreach (GameObject choiceObj in _choiceObjs)
                     {
                         choiceObj.SetActive(false);
