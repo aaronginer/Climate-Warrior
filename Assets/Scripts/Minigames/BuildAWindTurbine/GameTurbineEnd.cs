@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Items;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -48,6 +49,10 @@ public class GameTurbineEnd : MonoBehaviour
     }
     public void BackToButtonClick()
     {
+        if (GameStateManager.GSM.gameState.playerData.checkMissionCompleted(MiniGame.buildAWindTurbine))
+        {
+            GameStateManager.GSM.gameState.playerData.inventory.AddItem(ItemType.Turbine);
+        }
         SceneManager.LoadScene(Constants.SceneNames.village);
     }
 

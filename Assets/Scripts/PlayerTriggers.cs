@@ -33,11 +33,10 @@ public class PlayerTriggers : MonoBehaviour
             case "StartJmpNRunMinigame":
                 SceneManager.LoadScene(Constants.SceneNames.miniGameJumpAndRunCollectTurbine, LoadSceneMode.Single);
                 break;
-            case "StartTurbineMinigame" when !GameStateManager.GSM.gameState.playerData.checkMissionCompleted(MiniGame.buildAWindTurbine):
+            case "StartTurbineMinigame" when !GameStateManager.GSM.gameState.playerData.checkMissionCompleted(MiniGame.jumpAndRunCollectTurbineParts):
             {
                 DialogueReader reader = new DialogueReader("blockeddialogue.txt");
-                dialogueObject.GetComponent<DialogueDisplay>().SetDialogueReader(reader);
-                dialogueObject.GetComponent<DialogueDisplay>().DialogueUpdate();
+                dialogueObject.GetComponent<DialogueDisplay>().StartNewDialogue(reader);
                 break;
             }
             case "StartTurbineMinigame":
@@ -52,22 +51,19 @@ public class PlayerTriggers : MonoBehaviour
                 case "StartPathSign":
                 {
                     DialogueReader reader = new DialogueReader("pathdialogue.txt");
-                    dialogueObject.GetComponent<DialogueDisplay>().SetDialogueReader(reader);
-                    dialogueObject.GetComponent<DialogueDisplay>().DialogueUpdate();
+                    dialogueObject.GetComponent<DialogueDisplay>().StartNewDialogue(reader);
                     break;
                 }
                 case "StartTurbineSign":
                 {
                     DialogueReader reader = new DialogueReader("turbinedialogue.txt");
-                    dialogueObject.GetComponent<DialogueDisplay>().SetDialogueReader(reader);
-                    dialogueObject.GetComponent<DialogueDisplay>().DialogueUpdate();
+                    dialogueObject.GetComponent<DialogueDisplay>().StartNewDialogue(reader);
                     break;
                 }
                 case "StartMayorDialogue":
                 {
                     DialogueReader reader = new DialogueReader("mayordialogue.txt");
-                    dialogueObject.GetComponent<DialogueDisplay>().SetDialogueReader(reader);
-                    dialogueObject.GetComponent<DialogueDisplay>().DialogueUpdate();
+                    dialogueObject.GetComponent<DialogueDisplay>().StartNewDialogue(reader);
                     break;
                 }
             }

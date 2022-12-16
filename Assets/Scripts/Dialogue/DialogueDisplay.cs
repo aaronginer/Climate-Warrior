@@ -23,7 +23,8 @@ namespace Dialogue
         private readonly TextMeshProUGUI[] _choiceTextBoxes = new TextMeshProUGUI[4];
         
         private DialogueReader _dialogueReader;
-        private State _dialogueState;
+        private State _current;
+        private State _next;
         private int _choice;
 
         private enum State
@@ -31,7 +32,6 @@ namespace Dialogue
             NpcSpeak,
             PlayerOptions,
             PlayerSpeak,
-            Cleanup,
             Finished
         }
         
@@ -60,14 +60,19 @@ namespace Dialogue
             _choiceObjs[3] = choice4Obj;
 
             _dialogueReader = null;
-            _dialogueState = State.NpcSpeak;
+            _current = State.Finished;
+            _next = State.Finished;
             _choice = 0;
         }
         
-        public void SetDialogueReader(DialogueReader reader)
+        public void StartNewDialogue(DialogueReader reader)
         {
+            if (_current != State.Finished) return;
+            
             _dialogueReader = reader;
-            _dialogueState = State.NpcSpeak;
+            _next = State.NpcSpeak;
+
+            DialogueUpdate();
         }
 
         public void OnClick(int index)
@@ -78,7 +83,7 @@ namespace Dialogue
         
         public void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space) && _dialogueState != State.PlayerSpeak)
+            if (Input.GetKeyDown(KeyCode.Space) && _current != State.PlayerOptions)
             {
                 DialogueUpdate();
             }
@@ -92,17 +97,21 @@ namespace Dialogue
                 return;
             }
 
+            _current = _next;
+
             DialogueNode currentNode = _dialogueReader.GetCurrent();
             string[] options = currentNode.GetOptions();
-            switch (_dialogueState)
+            switch (_current)
             {
                 case State.NpcSpeak:
+                    Debug.Log(Environment.StackTrace);
                     textBoxObj.SetActive(true);
                     
                     _textBox.text = _dialogueReader.npcNamePrefix + _dialogueReader.GetCurrent().GetMessage();
-                    _dialogueState = options.Length == 0 ? State.Cleanup : State.PlayerOptions;
+                    _next = options.Length == 0 ? State.Finished : State.PlayerOptions;
                     break;
                 case State.PlayerOptions:
+                    Debug.Log(Environment.StackTrace);
                     textBoxObj.SetActive(false);
                     
                     for (int i = 0; i < options.Length; i++)
@@ -110,10 +119,11 @@ namespace Dialogue
                         _choiceObjs[i].SetActive(true);
                         _choiceTextBoxes[i].text = options[i];
                     }
-
-                    _dialogueState = State.PlayerSpeak;
+                    
+                    _next = State.PlayerSpeak;
                     break;
                 case State.PlayerSpeak:
+                    Debug.Log(Environment.StackTrace);
                     foreach (GameObject choiceObj in _choiceObjs)
                     {
                         choiceObj.SetActive(false);
@@ -122,16 +132,15 @@ namespace Dialogue
                     textBoxObj.SetActive(true);
                     _textBox.text = "You: " + options[_choice];
                     _dialogueReader.Choice(options[_choice]);
-                    _dialogueState = State.NpcSpeak;
+                    
+                    _next = State.NpcSpeak;
                     break;
-                case State.Cleanup:
+                case State.Finished:
                     textBoxObj.SetActive(false);
                     foreach (GameObject choiceObj in _choiceObjs)
                     {
                         choiceObj.SetActive(false);
                     }
-                    break;
-                case State.Finished:
                     break;
                 default:
                     Debug.Log("An error occured updating the dialogue. Invalid State.");

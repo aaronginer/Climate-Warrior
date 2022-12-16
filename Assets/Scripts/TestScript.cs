@@ -14,7 +14,6 @@ public class TestScript : MonoBehaviour
     {
         DialogueReader r = new DialogueReader(dialogueFile);
         _dialogueDisplay = dialogue.GetComponent<DialogueDisplay>();
-        _dialogueDisplay.SetDialogueReader(r);
-        _dialogueDisplay.DialogueUpdate();
+        _dialogueDisplay.GetComponent<DialogueDisplay>().StartNewDialogue(r);
     }
 }
