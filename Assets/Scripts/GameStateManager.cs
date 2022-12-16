@@ -58,13 +58,18 @@ public class GameStateManager : MonoBehaviour
         {
             File.Delete(_openSave);
         }
-        
+
         var dateTime = DateTime.Now.ToString("dd_MM_yyyy_HH_MM_ss");
+        string path = _persistentPath + "cw_save_" + dateTime + ".json";  
         
-        using StreamWriter writer = new StreamWriter(_persistentPath + "cw_save_" + dateTime + ".json");
+        using StreamWriter writer = new StreamWriter(path);
         string json = JsonUtility.ToJson(gameState);
 
         writer.Write(json);
+        
+        gameState.playerData.inventory.CleanInventory();
+
+        _openSave = path;
 
         Debug.Log("Game state saved.");
     }

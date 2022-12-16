@@ -42,9 +42,6 @@ namespace Dialogue
             new [] { Environment.NewLine },
             StringSplitOptions.None
         );
-        
-        // StreamReader reader = new StreamReader(dialoguePath);
-
 
         foreach (string line in lines)
         {
