@@ -13,9 +13,9 @@ namespace Dialogue
     private Dictionary<int, DialogueNode> _nodes = new Dictionary<int, DialogueNode>();
     private DialogueNode _currentNode;
 
-    public DialogueReader(string filename)
+    public DialogueReader(string dialogueName)
     {
-        if (!ParseFile(filename))
+        if (!ParseFile(dialogueName))
         {
             Debug.Log("Error parsing dialogue file.");
             _nodes.Clear();
@@ -32,9 +32,9 @@ namespace Dialogue
      * 
      * A line with no player options marks the end of the conversation.
      */
-    private bool ParseFile(string filename)
+    private bool ParseFile(string dialogueName)
     {
-        string dialoguePath = "Dialogues/" + filename.Replace(".txt", "");
+        string dialoguePath = "Dialogues/" + dialogueName;
         TextAsset fileContent = Resources.Load<TextAsset>(dialoguePath);
 
         // https://stackoverflow.com/questions/1547476/easiest-way-to-split-a-string-on-newlines-in-net

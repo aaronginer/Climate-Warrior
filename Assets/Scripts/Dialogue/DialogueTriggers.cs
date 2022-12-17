@@ -78,7 +78,7 @@ namespace Dialogue
             {
                 case "StartTurbineMinigame" when !GameStateManager.GSM.gameState.playerData.CheckMissionCompleted(MiniGame.jumpAndRunCollectTurbineParts):
                 {
-                    dialogueObject.GetComponent<DialogueDisplay>().StartNewDialogue("blockeddialogue.txt");
+                    dialogueObject.GetComponent<DialogueDisplay>().StartNewDialogue("blockeddialogue");
                     break;
                 }
             }
@@ -93,17 +93,17 @@ namespace Dialogue
             {
                 case "StartPathSign":
                 {
-                    _dialogueDisplay.StartNewDialogue("pathdialogue.txt");
+                    _dialogueDisplay.StartNewDialogue("pathdialogue");
                     break;
                 }
                 case "StartTurbineSign":
                 {
-                    _dialogueDisplay.StartNewDialogue("turbinedialogue.txt");
+                    _dialogueDisplay.StartNewDialogue("turbinedialogue");
                     break;
                 }
                 case "StartMayorDialogue":
                 {
-                    _dialogueDisplay.StartNewDialogue("mayordialogue.txt");
+                    _dialogueDisplay.StartNewDialogue("mayordialogue");
                     break;
                 }
             }

@@ -65,13 +65,13 @@ namespace Dialogue
             _choice = 0;
         }
         
-        public void StartNewDialogue(string dialogueFile)
+        public void StartNewDialogue(string dialogueName)
         {
             if (_current != State.Finished || !UIStateManager.UISM.CanStartDialogue()) return;
             
             UIStateManager.UISM.uIState = UIState.Dialogue;
             
-            _dialogueReader = new DialogueReader(dialogueFile);
+            _dialogueReader = new DialogueReader(dialogueName);
             _next = State.NpcSpeak;
 
             DialogueUpdate();
