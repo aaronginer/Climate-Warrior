@@ -69,6 +69,11 @@ public class PlayerController : MonoBehaviour
     }
 
     private bool TryMove(Vector2 direction) {
+        if (!UIStateManager.UISM.CanPlayerMove())
+        {
+            return false;
+        }
+        
         if(direction != Vector2.zero) {
             int count = rb.Cast(
                 direction,
@@ -81,13 +86,8 @@ public class PlayerController : MonoBehaviour
                 rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
                 return true;           
             }
-            else {
-                return false;
-            }
-        } else {
-            // cant move without direction
-            return false;
         }
 
+        return false;
     }
 }

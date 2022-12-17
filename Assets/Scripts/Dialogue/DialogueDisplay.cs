@@ -67,7 +67,9 @@ namespace Dialogue
         
         public void StartNewDialogue(DialogueReader reader)
         {
-            if (_current != State.Finished) return;
+            if (_current != State.Finished || !UIStateManager.UISM.CanStartDialogue()) return;
+            
+            UIStateManager.UISM.uIState = UIState.Dialogue;
             
             _dialogueReader = reader;
             _next = State.NpcSpeak;
@@ -138,6 +140,8 @@ namespace Dialogue
                     {
                         choiceObj.SetActive(false);
                     }
+                    
+                    UIStateManager.UISM.uIState = UIState.None;
                     break;
                 default:
                     Debug.Log("An error occured updating the dialogue. Invalid State.");
