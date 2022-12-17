@@ -14,6 +14,12 @@ namespace InventorySystem
             var mPos = Input.mousePosition;
             transform.position = mPos;
         }
+
+        public void UpdatePosition()
+        {
+            var mPos = Input.mousePosition;
+            transform.position = mPos;
+        }
     }
 }
 

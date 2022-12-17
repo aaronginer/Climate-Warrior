@@ -13,6 +13,7 @@ namespace InventorySystem
         public GameObject inventoryLayout;
         public GameObject[] itemObj;
         public GameObject hand;
+        private HandScript _handScript;
         private Image[] _itemImage;
         private TextMeshProUGUI[] _itemText;
         private Image _handImage;
@@ -46,6 +47,7 @@ namespace InventorySystem
 
             _handImage = hand.GetComponent<Image>();
             _handText = hand.GetComponentInChildren<TextMeshProUGUI>();
+            _handScript = hand.GetComponent<HandScript>();
 
             UpdateInventory();
             ToggleInventory();
@@ -130,6 +132,9 @@ namespace InventorySystem
                 {
                     _handSlot = _inventory.GetSlot(slotId);
                     _inventory.SetSlot(slotId, null);
+                    
+                    // update is handled by Update() function of HandScript, but that can be too slow so the item seems to jump
+                    _handScript.UpdatePosition();
                 }
             }
             UpdateInventory();
