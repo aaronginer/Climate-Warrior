@@ -55,7 +55,7 @@ namespace InventorySystem
 
         public void Update()
         {
-            if (Input.GetKeyDown("e"))
+            if (Input.GetKeyDown("e") && UIStateManager.UISM.CanToggleInventory())
             {
                 ToggleInventory();
             }
@@ -75,6 +75,8 @@ namespace InventorySystem
             titleText.SetActive(_active);
             inventoryLayout.SetActive(_active);
             hand.SetActive(_handSlot != null);
+
+            UIStateManager.UISM.uIState = _active ? UIState.Inventory : UIState.None;
         }
 
         // Updates the inventory UI elements
