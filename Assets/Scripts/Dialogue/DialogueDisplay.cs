@@ -91,7 +91,7 @@ namespace Dialogue
             }
         }
 
-        public void DialogueUpdate()
+        private void DialogueUpdate()
         {
             if (_dialogueReader == null)
             {
@@ -102,18 +102,21 @@ namespace Dialogue
             _current = _next;
 
             DialogueNode currentNode = _dialogueReader.GetCurrent();
-            string[] options = currentNode.GetOptions();
+            string[] options = null;
             switch (_current)
             {
                 case State.NpcSpeak: // show npc text
                     textBoxObj.SetActive(true);
                     
                     _textBox.text = _dialogueReader.npcNamePrefix + _dialogueReader.GetCurrent().GetMessage();
+                    
+                    options = currentNode.GetOptions();
                     _next = options.Length == 0 ? State.Finished : State.PlayerOptions;
                     break;
                 case State.PlayerOptions: // show the player option buttons
                     textBoxObj.SetActive(false);
                     
+                    options = currentNode.GetOptions();
                     for (int i = 0; i < options.Length; i++)
                     {
                         _choiceObjs[i].SetActive(true);
@@ -129,10 +132,12 @@ namespace Dialogue
                     }
 
                     textBoxObj.SetActive(true);
+                    
+                    options = currentNode.GetOptions();
                     _textBox.text = "You: " + options[_choice];
                     _dialogueReader.Choice(options[_choice]);
-                    
-                    _next = State.NpcSpeak;
+
+                    _next = _dialogueReader.GetCurrent() == null ? State.Finished : State.NpcSpeak;
                     break;
                 case State.Finished: // dialogue is in default state
                     textBoxObj.SetActive(false);

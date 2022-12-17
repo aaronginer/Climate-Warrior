@@ -124,11 +124,9 @@ namespace Dialogue
         {
             _currentNode = _nodes[_currentNode.GetChoiceId(option)];
         }
-        catch (Exception e)
+        catch (Exception ignored)
         {
-            Debug.Log("No dialogue node with id 1 in dialogue file.");
-            Console.WriteLine(e);
-            throw;
+            _currentNode = null;
         }
     }
 }   
