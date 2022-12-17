@@ -11,11 +11,13 @@ GameObject:
   - component: {fileID: 3154545048504334673}
   - component: {fileID: 3451579133904586963}
   - component: {fileID: 2277426010344069776}
-  - component: {fileID: 4665400214120593835}
+  - component: {fileID: 1181943579510409761}
   - component: {fileID: 3680909511035690254}
+  - component: {fileID: 1382467476}
   - component: {fileID: 1382467475}
   - component: {fileID: 2799438046930718990}
-  - component: {fileID: 1382467476}
+  - component: {fileID: 1181943579510409752}
+  - component: {fileID: 1181943579510409753}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -78,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_Sprite: {fileID: -698462608, guid: fb0bd2b4e812b264ab9ff8a6ed63ce6c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -111,8 +113,8 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!61 &4665400214120593835
-BoxCollider2D:
+--- !u!60 &1181943579510409761
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -124,7 +126,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.007789243, y: -0.15318993}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -134,9 +136,16 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.15284854, y: 0.059376776}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.026746683, y: -0.12749158}
+      - {x: -0.05226838, y: -0.13000622}
+      - {x: -0.04766696, y: -0.15589106}
+      - {x: -0.03883348, y: -0.17435518}
+      - {x: 0.054601416, y: -0.17159432}
+      - {x: 0.06502922, y: -0.14472453}
+      - {x: 0.06226837, y: -0.12871657}
+      - {x: 0.023065545, y: -0.12841189}
 --- !u!95 &3680909511035690254
 Animator:
   serializedVersion: 4
@@ -157,6 +166,36 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1382467476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430049181123127994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 70d4f23e92c4d1a4eb86ce735dcedec8, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!114 &1382467475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,7 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryDisplayObj: {fileID: 0}
---- !u!114 &1382467476
+--- !u!114 &1181943579510409752
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -207,24 +246,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 430049181123127994}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Script: {fileID: 11500000, guid: f6ec82e16c3fa124e909ae8f28222e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 70d4f23e92c4d1a4eb86ce735dcedec8, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+--- !u!114 &1181943579510409753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430049181123127994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee0c8b7a49469da418bb5f1f980bde23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueObject: {fileID: 0}
+  startDialogueText: {fileID: 0}
