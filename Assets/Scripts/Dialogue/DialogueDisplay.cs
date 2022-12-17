@@ -65,11 +65,11 @@ namespace Dialogue
             _choice = 0;
         }
         
-        public void StartNewDialogue(string dialogueFile, bool canWalk=false)
+        public void StartNewDialogue(string dialogueFile)
         {
             if (_current != State.Finished || !UIStateManager.UISM.CanStartDialogue()) return;
             
-            UIStateManager.UISM.uIState = canWalk ? UIState.WalkableDialogue : UIState.Dialogue;
+            UIStateManager.UISM.uIState = UIState.Dialogue;
             
             _dialogueReader = new DialogueReader(dialogueFile);
             _next = State.NpcSpeak;
