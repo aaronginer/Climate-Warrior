@@ -125,6 +125,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: button
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 209
+        width: 46
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9907bf715321e045ba142c9e105346b
+      internalID: 1533801021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_container
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 226
+        width: 44
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cf4623494e0e7e4793f9999cf45c4ab
+      internalID: 1306900814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -136,7 +178,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      button: 1533801021
       dialogue_box: -1832729064
+      ui_container: 1306900814
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

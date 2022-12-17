@@ -101,6 +101,7 @@ namespace Dialogue
 
             _current = _next;
 
+            Debug.Log(_current);
             DialogueNode currentNode = _dialogueReader.GetCurrent();
             string[] options = currentNode.GetOptions();
             switch (_current)
@@ -109,6 +110,7 @@ namespace Dialogue
                     textBoxObj.SetActive(true);
                     
                     _textBox.text = _dialogueReader.npcNamePrefix + _dialogueReader.GetCurrent().GetMessage();
+                    Debug.Log(options.Length);
                     _next = options.Length == 0 ? State.Finished : State.PlayerOptions;
                     break;
                 case State.PlayerOptions:
