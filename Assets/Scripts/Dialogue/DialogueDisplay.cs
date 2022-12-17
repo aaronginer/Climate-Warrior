@@ -65,13 +65,13 @@ namespace Dialogue
             _choice = 0;
         }
         
-        public void StartNewDialogue(DialogueReader reader)
+        public void StartNewDialogue(string dialogueFile, bool canWalk=false)
         {
             if (_current != State.Finished || !UIStateManager.UISM.CanStartDialogue()) return;
             
-            UIStateManager.UISM.uIState = UIState.Dialogue;
+            UIStateManager.UISM.uIState = canWalk ? UIState.WalkableDialogue : UIState.Dialogue;
             
-            _dialogueReader = reader;
+            _dialogueReader = new DialogueReader(dialogueFile);
             _next = State.NpcSpeak;
 
             DialogueUpdate();
@@ -101,19 +101,17 @@ namespace Dialogue
 
             _current = _next;
 
-            Debug.Log(_current);
             DialogueNode currentNode = _dialogueReader.GetCurrent();
             string[] options = currentNode.GetOptions();
             switch (_current)
             {
-                case State.NpcSpeak:
+                case State.NpcSpeak: // show npc text
                     textBoxObj.SetActive(true);
                     
                     _textBox.text = _dialogueReader.npcNamePrefix + _dialogueReader.GetCurrent().GetMessage();
-                    Debug.Log(options.Length);
                     _next = options.Length == 0 ? State.Finished : State.PlayerOptions;
                     break;
-                case State.PlayerOptions:
+                case State.PlayerOptions: // show the player option buttons
                     textBoxObj.SetActive(false);
                     
                     for (int i = 0; i < options.Length; i++)
@@ -124,7 +122,7 @@ namespace Dialogue
                     
                     _next = State.PlayerSpeak;
                     break;
-                case State.PlayerSpeak:
+                case State.PlayerSpeak: // show player selection
                     foreach (GameObject choiceObj in _choiceObjs)
                     {
                         choiceObj.SetActive(false);
@@ -136,7 +134,7 @@ namespace Dialogue
                     
                     _next = State.NpcSpeak;
                     break;
-                case State.Finished:
+                case State.Finished: // dialogue is in default state
                     textBoxObj.SetActive(false);
                     foreach (GameObject choiceObj in _choiceObjs)
                     {

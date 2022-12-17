@@ -35,8 +35,7 @@ public class PlayerTriggers : MonoBehaviour
                 break;
             case "StartTurbineMinigame" when !GameStateManager.GSM.gameState.playerData.CheckMissionCompleted(MiniGame.jumpAndRunCollectTurbineParts):
             {
-                DialogueReader reader = new DialogueReader("blockeddialogue.txt");
-                dialogueObject.GetComponent<DialogueDisplay>().StartNewDialogue(reader);
+                dialogueObject.GetComponent<DialogueDisplay>().StartNewDialogue("blockeddialogue.txt", true);
                 break;
             }
             case "StartTurbineMinigame":
@@ -50,20 +49,17 @@ public class PlayerTriggers : MonoBehaviour
             {
                 case "StartPathSign":
                 {
-                    DialogueReader reader = new DialogueReader("pathdialogue.txt");
-                    dialogueObject.GetComponent<DialogueDisplay>().StartNewDialogue(reader);
+                    dialogueObject.GetComponent<DialogueDisplay>().StartNewDialogue("pathdialogue.txt");
                     break;
                 }
                 case "StartTurbineSign":
                 {
-                    DialogueReader reader = new DialogueReader("turbinedialogue.txt");
-                    dialogueObject.GetComponent<DialogueDisplay>().StartNewDialogue(reader);
+                    dialogueObject.GetComponent<DialogueDisplay>().StartNewDialogue("turbinedialogue.txt");
                     break;
                 }
                 case "StartMayorDialogue":
                 {
-                    DialogueReader reader = new DialogueReader("mayordialogue.txt");
-                    dialogueObject.GetComponent<DialogueDisplay>().StartNewDialogue(reader);
+                    dialogueObject.GetComponent<DialogueDisplay>().StartNewDialogue("mayordialogue.txt");
                     break;
                 }
             }

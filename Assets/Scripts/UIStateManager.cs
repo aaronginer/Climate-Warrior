@@ -12,7 +12,8 @@ public enum UIState
 {
     None,
     Inventory,
-    Dialogue
+    Dialogue,
+    WalkableDialogue
 }
 public class UIStateManager : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class UIStateManager : MonoBehaviour
 
     public bool CanPlayerMove()
     {
-        return uIState is UIState.None;
+        return uIState is UIState.None or UIState.WalkableDialogue;
     }
 
     public bool CanToggleInventory()
