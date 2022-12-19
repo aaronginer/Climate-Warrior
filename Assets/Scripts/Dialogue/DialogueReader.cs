@@ -8,7 +8,7 @@ namespace Dialogue
 {
     public class DialogueReader
 {
-    public string npcNamePrefix = "";
+    public string npcName = "";
     
     private Dictionary<int, DialogueNode> _nodes = new Dictionary<int, DialogueNode>();
     private DialogueNode _currentNode;
@@ -48,9 +48,9 @@ namespace Dialogue
             if (line[0] == '#')
             {
                 var split = line.Split(":");
-                if (split.Length == 2 && split[0] == "#npc-name" && npcNamePrefix == "")
+                if (split.Length == 2 && split[0] == "#npc-name" && npcName == "")
                 {
-                    npcNamePrefix = split[1] + ": ";
+                    npcName = split[1];
                 }
                 continue;
             }
