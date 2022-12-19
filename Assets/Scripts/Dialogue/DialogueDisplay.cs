@@ -73,7 +73,7 @@ namespace Dialogue
             
             _dialogueReader = new DialogueReader(dialogueName);
             _next = State.NpcSpeak;
-
+            
             DialogueUpdate();
         }
 

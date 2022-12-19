@@ -62,6 +62,7 @@ namespace Dialogue
             string[] splitLine = line.Split("::");
             for (int i = 0; i < splitLine.Length; i++)
             {
+                Debug.Log(splitLine[i]);
                 try
                 {
                     Regex splitter = new Regex("^([0-9]+?)\"(.*?)\"$");
@@ -124,7 +125,7 @@ namespace Dialogue
         {
             _currentNode = _nodes[_currentNode.GetChoiceId(option)];
         }
-        catch (Exception ignored)
+        catch (Exception)
         {
             _currentNode = null;
         }
