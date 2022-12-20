@@ -26,7 +26,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        
+
+        gameObject.transform.position = GameStateManager.Instance.gameState.playerData.position;
     }
 
     // Update is called once per frame
@@ -62,6 +63,7 @@ public class PlayerController : MonoBehaviour
             spriteRenderer.flipX = false;
         }
 
+        GameStateManager.Instance.gameState.playerData.position = gameObject.transform.position;
     }
 
     void OnMove(InputValue movementValue) {
