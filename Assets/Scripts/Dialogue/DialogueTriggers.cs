@@ -28,7 +28,7 @@ namespace Dialogue
             "StartPathSign",
             "StartTurbineSign",
             "StartMayorDialogue",
-            "Sabotage1Dialogue"
+            "TestDialogue"
         };
 
         private const string signText = "Press F to read sign!";
@@ -107,9 +107,9 @@ namespace Dialogue
                     _dialogueDisplay.StartNewDialogue("mayordialogue");
                     break;
                 }
-                case "Sabotage1Dialogue":
+                case "TestDialogue":
                 {
-                    _dialogueDisplay.StartNewDialogue("sabotage_1");
+                    _dialogueDisplay.StartNewDialogue("sabotage_2");
                     break;
                 }
             }
