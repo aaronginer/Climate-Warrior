@@ -49,9 +49,9 @@ public class GameTurbineEnd : MonoBehaviour
     }
     public void BackToButtonClick()
     {
-        if (GameStateManager.GSM.gameState.playerData.CheckMissionCompleted(MiniGame.buildAWindTurbine))
+        if (GameStateManager.Instance.gameState.playerData.CheckMissionCompleted(MiniGame.buildAWindTurbine))
         {
-            GameStateManager.GSM.gameState.playerData.inventory.AddItem(ItemType.Turbine);
+            GameStateManager.Instance.gameState.playerData.inventory.AddItem(ItemType.Turbine);
         }
         SceneManager.LoadScene(Constants.SceneNames.village);
     }
@@ -65,7 +65,7 @@ public class GameTurbineEnd : MonoBehaviour
     {
         wonText.gameObject.SetActive(true);
         wonLevelButton.gameObject.SetActive(true);
-        GameStateManager.GSM.gameState.playerData.CompleteMission(MiniGame.buildAWindTurbine);
+        GameStateManager.Instance.gameState.playerData.CompleteMission(MiniGame.buildAWindTurbine);
     }
 
     public void Lost()

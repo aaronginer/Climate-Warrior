@@ -10,40 +10,26 @@ using static Newtonsoft.Json.JsonSerializer;
 
 public class GameStateManager : MonoBehaviour
 {
-    public static GameStateManager GSM { get; private set; }
+    public static GameStateManager Instance { get; private set; }
     
-    public GameState gameState = new();
+    public GameState gameState;
     
     private string _persistentPath = "";
     private string _openSave = "";
     
     private void Awake()
     {
-        if (GSM != null && GSM != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(this);
             return;
         }
-        GSM = this;
+        gameState = new GameState();
+        Instance = this;
         
         DontDestroyOnLoad(this);
 
         _persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar;
-    }
-
-    private void Start()
-    {
-        SceneManager.LoadScene(Constants.SceneNames.mainMenu, LoadSceneMode.Single);
-    }
-
-    public static void Save(GameState gameState)
-    {
-        GSM.gameState = gameState;
-    }
-
-    public static GameState Load()
-    {
-        return GSM.gameState;
     }
     
     public void SaveToDisk()

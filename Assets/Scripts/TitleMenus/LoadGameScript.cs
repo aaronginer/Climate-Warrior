@@ -53,7 +53,7 @@ namespace TitleMenus
                 return;
             }
             
-            GameStateManager.GSM.LoadFromDisk(selectedSave);
+            GameStateManager.Instance.LoadFromDisk(selectedSave);
             SceneManager.LoadScene(Constants.SceneNames.village, LoadSceneMode.Single);
         }
 

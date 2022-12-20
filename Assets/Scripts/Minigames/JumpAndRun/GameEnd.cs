@@ -58,7 +58,7 @@ public class GameEnd : MonoBehaviour
     {
         if (ScoreBoard.instance.GetScore() >= ScoreBoard.instance.minScore)
         {
-            GameStateManager.GSM.gameState.playerData.CompleteMission(MiniGame.jumpAndRunCollectTurbineParts);
+            GameStateManager.Instance.gameState.playerData.CompleteMission(MiniGame.jumpAndRunCollectTurbineParts);
         }
         SceneManager.LoadScene(returnToMenu);
     }

@@ -29,7 +29,7 @@ namespace InventorySystem
         {
             Debug.Log("Instantiating Display");
             
-            _inventory = GameStateManager.GSM.gameState.playerData.inventory;
+            _inventory = GameStateManager.Instance.gameState.playerData.inventory;
             _inventory.CleanInventory();
 
             _itemImage = new Image[9];

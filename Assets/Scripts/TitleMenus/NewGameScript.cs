@@ -18,8 +18,8 @@ namespace TitleMenus
 
         public void StartGame()
         {
-            GameStateManager.GSM.gameState.playerData = new PlayerData(_nameTextField.text);
-            GameStateManager.GSM.SaveToDisk();
+            GameStateManager.Instance.gameState.playerData = new PlayerData(_nameTextField.text);
+            GameStateManager.Instance.SaveToDisk();
 
             SceneManager.LoadScene(Constants.SceneNames.village, LoadSceneMode.Single);
         }

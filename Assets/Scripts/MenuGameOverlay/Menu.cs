@@ -30,7 +30,7 @@ namespace MenuGameOverlay
 
         public void SaveGameState()
         {
-            GameStateManager.GSM.SaveToDisk();
+            GameStateManager.Instance.SaveToDisk();
         }
 
         public void ExitGame()
