@@ -13,7 +13,7 @@ namespace TitleMenus
         // Start is called before the first frame update
         void Start()
         {
-            _nameTextField = nameTextField.GetComponentInChildren<TextMeshProUGUI>();
+            _nameTextField = nameTextField.GetComponent<TextMeshProUGUI>();
         }
 
         public void StartGame()
