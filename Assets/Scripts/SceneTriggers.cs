@@ -14,7 +14,7 @@ public class SceneTriggers : MonoBehaviour
             case "StartJmpNRunMinigame":
                 SceneManager.LoadScene(Constants.SceneNames.miniGameJumpAndRunCollectTurbine, LoadSceneMode.Single);
                 break;
-            case "StartTurbineMinigame" when GameStateManager.GSM.gameState.playerData.CheckMissionCompleted(MiniGame.jumpAndRunCollectTurbineParts):
+            case "StartTurbineMinigame" when GameStateManager.Instance.gameState.playerData.CheckMissionCompleted(MiniGame.jumpAndRunCollectTurbineParts):
                 SceneManager.LoadScene(Constants.SceneNames.miniGameBuildAWindTurbine, LoadSceneMode.Single);
                 break;
         }

@@ -76,7 +76,7 @@ namespace Dialogue
         {
             switch (_colliderObject.name)
             {
-                case "StartTurbineMinigame" when !GameStateManager.GSM.gameState.playerData.CheckMissionCompleted(MiniGame.jumpAndRunCollectTurbineParts):
+                case "StartTurbineMinigame" when !GameStateManager.Instance.gameState.playerData.CheckMissionCompleted(MiniGame.jumpAndRunCollectTurbineParts):
                 {
                     dialogueObject.GetComponent<DialogueDisplay>().StartNewDialogue("blockeddialogue");
                     break;
