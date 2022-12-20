@@ -14,7 +14,7 @@ public enum MiniGame
 public class PlayerData
 {
     public Inventory inventory;
-    public String name;
+    public string name;
 
     public int[] missions = new int[2];
 
