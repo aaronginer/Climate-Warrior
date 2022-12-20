@@ -70,7 +70,8 @@ namespace Dialogue
                     if (i == 0)
                     {
                         id = int.Parse(match.Groups[1].ToString());
-                        message = match.Groups[2].ToString();
+                        message = match.Groups[2].ToString().Replace("[player-name]", 
+                            GameStateManager.Instance.gameState.playerData.name);
                     }
                     // Parse Answer options
                     else 
