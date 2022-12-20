@@ -105,7 +105,6 @@ namespace Dialogue
                 case State.NpcSpeak: // show npc text
                     dialogueBox.SetActive(true);
 
-                    Debug.Log(_dialogueReader.npcName);
                     textBoxName.text = _dialogueReader.npcName;
                     textBoxMessage.text = _dialogueReader.GetCurrent().GetMessage();
                     
