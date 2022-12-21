@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MenuGameOverlay
 {
@@ -35,7 +36,14 @@ namespace MenuGameOverlay
 
         public void ExitGame()
         {
+            GameStateManager.Instance.SaveToDisk();
             Application.Quit();
+        }
+
+        public void BackToMenu()
+        {
+            GameStateManager.Instance.SaveToDisk();
+            SceneManager.LoadScene("MainMenu");
         }
     }       
 }
