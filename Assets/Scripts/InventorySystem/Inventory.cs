@@ -67,7 +67,6 @@ namespace InventorySystem
             Debug.Log(GetHashCode());
             for (int i = 0; i < slots.Length; i++)
             {
-                Debug.Log(slots[i]);
                 if (slots[i] != null)
                 {
                     Debug.Log(slots[i] + ": " + slots[i].itemType + " - " + slots[i].amount);

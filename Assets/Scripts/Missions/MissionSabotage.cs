@@ -1,20 +1,47 @@
 ﻿
+using System.Collections.Generic;
 using Dialogue;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Missions
 {
-    public class MissionSabotage : Mission
+    public sealed class MissionSabotage : Mission
     {
-        public MissionSabotage(string name) : base(name)
+        public MissionSabotage() : base("Sabotage")
         {
-            ManualDialogueTriggers.Add("Panel1Sign");
+            ManualDialogueTriggers["Village"].Add("Sabotage1Dialogue");
+            ManualDialogueTriggers["Village"].Add("Sabotage2Dialogue");
+            ManualDialogueTriggers["HydroPlantUpper"].Add("Panel1Sign");
         }
 
+        /*
+         * Mission States
+         * 0: Start: Mayor dialogue 1, nothing else
+         * 1: Mission not accepted on first try: Mayor dialogue 2, nothing else
+         * 2: Mission accepted: Active Panel1
+         */
+
+        public override void Setup()
+        {
+            switch (State.stateID)
+            {
+                case 0:
+                    InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "Sabotage1Dialogue");
+                    break;
+                case 1:
+                    InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "Sabotage2Dialogue");
+                    break;
+                case 2:
+                    InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "Panel1Sign");
+                    break;
+            }
+        }
+        
         public override void HandleAutomaticDialogueTriggers(GameObject obj, DialogueDisplay display)
         {
-            if (!AutomaticDialogueTriggers.Contains(obj.name)) return;
+            if (!IsAutomaticDialogueTrigger(obj)) return;
             
             switch (obj.name)
             {
@@ -24,7 +51,7 @@ namespace Missions
         
         public override void HandleManualDialogueTriggers(GameObject obj, DialogueDisplay display)
         {
-            if (!ManualDialogueTriggers.Contains(obj.name)) return;
+            if (!IsManualDialogueTrigger(obj)) return;
             
             switch (obj.name)
             {
@@ -32,6 +59,25 @@ namespace Missions
                 {
                     display.StartNewDialogue("Missions/Sabotage/panel_1");
                     Object.Destroy(obj);
+                    State.stateID = 3;
+                    Setup();
+                    break;
+                }
+                case "Sabotage1Dialogue":
+                {
+                    display.StartNewDialogue("Missions/Sabotage/sabotage_1");
+                    Object.Destroy(obj);
+                    State.stateID = 1;
+                    Setup();
+                    break;
+                }
+                case "Sabotage2Dialogue":
+                {
+                    display.StartNewDialogue("Missions/Sabotage/sabotage_2");
+                    Object.Destroy(obj);
+                    State.stateID = 2;
+                    SceneManager.LoadScene("HydroPlantUpper");
+                    //Setup();
                     break;
                 }
             }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Missions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -54,6 +55,7 @@ namespace TitleMenus
             }
             
             GameStateManager.Instance.LoadFromDisk(selectedSave);
+            GameStateManager.Instance.LoadMission();
             SceneManager.LoadScene(Constants.SceneNames.village, LoadSceneMode.Single);
         }
 

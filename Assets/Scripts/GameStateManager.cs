@@ -1,13 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using Missions;
-using Newtonsoft.Json.Serialization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using static Newtonsoft.Json.JsonSerializer;
 
 public class GameStateManager : MonoBehaviour
 {
@@ -28,7 +23,9 @@ public class GameStateManager : MonoBehaviour
             return;
         }
         gameState = new GameState();
-        CurrentMission = new MissionSabotage("sab");
+        
+        // register callback
+        SceneManager.sceneLoaded += OnSceneLoaded;
         
         Instance = this;
         
@@ -36,7 +33,12 @@ public class GameStateManager : MonoBehaviour
 
         _persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar;
     }
-    
+
+    private void Start()
+    {
+        StartMission(new MissionSabotage());
+    }
+
     public void SaveToDisk()
     {
         if (gameState == null)
@@ -89,13 +91,27 @@ public class GameStateManager : MonoBehaviour
         if (CurrentMission != null) return false;
 
         CurrentMission = mission;
-        gameState.missionState = mission.State;
+        gameState.missionState = mission?.State;
+        
+        mission?.Setup();
 
         return true;
     }
 
+    public void LoadMission()
+    {
+        var m = Mission.LoadMission(gameState.missionState);
+        gameState.missionState = m.State;
+        CurrentMission = m;
+    }
+    
     public void EndMission()
     {
         CurrentMission = null;
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        CurrentMission?.Setup();
     }
 }

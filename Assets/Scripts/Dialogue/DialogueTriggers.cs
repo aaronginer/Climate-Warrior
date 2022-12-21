@@ -31,7 +31,7 @@ namespace Dialogue
         };
 
         private const string signText = "F - Read";
-        private const string dialogueText = "F - Talk!";
+        private const string dialogueText = "F - Talk";
         
         
         private void Start()

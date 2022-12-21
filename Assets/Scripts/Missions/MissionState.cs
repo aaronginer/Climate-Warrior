@@ -1,14 +1,17 @@
-﻿namespace Missions
+﻿using System;
+
+namespace Missions
 {
+    [Serializable]
     public class MissionState
     {
-        public string Name;
-        public int State;
+        public string missionName;
+        public int stateID;
 
         public MissionState(string name)
         {
-            Name = name;
-            State = 0;
+            missionName = name;
+            stateID = 0;
         }
     }
 }
