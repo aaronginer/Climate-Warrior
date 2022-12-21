@@ -22,9 +22,16 @@ public class SceneTriggers : MonoBehaviour
                 SceneManager.LoadScene("HydroPlantLower", LoadSceneMode.Single);
                 break;
             case "HydroPlantUpperFloor":
-
                 GameStateManager.Instance.gameState.playerData.position = new Vector3(1.00800002f, -0.425000012f, 0);
                 SceneManager.LoadScene("HydroPlantUpper", LoadSceneMode.Single);
+                break;
+            case "HydroPlantEnter":
+                GameStateManager.Instance.gameState.playerData.position = new Vector3(1.35099995f, 0.504000008f, 0);
+                SceneManager.LoadScene("HydroPlantUpper", LoadSceneMode.Single);
+                break;
+            case "HydroPlantExit":
+                GameStateManager.Instance.gameState.playerData.position = new Vector3(1.36699998f,1.301f,0);
+                SceneManager.LoadScene("River", LoadSceneMode.Single);
                 break;
         }
     }
