@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         gameObject.transform.position = GameStateManager.Instance.gameState.playerData.position;
+        GameStateManager.Instance.gameState.playerData.sceneName = SceneManager.GetActiveScene().name;
     }
 
     // Update is called once per frame

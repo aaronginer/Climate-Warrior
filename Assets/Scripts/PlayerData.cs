@@ -15,7 +15,8 @@ public class PlayerData
 {
     public Inventory inventory;
     public Vector3 position;
-    public String name;
+    public string sceneName;
+    public string name;
 
     public int[] missions = new int[2];
 
@@ -23,6 +24,7 @@ public class PlayerData
     public PlayerData(string name)
     {
         this.name = name;
+        sceneName = "Village";
         inventory = new Inventory(9);
     }
 

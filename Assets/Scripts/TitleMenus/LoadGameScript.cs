@@ -56,7 +56,7 @@ namespace TitleMenus
             
             GameStateManager.Instance.LoadFromDisk(selectedSave);
             GameStateManager.Instance.LoadMission();
-            SceneManager.LoadScene(Constants.SceneNames.village, LoadSceneMode.Single);
+            SceneManager.LoadScene(GameStateManager.Instance.gameState.playerData.sceneName);
         }
 
         public void BackToMainMenu()
