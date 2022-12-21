@@ -28,11 +28,12 @@ namespace Dialogue
             "StartPathSign",
             "StartTurbineSign",
             "StartMayorDialogue",
-            "TestDialogue"
+            "TestDialogue",
+            "Panel1Sign"
         };
 
-        private const string signText = "Press F to read sign!";
-        private const string dialogueText = "Press F to start dialogue!"; 
+        private const string signText = "F - Read";
+        private const string dialogueText = "F - Talk!";
         
         
         private void Start()
@@ -109,7 +110,13 @@ namespace Dialogue
                 }
                 case "TestDialogue":
                 {
-                    _dialogueDisplay.StartNewDialogue("sabotage_2");
+                    _dialogueDisplay.StartNewDialogue("Missions/Sabotage/sabotage_2");
+                    break;
+                }
+                case "Panel1Sign":
+                {
+                    _dialogueDisplay.StartNewDialogue("Missions/Sabotage/panel_1");
+                    Destroy(_colliderObject);
                     break;
                 }
             }
