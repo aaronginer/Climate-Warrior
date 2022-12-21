@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Missions;
 using Newtonsoft.Json.Serialization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,6 +14,8 @@ public class GameStateManager : MonoBehaviour
     public static GameStateManager Instance { get; private set; }
     
     public GameState gameState;
+
+    public Mission CurrentMission;
     
     private string _persistentPath = "";
     private string _openSave = "";
@@ -25,6 +28,8 @@ public class GameStateManager : MonoBehaviour
             return;
         }
         gameState = new GameState();
+        CurrentMission = new MissionSabotage("sab");
+        
         Instance = this;
         
         DontDestroyOnLoad(this);
@@ -77,5 +82,20 @@ public class GameStateManager : MonoBehaviour
         gameState = JsonUtility.FromJson<GameState>(json);
 
         Debug.Log("Game state loaded.");
+    }
+
+    public bool StartMission(Mission mission)
+    {
+        if (CurrentMission != null) return false;
+
+        CurrentMission = mission;
+        gameState.missionState = mission.State;
+
+        return true;
+    }
+
+    public void EndMission()
+    {
+        CurrentMission = null;
     }
 }

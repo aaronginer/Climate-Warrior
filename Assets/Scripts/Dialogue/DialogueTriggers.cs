@@ -28,8 +28,6 @@ namespace Dialogue
             "StartPathSign",
             "StartTurbineSign",
             "StartMayorDialogue",
-            "TestDialogue",
-            "Panel1Sign"
         };
 
         private const string signText = "F - Read";
@@ -44,19 +42,23 @@ namespace Dialogue
 
         public void OnTriggerEnter2D(Collider2D col)
         {
-            bool automatic = _automatic.Contains(col.name);
-            bool manual = _manual.Contains(col.name);
-            if (!(automatic || manual)) return;
+            var automatic = _automatic.Contains(col.name);
+            var manual = _manual.Contains(col.name);
 
             _colliderObject = col.gameObject;
-            if (manual)
+            if (manual || (GameStateManager.Instance.CurrentMission?.IsManualDialogueTrigger(_colliderObject) ?? false))
             {
                 startDialogueText.GetComponentInChildren<TextMeshProUGUI>().text = col.name.Contains("Sign") ? signText : dialogueText;
                 startDialogueText.SetActive(true);
             }
-            else
+            else if (automatic)
             {
                 HandleAutomaticDialogue();
+                
+            }
+            else if (GameStateManager.Instance.CurrentMission?.IsAutomaticDialogueTrigger(_colliderObject) ?? false)
+            {
+                GameStateManager.Instance.CurrentMission.HandleAutomaticDialogueTriggers(_colliderObject, _dialogueDisplay);
             }
         }
 
@@ -74,6 +76,7 @@ namespace Dialogue
             }
         }
 
+        // handle dialogue triggers that are not specific to missions
         private void HandleAutomaticDialogue()
         {
             switch (_colliderObject.name)
@@ -86,12 +89,13 @@ namespace Dialogue
             }
         }
 
+        // handle dialogue triggers that are not specific to missions
         private void HandleManualDialogue()
         {
             if (!Input.GetKeyDown("f")) return;
             
             startDialogueText.SetActive(false);
-            switch (_colliderObject.gameObject.name)
+            switch (_colliderObject.name)
             {
                 case "StartPathSign":
                 {
@@ -108,17 +112,9 @@ namespace Dialogue
                     _dialogueDisplay.StartNewDialogue("mayordialogue");
                     break;
                 }
-                case "TestDialogue":
-                {
-                    _dialogueDisplay.StartNewDialogue("Missions/Sabotage/sabotage_2");
+                default:
+                    GameStateManager.Instance.CurrentMission?.HandleManualDialogueTriggers(_colliderObject, _dialogueDisplay);
                     break;
-                }
-                case "Panel1Sign":
-                {
-                    _dialogueDisplay.StartNewDialogue("Missions/Sabotage/panel_1");
-                    Destroy(_colliderObject);
-                    break;
-                }
             }
         }
     }
