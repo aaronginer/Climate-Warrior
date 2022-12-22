@@ -1,3 +1,4 @@
 ﻿#npc-name:Mayor
 1"Hello Warrior! One of our electricians at the hydro-plant told me that one of the machines was malfunctioning... Do you know anything about that?"::0"No... That's weird, I'll have a look!"::2"I'm sure they'll figure it out, I've got more important business to attend to!"
+#actions:Start,Delay
 2"Alright, I'll make sure to call you as soon as I know more!"

@@ -103,6 +103,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6632361662185935000}
+        m_TargetAssemblyTypeName: Dialogue.ChoiceAction, Assembly-CSharp
+        m_MethodName: HandleAction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1493271673055523457
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,6 +488,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6632361662185935002}
+        m_TargetAssemblyTypeName: Dialogue.ChoiceAction, Assembly-CSharp
+        m_MethodName: HandleAction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4296971907156207506
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,6 +599,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6632361662185935001}
+        m_TargetAssemblyTypeName: Dialogue.ChoiceAction, Assembly-CSharp
+        m_MethodName: HandleAction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -726,6 +762,7 @@ GameObject:
   - component: {fileID: 5432240246543777859}
   - component: {fileID: 6632361662185935018}
   - component: {fileID: 7784174555797708486}
+  - component: {fileID: 6632361662185935003}
   m_Layer: 0
   m_Name: Choice1
   m_TagString: Untagged
@@ -806,6 +843,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorOver: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 0.78431374}
   colorNormal: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 0.78431374}
+--- !u!114 &6632361662185935003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5432240246543777856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbab8b6f6bf06714d9b2df0f8fa5c261, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  action: 
 --- !u!1 &5432240246606302712
 GameObject:
   m_ObjectHideFlags: 0
@@ -880,6 +930,7 @@ GameObject:
   - component: {fileID: 5432240246667571662}
   - component: {fileID: 6632361662185935020}
   - component: {fileID: 8029808574185927858}
+  - component: {fileID: 6632361662185935001}
   m_Layer: 0
   m_Name: Choice3
   m_TagString: Untagged
@@ -960,6 +1011,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorOver: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 0.78431374}
   colorNormal: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 0.78431374}
+--- !u!114 &6632361662185935001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5432240246667571651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbab8b6f6bf06714d9b2df0f8fa5c261, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  action: 
 --- !u!1 &5432240247207319932
 GameObject:
   m_ObjectHideFlags: 0
@@ -1050,6 +1114,7 @@ GameObject:
   - component: {fileID: 5432240247213974643}
   - component: {fileID: 6632361662185935019}
   - component: {fileID: 5072462540679997337}
+  - component: {fileID: 6632361662185935000}
   m_Layer: 0
   m_Name: Choice4
   m_TagString: Untagged
@@ -1130,6 +1195,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorOver: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 0.78431374}
   colorNormal: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 0.78431374}
+--- !u!114 &6632361662185935000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5432240247213974640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbab8b6f6bf06714d9b2df0f8fa5c261, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  action: 
 --- !u!1 &5432240247584580236
 GameObject:
   m_ObjectHideFlags: 0
@@ -1142,6 +1220,7 @@ GameObject:
   - component: {fileID: 5432240247584580239}
   - component: {fileID: 6632361662185935021}
   - component: {fileID: 5287325786290428311}
+  - component: {fileID: 6632361662185935002}
   m_Layer: 0
   m_Name: Choice2
   m_TagString: Untagged
@@ -1222,6 +1301,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorOver: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 0.78431374}
   colorNormal: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 0.78431374}
+--- !u!114 &6632361662185935002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5432240247584580236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbab8b6f6bf06714d9b2df0f8fa5c261, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  action: 
 --- !u!1 &5745428259657422483
 GameObject:
   m_ObjectHideFlags: 0
@@ -1317,6 +1409,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: Dialogue.DialogueDisplay, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6632361662185935003}
+        m_TargetAssemblyTypeName: Dialogue.ChoiceAction, Assembly-CSharp
+        m_MethodName: HandleAction
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Dialogue
 {
@@ -23,6 +24,7 @@ namespace Dialogue
         private DialogueReader _dialogueReader;
         private State _current;
         private State _next;
+        
         private int _choice;
 
         private enum State
@@ -60,6 +62,8 @@ namespace Dialogue
             _current = State.Finished;
             _next = State.Finished;
             _choice = 0;
+
+            GameStateManager.Instance.DialogueDisplay = this;
         }
         
         public void StartNewDialogue(string dialogueName)
@@ -115,10 +119,12 @@ namespace Dialogue
                     dialogueBox.SetActive(false);
                     
                     options = currentNode.GetOptions();
+                    string[] actions = currentNode.GetActions();
                     for (int i = 0; i < options.Length; i++)
                     {
                         _choiceObjs[i].SetActive(true);
                         _choiceTextBoxes[i].text = options[i];
+                        _choiceObjs[i].GetComponent<ChoiceAction>().action = actions[i];
                     }
                     
                     _next = State.PlayerSpeak;

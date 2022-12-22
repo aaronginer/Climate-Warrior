@@ -25,7 +25,13 @@ namespace Dialogue
     /*
      * Parses a dialogue file and saves each line as a DialogueNode
      *
-     * Each line in the file MUST have the format: [NodeID]"<NPC-message>",[NodeRedirectID1]"<Option1>",[NodeRedirectID1]"<Option1>",...
+     * Each line in the file MUST have the either one of these formats:
+     * 1)   [NodeID]"<NPC-message>",[NodeRedirectID1]"<Option1>",[NodeRedirectID1]"<Option1>",...
+     *      which defines a dialogue node
+     * 2)   #npc-name:<name>
+     *      which defines the NPCs name
+     * 3)   #actions:<action1>,<action2>,<action3>,<action4>
+     *      which defines the mission actions on a dialogue choice (you can provide * actions)
      * The dialogue file MUST contain a node with ID 1
      *
      * Example dialogue: Materials/Dialogues/testdialogue.txt
@@ -43,6 +49,7 @@ namespace Dialogue
             StringSplitOptions.None
         );
 
+        DialogueNode previous = null;
         foreach (string line in lines)
         {
             if (line[0] == '#')
@@ -51,6 +58,12 @@ namespace Dialogue
                 if (split.Length == 2 && split[0] == "#npc-name" && npcName == "")
                 {
                     npcName = split[1];
+                }
+
+                else if (split.Length == 2 && split[0] == "#actions")
+                {
+                    string[] actions = split[1].Split(",");
+                    previous?.UpdateActions(actions);
                 }
                 continue;
             }
@@ -91,7 +104,8 @@ namespace Dialogue
 
             Debug.Assert(id != -1);
             Debug.Assert(message != "");
-            _nodes.Add(id, new DialogueNode(id, message, options));
+            previous = new DialogueNode(id, message, options);
+            _nodes.Add(id, previous);
         }
 
         try

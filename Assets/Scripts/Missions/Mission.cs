@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Dialogue;
 using UnityEditor;
 using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Object = UnityEngine.Object;
 
 namespace Missions
 {
@@ -17,7 +19,7 @@ namespace Missions
 
         protected readonly Dictionary<string, List<string>> SceneTriggers = new();
 
-        private static readonly string[] _scenes = new[]
+        private static readonly string[] Scenes = new[]
         {
             "Village",
             "HydroPlantUpper",
@@ -29,7 +31,7 @@ namespace Missions
         {
             State = new MissionState(name);
 
-            foreach (var scene in _scenes)
+            foreach (var scene in Scenes)
             {
                 ManualDialogueTriggers.Add(scene, new List<string>());
                 AutomaticDialogueTriggers.Add(scene, new List<string>());
@@ -37,36 +39,23 @@ namespace Missions
             }
         }
 
-        public virtual void Setup() {}
-
-        public virtual bool IsManualDialogueTrigger(GameObject obj)
+        public bool IsManualDialogueTrigger(GameObject obj)
         {
             return ManualDialogueTriggers[SceneManager.GetActiveScene().name].Contains(obj.name);
         }
 
-        public virtual bool IsAutomaticDialogueTrigger(GameObject obj)
+        public bool IsAutomaticDialogueTrigger(GameObject obj)
         {
             return AutomaticDialogueTriggers[SceneManager.GetActiveScene().name].Contains(obj.name);
         }
         
+        public virtual void Setup() {}
+        public virtual void AdvanceState() {}
+        public virtual void HandleAction(string action) {}
+        
         public virtual void HandleAutomaticDialogueTriggers(GameObject obj, DialogueDisplay display) {}
         public virtual void HandleManualDialogueTriggers(GameObject obj, DialogueDisplay display) {}
         public virtual void HandleSceneTriggers(GameObject obj) {}
-
-        public static Mission LoadMission(MissionState state)
-        {
-            if (state == null) return null;
-
-            Mission mission = state.missionName switch
-            {
-                "Sabotage" => new MissionSabotage(),
-                _ => null
-            };
-
-            if (mission != null) mission.State = state;
-            
-            return mission;
-        }
 
         protected void InstantiateDialogueTriggerFromPrefab(string path, string name)
         {
@@ -99,6 +88,21 @@ namespace Missions
             
             var newObj = Object.Instantiate(obj, parent.transform);
             newObj.name = name;
+        }
+        
+        public static Mission LoadMission(MissionState state)
+        {
+            if (state == null) return null;
+
+            Mission mission = state.missionName switch
+            {
+                "Sabotage" => new MissionSabotage(),
+                _ => null
+            };
+
+            if (mission != null) mission.State = state;
+            
+            return mission;
         }
     }
 }

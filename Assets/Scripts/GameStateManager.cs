@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using Dialogue;
 using Missions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,11 +11,15 @@ public class GameStateManager : MonoBehaviour
     
     public GameState gameState;
 
+    public DialogueDisplay DialogueDisplay;
+    
     public Mission CurrentMission;
+    public float missionTimer = 0.0f;
+    public bool missionTimerActive = false;
     
     private string _persistentPath = "";
     private string _openSave = "";
-    
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -37,6 +42,19 @@ public class GameStateManager : MonoBehaviour
     private void Start()
     {
         StartMission(new MissionSabotage());
+    }
+
+    private void Update()
+    {
+        if (!missionTimerActive) return;
+        
+        missionTimer -= Time.deltaTime;
+
+        if (missionTimer > 0) return;
+            
+        missionTimerActive = false;
+        
+        CurrentMission?.AdvanceState();
     }
 
     public void SaveToDisk()
@@ -93,7 +111,7 @@ public class GameStateManager : MonoBehaviour
         CurrentMission = mission;
         gameState.missionState = mission?.State;
         
-        mission?.Setup();
+        mission?.AdvanceState();
 
         return true;
     }
@@ -110,8 +128,15 @@ public class GameStateManager : MonoBehaviour
         CurrentMission = null;
     }
 
+    public void SetMissionAdvanceTimer(float time)
+    {
+        Debug.Log("Started mission advance timer for " + time + " seconds");
+        missionTimer = time;
+        missionTimerActive = true;
+    }
+    
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        CurrentMission?.Setup();
+        CurrentMission?.AdvanceState();
     }
 }

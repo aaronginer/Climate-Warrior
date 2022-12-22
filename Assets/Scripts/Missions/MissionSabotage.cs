@@ -1,9 +1,11 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using Dialogue;
 using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Object = UnityEngine.Object;
 
 namespace Missions
 {
@@ -16,6 +18,13 @@ namespace Missions
             ManualDialogueTriggers["HydroPlantUpper"].Add("Panel1Sign");
         }
 
+        private enum States
+        {
+            Init,
+            NotAccepted,
+            NotAcceptedNextDialogue,
+            Accepted,
+        }
         /*
          * Mission States
          * 0: Start: Mayor dialogue 1, nothing else
@@ -23,22 +32,45 @@ namespace Missions
          * 2: Mission accepted: Active Panel1
          */
 
-        public override void Setup()
+        public override void AdvanceState()
         {
             switch (State.stateID)
             {
-                case 0:
+                case (int) States.Init:
                     InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "Sabotage1Dialogue");
                     break;
-                case 1:
-                    InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "Sabotage2Dialogue");
+                case (int) States.NotAccepted:
+                    GameStateManager.Instance.SetMissionAdvanceTimer(5);
+                    State.stateID = (int) States.NotAcceptedNextDialogue;
                     break;
-                case 2:
+                case (int) States.NotAcceptedNextDialogue:
+                    // dialoguedisplay could be invalid at this point
+                    GameStateManager.Instance.DialogueDisplay.StartNewDialogue("Missions/Sabotage/sabotage_2");
+                    break;
+                case (int) States.Accepted:
                     InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "Panel1Sign");
                     break;
             }
         }
-        
+
+        public override void HandleAction(string action)
+        {
+            if (action == "") return;
+
+            switch (action)
+            {
+                case "Start":
+                    State.stateID = (int) States.Accepted;
+                    AdvanceState();
+                    break;
+                case "Delay":
+                    // some negative environmental impact
+                    State.stateID = (int)States.NotAccepted;
+                    AdvanceState();
+                    break;
+            }
+        }
+
         public override void HandleAutomaticDialogueTriggers(GameObject obj, DialogueDisplay display)
         {
             if (!IsAutomaticDialogueTrigger(obj)) return;
@@ -60,15 +92,13 @@ namespace Missions
                     display.StartNewDialogue("Missions/Sabotage/panel_1");
                     Object.Destroy(obj);
                     State.stateID = 3;
-                    Setup();
+                    AdvanceState();
                     break;
                 }
                 case "Sabotage1Dialogue":
                 {
                     display.StartNewDialogue("Missions/Sabotage/sabotage_1");
                     Object.Destroy(obj);
-                    State.stateID = 1;
-                    Setup();
                     break;
                 }
                 case "Sabotage2Dialogue":
