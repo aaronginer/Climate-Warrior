@@ -23,6 +23,8 @@ namespace Missions
             Init,
             NotAccepted,
             NotAcceptedNextDialogue,
+            NotAcceptedAgain,
+            NotAcceptedAgainDialogue,
             Accepted,
         }
         /*
@@ -32,6 +34,29 @@ namespace Missions
          * 2: Mission accepted: Active Panel1
          */
 
+        public override void Setup()
+        {
+            switch (State.stateID)
+            {
+                case (int) States.Init:
+                    InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "Sabotage1Dialogue");
+                    break;
+                case (int) States.NotAcceptedNextDialogue:
+                    // rewind to NotAccepted if saved in this state
+                    State.stateID = (int)States.NotAccepted;
+                    AdvanceState();
+                    break;
+                case (int) States.NotAcceptedAgainDialogue:
+                    // rewind to NotAcceptedAgain if saved in this state
+                    State.stateID = (int)States.NotAcceptedAgain;
+                    AdvanceState();
+                    break;
+                case (int) States.Accepted:
+                    InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "Panel1Sign");
+                    break;
+            }
+        }
+        
         public override void AdvanceState()
         {
             switch (State.stateID)
@@ -40,12 +65,20 @@ namespace Missions
                     InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "Sabotage1Dialogue");
                     break;
                 case (int) States.NotAccepted:
-                    GameStateManager.Instance.SetMissionAdvanceTimer(5);
+                    GameStateManager.Instance.SetMissionAdvanceTimer(1);
                     State.stateID = (int) States.NotAcceptedNextDialogue;
                     break;
                 case (int) States.NotAcceptedNextDialogue:
                     // dialoguedisplay could be invalid at this point
-                    GameStateManager.Instance.DialogueDisplay.StartNewDialogue("Missions/Sabotage/sabotage_2");
+                    GameStateManager.Instance.dialogueDisplay.StartNewDialogue("Missions/Sabotage/sabotage_2");
+                    break;
+                case (int) States.NotAcceptedAgain:
+                    GameStateManager.Instance.SetMissionAdvanceTimer(1);
+                    State.stateID = (int) States.NotAcceptedAgainDialogue;
+                    break;
+                case (int) States.NotAcceptedAgainDialogue:
+                    // dialoguedisplay could be invalid at this point
+                    GameStateManager.Instance.dialogueDisplay.StartNewDialogue("Missions/Sabotage/sabotage_3");
                     break;
                 case (int) States.Accepted:
                     InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "Panel1Sign");
@@ -65,7 +98,12 @@ namespace Missions
                     break;
                 case "Delay":
                     // some negative environmental impact
-                    State.stateID = (int)States.NotAccepted;
+                    State.stateID = (int) States.NotAccepted;
+                    AdvanceState();
+                    break;
+                case "DelayAgain":
+                    // some more negative impact
+                    State.stateID = (int) States.NotAcceptedAgain;
                     AdvanceState();
                     break;
             }

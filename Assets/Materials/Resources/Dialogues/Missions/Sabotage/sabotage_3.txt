@@ -1,0 +1,3 @@
+﻿#npc-name:Mayor calling...
+1"[player-name]! There is ANOTHER problem! Now one of the servers went offline! Get down there... NOW!"::0"Ok, ok... Relax! I'm on my way."
+#actions:Start

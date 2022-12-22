@@ -11,7 +11,7 @@ public class GameStateManager : MonoBehaviour
     
     public GameState gameState;
 
-    public DialogueDisplay DialogueDisplay;
+    public DialogueDisplay dialogueDisplay;
     
     public Mission CurrentMission;
     public float missionTimer = 0.0f;
@@ -130,13 +130,13 @@ public class GameStateManager : MonoBehaviour
 
     public void SetMissionAdvanceTimer(float time)
     {
-        Debug.Log("Started mission advance timer for " + time + " seconds");
+        Debug.Log(time);
         missionTimer = time;
         missionTimerActive = true;
     }
     
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        CurrentMission?.AdvanceState();
+        CurrentMission?.Setup();
     }
 }
