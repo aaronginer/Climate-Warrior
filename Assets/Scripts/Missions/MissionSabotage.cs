@@ -59,6 +59,7 @@ namespace Missions
         
         public override void AdvanceState()
         {
+            Debug.Log(".");
             switch (State.stateID)
             {
                 case (int) States.Init:
@@ -129,8 +130,6 @@ namespace Missions
                 {
                     display.StartNewDialogue("Missions/Sabotage/panel_1");
                     Object.Destroy(obj);
-                    State.stateID = 3;
-                    AdvanceState();
                     break;
                 }
                 case "Sabotage1Dialogue":
@@ -143,9 +142,6 @@ namespace Missions
                 {
                     display.StartNewDialogue("Missions/Sabotage/sabotage_2");
                     Object.Destroy(obj);
-                    State.stateID = 2;
-                    SceneManager.LoadScene("HydroPlantUpper");
-                    //Setup();
                     break;
                 }
             }
