@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -3995,11 +3995,11 @@ TextureImporter:
       tilesWalls_48: 363692168
       tilesWalls_178: -445431564
       tilesWalls_153: 1121188447
-      tilesWalls_50: 1018610771
       tilesWalls_118: 2146343152
+      tilesWalls_50: 1018610771
       tilesWalls_68: 764882803
-      tilesWalls_86: 405599785
       tilesWalls_126: 176267892
+      tilesWalls_86: 405599785
       tilesWalls_45: -1982204165
       tilesWalls_139: 206768250
       tilesWalls_143: 1725752094
@@ -4011,8 +4011,8 @@ TextureImporter:
       tilesWalls_81: 984666743
       tilesWalls_123: 542693254
       tilesWalls_130: 1584020777
-      tilesWalls_73: -1736873186
       tilesWalls_46: 1933998656
+      tilesWalls_73: -1736873186
       tilesWalls_149: -891075747
       tilesWalls_60: 268895896
       tilesWalls_161: 295915105

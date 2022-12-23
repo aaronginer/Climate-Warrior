@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -3097,7 +3097,6 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      tilesFloor_141: 245161701
       tilesFloor_57: -1087037949
       tilesFloor_53: 1810960181
       tilesFloor_66: -937485828
@@ -3237,6 +3236,7 @@ TextureImporter:
       tilesFloor_58: -2109554879
       tilesFloor_82: 1217045273
       tilesFloor_40: 1745730494
+      tilesFloor_141: 245161701
       tilesFloor_120: 312670077
       tilesFloor_84: 417275324
   spritePackingTag: 
