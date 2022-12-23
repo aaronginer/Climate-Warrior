@@ -213,7 +213,7 @@ MonoBehaviour:
   text: 
   requireCompleted: 0
   sceneName: JumpAndRun
-  startPosition: {x: 0, y: 0, z: 0}
+  startPosition: {x: 0.34, y: 4.371779, z: 0}
 --- !u!1 &184222830
 GameObject:
   m_ObjectHideFlags: 0
