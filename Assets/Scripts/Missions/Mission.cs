@@ -14,6 +14,7 @@ namespace Missions
     public class Mission : IMission
     {
         public MissionState State;
+        private bool CurrentGameCompleted = false;
 
         private static readonly string[] Scenes = new[]
         {
@@ -68,6 +69,19 @@ namespace Missions
             
             var newObj = Object.Instantiate(obj, parent.transform);
             newObj.name = name;
+        }
+
+        public void CompleteCurrentGame()
+        {
+            CurrentGameCompleted = true;
+            AdvanceState();
+        }
+
+        public bool IsCurrentGameCompleted()
+        {
+            bool completed = CurrentGameCompleted;
+            CurrentGameCompleted = false;
+            return completed;
         }
         
         public static Mission LoadMission(MissionState state)

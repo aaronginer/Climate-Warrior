@@ -17,6 +17,7 @@ namespace Missions
             NotAcceptedAgainDialogue,
             Accepted,
             ServerCrashed,
+            Final,
         }
 
         public override void Setup()
@@ -47,7 +48,6 @@ namespace Missions
         
         public override void AdvanceState()
         {
-            Debug.Log(".");
             switch (State.stateID)
             {
                 case (int) States.Init:
@@ -73,6 +73,11 @@ namespace Missions
                     InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "Panel1Sign");
                     break;
                 case (int) States.ServerCrashed:
+                    if (IsCurrentGameCompleted())
+                    {
+                        State.stateID = (int)States.Final;
+                        AdvanceState();
+                    }
                     InstantiateSceneTriggerFromPrefab("Missions/Sabotage/Triggers/", "InspectServers");
                     break;
             }

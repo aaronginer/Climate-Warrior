@@ -103,6 +103,7 @@ namespace Missions.Sabotage
             {
                 outField.text = "Server status: RUNNING.";
                 yield return new WaitForSeconds(1);
+                GameStateManager.Instance.CurrentMission.CompleteCurrentGame();
                 SceneManager.LoadScene("HydroPlantUpper");
             }
             else
