@@ -4,6 +4,7 @@ using System.Runtime.ConstrainedExecution;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Missions.Sabotage
@@ -31,7 +32,7 @@ namespace Missions.Sabotage
         private bool _hasDiagnosed;
 
         private int _numSpiders;
-        private const int MaxSpiders = 16;
+        private const int MaxSpiders = 4;
         
         void Start()
         {
@@ -101,6 +102,8 @@ namespace Missions.Sabotage
             if (!usbAttached && _hasDiagnosed)
             {
                 outField.text = "Server status: RUNNING.";
+                yield return new WaitForSeconds(1);
+                SceneManager.LoadScene("HydroPlantUpper");
             }
             else
             {

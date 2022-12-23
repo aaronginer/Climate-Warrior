@@ -55,12 +55,14 @@ namespace Missions
             string sceneName = SceneManager.GetActiveScene().name;
 
             var obj = Resources.Load(path + name) as GameObject;
+            
             if (obj == null) return;
-
+            
             SceneTrigger triggerScript = obj.GetComponent<SceneTrigger>();
             if (triggerScript == null) return;
 
             if (sceneName != triggerScript.scene) return;
+
             
             var parent = GameObject.Find("SceneTriggers");
             

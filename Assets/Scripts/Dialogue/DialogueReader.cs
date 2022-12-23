@@ -12,6 +12,7 @@ namespace Dialogue
     
     private Dictionary<int, DialogueNode> _nodes = new Dictionary<int, DialogueNode>();
     private DialogueNode _currentNode;
+    private string _endAction = "";
 
     public DialogueReader(string dialogueName)
     {
@@ -65,11 +66,14 @@ namespace Dialogue
                 {
                     npcName = split[1];
                 }
-
                 else if (split.Length == 2 && split[0] == "#actions")
                 {
                     string[] actions = split[1].Split(",");
                     previous?.UpdateActions(actions);
+                }
+                else if (split.Length == 2 && split[0] == "#end-action")
+                {
+                    _endAction = (split[1]);
                 }
                 continue;
             }
@@ -136,6 +140,11 @@ namespace Dialogue
         return _currentNode;
     }
 
+    public string GetEndAction()
+    {
+        return _endAction;
+    }
+    
     /*
      * Update the current dialogue node depending on the players choice
      */

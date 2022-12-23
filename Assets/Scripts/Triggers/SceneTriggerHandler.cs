@@ -56,8 +56,11 @@ namespace Triggers
             if (_triggerScript.requireCompleted != MiniGame.None
                 && !GameStateManager.Instance.gameState.playerData.CheckMissionCompleted(_triggerScript.requireCompleted))
                 return;
-            
-            GameStateManager.Instance.gameState.playerData.position = _triggerScript.startPosition;
+
+            if (_triggerScript.setStartPosition)
+            {
+                GameStateManager.Instance.gameState.playerData.position = _triggerScript.startPosition;
+            }
             
             SceneManager.LoadScene(_triggerScript.sceneName);
         }

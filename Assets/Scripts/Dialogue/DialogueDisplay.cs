@@ -146,6 +146,10 @@ namespace Dialogue
                     _next = _dialogueReader.GetCurrent() == null ? State.Finished : State.NpcSpeak;
                     break;
                 case State.Finished: // dialogue is in default state
+                    
+                    // handle the defined "end action"
+                    GameStateManager.Instance.CurrentMission?.HandleAction(_dialogueReader.GetEndAction());
+                    
                     dialogueBox.SetActive(false);
                     foreach (GameObject choiceObj in _choiceObjs)
                     {

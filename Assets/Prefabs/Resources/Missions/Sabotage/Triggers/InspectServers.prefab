@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3904003185658157657
+--- !u!1 &5345334605984855972
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,25 +8,25 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3904003185658157656}
-  - component: {fileID: 3904003185658157658}
-  - component: {fileID: 3904003185658157659}
-  - component: {fileID: 4573860361756618710}
+  - component: {fileID: 5345334605984855975}
+  - component: {fileID: 5345334605984855969}
+  - component: {fileID: 5345334605984855974}
+  - component: {fileID: 933488684266876827}
   m_Layer: 6
-  m_Name: Sabotage1Dialogue
-  m_TagString: DialogueTrigger
+  m_Name: InspectServers
+  m_TagString: SceneTrigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &3904003185658157656
+--- !u!224 &5345334605984855975
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3904003185658157657}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 5345334605984855972}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -36,31 +36,31 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.959, y: 0.049}
-  m_SizeDelta: {x: 150, y: 150}
+  m_AnchoredPosition: {x: -1.686, y: 0.404}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &3904003185658157658
+--- !u!222 &5345334605984855969
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3904003185658157657}
+  m_GameObject: {fileID: 5345334605984855972}
   m_CullTransparentMesh: 1
---- !u!61 &3904003185658157659
+--- !u!61 &5345334605984855974
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3904003185658157657}
+  m_GameObject: {fileID: 5345334605984855972}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.3513472, y: -0.427189}
+  m_Offset: {x: 0.16015399, y: -0.01077202}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -71,23 +71,24 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.29730558, y: 0.14562201}
+  m_Size: {x: 0.42223263, y: 0.10228509}
   m_EdgeRadius: 0
---- !u!114 &4573860361756618710
+--- !u!114 &933488684266876827
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3904003185658157657}
+  m_GameObject: {fileID: 5345334605984855972}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a3f961cdb564a208b01091a292d23f1, type: 3}
+  m_Script: {fileID: 11500000, guid: 0436a990cc495d24f9648f4e4e9d88b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: Village
+  scene: HydroPlantUpper
   manual: 1
-  text: F - Talk
+  text: F - Inspect
   requireCompleted: 0
-  dialoguePath: Missions/Sabotage/sabotage_1
-  destroy: 1
+  sceneName: Virus
+  setStartPosition: 0
+  startPosition: {x: 0, y: 0, z: 0}

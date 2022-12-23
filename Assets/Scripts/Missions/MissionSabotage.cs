@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Missions
 {
@@ -15,6 +16,7 @@ namespace Missions
             NotAcceptedAgain,
             NotAcceptedAgainDialogue,
             Accepted,
+            ServerCrashed,
         }
 
         public override void Setup()
@@ -37,6 +39,9 @@ namespace Missions
                 case (int) States.Accepted:
                     InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "Panel1Sign");
                     break;
+                case (int) States.ServerCrashed:
+                    InstantiateSceneTriggerFromPrefab("Missions/Sabotage/Triggers/", "InspectServers");
+                    break;
             }
         }
         
@@ -49,7 +54,7 @@ namespace Missions
                     InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "Sabotage1Dialogue");
                     break;
                 case (int) States.NotAccepted:
-                    GameStateManager.Instance.SetMissionAdvanceTimer(1);
+                    GameStateManager.Instance.SetMissionAdvanceTimer(5);
                     State.stateID = (int) States.NotAcceptedNextDialogue;
                     break;
                 case (int) States.NotAcceptedNextDialogue:
@@ -57,7 +62,7 @@ namespace Missions
                     GameStateManager.Instance.dialogueDisplay.StartNewDialogue("Missions/Sabotage/sabotage_2");
                     break;
                 case (int) States.NotAcceptedAgain:
-                    GameStateManager.Instance.SetMissionAdvanceTimer(1);
+                    GameStateManager.Instance.SetMissionAdvanceTimer(5);
                     State.stateID = (int) States.NotAcceptedAgainDialogue;
                     break;
                 case (int) States.NotAcceptedAgainDialogue:
@@ -66,6 +71,9 @@ namespace Missions
                     break;
                 case (int) States.Accepted:
                     InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "Panel1Sign");
+                    break;
+                case (int) States.ServerCrashed:
+                    InstantiateSceneTriggerFromPrefab("Missions/Sabotage/Triggers/", "InspectServers");
                     break;
             }
         }
@@ -88,6 +96,10 @@ namespace Missions
                 case "DelayAgain":
                     // some more negative impact
                     State.stateID = (int) States.NotAcceptedAgain;
+                    AdvanceState();
+                    break;
+                case "Server":
+                    State.stateID = (int)States.ServerCrashed;
                     AdvanceState();
                     break;
             }
