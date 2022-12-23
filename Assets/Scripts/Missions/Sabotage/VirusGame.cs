@@ -12,32 +12,46 @@ namespace Missions.Sabotage
     {
         public Sprite serverWindowActive;
         public Sprite serverWindowInactive;
+        public Sprite cursorSettingsActive;
+        public Sprite cursorSettingsInactive;
         public GameObject serverWindowButton;
         public GameObject serverWindow;
+        public GameObject cursorSettingsButton;
+        public GameObject cursorSettingsWindow;
         public GameObject inputFieldCommandLine;
         public GameObject outputFieldCommandLine;
         public GameObject spidersContainer;
 
-        public GameObject knifeCursor;
+        public GameObject cursor;
 
+        public bool knifeSelected;
+        public bool usbAttached;
+        
         private bool _restarting;
-        private bool _usbAttached;
+        private bool _hasDiagnosed;
 
-        private int _numSpiders = 0;
-        private const int maxSpiders = 16;
+        private int _numSpiders;
+        private const int MaxSpiders = 16;
         
         void Start()
         {
+            Cursor.visible = false;
+
+            _numSpiders = 0;
             _restarting = false;
-            _usbAttached = true;
+            _hasDiagnosed = false;
+            usbAttached = true;
+            knifeSelected = false;
             
             ToggleServerWindow();
+            ToggleCursorSettingsWindow();
         }
 
         // Update is called once per frame
         void Update()
         {
-            knifeCursor.transform.position = Input.mousePosition;
+            cursor.transform.position = Input.mousePosition + new Vector3(7, -7, 0);
+
             if (Input.GetKeyDown(KeyCode.Return) && !_restarting && _numSpiders == 0)
             {
                 if (serverWindow.activeSelf)
@@ -62,6 +76,7 @@ namespace Missions.Sabotage
                     StartCoroutine(RestartServer(outField));
                     break;
                 case "diagnose":
+                    _hasDiagnosed = true;
                     StartCoroutine(DiagnoseServer(outField));
                     break;
                 default:
@@ -83,8 +98,16 @@ namespace Missions.Sabotage
             yield return new WaitForSeconds(1);
             outField.text = "Starting server...";
             yield return new WaitForSeconds(1);
-            outField.color = Color.red;
-            outField.text = "Server crashed.";
+            if (!usbAttached && _hasDiagnosed)
+            {
+                outField.text = "Server status: RUNNING.";
+            }
+            else
+            {
+                outField.color = Color.red;
+                outField.text = "Server crashed. Please run a diagnostic.";
+                _hasDiagnosed = false;
+            }
             _restarting = false;
         }
 
@@ -94,30 +117,46 @@ namespace Missions.Sabotage
             outField.text = "Starting diagnosis...";
             yield return new WaitForSeconds(1);
             bool flipFlop = true;
-            _numSpiders = maxSpiders;
-            for (int i = 0; i < maxSpiders; i++)
+            _numSpiders = MaxSpiders;;
+            for (int i = 0; i < MaxSpiders; i++)
             {
                 yield return new WaitForSeconds(0.2f);
                 flipFlop = !flipFlop;
 
-                GameObject spider = Resources.Load<GameObject>(flipFlop ? 
+                GameObject spiderPrefab = Resources.Load<GameObject>(flipFlop ? 
                     "Missions/Sabotage/SpiderPurple" : "Missions/Sabotage/SpiderOrange");
                 
-                Instantiate(spider, spidersContainer.transform);
+                GameObject spider = Instantiate(spiderPrefab, spidersContainer.transform);
+                spider.GetComponent<Spider>().gameScript = this;
             }
         }
         
-
+        public void ToggleCursorSettingsWindow()
+        {
+            cursorSettingsWindow.SetActive(!cursorSettingsWindow.activeSelf);
+            
+            cursorSettingsButton.GetComponent<Image>().sprite = cursorSettingsWindow.activeSelf ? cursorSettingsActive : cursorSettingsInactive;
+        }
+        
         public void ToggleServerWindow()
         {
             serverWindow.SetActive(!serverWindow.activeSelf);
             serverWindowButton.GetComponent<Image>().sprite = serverWindow.activeSelf ? serverWindowActive : serverWindowInactive;
-            ToggleKnifeCursor();
         }
 
-        public void ToggleKnifeCursor()
+        public void Squish()
         {
-            knifeCursor.SetActive(!knifeCursor.activeSelf);
+            _numSpiders--;
+        }
+
+        public void SelectKnife()
+        {
+            knifeSelected = true;
+        }
+
+        public void DeselectKnife()
+        {
+            knifeSelected = false;
         }
     }   
 }
