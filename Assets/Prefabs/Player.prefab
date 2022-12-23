@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd3c832cf5e121488e7cee626594fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryDisplayObj: {fileID: 0}
+  inventoryDisplayObj: {fileID: 5432240246606302712, guid: ff918fbf8898f4e49a27b83e613c12f2, type: 3}
 --- !u!114 &1181943579510409752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,6 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ec82e16c3fa124e909ae8f28222e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textPopup: {fileID: 0}
 --- !u!114 &1181943579510409753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,5 +262,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee0c8b7a49469da418bb5f1f980bde23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueObject: {fileID: 0}
-  startDialogueText: {fileID: 0}
+  dialogueObject: {fileID: 5432240246606302712, guid: ff918fbf8898f4e49a27b83e613c12f2, type: 3}
+  textPopup: {fileID: 0}

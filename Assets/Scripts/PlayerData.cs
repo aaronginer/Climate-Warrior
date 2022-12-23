@@ -6,6 +6,7 @@ using UnityEngine;
 
 public enum MiniGame
 {
+    None,
     buildAWindTurbine,
     jumpAndRunCollectTurbineParts
 }

@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 3904003185658157656}
   - component: {fileID: 3904003185658157658}
   - component: {fileID: 3904003185658157659}
+  - component: {fileID: 4573860361756618710}
+  - component: {fileID: 5105471768517859352}
   m_Layer: 6
   m_Name: Sabotage1Dialogue
   m_TagString: DialogueTrigger
@@ -72,3 +74,39 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32778668, y: 0.14562204}
   m_EdgeRadius: 0
+--- !u!114 &4573860361756618710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3904003185658157657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a3f961cdb564a208b01091a292d23f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: Village
+  manual: 1
+  text: F - Talk
+  requireCompleted: 0
+  dialoguePath: Missions/Sabotage/sabotage_1
+  destroy: 1
+--- !u!114 &5105471768517859352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3904003185658157657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0436a990cc495d24f9648f4e4e9d88b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: Village
+  manual: 0
+  text: 
+  requireCompleted: 0
+  sceneName: HydroPlantUpper
+  startPosition: {x: 0, y: 0, z: 0}
