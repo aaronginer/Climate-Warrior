@@ -889,7 +889,7 @@ RectTransform:
   m_Children:
   - {fileID: 1478308508}
   - {fileID: 729027416}
-  - {fileID: 888919975}
+  - {fileID: 1631623043}
   - {fileID: 1304448842}
   - {fileID: 425813456}
   - {fileID: 804666128}
@@ -1783,17 +1783,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 888919974}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 556652385}
-  m_RootOrder: 2
+  m_Father: {fileID: 1631623043}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 222.4, y: -144.1}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 72.3411, y: 29.88}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &888919976
@@ -1847,6 +1847,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   game: {fileID: 564083618}
+  canvas: {fileID: 556652381}
+  usbSlot: {fileID: 1631623042}
 --- !u!50 &888919980
 Rigidbody2D:
   serializedVersion: 4
@@ -2760,6 +2762,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1478308507}
   m_CullTransparentMesh: 1
+--- !u!1 &1631623042
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1631623043}
+  m_Layer: 5
+  m_Name: USB-Slot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1631623043
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631623042}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 888919975}
+  m_Father: {fileID: 556652385}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 222.4, y: -144.1}
+  m_SizeDelta: {x: 72.3411, y: 29.88}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1683627222
 GameObject:
   m_ObjectHideFlags: 0
