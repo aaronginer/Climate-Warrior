@@ -56,13 +56,32 @@ public class PlayerController : MonoBehaviour
             
         } else {
             animator.SetBool("isMoving", false);
+            animator.SetBool("Up", false);
+            animator.SetBool("Down", false);
+            animator.SetBool("LeftRight", false);
+
         }
 
         // set sprite direction
-        if (movementInput.x < 0) {
+        if (movementInput.x < 0 && movementInput.y == 0) {
             spriteRenderer.flipX = true;
-        } else if (movementInput.x > 0) {
+            animator.SetBool("Up", false);
+            animator.SetBool("Down", false);
+            animator.SetBool("LeftRight", true);
+
+        } else if (movementInput.x > 0 && movementInput.y == 0) {
             spriteRenderer.flipX = false;
+            animator.SetBool("Up", false);
+            animator.SetBool("Down", false);
+            animator.SetBool("LeftRight", true);
+        } else if (movementInput.x == 0 && movementInput.y > 0) {
+            animator.SetBool("Up", true);
+            animator.SetBool("Down", false);
+            animator.SetBool("LeftRight", false);
+        } else if (movementInput.x == 0 && movementInput.y < 0) {
+            animator.SetBool("Up", false);
+            animator.SetBool("Down", true);
+            animator.SetBool("LeftRight", false);
         }
 
         GameStateManager.Instance.gameState.playerData.position = gameObject.transform.position;
