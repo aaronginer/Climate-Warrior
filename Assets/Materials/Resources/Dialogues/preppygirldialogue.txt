@@ -1,0 +1,4 @@
+#npc-name:Preppy Girl
+1"Don't mind my boyfriend... He's just mad that he has to get on a bus to see any concert."::2"Does it bother you too?"::3"You guys should start your own band!"
+2"No, I prefer listening to the sound of nature! You should visit the forest!"
+3"Hmm... I don't think our neighbours would approve of all the noise..."

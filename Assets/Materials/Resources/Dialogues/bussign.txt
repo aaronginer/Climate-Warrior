@@ -1,0 +1,2 @@
+#npc-name:A wooden sign reads
+1"North -> Big City; South -> Riverside Village"

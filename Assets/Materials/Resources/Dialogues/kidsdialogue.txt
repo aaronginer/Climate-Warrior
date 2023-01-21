@@ -1,0 +1,6 @@
+#npc-name:Kids
+1"You cheated! You chose rock and then switched to scissors!"::2"What's going on, kids?"::3"*leave without making too much noise*"
+2"Danny is a liar! He's cheating!"::4"Come on, Danny, that's not nice."::5"Too bad, kid. Maybe you should cheat too."
+3"Mom, Danny is a liar!"
+4"I didn't cheat! Mom, Lizzie is a liar!"
+5"You're right! Thanks, sir!"

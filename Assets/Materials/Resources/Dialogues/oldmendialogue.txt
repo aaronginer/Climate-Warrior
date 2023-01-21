@@ -1,0 +1,6 @@
+#npc-name:Old Men
+1"I'm telling you, these days are getting hotter and hotter..."::2"Do you know where I can find the town hall?"::3"What's been going on with the weather?"
+2"Oh, you're the new... assistant."::4"...yes."::5"*coughs* I am actually a City Planner."
+4"The town hall is south and to the left..."
+5"Back in our day, young people had to get actual jobs!"
+3"We don't know kid, but what we do know it that it hasn't rained all winter. Look at the sky, sunny in the middle of winter!"

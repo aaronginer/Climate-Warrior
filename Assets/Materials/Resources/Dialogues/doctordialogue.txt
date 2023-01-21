@@ -1,0 +1,2 @@
+#npc-name:Doctor
+1"Come to me whenever you need some medicine!"

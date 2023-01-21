@@ -1,0 +1,2 @@
+#npc-name:A wooden sign reads
+1"This way to the Power Plant"

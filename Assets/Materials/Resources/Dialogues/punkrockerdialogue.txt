@@ -1,0 +1,4 @@
+#npc-name:Cool Punk Rocker
+1"This city is so lame..."::2"What about it you don't like?"::3"Who cares about that, man? Look at your cool hair!"
+2"Look around, new guy! No clubs, no concerts... There's nothing to do!"
+3"Thanks, man. Finally, someone with good taste moves in!"

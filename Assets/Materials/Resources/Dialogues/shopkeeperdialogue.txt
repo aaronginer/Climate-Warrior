@@ -1,0 +1,2 @@
+#npc-name:Shopkeeper
+1"The weather has been hot enough to grow watermelon! Only 3.99! Come get it while you can! Only 3.99!"
