@@ -13,6 +13,7 @@ public class GameStateManager : MonoBehaviour
 
     public DialogueDisplay dialogueDisplay;
     
+    public BaseMission BaseMission;
     public Mission CurrentMission;
     public float missionTimer = 0.0f;
     public bool missionTimerActive = false;
@@ -37,9 +38,8 @@ public class GameStateManager : MonoBehaviour
         DontDestroyOnLoad(this);
 
         _persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar;
-        
-        StartMission(new MissionSabotage());
-        // MissionCompleteScript.MissionComplete();
+
+        BaseMission = new BaseMission(); // start the base mission 
     }
 
     private void Start()
@@ -107,16 +107,14 @@ public class GameStateManager : MonoBehaviour
         Debug.Log("Game state loaded.");
     }
 
-    public bool StartMission(Mission mission)
+    public void StartMission(Mission mission)
     {
-        if (CurrentMission != null) return false;
+        if (CurrentMission != null) return;
 
         CurrentMission = mission;
         gameState.missionState = mission?.State;
         
         mission?.AdvanceState();
-
-        return true;
     }
 
     public void LoadMission()
