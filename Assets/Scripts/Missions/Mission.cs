@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Dialogue;
-using Triggers;
-using UnityEditor;
-using UnityEditor.Build.Content;
+﻿using Triggers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
@@ -14,19 +8,20 @@ namespace Missions
     public class Mission : IMission
     {
         public MissionState State;
-        private bool CurrentGameCompleted = false;
+        public readonly float ClimateScoreMaxTime;
+        private bool _currentGameCompleted;
 
-        private static readonly string[] Scenes = new[]
-        {
-            "Village",
-            "HydroPlantUpper",
-            "HydroPlantLower",
-            "River"
-        };
+        // mission tree a just another mission? would give benefit of not having to implement a new system
         
-        protected Mission(string name)
+        protected Mission(string name, float climateScoreTime)
         {
-            State = new MissionState(name);
+            ClimateScoreMaxTime = climateScoreTime;
+            State = new MissionState(name, climateScoreTime);
+            
+            // Instantiate the climate score object
+            var climateScorePrefab = Resources.Load("Missions/ClimateScore") as GameObject;
+            Debug.Assert(climateScorePrefab);
+            Object.Instantiate(climateScorePrefab, GameObject.Find("Canvas").transform);
         }
 
         public virtual void Setup() {}
@@ -73,14 +68,14 @@ namespace Missions
 
         public void CompleteCurrentGame()
         {
-            CurrentGameCompleted = true;
+            _currentGameCompleted = true;
             AdvanceState();
         }
 
         public bool IsCurrentGameCompleted()
         {
-            bool completed = CurrentGameCompleted;
-            CurrentGameCompleted = false;
+            bool completed = _currentGameCompleted;
+            _currentGameCompleted = false;
             return completed;
         }
         

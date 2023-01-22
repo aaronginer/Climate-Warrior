@@ -37,11 +37,15 @@ public class GameStateManager : MonoBehaviour
         DontDestroyOnLoad(this);
 
         _persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar;
+        
+        StartMission(new MissionSabotage());
+        
+        MissionCompleteScript.MissionComplete();
     }
 
     private void Start()
     {
-        StartMission(new MissionSabotage());
+        //StartMission(new MissionSabotage());
     }
 
     private void Update()
