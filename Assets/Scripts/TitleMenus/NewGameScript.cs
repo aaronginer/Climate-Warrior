@@ -18,6 +18,9 @@ namespace TitleMenus
 
         public void StartGame()
         {
+            Debug.Log(GameStateManager.Instance);
+            Debug.Log(GameStateManager.Instance.gameState);
+            Debug.Log(GameStateManager.Instance.gameState.playerData);
             GameStateManager.Instance.gameState.playerData = new PlayerData(_nameTextField.text);
             GameStateManager.Instance.SaveToDisk();
 

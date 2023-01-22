@@ -1,4 +1,5 @@
-﻿using Triggers;
+﻿using Scoring;
+using Triggers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
@@ -8,6 +9,7 @@ namespace Missions
     public class Mission : IMission
     {
         public MissionState State;
+        public readonly GameObject ClimateScoreObject;
         public readonly float ClimateScoreMaxTime;
         private bool _currentGameCompleted;
 
@@ -18,10 +20,9 @@ namespace Missions
             ClimateScoreMaxTime = climateScoreTime;
             State = new MissionState(name, climateScoreTime);
             
-            // Instantiate the climate score object
-            var climateScorePrefab = Resources.Load("Missions/ClimateScore") as GameObject;
-            Debug.Assert(climateScorePrefab);
-            Object.Instantiate(climateScorePrefab, GameObject.Find("Canvas").transform);
+            // Instantiate the climate score canvas object
+            var climateScorePrefab = Resources.Load("ClimateScore") as GameObject;
+            ClimateScoreObject = Object.Instantiate(climateScorePrefab, GameObject.Find("PersistentCanvas").transform);
         }
 
         public virtual void Setup() {}
@@ -69,7 +70,6 @@ namespace Missions
         public void CompleteCurrentGame()
         {
             _currentGameCompleted = true;
-            AdvanceState();
         }
 
         public bool IsCurrentGameCompleted()

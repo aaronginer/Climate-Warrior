@@ -26,6 +26,7 @@ namespace MenuGameOverlay
             {
                 _active = !_active;
                 menuContainer.SetActive(_active);
+                // Time.timeScale = _active ? 0 : 1;
             }
         }
 
@@ -42,6 +43,7 @@ namespace MenuGameOverlay
 
         public void BackToMenu()
         {
+            Destroy(GameObject.Find("PersistentCanvas"));
             GameStateManager.Instance.SaveToDisk();
             SceneManager.LoadScene("MainMenu");
         }

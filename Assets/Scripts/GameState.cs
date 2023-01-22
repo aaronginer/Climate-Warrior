@@ -7,6 +7,7 @@ public class GameState
 {
     public PlayerData playerData;
     public MissionState missionState;
+    public int score = 0;
 
     public GameState()
     {

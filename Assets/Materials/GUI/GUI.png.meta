@@ -323,7 +323,7 @@ TextureImporter:
         width: 75
         height: 1
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -331,6 +331,69 @@ TextureImporter:
       bones: []
       spriteID: 2e2c0f4360271a14daca8b5a8e897c4f
       internalID: -188143099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right_arrow
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 262
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a707daa565bb382409ad76bf0cff5d59
+      internalID: 1279093876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left_arrow
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 262
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 025372a2561e83a408f1a1fb7969ea22
+      internalID: -1798862310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: score_field
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 244
+        width: 39
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cebae98270b46c048a117983c52b5abc
+      internalID: 972645751
       vertices: []
       indices: 
       edges: []
@@ -346,17 +409,20 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      right_arrow: 1279093876
       button: 1533801021
       mission_complete_window: 1846457560
       score_bar: 1822851825
       separator_line_horizontal: -188143099
       blue_ba: 1951336498
       dialogue_box: -1832729064
+      left_arrow: -1798862310
       ui_container: 1306900814
       blue_bar: 1040017081
       separator: -536498141
       orange_bar: -687344687
       red_bar: -748914893
+      score_field: 972645751
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

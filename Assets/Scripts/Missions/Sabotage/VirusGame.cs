@@ -32,7 +32,7 @@ namespace Missions.Sabotage
         private bool _hasDiagnosed;
 
         private int _numSpiders;
-        private const int MaxSpiders = 8;
+        private const int MaxSpiders = 1;
         
         void Start()
         {
@@ -103,7 +103,7 @@ namespace Missions.Sabotage
             {
                 outField.text = "Server status: RUNNING.";
                 yield return new WaitForSeconds(1);
-                GameStateManager.Instance.CurrentMission.CompleteCurrentGame();
+                GameStateManager.Instance.CurrentMission.State.stateID = (int) MissionSabotage.States.ServerFixed;
                 SceneManager.LoadScene("HydroPlantUpper");
             }
             else

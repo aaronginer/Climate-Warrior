@@ -5,10 +5,10 @@ namespace Missions
 {
     public sealed class MissionSabotage : Mission
     {
-        public MissionSabotage() : base("Sabotage", 20)
+        public MissionSabotage() : base("Sabotage", 120)
         {}
 
-        private enum States
+        public enum States
         {
             Init,
             NotAccepted,
@@ -17,6 +17,7 @@ namespace Missions
             NotAcceptedAgainDialogue,
             Accepted,
             ServerCrashed,
+            ServerFixed,
             Final,
         }
 
@@ -42,6 +43,10 @@ namespace Missions
                     break;
                 case (int) States.ServerCrashed:
                     InstantiateSceneTriggerFromPrefab("Missions/Sabotage/Triggers/", "InspectServers");
+                    break;
+                case (int) States.ServerFixed:
+                    State.stateID = (int) States.Final;
+                    AdvanceState();
                     break;
             }
         }
@@ -73,12 +78,11 @@ namespace Missions
                     InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "Panel1Sign");
                     break;
                 case (int) States.ServerCrashed:
-                    if (IsCurrentGameCompleted())
-                    {
-                        State.stateID = (int)States.Final;
-                        AdvanceState();
-                    }
                     InstantiateSceneTriggerFromPrefab("Missions/Sabotage/Triggers/", "InspectServers");
+                    break;  
+                case (int) States.Final:
+                    Debug.Log("Mission compelte");
+                    MissionCompleteScript.MissionComplete();
                     break;
             }
         }

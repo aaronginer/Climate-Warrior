@@ -39,8 +39,7 @@ public class GameStateManager : MonoBehaviour
         _persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar;
         
         StartMission(new MissionSabotage());
-        
-        MissionCompleteScript.MissionComplete();
+        // MissionCompleteScript.MissionComplete();
     }
 
     private void Start()
@@ -142,5 +141,6 @@ public class GameStateManager : MonoBehaviour
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         CurrentMission?.Setup();
+        Cursor.visible = true;
     }
 }

@@ -1,9 +1,10 @@
 using System;
 using Cinemachine;
+using Missions;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace ClimateScore
+namespace Scoring
 {
     public class ClimateScoreManager : MonoBehaviour
     {
@@ -12,8 +13,8 @@ namespace ClimateScore
         private float _totalSeconds;
         private float _catastropheSeconds;
         
-        private bool _catastropheHappened;
-    
+        public bool catastropheHappened;
+
         void Start()
         {
             _totalSeconds = GameStateManager.Instance.CurrentMission.ClimateScoreMaxTime;
@@ -22,21 +23,27 @@ namespace ClimateScore
 
         void Update()
         {
+            Mission currentMission = GameStateManager.Instance.CurrentMission;
+            if (currentMission.State.climateScoreSeconds <= 0)
+            {
+                currentMission.State.climateScoreSeconds = 0;
+                return;
+            }
+            
             var redBarTransform = redBar.transform;
             var orangeBarTransform = orangeBar.transform;
 
-            GameStateManager.Instance.CurrentMission.State.climateScoreSeconds -= Time.deltaTime;
-            float scaleX = GameStateManager.Instance.CurrentMission.State.climateScoreSeconds / _totalSeconds;
+            currentMission.State.climateScoreSeconds -= Time.deltaTime;
+            float scaleX = currentMission.State.climateScoreSeconds / _totalSeconds;
             
             redBarTransform.localScale = new Vector3(scaleX, 1, 1);
             orangeBarTransform.localScale = new Vector3(scaleX, 1, 1);
 
             Debug.Assert(_catastropheSeconds < _totalSeconds);
             if (redBarTransform.localScale.x <= _catastropheSeconds / _totalSeconds
-                && !_catastropheHappened)
+                && !catastropheHappened)
             {
-                _catastropheHappened = true;
-                
+                catastropheHappened = true;
             }
             else if (redBarTransform.localScale.x <= 0)
             {
