@@ -25,7 +25,6 @@ namespace Scoring
 
         void Update()
         {
-            Mission currentMission = GameStateManager.Instance.CurrentMission;
             if (secondsLeft <= 0)
             {
                 secondsLeft = 0;

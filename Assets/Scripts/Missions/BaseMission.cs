@@ -1,4 +1,5 @@
 ﻿using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,7 +14,8 @@ namespace Missions
         public enum States
         {
             Init,
-            Sabotage,
+            SabotageNext,
+            SabotageStarted,
             Final,
         }
 
@@ -22,6 +24,9 @@ namespace Missions
             switch (State.stateID)
             {
                 case (int) States.Init:
+                    break;
+                case (int) States.SabotageStarted:
+                    GameStateManager.Instance.StartMission(new MissionSabotage());
                     break;
                 case (int) States.Final:
                     break;
@@ -47,7 +52,7 @@ namespace Missions
             {
                 case "MissionSabotage":
                     GameStateManager.Instance.StartMission(new MissionSabotage());
-                    State.stateID = (int) States.Sabotage;
+                    State.stateID = (int) States.SabotageStarted;
                     _missionActive = true;
                     break;
             }

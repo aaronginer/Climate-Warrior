@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameStateManager : MonoBehaviour
 {
-    public static GameStateManager Instance { get; private set; }
+    public static GameStateManager Instance;
     
     public GameState gameState;
 
@@ -15,8 +15,8 @@ public class GameStateManager : MonoBehaviour
     
     public BaseMission BaseMission;
     public Mission CurrentMission;
-    public float missionTimer = 0.0f;
-    public bool missionTimerActive = false;
+    public float missionTimer;
+    public bool missionTimerActive;
     
     private string _persistentPath = "";
     private string _openSave = "";
@@ -28,24 +28,13 @@ public class GameStateManager : MonoBehaviour
             Destroy(this);
             return;
         }
-        gameState = new GameState();
-        
         // register callback
         SceneManager.sceneLoaded += OnSceneLoaded;
         
         Instance = this;
-        
-        DontDestroyOnLoad(this);
-
         _persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar;
 
-        BaseMission = new BaseMission(); // start the base mission 
-        gameState.baseMissionState = BaseMission.State;
-    }
-
-    private void Start()
-    {
-        //StartMission(new MissionSabotage());
+        DontDestroyOnLoad(this);
     }
 
     private void Update()
@@ -104,7 +93,6 @@ public class GameStateManager : MonoBehaviour
         using StreamReader reader = new StreamReader(savePath);
         string json = reader.ReadToEnd();
         gameState = JsonUtility.FromJson<GameState>(json);
-        Debug.Log(gameState.baseMissionState.stateID);
 
         Debug.Log("Game state loaded.");
     }
@@ -125,6 +113,7 @@ public class GameStateManager : MonoBehaviour
             State = gameState.baseMissionState
         };
         BaseMission = m;
+        Debug.Log(BaseMission.GetHashCode());
     }
     
     public void EndMission()
@@ -134,15 +123,26 @@ public class GameStateManager : MonoBehaviour
 
     public void SetMissionAdvanceTimer(float time)
     {
-        Debug.Log(time);
         missionTimer = time;
         missionTimerActive = true;
     }
-    
-    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         BaseMission?.Setup();
         CurrentMission?.Setup();
         Cursor.visible = true;
+    }
+
+    public static void Destroy()
+    {
+        Instance.enabled = false;
+        Destroy(Instance.gameObject);
+        Instance = null;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

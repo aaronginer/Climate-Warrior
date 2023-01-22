@@ -25,7 +25,10 @@ namespace Missions
             
             // Instantiate the climate score canvas object for every mission that is not the MissionTree (base mission) 
             var climateScorePrefab = Resources.Load("ClimateScore") as GameObject;
-            ClimateScoreObject = Object.Instantiate(climateScorePrefab, GameObject.Find("PersistentCanvas").transform);
+            var persistentCanvas = GameObject.Find("PersistentCanvas");
+            // if (persistentCanvas == null) return;
+            
+            ClimateScoreObject = Object.Instantiate(climateScorePrefab, persistentCanvas.transform);
         }
 
         public virtual void Setup() {}
