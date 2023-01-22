@@ -43,7 +43,7 @@ namespace MenuGameOverlay
 
         public void BackToMenu()
         {
-            Destroy(GameObject.Find("PersistentCanvas"));
+            PersistentCanvasScript.DestroyPersistentCanvas();
             GameStateManager.Instance.SaveToDisk();
             SceneManager.LoadScene("MainMenu");
         }

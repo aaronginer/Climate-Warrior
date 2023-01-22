@@ -40,6 +40,7 @@ public class GameStateManager : MonoBehaviour
         _persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar;
 
         BaseMission = new BaseMission(); // start the base mission 
+        gameState.baseMissionState = BaseMission.State;
     }
 
     private void Start()
@@ -103,6 +104,7 @@ public class GameStateManager : MonoBehaviour
         using StreamReader reader = new StreamReader(savePath);
         string json = reader.ReadToEnd();
         gameState = JsonUtility.FromJson<GameState>(json);
+        Debug.Log(gameState.baseMissionState.stateID);
 
         Debug.Log("Game state loaded.");
     }
@@ -112,16 +114,17 @@ public class GameStateManager : MonoBehaviour
         if (CurrentMission != null) return;
 
         CurrentMission = mission;
-        gameState.missionState = mission?.State;
         
         mission?.AdvanceState();
     }
 
-    public void LoadMission()
+    public void LoadBaseMission()
     {
-        var m = Mission.LoadMission(gameState.missionState);
-        gameState.missionState = m.State;
-        CurrentMission = m;
+        var m = new BaseMission
+        {
+            State = gameState.baseMissionState
+        };
+        BaseMission = m;
     }
     
     public void EndMission()
@@ -138,6 +141,7 @@ public class GameStateManager : MonoBehaviour
     
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        BaseMission?.Setup();
         CurrentMission?.Setup();
         Cursor.visible = true;
     }

@@ -25,6 +25,7 @@ namespace TitleMenus
             GameStateManager.Instance.SaveToDisk();
 
             SceneManager.LoadScene(Constants.SceneNames.village, LoadSceneMode.Single);
+            PersistentCanvasScript.SpawnPersistentCanvas();
         }
 
         public void BackToMainMenu()

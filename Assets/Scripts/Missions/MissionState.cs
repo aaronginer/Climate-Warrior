@@ -8,13 +8,11 @@ namespace Missions
     {
         public string missionName;
         public int stateID;
-        public float climateScoreSeconds;
 
-        public MissionState(string name, float csSeconds)
+        public MissionState(string name)
         {
             missionName = name;
             stateID = 0;
-            climateScoreSeconds = csSeconds;
         }
     }
 }

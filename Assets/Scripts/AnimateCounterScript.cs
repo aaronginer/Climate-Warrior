@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class AnimateCounterScript : MonoBehaviour
 {
-    private int _startValue = 0;
+    private int _startValue;
     private int _countTo;
     private const float Seconds = 1f;
     private float _secondsLeft;

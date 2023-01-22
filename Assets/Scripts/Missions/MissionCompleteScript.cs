@@ -45,16 +45,19 @@ namespace Missions
         IEnumerator ShowMissionResults()
         {
             Mission currentMission = GameStateManager.Instance.CurrentMission;
+            ClimateScoreManager csManager =
+                currentMission.ClimateScoreObject.GetComponentInChildren<ClimateScoreManager>();
+            
             Debug.Assert(currentMission != null);
+            Debug.Assert(csManager != null);
             
             const int baseScore = 500;
             
             float missionMaxTime = currentMission.ClimateScoreMaxTime;
-            float missionTimeLeft = currentMission.State.climateScoreSeconds;
-            int timeScore = (int)(missionTimeLeft / missionMaxTime * 1000);
+            float missionTimeLeft = csManager.secondsLeft;
+            int timeScore = (int) (missionTimeLeft / missionMaxTime * 1000);
             
-            int deductionsCatastrophe =
-                currentMission.ClimateScoreObject.GetComponentInChildren<ClimateScoreManager>().catastropheHappened ? -250 : 0;
+            int deductionsCatastrophe = csManager.catastropheHappened ? -250 : 0;
             
             int deductionsDecisions = 0;
             

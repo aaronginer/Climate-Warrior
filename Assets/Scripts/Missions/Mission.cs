@@ -18,10 +18,10 @@ namespace Missions
         protected Mission(string name, float climateScoreTime=120)
         {
             ClimateScoreMaxTime = climateScoreTime;
-            State = new MissionState(name, climateScoreTime);
+            State = new MissionState(name);
 
             
-            if (name == "MissionTree") return;
+            if (name == "BaseMission") return;
             
             // Instantiate the climate score canvas object for every mission that is not the MissionTree (base mission) 
             var climateScorePrefab = Resources.Load("ClimateScore") as GameObject;

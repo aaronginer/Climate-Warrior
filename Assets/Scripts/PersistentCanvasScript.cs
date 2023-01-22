@@ -17,4 +17,15 @@ public class PersistentCanvasScript : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
+
+    public static void SpawnPersistentCanvas()
+    {
+        var obj = Instantiate(Resources.Load("PersistentCanvas"));
+        obj.name = "PersistentCanvas";
+    }
+
+    public static void DestroyPersistentCanvas()
+    {
+        Destroy(Instance.gameObject);
+    }
 }

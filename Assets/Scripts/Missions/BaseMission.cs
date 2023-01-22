@@ -7,7 +7,7 @@ namespace Missions
     public sealed class BaseMission : Mission
     {
         private bool _missionActive;
-        public BaseMission() : base("MissionTree")
+        public BaseMission() : base("BaseMission")
         {}
 
         public enum States

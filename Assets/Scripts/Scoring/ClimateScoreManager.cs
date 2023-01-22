@@ -11,6 +11,7 @@ namespace Scoring
         public GameObject redBar;
         public GameObject orangeBar;
         private float _totalSeconds;
+        public float secondsLeft;
         private float _catastropheSeconds;
         
         public bool catastropheHappened;
@@ -18,23 +19,24 @@ namespace Scoring
         void Start()
         {
             _totalSeconds = GameStateManager.Instance.CurrentMission.ClimateScoreMaxTime;
+            secondsLeft = _totalSeconds;
             _catastropheSeconds = _totalSeconds / 2;
         }
 
         void Update()
         {
             Mission currentMission = GameStateManager.Instance.CurrentMission;
-            if (currentMission.State.climateScoreSeconds <= 0)
+            if (secondsLeft <= 0)
             {
-                currentMission.State.climateScoreSeconds = 0;
+                secondsLeft = 0;
                 return;
             }
             
             var redBarTransform = redBar.transform;
             var orangeBarTransform = orangeBar.transform;
 
-            currentMission.State.climateScoreSeconds -= Time.deltaTime;
-            float scaleX = currentMission.State.climateScoreSeconds / _totalSeconds;
+            secondsLeft -= Time.deltaTime;
+            float scaleX = secondsLeft / _totalSeconds;
             
             redBarTransform.localScale = new Vector3(scaleX, 1, 1);
             orangeBarTransform.localScale = new Vector3(scaleX, 1, 1);
