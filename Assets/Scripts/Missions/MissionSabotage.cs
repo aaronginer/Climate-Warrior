@@ -2,7 +2,7 @@
 {
     public sealed class MissionSabotage : Mission
     {
-        public MissionSabotage() : base("Sabotage", 10)
+        public MissionSabotage() : base("Sabotage",true, 10)
         {}
 
         public enum States

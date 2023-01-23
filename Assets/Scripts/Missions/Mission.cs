@@ -14,13 +14,13 @@ namespace Missions
 
         // mission tree a just another mission? would give benefit of not having to implement a new system
         
-        protected Mission(string name, float climateScoreTime=120)
+        protected Mission(string name, bool climateScoreEnabled=false, float climateScoreTime=120)
         {
             ClimateScoreMaxTime = climateScoreTime;
             State = new MissionState(name);
 
             
-            if (name == "BaseMission") return;
+            if (!climateScoreEnabled) return;
             
             // Instantiate the climate score canvas object for every mission that is not the MissionTree (base mission) 
             var climateScorePrefab = Resources.Load("ClimateScore") as GameObject;
