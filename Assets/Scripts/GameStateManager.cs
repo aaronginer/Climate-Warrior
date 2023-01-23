@@ -34,6 +34,12 @@ public class GameStateManager : MonoBehaviour
         Instance = this;
         _persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar;
 
+        BaseMission = new BaseMission();
+        gameState = new GameState
+        {
+            baseMissionState = BaseMission.State
+        };
+
         DontDestroyOnLoad(this);
     }
 
