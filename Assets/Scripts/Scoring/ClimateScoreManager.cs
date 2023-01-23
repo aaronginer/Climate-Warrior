@@ -2,6 +2,7 @@ using System;
 using Missions;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Scoring
@@ -42,15 +43,21 @@ namespace Scoring
             
             UpdateBars();
 
+            Debug.Log(_front.localScale.x);
             Debug.Assert(_catastropheSeconds < _totalSeconds);
-            if (_currentMissionState.timeLeft <= 0
+            if (_currentMissionState.timeLeft <= _totalSeconds / 2
                 && !catastropheHappened)
             {
                 catastropheHappened = true;
             }
-            else if (_front.localScale.x <= 0)
+            else if (_currentMissionState.timeLeft <= 0)
             {
-                Debug.Log("Game over!");
+                if (_currentMissionState.missionName == "Sabotage")
+                {
+                    _currentMissionState.stateID = (int)MissionSabotage.States.MissionFailed;
+                }
+                    
+                SceneManager.LoadScene(GameStateManager.Instance.gameState.playerData.sceneName);
             }
         }
 

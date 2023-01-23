@@ -100,7 +100,7 @@ namespace Missions.Sabotage
             {
                 outField.text = "Server status: RUNNING.";
                 yield return new WaitForSeconds(1);
-                GameStateManager.Instance.CurrentMission.State.stateID = (int) MissionSabotage.States.ServerFixed;
+                GameStateManager.Instance.CurrentMission.State.stateID = (int) MissionSabotage.States.MissionComplete;
                 SceneManager.LoadScene("HydroPlantUpper");
             }
             else

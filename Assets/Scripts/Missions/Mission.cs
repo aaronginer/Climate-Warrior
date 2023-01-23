@@ -12,6 +12,8 @@ namespace Missions
         public readonly float ClimateScoreMaxTime;
         private bool _currentGameCompleted;
 
+        public bool Failed;
+
         // mission tree a just another mission? would give benefit of not having to implement a new system
         
         protected Mission(string name, bool climateScoreEnabled=false, float climateScoreTime=120)

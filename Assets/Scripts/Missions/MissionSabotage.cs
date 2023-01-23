@@ -1,8 +1,10 @@
-﻿namespace Missions
+﻿using UnityEngine.SceneManagement;
+
+namespace Missions
 {
     public sealed class MissionSabotage : Mission
     {
-        public MissionSabotage() : base("Sabotage",true, 120)
+        public MissionSabotage() : base("Sabotage",true, 50)
         {}
 
         public enum States
@@ -43,8 +45,14 @@
                     InstantiateSceneTriggerFromPrefab("Missions/Sabotage/Triggers/", "InspectServers");
                     break;
                 case (int) States.ServerFixed:
-                    State.stateID = (int) States.MissionComplete;
-                    AdvanceState();
+                    break;
+                case (int) States.MissionComplete:
+                    MissionCompleteScript.MissionComplete();
+                    GameStateManager.Instance.BaseMission.FinishMission(true);
+                    break;
+                case (int) States.MissionFailed:
+                    MissionFailedScript.MissionFailed();
+                    GameStateManager.Instance.BaseMission.FinishMission(false);
                     break;
             }
         }
@@ -77,10 +85,6 @@
                     break;
                 case (int) States.ServerCrashed:
                     InstantiateSceneTriggerFromPrefab("Missions/Sabotage/Triggers/", "InspectServers");
-                    break;  
-                case (int) States.MissionComplete:
-                    MissionCompleteScript.MissionComplete();
-                    GameStateManager.Instance.BaseMission.FinishMission(true);
                     break;
             }
         }
