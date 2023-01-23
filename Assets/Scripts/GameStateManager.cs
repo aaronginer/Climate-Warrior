@@ -108,6 +108,7 @@ public class GameStateManager : MonoBehaviour
         if (CurrentMission != null) return;
 
         CurrentMission = mission;
+        gameState.missionState = mission.State;
         
         mission?.AdvanceState();
     }
@@ -120,6 +121,13 @@ public class GameStateManager : MonoBehaviour
         };
         BaseMission = m;
         Debug.Log(BaseMission.GetHashCode());
+    }
+    
+    public void LoadMission()
+    {
+        var m = Mission.LoadMission(gameState.missionState);
+        gameState.missionState = m.State;
+        CurrentMission = m;
     }
     
     public void EndMission()

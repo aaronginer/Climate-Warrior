@@ -54,7 +54,7 @@ namespace Missions
             const int baseScore = 500;
             
             float missionMaxTime = currentMission.ClimateScoreMaxTime;
-            float missionTimeLeft = csManager.secondsLeft;
+            float missionTimeLeft = currentMission.State.timeLeft;
             int timeScore = (int) (missionTimeLeft / missionMaxTime * 1000);
             
             int deductionsCatastrophe = csManager.catastropheHappened ? -250 : 0;

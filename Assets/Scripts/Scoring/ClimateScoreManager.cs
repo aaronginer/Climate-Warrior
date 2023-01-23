@@ -1,3 +1,5 @@
+using System;
+using Missions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,54 +12,62 @@ namespace Scoring
         public GameObject backBar;
         public TextMeshProUGUI degreesText;
         private float _totalSeconds;
-        public float secondsLeft;
         private float _catastropheSeconds;
 
         private const float MaxDegrees = 4.0f;
         
         public bool catastropheHappened;
 
-        void Start()
+        private MissionState _currentMissionState;
+        private Transform _front;
+        private Transform _back;
+
+        private void Start()
         {
+            _front = frontBar.transform;
+            _back = backBar.transform;
+            _currentMissionState = GameStateManager.Instance.CurrentMission.State;
             _totalSeconds = GameStateManager.Instance.CurrentMission.ClimateScoreMaxTime;
-            secondsLeft = _totalSeconds;
+            UpdateBars();
             _catastropheSeconds = _totalSeconds / 2;
         }
 
         void Update()
         {
-            if (secondsLeft <= 0)
+            if (_currentMissionState.timeLeft <= 0)
             {
-                secondsLeft = 0;
+                _currentMissionState.timeLeft = 0;
                 return;
             }
             
-            var frontBarTransform = frontBar.transform;
-            var backBarTransform = backBar.transform;
-
-            secondsLeft -= Time.deltaTime;
-            float scaleX = 1 - (secondsLeft / _totalSeconds);
-            
-            frontBarTransform.localScale = new Vector3(scaleX, 1, 1);
-            frontBarTransform.GetComponent<Image>().color =
-                Color.Lerp(new Color(0.04707184f, 0.7075472f, 0, 1), new Color(0.5283019f, 0, 0, 1), scaleX);
-            backBarTransform.localScale = new Vector3(scaleX, 1, 1);
-            backBarTransform.GetComponent<Image>().color =
-                Color.Lerp(new Color(0.1369746f, 0.8301887f, 0, 1), new Color(0.6415094f, 0.08979349f, 0, 1), scaleX);
-            
-            float degreesCurrent = scaleX * MaxDegrees;
-            degreesText.text = "+" + degreesCurrent.ToString("0.#") + " °C"; 
+            UpdateBars();
 
             Debug.Assert(_catastropheSeconds < _totalSeconds);
-            if (frontBarTransform.localScale.x <= _catastropheSeconds / _totalSeconds
+            if (_currentMissionState.timeLeft <= 0
                 && !catastropheHappened)
             {
                 catastropheHappened = true;
             }
-            else if (frontBarTransform.localScale.x <= 0)
+            else if (_front.localScale.x <= 0)
             {
                 Debug.Log("Game over!");
             }
+        }
+
+        void UpdateBars()
+        {
+            _currentMissionState.timeLeft -= Time.deltaTime;
+            float scaleX = 1 - (_currentMissionState.timeLeft / _totalSeconds);
+            
+            _front.localScale = new Vector3(scaleX, 1, 1);
+            _front.GetComponent<Image>().color =
+                Color.Lerp(new Color(0.04707184f, 0.7075472f, 0, 1), new Color(0.5283019f, 0, 0, 1), scaleX);
+            _back.localScale = new Vector3(scaleX, 1, 1);
+            _back.GetComponent<Image>().color =
+                Color.Lerp(new Color(0.1369746f, 0.8301887f, 0, 1), new Color(0.6415094f, 0.08979349f, 0, 1), scaleX);
+            
+            float degreesCurrent = scaleX * MaxDegrees;
+            degreesText.text = "+" + degreesCurrent.ToString("0.#") + " °C"; 
         }
     }
 }

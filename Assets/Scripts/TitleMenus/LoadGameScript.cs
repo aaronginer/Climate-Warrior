@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TMPro;
@@ -55,14 +56,16 @@ namespace TitleMenus
             
             SceneManager.LoadScene(GameStateManager.Instance.gameState.playerData.sceneName);
 
-            GameStateManager.Instance.LoadBaseMission();
             PersistentCanvasScript.SpawnPersistentCanvas();
+            GameStateManager.Instance.LoadBaseMission();
+            GameStateManager.Instance.LoadMission();
         }
 
         public void BackToMainMenu()
         {
             SceneManager.LoadScene(Constants.SceneNames.mainMenu, LoadSceneMode.Single);
         }
+        
     }
 
 }

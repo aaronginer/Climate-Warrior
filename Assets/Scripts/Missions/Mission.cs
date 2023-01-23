@@ -19,14 +19,14 @@ namespace Missions
             ClimateScoreMaxTime = climateScoreTime;
             State = new MissionState(name);
 
-            
-            if (!climateScoreEnabled) return;
-            
             // Instantiate the climate score canvas object for every mission that is not the MissionTree (base mission) 
+            if (!climateScoreEnabled) return;
+
+            State.timeLeft = climateScoreTime;
+            
             var climateScorePrefab = Resources.Load("ClimateScore") as GameObject;
             var persistentCanvas = GameObject.Find("PersistentCanvas");
-            // if (persistentCanvas == null) return;
-            
+
             ClimateScoreObject = Object.Instantiate(climateScorePrefab, persistentCanvas.transform);
         }
 

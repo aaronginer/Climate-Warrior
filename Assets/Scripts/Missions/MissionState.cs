@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Missions
 {
@@ -7,6 +8,7 @@ namespace Missions
     {
         public string missionName;
         public int stateID;
+        public float timeLeft;
 
         public MissionState(string name)
         {
