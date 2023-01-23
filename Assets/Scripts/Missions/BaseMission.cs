@@ -1,28 +1,35 @@
-﻿namespace Missions
+﻿using System.Collections.Generic;
+using UnityEngine;
+
+namespace Missions
 {
     public sealed class BaseMission : Mission
     {
-        private bool _missionActive;
         public BaseMission() : base("BaseMission")
-        {}
+        {
+            State.missions = new List<string>(new[]
+            {
+                "Sabotage",
+                "Sabotage",
+            });
+        }
 
         public enum States
         {
-            Init,
-            SabotageNext,
-            SabotageStarted,
-            Final,
+            PrepareMission,
+            MissionActive,
+            SideQuest,
         }
 
         public override void Setup()
         {
             switch (State.stateID)
             {
-                case (int) States.Init:
+                case (int) States.PrepareMission:
                     break;
-                case (int) States.SabotageStarted:
+                case (int) States.MissionActive:
                     break;
-                case (int) States.Final:
+                case (int) States.SideQuest:
                     break;
             }
         }
@@ -31,9 +38,12 @@
         {
             switch (State.stateID)
             {
-                case (int)States.Init:
+                case (int) States.PrepareMission:
                     break;
-                case (int)States.Final:
+                case (int) States.MissionActive:
+                    GameStateManager.Instance.StartMission(LoadMission(State.missions[0]));
+                    break;
+                case (int) States.SideQuest:
                     break;
             }
         }
@@ -45,11 +55,29 @@
             switch (action)
             {
                 case "MissionSabotage":
+                    State.missions.Insert(0, "Sabotage");
                     GameStateManager.Instance.StartMission(new MissionSabotage());
-                    State.stateID = (int) States.SabotageStarted;
-                    _missionActive = true;
+                    State.stateID = (int) States.MissionActive;
+                    break;
+                case "StartNextMission":
+                    State.stateID = (int)States.MissionActive;
+                    AdvanceState();
                     break;
             }
+        }
+
+        public void FinishMission(bool complete)
+        {
+            Debug.Assert(State.stateID == (int)States.MissionActive);
+
+            if (complete)
+            {
+                State.missions.RemoveAt(0);
+            }
+
+            // if catastrophe -> go to sidequest
+            State.stateID = (int) States.PrepareMission;
+            AdvanceState();
         }
     }
 }

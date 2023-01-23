@@ -125,14 +125,19 @@ public class GameStateManager : MonoBehaviour
     
     public void LoadMission()
     {
-        var m = Mission.LoadMission(gameState.missionState);
-        gameState.missionState = m.State;
+        var m = Mission.LoadMission(gameState.missionState.missionName);
+        if (m == null)
+        {
+            return;
+        }
+        m.State = gameState.missionState;
         CurrentMission = m;
     }
     
     public void EndMission()
     {
         CurrentMission = null;
+        gameState.missionState = null;
     }
 
     public void SetMissionAdvanceTimer(float time)

@@ -84,18 +84,14 @@ namespace Missions
             return completed;
         }
         
-        public static Mission LoadMission(MissionState state)
+        public static Mission LoadMission(string missionName)
         {
-            if (state == null) return null;
-
-            Mission mission = state.missionName switch
+            Mission mission = missionName switch
             {
                 "Sabotage" => new MissionSabotage(),
                 _ => null
             };
 
-            if (mission != null) mission.State = state;
-            
             return mission;
         }
     }

@@ -2,7 +2,7 @@
 {
     public sealed class MissionSabotage : Mission
     {
-        public MissionSabotage() : base("Sabotage",true, 10)
+        public MissionSabotage() : base("Sabotage",true, 120)
         {}
 
         public enum States
@@ -15,7 +15,8 @@
             Accepted,
             ServerCrashed,
             ServerFixed,
-            Final,
+            MissionComplete,
+            MissionFailed,
         }
 
         public override void Setup()
@@ -42,7 +43,7 @@
                     InstantiateSceneTriggerFromPrefab("Missions/Sabotage/Triggers/", "InspectServers");
                     break;
                 case (int) States.ServerFixed:
-                    State.stateID = (int) States.Final;
+                    State.stateID = (int) States.MissionComplete;
                     AdvanceState();
                     break;
             }
@@ -77,9 +78,9 @@
                 case (int) States.ServerCrashed:
                     InstantiateSceneTriggerFromPrefab("Missions/Sabotage/Triggers/", "InspectServers");
                     break;  
-                case (int) States.Final:
-                    GameStateManager.Instance.BaseMission.State.stateID = (int) BaseMission.States.Final;
+                case (int) States.MissionComplete:
                     MissionCompleteScript.MissionComplete();
+                    GameStateManager.Instance.BaseMission.FinishMission(true);
                     break;
             }
         }
