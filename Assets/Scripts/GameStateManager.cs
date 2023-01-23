@@ -63,7 +63,7 @@ public class GameStateManager : MonoBehaviour
             File.Delete(_openSave);
         }
 
-        var dateTime = DateTime.Now.ToString("dd_MM_yyyy_HH_MM_ss");
+        var dateTime = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss");
         string path = _persistentPath + "cw_save_" + dateTime + ".json";  
         
         using StreamWriter writer = new StreamWriter(path);

@@ -26,7 +26,6 @@ namespace Missions
                 case (int) States.Init:
                     break;
                 case (int) States.SabotageStarted:
-                    GameStateManager.Instance.StartMission(new MissionSabotage());
                     break;
                 case (int) States.Final:
                     break;

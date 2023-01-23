@@ -81,7 +81,7 @@ namespace Missions
                     InstantiateSceneTriggerFromPrefab("Missions/Sabotage/Triggers/", "InspectServers");
                     break;  
                 case (int) States.Final:
-                    Debug.Log("Mission compelte");
+                    GameStateManager.Instance.BaseMission.State.stateID = (int) BaseMission.States.Final;
                     MissionCompleteScript.MissionComplete();
                     break;
             }
