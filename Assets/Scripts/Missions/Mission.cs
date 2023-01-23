@@ -1,5 +1,4 @@
-﻿using Scoring;
-using Triggers;
+﻿using Triggers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;

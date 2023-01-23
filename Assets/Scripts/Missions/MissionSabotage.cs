@@ -1,11 +1,8 @@
-﻿using UnityEngine;
-using UnityEngine.SceneManagement;
-
-namespace Missions
+﻿namespace Missions
 {
     public sealed class MissionSabotage : Mission
     {
-        public MissionSabotage() : base("Sabotage", 120)
+        public MissionSabotage() : base("Sabotage", 10)
         {}
 
         public enum States

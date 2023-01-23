@@ -1,7 +1,4 @@
-﻿using Dialogue;
-using UnityEngine;
-
-namespace Missions
+﻿namespace Missions
 {
     public interface IMission
     {

@@ -1,9 +1,4 @@
-﻿using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-
-namespace Missions
+﻿namespace Missions
 {
     public sealed class BaseMission : Mission
     {

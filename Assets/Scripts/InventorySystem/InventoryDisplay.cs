@@ -1,8 +1,6 @@
 using Items;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Assertions;
-using UnityEngine.Experimental.AI;
 using UnityEngine.UI;
 
 namespace InventorySystem

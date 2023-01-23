@@ -1,12 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using Newtonsoft.Json.Serialization;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using static Newtonsoft.Json.JsonSerializer;
 
 public enum UIState
 {
