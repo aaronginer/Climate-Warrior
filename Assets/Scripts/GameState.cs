@@ -6,12 +6,13 @@ using UnityEngine;
 public class GameState
 {
     public PlayerData playerData;
-    public MissionState missionState;
+    public MissionState baseMissionState;
+    public int score = 0;
 
     public GameState()
     {
         playerData = new PlayerData("default");
-        missionState = null;
+        baseMissionState = null;
     }
     
     public void PrintGameState()

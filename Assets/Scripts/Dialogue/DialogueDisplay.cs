@@ -148,6 +148,7 @@ namespace Dialogue
                 case State.Finished: // dialogue is in default state
                     
                     // handle the defined "end action"
+                    GameStateManager.Instance.BaseMission.HandleAction(_dialogueReader.GetEndAction());
                     GameStateManager.Instance.CurrentMission?.HandleAction(_dialogueReader.GetEndAction());
                     
                     dialogueBox.SetActive(false);

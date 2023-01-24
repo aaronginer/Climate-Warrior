@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Dialogue;
+﻿using Scoring;
 using Triggers;
-using UnityEditor;
-using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
@@ -14,19 +9,26 @@ namespace Missions
     public class Mission : IMission
     {
         public MissionState State;
-        private bool CurrentGameCompleted = false;
+        public readonly GameObject ClimateScoreObject;
+        public readonly float ClimateScoreMaxTime;
+        private bool _currentGameCompleted;
 
-        private static readonly string[] Scenes = new[]
-        {
-            "Village",
-            "HydroPlantUpper",
-            "HydroPlantLower",
-            "River"
-        };
+        // mission tree a just another mission? would give benefit of not having to implement a new system
         
-        protected Mission(string name)
+        protected Mission(string name, float climateScoreTime=120)
         {
+            ClimateScoreMaxTime = climateScoreTime;
             State = new MissionState(name);
+
+            
+            if (name == "BaseMission") return;
+            
+            // Instantiate the climate score canvas object for every mission that is not the MissionTree (base mission) 
+            var climateScorePrefab = Resources.Load("ClimateScore") as GameObject;
+            var persistentCanvas = GameObject.Find("PersistentCanvas");
+            // if (persistentCanvas == null) return;
+            
+            ClimateScoreObject = Object.Instantiate(climateScorePrefab, persistentCanvas.transform);
         }
 
         public virtual void Setup() {}
@@ -73,14 +75,13 @@ namespace Missions
 
         public void CompleteCurrentGame()
         {
-            CurrentGameCompleted = true;
-            AdvanceState();
+            _currentGameCompleted = true;
         }
 
         public bool IsCurrentGameCompleted()
         {
-            bool completed = CurrentGameCompleted;
-            CurrentGameCompleted = false;
+            bool completed = _currentGameCompleted;
+            _currentGameCompleted = false;
             return completed;
         }
         

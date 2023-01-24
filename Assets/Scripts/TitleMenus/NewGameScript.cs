@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Missions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -18,10 +19,16 @@ namespace TitleMenus
 
         public void StartGame()
         {
-            GameStateManager.Instance.gameState.playerData = new PlayerData(_nameTextField.text);
+            GameStateManager.Instance.gameState = new GameState
+            {
+                playerData = new PlayerData(_nameTextField.text)
+            };
             GameStateManager.Instance.SaveToDisk();
 
             SceneManager.LoadScene(Constants.SceneNames.village, LoadSceneMode.Single);
+            
+            GameStateManager.Instance.BaseMission = new BaseMission();
+            PersistentCanvasScript.SpawnPersistentCanvas();
         }
 
         public void BackToMainMenu()

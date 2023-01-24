@@ -7,15 +7,16 @@ using UnityEngine.SceneManagement;
 
 public class GameStateManager : MonoBehaviour
 {
-    public static GameStateManager Instance { get; private set; }
+    public static GameStateManager Instance;
     
     public GameState gameState;
 
     public DialogueDisplay dialogueDisplay;
     
+    public BaseMission BaseMission;
     public Mission CurrentMission;
-    public float missionTimer = 0.0f;
-    public bool missionTimerActive = false;
+    public float missionTimer;
+    public bool missionTimerActive;
     
     private string _persistentPath = "";
     private string _openSave = "";
@@ -27,21 +28,19 @@ public class GameStateManager : MonoBehaviour
             Destroy(this);
             return;
         }
-        gameState = new GameState();
-        
         // register callback
         SceneManager.sceneLoaded += OnSceneLoaded;
         
         Instance = this;
-        
-        DontDestroyOnLoad(this);
-
         _persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar;
-    }
 
-    private void Start()
-    {
-        StartMission(new MissionSabotage());
+        BaseMission = new BaseMission();
+        gameState = new GameState
+        {
+            baseMissionState = BaseMission.State
+        };
+
+        DontDestroyOnLoad(this);
     }
 
     private void Update()
@@ -70,7 +69,7 @@ public class GameStateManager : MonoBehaviour
             File.Delete(_openSave);
         }
 
-        var dateTime = DateTime.Now.ToString("dd_MM_yyyy_HH_MM_ss");
+        var dateTime = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss");
         string path = _persistentPath + "cw_save_" + dateTime + ".json";  
         
         using StreamWriter writer = new StreamWriter(path);
@@ -104,23 +103,23 @@ public class GameStateManager : MonoBehaviour
         Debug.Log("Game state loaded.");
     }
 
-    public bool StartMission(Mission mission)
+    public void StartMission(Mission mission)
     {
-        if (CurrentMission != null) return false;
+        if (CurrentMission != null) return;
 
         CurrentMission = mission;
-        gameState.missionState = mission?.State;
         
         mission?.AdvanceState();
-
-        return true;
     }
 
-    public void LoadMission()
+    public void LoadBaseMission()
     {
-        var m = Mission.LoadMission(gameState.missionState);
-        gameState.missionState = m.State;
-        CurrentMission = m;
+        var m = new BaseMission
+        {
+            State = gameState.baseMissionState
+        };
+        BaseMission = m;
+        Debug.Log(BaseMission.GetHashCode());
     }
     
     public void EndMission()
@@ -130,13 +129,26 @@ public class GameStateManager : MonoBehaviour
 
     public void SetMissionAdvanceTimer(float time)
     {
-        Debug.Log(time);
         missionTimer = time;
         missionTimerActive = true;
     }
-    
-    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        BaseMission?.Setup();
         CurrentMission?.Setup();
+        Cursor.visible = true;
+    }
+
+    public static void Destroy()
+    {
+        Instance.enabled = false;
+        Destroy(Instance.gameObject);
+        Instance = null;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

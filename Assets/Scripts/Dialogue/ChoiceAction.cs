@@ -8,6 +8,7 @@ namespace Dialogue
 
         public void HandleAction()
         {
+            GameStateManager.Instance.BaseMission.HandleAction(action);
             GameStateManager.Instance.CurrentMission?.HandleAction(action);
         }
     }

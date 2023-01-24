@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,6 +27,7 @@ namespace MenuGameOverlay
             {
                 _active = !_active;
                 menuContainer.SetActive(_active);
+                // Time.timeScale = _active ? 0 : 1;
             }
         }
 
@@ -42,8 +44,10 @@ namespace MenuGameOverlay
 
         public void BackToMenu()
         {
+            PersistentCanvasScript.DestroyPersistentCanvas();
             GameStateManager.Instance.SaveToDisk();
-            SceneManager.LoadScene("MainMenu");
+            GameStateManager.Destroy();
+            SceneManager.LoadScene("_preload");
         }
     }       
 }
