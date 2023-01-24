@@ -44,4 +44,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Missions/Sabotage/Virus.unity
     guid: 02ff0374f6ded5443b14d13be8ffeb5c
+  - enabled: 1
+    path: Assets/Scenes/Missions/Flooding/Flooding.unity
+    guid: 333b16941071cbd49b4d484b3a8504c6
   m_configObjects: {}

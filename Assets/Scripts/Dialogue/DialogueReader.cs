@@ -32,7 +32,12 @@ namespace Dialogue
      *      which defines the NPCs name
      * 3)   #actions:<action1>,<action2>,<action3>,<action4>
      *      which defines the mission actions on a dialogue choice (you can provide * actions)
+     * 4)   #end-action:<action>
+     *      defines the action taken when dialogue is finished
      * The dialogue file MUST contain a node with ID 1
+     *
+     * Additional features:
+     * 1)   [player-name] is substituted with the name of the player
      *
      * Example dialogue: Materials/Dialogues/testdialogue.txt
      * 

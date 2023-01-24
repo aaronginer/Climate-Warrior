@@ -45,14 +45,13 @@ public class GameStateManager : MonoBehaviour
 
     private void Update()
     {
+        CurrentMission?.UpdateTime();
+        
+        // mission timer
         if (!missionTimerActive) return;
-        
         missionTimer -= Time.deltaTime;
-
         if (missionTimer > 0) return;
-            
         missionTimerActive = false;
-        
         CurrentMission?.AdvanceState();
     }
 

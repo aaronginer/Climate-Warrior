@@ -9,19 +9,26 @@ namespace Missions
     {
         public MissionState State;
         public readonly GameObject ClimateScoreObject;
-        public readonly float ClimateScoreMaxTime;
+        
+        public readonly float MissionMaxTime;
+        public int DeductionsDecisions;
+        public int BaseScore;
+        public int TimeScoreMax;
+        
         private bool _currentGameCompleted;
 
-        protected Mission(string name, bool climateScoreEnabled=false, float climateScoreTime=120)
+        protected Mission(string name, int baseScore=0, int timeScoreMax=0, float missionTime=120, bool climateScoreEnabled=false)
         {
-            ClimateScoreMaxTime = climateScoreTime;
-            State = new MissionState(name);
+            BaseScore = baseScore;
+            TimeScoreMax = timeScoreMax;
+            MissionMaxTime = missionTime;
+            State = new MissionState(name)
+            {
+                timeLeft = missionTime
+            };
 
             // Instantiate the climate score canvas object for every mission that is not the MissionTree (base mission) 
             if (!climateScoreEnabled) return;
-
-            State.timeLeft = climateScoreTime;
-            
             var climateScorePrefab = Resources.Load("ClimateScore") as GameObject;
             var persistentCanvas = GameObject.Find("PersistentCanvas");
 
@@ -81,12 +88,23 @@ namespace Missions
             _currentGameCompleted = false;
             return completed;
         }
+
+        public void UpdateTime()
+        {
+            if (State.timeLeft <= 0)
+            {
+                State.timeLeft = 0;
+                return;
+            }
+            State.timeLeft -= Time.deltaTime;
+        }
         
         public static Mission LoadMission(string missionName)
         {
             Mission mission = missionName switch
             {
                 "Sabotage" => new MissionSabotage(),
+                "Flooding" => new MissionSabotage(),
                 _ => null
             };
 

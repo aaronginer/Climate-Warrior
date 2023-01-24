@@ -59,6 +59,11 @@ namespace Missions
                     GameStateManager.Instance.StartMission(new MissionSabotage());
                     State.stateID = (int) States.MissionActive;
                     break;
+                case "MissionFlooding":
+                    State.missions.Insert(0, "Flooding");
+                    GameStateManager.Instance.StartMission(new MissionFlooding());
+                    State.stateID = (int) States.MissionActive;
+                    break;
                 case "StartNextMission":
                     State.stateID = (int)States.MissionActive;
                     AdvanceState();

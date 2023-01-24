@@ -4,7 +4,7 @@ namespace Missions
 {
     public sealed class Drought : Mission
     {
-        public Drought() : base("Flooding")
+        public Drought() : base("Drought")
         {}
 
         public enum States

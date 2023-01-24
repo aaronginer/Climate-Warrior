@@ -96,7 +96,6 @@ namespace Dialogue
         {
             if (_dialogueReader == null)
             {
-                Debug.Log("No DialogueReader initialized.");
                 return;
             }
 

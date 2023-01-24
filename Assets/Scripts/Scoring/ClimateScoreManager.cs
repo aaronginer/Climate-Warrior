@@ -28,19 +28,13 @@ namespace Scoring
             _front = frontBar.transform;
             _back = backBar.transform;
             _currentMissionState = GameStateManager.Instance.CurrentMission.State;
-            _totalSeconds = GameStateManager.Instance.CurrentMission.ClimateScoreMaxTime;
+            _totalSeconds = GameStateManager.Instance.CurrentMission.MissionMaxTime;
             UpdateBars();
             _catastropheSeconds = _totalSeconds / 2;
         }
 
         void Update()
         {
-            if (_currentMissionState.timeLeft <= 0)
-            {
-                _currentMissionState.timeLeft = 0;
-                return;
-            }
-            
             UpdateBars();
 
             Debug.Assert(_catastropheSeconds < _totalSeconds);
@@ -64,7 +58,6 @@ namespace Scoring
 
         void UpdateBars()
         {
-            _currentMissionState.timeLeft -= Time.deltaTime;
             float scaleX = 1 - (_currentMissionState.timeLeft / _totalSeconds);
             
             _front.localScale = new Vector3(scaleX, 1, 1);
