@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 namespace Catastrophes
 {
-    public class Rain : MonoBehaviour
+    public class FloodingScript : MonoBehaviour
     {
         public GameObject grid;
         public GameObject canvas;
@@ -15,7 +15,6 @@ namespace Catastrophes
         private void Awake()
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
-            _active = GameStateManager.Instance.gameState.catastropheState.state == CatastropheState.States.Flooding;
         }
 
         public void ToggleRain()
@@ -26,6 +25,7 @@ namespace Catastrophes
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
+            _active = GameStateManager.Instance.gameState.catastropheState.state == CatastropheState.States.Flooding;
             SetActive();
         }
         
