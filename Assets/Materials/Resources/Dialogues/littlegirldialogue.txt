@@ -1,0 +1,4 @@
+#npc-name:Little Girl
+1"Mushrooms, mushrooms, mushrooms..."::2"Hey! Do you know the way to the canyon?"::3"Mushrooms?"
+2"Yes, sir! You just have to go north. You're so lucky, my mom would never let me go to the canyon..."
+3"I'm singing the mushroom song!"
