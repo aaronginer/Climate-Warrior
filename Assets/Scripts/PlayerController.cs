@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     public ContactFilter2D movementFilter;
     public float collisionOffset = 0.05f;
 
+    public bool savePositionOnStart = true;
+
     Vector2 movementInput;
     Rigidbody2D rb;
 
@@ -27,8 +29,11 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        gameObject.transform.position = GameStateManager.Instance.gameState.playerData.position;
-        GameStateManager.Instance.gameState.playerData.sceneName = SceneManager.GetActiveScene().name;
+        if (savePositionOnStart)
+        {
+            gameObject.transform.position = GameStateManager.Instance.gameState.playerData.position;
+            GameStateManager.Instance.gameState.playerData.sceneName = SceneManager.GetActiveScene().name;
+        }
     }
 
     // Update is called once per frame
@@ -64,7 +69,10 @@ public class PlayerController : MonoBehaviour
             spriteRenderer.flipX = false;
         }
 
-        GameStateManager.Instance.gameState.playerData.position = gameObject.transform.position;
+        if (savePositionOnStart)
+        {
+            GameStateManager.Instance.gameState.playerData.position = gameObject.transform.position;
+        }
     }
 
     void OnMove(InputValue movementValue) {
