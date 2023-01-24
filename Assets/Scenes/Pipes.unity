@@ -5903,6 +5903,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 397880782, guid: 9ba075a0b2d40614ca6f233a53ba173d, type: 3}
+    - target: {fileID: 6566029088709993678, guid: 52d9cfa4951b97d429293b473b66a4cf, type: 3}
+      propertyPath: isStaticPipe
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52d9cfa4951b97d429293b473b66a4cf, type: 3}
 --- !u!4 &1654166149 stripped
@@ -7943,6 +7947,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 397880782, guid: 9ba075a0b2d40614ca6f233a53ba173d, type: 3}
+    - target: {fileID: 6566029088709993678, guid: 52d9cfa4951b97d429293b473b66a4cf, type: 3}
+      propertyPath: isStaticPipe
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52d9cfa4951b97d429293b473b66a4cf, type: 3}
 --- !u!4 &2094134967 stripped
@@ -8075,6 +8083,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 397880782, guid: 9ba075a0b2d40614ca6f233a53ba173d, type: 3}
+    - target: {fileID: 6566029088709993678, guid: 52d9cfa4951b97d429293b473b66a4cf, type: 3}
+      propertyPath: isStaticPipe
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52d9cfa4951b97d429293b473b66a4cf, type: 3}
 --- !u!4 &2109171962 stripped
