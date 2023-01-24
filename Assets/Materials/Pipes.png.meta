@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -1400,13 +1400,13 @@ TextureImporter:
       Pipes_54: 1818618162
       Pipes_58: 1194341765
       Pipes_3: -1867274732
-      Pipes_40: 1336167741
+      Pipes_39: -983058231
       Pipes_51: -1643321718
-      Pipes_31: 318597611
+      Pipes_30: 1867055468
       Pipes_53: 390565986
       Pipes_11: 2129729587
       Pipes_29: 1300714193
-      Pipes_39: -983058231
+      Pipes_40: 1336167741
       Pipes_34: 1249863913
       Pipes_6: 1942235361
       Pipes_35: 632592306
@@ -1417,7 +1417,7 @@ TextureImporter:
       Pipes_38: 1384412239
       Pipes_55: -1143786341
       Pipes_26: 739347455
-      Pipes_30: 1867055468
+      Pipes_31: 318597611
       Pipes_50: -1755198607
       Pipes_9: 1446871406
       Pipes_57: -1494152487
