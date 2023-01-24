@@ -4,7 +4,7 @@ namespace Missions
 {
     public sealed class MissionSabotage : Mission
     {
-        public MissionSabotage() : base("Sabotage",true, 50)
+        public MissionSabotage() : base("Sabotage",true, 5)
         {}
 
         public enum States

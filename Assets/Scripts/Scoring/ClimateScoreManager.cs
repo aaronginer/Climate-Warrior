@@ -43,7 +43,6 @@ namespace Scoring
             
             UpdateBars();
 
-            Debug.Log(_front.localScale.x);
             Debug.Assert(_catastropheSeconds < _totalSeconds);
             if (_currentMissionState.timeLeft <= _totalSeconds / 2
                 && !catastropheHappened)
