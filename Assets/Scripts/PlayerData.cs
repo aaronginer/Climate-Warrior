@@ -8,7 +8,8 @@ public enum MiniGame
 {
     None,
     buildAWindTurbine,
-    jumpAndRunCollectTurbineParts
+    jumpAndRunCollectTurbineParts,
+    pipes,
 }
 
 [Serializable]

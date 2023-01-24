@@ -7,6 +7,7 @@
         public static string newGame = "NewGame";
         public static string loadGame = "LoadGame";
         public static string miniGameBuildAWindTurbine = "BuildAWindTurbine";
+        public static string pipes = "Pipes";
         public static string miniGameJumpAndRunCollectTurbine = "JumpAndRun";
         public static string hydroPlantUpper = "HydroPlantUpper";
         public static string hydroPlantLower = "HydroPlantLower";
