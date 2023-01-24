@@ -1,4 +1,5 @@
 using System;
+using Catastrophes;
 using Missions;
 using TMPro;
 using UnityEngine;
@@ -48,6 +49,8 @@ namespace Scoring
                 && !catastropheHappened)
             {
                 catastropheHappened = true;
+                GameObject.Find("Rain")?.GetComponent<Rain>().ToggleRain();
+                GameStateManager.Instance.gameState.catastropheState.state = CatastropheState.States.Flooding;
             }
             else if (_currentMissionState.timeLeft <= 0)
             {
