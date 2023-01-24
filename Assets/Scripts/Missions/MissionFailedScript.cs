@@ -21,6 +21,7 @@ namespace Missions
 
         void Start()
         {
+            UIStateManager.UISM.uIState = UIState.MissionFinish;
             StartCoroutine(ShowMissionResults());
         }
 
@@ -47,7 +48,7 @@ namespace Missions
 
         public void CloseWindow()
         {
-
+            UIStateManager.UISM.uIState = UIState.None;
             GameStateManager.Instance.EndMission();
             GameObject.Find("Score").GetComponentInChildren<AnimateCounterScript>().StartAnimate(_finalScore);
             Destroy(gameObject);

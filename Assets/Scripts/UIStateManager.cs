@@ -4,7 +4,8 @@ public enum UIState
 {
     None,
     Inventory,
-    Dialogue
+    Dialogue,
+    MissionFinish
 }
 public class UIStateManager : MonoBehaviour
 {
@@ -37,5 +38,10 @@ public class UIStateManager : MonoBehaviour
     public bool CanStartDialogue()
     {
         return uIState is UIState.None;
+    }
+
+    public bool CanOpenMenuOverlay()
+    {
+        return uIState is not UIState.MissionFinish;
     }
 }

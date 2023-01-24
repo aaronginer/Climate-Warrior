@@ -18,7 +18,7 @@ namespace MenuGameOverlay
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) && UIStateManager.UISM.CanOpenMenuOverlay())
             {
                 _active = !_active;
                 menuContainer.SetActive(_active);
