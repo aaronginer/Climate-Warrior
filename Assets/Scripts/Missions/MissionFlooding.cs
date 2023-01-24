@@ -60,7 +60,7 @@ namespace Missions
                     DeductionsDecisions -= 25;
                     break;
                 case "GrandmaDialogueFinished":
-                    GameObject.Find("Controller").GetComponent<FloodingGameScript>().Phase2();
+                    GameObject.Find("Player").GetComponent<FloodingGameScript>().Phase2();
                     break;
                 case "GrandmaRescued":
                     State.stateID = (int)States.MissionComplete;
