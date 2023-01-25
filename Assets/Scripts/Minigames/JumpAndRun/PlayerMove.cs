@@ -45,13 +45,14 @@ public class PlayerMove : MonoBehaviour
             return;
         }
             
-        if (IsGrounded() && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))) rigidbodyComponent.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
+        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space)) rigidbodyComponent.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
         if (rigidbodyComponent.velocity.y >= 0) rigidbodyComponent.gravityScale = forceUp;
         if (rigidbodyComponent.velocity.y < 0) rigidbodyComponent.gravityScale = forceDown;
 
         HandleMovement();
         if(this.gameObject.transform.position.x >= finishSign.transform.position.x)
         {
+
             gameEndScreen.ShowEndScreen(false);
         }
     }
@@ -101,7 +102,7 @@ public class PlayerMove : MonoBehaviour
         if (transform.position.y < -5)
         {
             Destroy(gameObject);
-            //gameEndScreen.ShowEndScreen(true);
+            gameEndScreen.ShowEndScreen(true);
         }
     }
 
@@ -111,13 +112,14 @@ public class PlayerMove : MonoBehaviour
         if (coin != null)
         {
             ScoreBoard.instance.UpdateScore(coin.value);
+            coin.MakeSound();
             Destroy(coin.gameObject);
         }
     }
 
     private void OnDestroy()
     {
-        gameEndScreen.ShowEndScreen(true);
+        //gameEndScreen.ShowEndScreen(true);
         ScoreBoard.instance.timerRunning = false;
     }
 }

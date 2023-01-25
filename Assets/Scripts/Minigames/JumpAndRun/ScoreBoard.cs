@@ -15,7 +15,7 @@ public class ScoreBoard : MonoBehaviour
     private PlayerMove player;
     private TMPro.TextMeshProUGUI timeText;
     private TMPro.TextMeshProUGUI scoreText;
-
+    private GameEnd gameEndScreen;
     private void Awake()
     {
         if (instance == null)
@@ -25,11 +25,12 @@ public class ScoreBoard : MonoBehaviour
             timeText = GameObject.Find("TimeValue").GetComponent<TMPro.TextMeshProUGUI>();
             scoreText = GameObject.Find("ScoreValue").GetComponent<TMPro.TextMeshProUGUI>();
             timeText.text = timeRemaining.ToString();
+            gameEndScreen = GameObject.Find("EndScreen").GetComponent<GameEnd>();
             scoreText.text = "0";
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(this);
         }
     }
 
@@ -49,6 +50,7 @@ public class ScoreBoard : MonoBehaviour
             {
                 timeText.text = "0";
                 timerRunning = false;
+                gameEndScreen.ShowEndScreen(true);
                 Destroy(player.gameObject);
             }
         }

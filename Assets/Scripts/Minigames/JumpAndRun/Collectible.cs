@@ -5,6 +5,7 @@ using UnityEngine;
 public class Collectible : MonoBehaviour
 {
     // Start is called before the first frame update
+    public AudioClip sound;
     public int value = 5;
 
     void Start()
@@ -16,5 +17,14 @@ public class Collectible : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void MakeSound()
+    {
+        AudioSource.PlayClipAtPoint(sound, transform.position);
+    }
+
+    private void OnDestroy()
+    {
     }
 }
