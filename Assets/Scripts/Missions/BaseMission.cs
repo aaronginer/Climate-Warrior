@@ -12,7 +12,6 @@ namespace Missions
             State.missions = new List<string>(new[]
             {
                 "Sabotage",
-                "Sabotage",
             });
         }
 
@@ -20,7 +19,7 @@ namespace Missions
         {
             PrepareMission,
             MissionActive,
-            SideQuest,
+            GameFinished,
         }
 
         public override void Setup()
@@ -32,7 +31,8 @@ namespace Missions
                     break;
                 case (int) States.MissionActive:
                     break;
-                case (int) States.SideQuest:
+                case (int) States.GameFinished:
+                    Debug.Log("Finished the game");
                     break;
             }
         }
@@ -47,7 +47,8 @@ namespace Missions
                 case (int) States.MissionActive:
                     GameStateManager.Instance.StartMission(LoadMission(State.missions[0]));
                     break;
-                case (int) States.SideQuest:
+                case (int) States.GameFinished:
+                    Debug.Log("Finished the game");
                     break;
             }
         }
@@ -113,7 +114,8 @@ namespace Missions
             }
 
             // if catastrophe -> go to sidequest
-            State.stateID = (int) States.PrepareMission;
+            
+            State.stateID = State.missions.Count == 0 ? (int) States.GameFinished : (int) States.PrepareMission;
             AdvanceState();
         }
 
