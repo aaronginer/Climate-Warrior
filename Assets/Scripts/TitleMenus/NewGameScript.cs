@@ -23,7 +23,7 @@ namespace TitleMenus
             };
             GameStateManager.Instance.SaveToDisk();
 
-            SceneManager.LoadScene(Constants.SceneNames.village, LoadSceneMode.Single);
+            SceneManager.LoadScene(Constants.SceneNames.openingcutscene, LoadSceneMode.Single);
             
             GameStateManager.Instance.BaseMission = new BaseMission();
             PersistentCanvasScript.SpawnPersistentCanvas();

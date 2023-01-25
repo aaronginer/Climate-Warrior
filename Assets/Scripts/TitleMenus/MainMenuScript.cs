@@ -17,7 +17,7 @@ namespace TitleMenus
 
         public void OpenCredits()
         {
-            SceneManager.LoadScene("Credits", LoadSceneMode.Single);
+            SceneManager.LoadScene(Constants.SceneNames.credits, LoadSceneMode.Single);
         }
     }   
 }

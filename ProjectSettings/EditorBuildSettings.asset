@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TitleScenes/NewGame.unity
     guid: be8ab1240cb144d4f83418badadc6ced
   - enabled: 1
+    path: Assets/Scenes/Credits/ScrollingCredits.unity
+    guid: ff50064503dc4434992fec45fe783a85
+  - enabled: 1
     path: Assets/Scenes/TitleScenes/MainMenu.unity
     guid: f0f05c4e8256fe04982d1a56bf30ce5a
   - enabled: 1
@@ -38,6 +41,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HydroPlantLower.unity
     guid: a9d815c3698bb984bbf05f02289cc135
+  - enabled: 1
+    path: Assets/Scenes/OpeningCutscene.unity
+    guid: 427086fc02b120043bef9e45c26d281f
   - enabled: 1
     path: Assets/Scenes/River.unity
     guid: ee53fedd00e254341a2d5c3fae40e9ef
