@@ -1,4 +1,4 @@
 #npc-name:Mom
-1"Hi, there! You're the new city planner, right?"::2"Yes, m'am."::3"Your kids seem to be having some trouble..."
+1"Hi, there! You're the new city planner, right?"::2"Yes, ma'am."::3"Your kids seem to be having some trouble..."
 2"Finally, this little town could use some help. The mayor is waiting for you near the town hall."
 3"Well, they're a handful!"

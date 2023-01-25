@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
+using System.Collections.Generic;
 
 namespace Missions
 {
@@ -8,6 +8,8 @@ namespace Missions
     {
         public string missionName;
         public int stateID;
+        public float timeLeft; // for normal mission only
+        public List<string> missions; // for base mission only
 
         public MissionState(string name)
         {

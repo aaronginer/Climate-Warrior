@@ -1,33 +1,38 @@
-﻿using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
+﻿using System.Collections.Generic;
+using Scoring;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Assertions;
 
 namespace Missions
 {
     public sealed class BaseMission : Mission
     {
-        private bool _missionActive;
         public BaseMission() : base("BaseMission")
-        {}
+        {
+            State.missions = new List<string>(new[]
+            {
+                "Sabotage",
+            });
+        }
 
         public enum States
         {
-            Init,
-            SabotageNext,
-            SabotageStarted,
-            Final,
+            PrepareMission,
+            MissionActive,
+            GameFinished,
         }
 
         public override void Setup()
         {
             switch (State.stateID)
             {
-                case (int) States.Init:
+                case (int) States.PrepareMission:
+                    SpawnMayorDialogue();
                     break;
-                case (int) States.SabotageStarted:
+                case (int) States.MissionActive:
                     break;
-                case (int) States.Final:
+                case (int) States.GameFinished:
+                    Debug.Log("Finished the game");
                     break;
             }
         }
@@ -36,9 +41,14 @@ namespace Missions
         {
             switch (State.stateID)
             {
-                case (int)States.Init:
+                case (int) States.PrepareMission:
+                    SpawnMayorDialogue();
                     break;
-                case (int)States.Final:
+                case (int) States.MissionActive:
+                    GameStateManager.Instance.StartMission(LoadMission(State.missions[0]));
+                    break;
+                case (int) States.GameFinished:
+                    Debug.Log("Finished the game");
                     break;
             }
         }
@@ -46,15 +56,72 @@ namespace Missions
         public override void HandleAction(string action)
         {
             if (action == "") return;
-
+            
             switch (action)
             {
                 case "MissionSabotage":
+                    PushMission("Sabotage");
                     GameStateManager.Instance.StartMission(new MissionSabotage());
-                    State.stateID = (int) States.SabotageStarted;
-                    _missionActive = true;
+                    State.stateID = (int) States.MissionActive;
+                    break;
+                case "MissionFlooding":
+                    PushMission("Flooding");
+                    GameStateManager.Instance.StartMission(new MissionFlooding());
+                    State.stateID = (int) States.MissionActive;
+                    break;
+                case "StartNextMission":
+                    State.stateID = (int)States.MissionActive;
+                    AdvanceState();
+                    break;
+                case "Penalty25":
+                    ScoreScript.Penalty(-25);
+                    break;
+                case "Penalty200":
+                    ScoreScript.Penalty(-200);
+                    break;
+                case "RespawnIfNotAccepted":
+                    if (State.stateID != (int) States.MissionActive) SpawnMayorDialogue();
                     break;
             }
+        }
+
+        private void SpawnMayorDialogue()
+        {
+            Debug.Assert(State.missions.Count != 0);
+            string missionName = State.missions[0];
+
+            switch (missionName)
+            {
+                // Spawn the starting mayor dialogue
+                case "Sabotage":
+                    InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "Sabotage1Dialogue");
+                    break;
+                case "Flooding":
+                    InstantiateDialogueTriggerFromPrefab("Missions/Flooding/Triggers/", "Flooding1Dialogue");
+                    break;
+                case "Drought":
+                    break;
+            }
+        }
+        
+        public void FinishMission(bool complete)
+        {
+            Debug.Assert(State.stateID == (int)States.MissionActive);
+
+            if (complete)
+            {
+                State.missions.RemoveAt(0);
+            }
+
+            // if catastrophe -> go to sidequest
+            
+            State.stateID = State.missions.Count == 0 ? (int) States.GameFinished : (int) States.PrepareMission;
+            AdvanceState();
+        }
+
+        public void PushMission(string missionName)
+        {
+            State.missions.Insert(0, missionName);
         }
     }
 }

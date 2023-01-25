@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
@@ -33,7 +32,12 @@ namespace Dialogue
      *      which defines the NPCs name
      * 3)   #actions:<action1>,<action2>,<action3>,<action4>
      *      which defines the mission actions on a dialogue choice (you can provide * actions)
+     * 4)   #end-action:<action>
+     *      defines the action taken when dialogue is finished
      * The dialogue file MUST contain a node with ID 1
+     *
+     * Additional features:
+     * 1)   [player-name] is substituted with the name of the player
      *
      * Example dialogue: Materials/Dialogues/testdialogue.txt
      * 
@@ -59,6 +63,8 @@ namespace Dialogue
         DialogueNode previous = null;
         foreach (string line in lines)
         {
+            if (line.Length == 0) continue;
+            
             if (line[0] == '#')
             {
                 var split = line.Split(":");
@@ -94,7 +100,8 @@ namespace Dialogue
                     {
                         id = int.Parse(match.Groups[1].ToString());
                         message = match.Groups[2].ToString().Replace("[player-name]", 
-                            GameStateManager.Instance.gameState.playerData.name);
+                            GameStateManager.Instance.gameState.playerData.name).Replace("[player-gender]", 
+                            "man");
                     }
                     // Parse Answer options
                     else 

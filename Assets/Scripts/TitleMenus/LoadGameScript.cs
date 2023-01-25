@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Missions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -28,18 +26,18 @@ namespace TitleMenus
         
         private void ListSaves()
         {
-            var saveFilesPaths = Directory.GetFiles(_persistentPath).Where(f => f.Contains("cw_save_")).ToArray();
+            var saveFilesPaths = Directory.GetFiles(_persistentPath).Where(f => f.Contains("save_")).ToArray();
 
             for (int i = 0; i < saveFilesPaths.Length; i++)
             {
                 string[] split = saveFilesPaths[i].Split(Path.AltDirectorySeparatorChar);
-                var saveName = split[^1].Replace(".json", "").Replace("cw_save_", "");
+                var saveName = split[^1].Replace(".json", "").Replace("save_", "");
 
                 GameObject button = Instantiate(Resources.Load("SelectSaveButton"), 
                     savesButtonsContainer.transform) as GameObject;
 
                 if (button == null) continue;
-                
+
                 button.GetComponentInChildren<TextMeshProUGUI>().text = saveName;
                 button.GetComponent<RectTransform>().localPosition += new Vector3(0, -i*savesButtonsMargin, 0);
 
@@ -58,14 +56,16 @@ namespace TitleMenus
             
             SceneManager.LoadScene(GameStateManager.Instance.gameState.playerData.sceneName);
 
-            GameStateManager.Instance.LoadBaseMission();
             PersistentCanvasScript.SpawnPersistentCanvas();
+            GameStateManager.Instance.LoadBaseMission();
+            GameStateManager.Instance.LoadMission();
         }
 
         public void BackToMainMenu()
         {
             SceneManager.LoadScene(Constants.SceneNames.mainMenu, LoadSceneMode.Single);
         }
+        
     }
 
 }

@@ -1,8 +1,6 @@
 using Items;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Assertions;
-using UnityEngine.Experimental.AI;
 using UnityEngine.UI;
 
 namespace InventorySystem
@@ -27,8 +25,6 @@ namespace InventorySystem
 
         public void Start()
         {
-            Debug.Log("Instantiating Display");
-            
             _inventory = GameStateManager.Instance.gameState.playerData.inventory;
             _inventory.CleanInventory();
 

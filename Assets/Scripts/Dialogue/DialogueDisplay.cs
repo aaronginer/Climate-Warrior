@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Dialogue
 {
@@ -69,7 +68,7 @@ namespace Dialogue
         // TODO: if a dialogue is currently active and a mission tries to start a new important dialogue, it will not display and mission status will be halted until restart
         public void StartNewDialogue(string dialogueName)
         {
-            if (_current != State.Finished || !UIStateManager.UISM.CanStartDialogue()) return;
+            if (_current != State.Finished || !UIStateManager.UISM.IsNone()) return;
             
             UIStateManager.UISM.uIState = UIState.Dialogue;
             
@@ -97,7 +96,6 @@ namespace Dialogue
         {
             if (_dialogueReader == null)
             {
-                Debug.Log("No DialogueReader initialized.");
                 return;
             }
 

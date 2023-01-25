@@ -1,0 +1,5 @@
+﻿#npc-name:Ms. Remming
+1"My Hero! Thank you so much for coming to save me!"::2"My pleasure Ma'am, anytime."::3"The mayor forced me to..."
+#actions:none,Penalty50
+2"Look! The water level is rising... How will we get back now? Oh no, oh no..."::0"We'll go back the same way I came from, the water shouldn't be too deep there!"::0"We got this!"
+#end-action:GrandmaDialogueFinished

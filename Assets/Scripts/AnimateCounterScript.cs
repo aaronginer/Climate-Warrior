@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using TMPro;
 using UnityEngine;
 
@@ -44,9 +41,9 @@ public class AnimateCounterScript : MonoBehaviour
         }
     }
 
-    public void StartAnimate(int countTo)
+    public void StartAnimate(int addScore)
     {
-        StartCoroutine(YieldLoop(countTo));
+        StartCoroutine(YieldLoop(addScore));
     }
 
     IEnumerator YieldLoop(int countTo)

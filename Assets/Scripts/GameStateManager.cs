@@ -45,14 +45,13 @@ public class GameStateManager : MonoBehaviour
 
     private void Update()
     {
+        CurrentMission?.UpdateTime();
+        
+        // mission timer
         if (!missionTimerActive) return;
-        
         missionTimer -= Time.deltaTime;
-
         if (missionTimer > 0) return;
-            
         missionTimerActive = false;
-        
         CurrentMission?.AdvanceState();
     }
 
@@ -64,13 +63,8 @@ public class GameStateManager : MonoBehaviour
             return;
         }
 
-        if (_openSave != "") // if a save is open, delete it and create new save
-        {
-            File.Delete(_openSave);
-        }
-
         var dateTime = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss");
-        string path = _persistentPath + "cw_save_" + dateTime + ".json";  
+        string path = _persistentPath + "save_" + Instance.gameState.playerData.name + "_" + dateTime + ".json";  
         
         using StreamWriter writer = new StreamWriter(path);
         string json = JsonUtility.ToJson(gameState);
@@ -79,6 +73,11 @@ public class GameStateManager : MonoBehaviour
         
         gameState.playerData.inventory.CleanInventory();
 
+        if (_openSave != "") // if a save is open, delete it and create new save
+        {
+            File.Delete(_openSave);
+        }
+        
         _openSave = path;
 
         Debug.Log("Game state saved.");
@@ -86,7 +85,7 @@ public class GameStateManager : MonoBehaviour
 
     public void LoadFromDisk(string saveFile)
     {
-        string savePath = _persistentPath + "cw_save_" + saveFile + ".json";
+        string savePath = _persistentPath + "save_" + saveFile + ".json";
 
         if (!File.Exists(savePath))
         {
@@ -108,6 +107,7 @@ public class GameStateManager : MonoBehaviour
         if (CurrentMission != null) return;
 
         CurrentMission = mission;
+        gameState.missionState = mission.State;
         
         mission?.AdvanceState();
     }
@@ -119,12 +119,23 @@ public class GameStateManager : MonoBehaviour
             State = gameState.baseMissionState
         };
         BaseMission = m;
-        Debug.Log(BaseMission.GetHashCode());
+    }
+    
+    public void LoadMission()
+    {
+        var m = Mission.LoadMission(gameState.missionState.missionName);
+        if (m == null)
+        {
+            return;
+        }
+        m.State = gameState.missionState;
+        CurrentMission = m;
     }
     
     public void EndMission()
     {
         CurrentMission = null;
+        gameState.missionState = null;
     }
 
     public void SetMissionAdvanceTimer(float time)

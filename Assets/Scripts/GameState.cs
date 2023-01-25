@@ -1,4 +1,5 @@
 using System;
+using Catastrophes;
 using Missions;
 using UnityEngine;
 
@@ -7,12 +8,16 @@ public class GameState
 {
     public PlayerData playerData;
     public MissionState baseMissionState;
-    public int score = 0;
+    public MissionState missionState;
+    public CatastropheState catastropheState;
+    public int score;
 
     public GameState()
     {
         playerData = new PlayerData("default");
         baseMissionState = null;
+        missionState = null;
+        catastropheState = new CatastropheState();
     }
     
     public void PrintGameState()

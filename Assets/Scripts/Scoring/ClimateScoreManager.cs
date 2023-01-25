@@ -1,55 +1,75 @@
-using System;
-using Cinemachine;
+using Catastrophes;
 using Missions;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Assertions;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Scoring
 {
     public class ClimateScoreManager : MonoBehaviour
     {
-        public GameObject redBar;
-        public GameObject orangeBar;
+        public GameObject frontBar;
+        public GameObject backBar;
+        public TextMeshProUGUI degreesText;
         private float _totalSeconds;
-        public float secondsLeft;
         private float _catastropheSeconds;
+
+        private const float MaxDegrees = 4.0f;
         
         public bool catastropheHappened;
 
-        void Start()
+        private MissionState _currentMissionState;
+        private Transform _front;
+        private Transform _back;
+
+        private void Start()
         {
-            _totalSeconds = GameStateManager.Instance.CurrentMission.ClimateScoreMaxTime;
-            secondsLeft = _totalSeconds;
+            _front = frontBar.transform;
+            _back = backBar.transform;
+            _currentMissionState = GameStateManager.Instance.CurrentMission.State;
+            _totalSeconds = GameStateManager.Instance.CurrentMission.MissionMaxTime;
+            UpdateBars();
             _catastropheSeconds = _totalSeconds / 2;
         }
 
         void Update()
         {
-            if (secondsLeft <= 0)
-            {
-                secondsLeft = 0;
-                return;
-            }
-            
-            var redBarTransform = redBar.transform;
-            var orangeBarTransform = orangeBar.transform;
-
-            secondsLeft -= Time.deltaTime;
-            float scaleX = secondsLeft / _totalSeconds;
-            
-            redBarTransform.localScale = new Vector3(scaleX, 1, 1);
-            orangeBarTransform.localScale = new Vector3(scaleX, 1, 1);
+            UpdateBars();
 
             Debug.Assert(_catastropheSeconds < _totalSeconds);
-            if (redBarTransform.localScale.x <= _catastropheSeconds / _totalSeconds
+            if (_currentMissionState.timeLeft <= _totalSeconds / 2
                 && !catastropheHappened)
             {
                 catastropheHappened = true;
+                GameObject.Find("Flooding")?.GetComponent<FloodingScript>().ToggleRain(true);
+                GameStateManager.Instance.BaseMission.PushMission("Flooding");
+                GameStateManager.Instance.gameState.catastropheState.state = CatastropheState.States.Flooding;
             }
-            else if (redBarTransform.localScale.x <= 0)
+            else if (_currentMissionState.timeLeft <= 0)
             {
-                Debug.Log("Game over!");
+                if (_currentMissionState.missionName == "Sabotage")
+                {
+                    _currentMissionState.stateID = (int)MissionSabotage.States.MissionFailed;
+                }
+                    
+                SceneManager.LoadScene(GameStateManager.Instance.gameState.playerData.sceneName);
             }
+        }
+
+        void UpdateBars()
+        {
+            float scaleX = 1 - (_currentMissionState.timeLeft / _totalSeconds);
+            
+            _front.localScale = new Vector3(scaleX, 1, 1);
+            _front.GetComponent<Image>().color =
+                Color.Lerp(new Color(0.04707184f, 0.7075472f, 0, 1), new Color(0.5283019f, 0, 0, 1), scaleX);
+            _back.localScale = new Vector3(scaleX, 1, 1);
+            _back.GetComponent<Image>().color =
+                Color.Lerp(new Color(0.1369746f, 0.8301887f, 0, 1), new Color(0.6415094f, 0.08979349f, 0, 1), scaleX);
+            
+            float degreesCurrent = scaleX * MaxDegrees;
+            degreesText.text = "+" + degreesCurrent.ToString("0.#") + " °C"; 
         }
     }
 }

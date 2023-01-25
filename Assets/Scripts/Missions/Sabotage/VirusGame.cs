@@ -1,9 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.ConstrainedExecution;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -103,7 +100,7 @@ namespace Missions.Sabotage
             {
                 outField.text = "Server status: RUNNING.";
                 yield return new WaitForSeconds(1);
-                GameStateManager.Instance.CurrentMission.State.stateID = (int) MissionSabotage.States.ServerFixed;
+                GameStateManager.Instance.CurrentMission.State.stateID = (int) MissionSabotage.States.MissionComplete;
                 SceneManager.LoadScene("HydroPlantUpper");
             }
             else

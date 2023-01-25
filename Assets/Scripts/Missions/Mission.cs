@@ -1,5 +1,4 @@
-﻿using Scoring;
-using Triggers;
+﻿using Triggers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
@@ -10,24 +9,23 @@ namespace Missions
     {
         public MissionState State;
         public readonly GameObject ClimateScoreObject;
-        public readonly float ClimateScoreMaxTime;
+        
+        public float MissionMaxTime;
+        public int DeductionsDecisions;
+        public int BaseScore;
+        public int TimeScoreMax;
+        
         private bool _currentGameCompleted;
 
-        // mission tree a just another mission? would give benefit of not having to implement a new system
-        
-        protected Mission(string name, float climateScoreTime=120)
+        protected Mission(string name, bool climateScoreEnabled=false)
         {
-            ClimateScoreMaxTime = climateScoreTime;
             State = new MissionState(name);
 
-            
-            if (name == "BaseMission") return;
-            
             // Instantiate the climate score canvas object for every mission that is not the MissionTree (base mission) 
+            if (!climateScoreEnabled) return;
             var climateScorePrefab = Resources.Load("ClimateScore") as GameObject;
             var persistentCanvas = GameObject.Find("PersistentCanvas");
-            // if (persistentCanvas == null) return;
-            
+
             ClimateScoreObject = Object.Instantiate(climateScorePrefab, persistentCanvas.transform);
         }
 
@@ -84,19 +82,26 @@ namespace Missions
             _currentGameCompleted = false;
             return completed;
         }
-        
-        public static Mission LoadMission(MissionState state)
-        {
-            if (state == null) return null;
 
-            Mission mission = state.missionName switch
+        public void UpdateTime()
+        {
+            if (State.timeLeft <= 0)
+            {
+                State.timeLeft = 0;
+                return;
+            }
+            State.timeLeft -= Time.deltaTime;
+        }
+        
+        public static Mission LoadMission(string missionName)
+        {
+            Mission mission = missionName switch
             {
                 "Sabotage" => new MissionSabotage(),
+                "Flooding" => new MissionFlooding(),
                 _ => null
             };
 
-            if (mission != null) mission.State = state;
-            
             return mission;
         }
     }

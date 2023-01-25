@@ -1,18 +1,11 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using Newtonsoft.Json.Serialization;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using static Newtonsoft.Json.JsonSerializer;
 
 public enum UIState
 {
     None,
     Inventory,
-    Dialogue
+    Dialogue,
+    MissionFinish
 }
 public class UIStateManager : MonoBehaviour
 {
@@ -42,8 +35,13 @@ public class UIStateManager : MonoBehaviour
         return uIState is UIState.None or UIState.Inventory;
     }
 
-    public bool CanStartDialogue()
+    public bool IsNone()
     {
         return uIState is UIState.None;
+    }
+
+    public bool CanOpenMenuOverlay()
+    {
+        return uIState is not UIState.MissionFinish;
     }
 }
