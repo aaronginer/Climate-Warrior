@@ -42,7 +42,8 @@ namespace Scoring
                 && !catastropheHappened)
             {
                 catastropheHappened = true;
-                GameObject.Find("Flooding")?.GetComponent<FloodingScript>().ToggleRain();
+                GameObject.Find("Flooding")?.GetComponent<FloodingScript>().ToggleRain(true);
+                GameStateManager.Instance.BaseMission.PushMission("Flooding");
                 GameStateManager.Instance.gameState.catastropheState.state = CatastropheState.States.Flooding;
             }
             else if (_currentMissionState.timeLeft <= 0)

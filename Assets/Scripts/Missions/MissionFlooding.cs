@@ -1,4 +1,5 @@
-﻿using Missions.Flooding;
+﻿using Catastrophes;
+using Missions.Flooding;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -8,14 +9,18 @@ namespace Missions
     public sealed class MissionFlooding : Mission
     {
         private FloodingGameScript _gameScript;
-        
-        public MissionFlooding() : base("Flooding", -250, 250)
-        {}
+
+        public MissionFlooding() : base("Flooding")
+        {
+            BaseScore = -250;
+            TimeScoreMax = 250;
+            MissionMaxTime = 120;
+            State.timeLeft = MissionMaxTime;
+        }
 
         public enum States
         {
             Init,
-            InGame,
             GrandmaSaved,
             MissionComplete,
             MissionFailed
@@ -56,13 +61,14 @@ namespace Missions
 
             switch (action)
             {
-                case "Karma50":
+                case "Penalty50":
                     DeductionsDecisions -= 25;
                     break;
                 case "GrandmaDialogueFinished":
                     GameObject.Find("Player").GetComponent<FloodingGameScript>().Phase2();
                     break;
                 case "GrandmaRescued":
+                    GameStateManager.Instance.gameState.catastropheState.state = CatastropheState.States.None;
                     State.stateID = (int)States.MissionComplete;
                     SceneManager.LoadScene("Village");
                     break;

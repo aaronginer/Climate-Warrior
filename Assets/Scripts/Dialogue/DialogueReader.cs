@@ -63,6 +63,8 @@ namespace Dialogue
         DialogueNode previous = null;
         foreach (string line in lines)
         {
+            if (line.Length == 0) continue;
+            
             if (line[0] == '#')
             {
                 var split = line.Split(":");
@@ -98,7 +100,8 @@ namespace Dialogue
                     {
                         id = int.Parse(match.Groups[1].ToString());
                         message = match.Groups[2].ToString().Replace("[player-name]", 
-                            GameStateManager.Instance.gameState.playerData.name);
+                            GameStateManager.Instance.gameState.playerData.name).Replace("[player-gender]", 
+                            "man");
                     }
                     // Parse Answer options
                     else 

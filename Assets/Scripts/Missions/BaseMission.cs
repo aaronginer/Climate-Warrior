@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using Scoring;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Missions
 {
@@ -26,6 +28,7 @@ namespace Missions
             switch (State.stateID)
             {
                 case (int) States.PrepareMission:
+                    SpawnMayorDialogue();
                     break;
                 case (int) States.MissionActive:
                     break;
@@ -39,6 +42,7 @@ namespace Missions
             switch (State.stateID)
             {
                 case (int) States.PrepareMission:
+                    SpawnMayorDialogue();
                     break;
                 case (int) States.MissionActive:
                     GameStateManager.Instance.StartMission(LoadMission(State.missions[0]));
@@ -51,16 +55,16 @@ namespace Missions
         public override void HandleAction(string action)
         {
             if (action == "") return;
-
+            
             switch (action)
             {
                 case "MissionSabotage":
-                    State.missions.Insert(0, "Sabotage");
+                    PushMission("Sabotage");
                     GameStateManager.Instance.StartMission(new MissionSabotage());
                     State.stateID = (int) States.MissionActive;
                     break;
                 case "MissionFlooding":
-                    State.missions.Insert(0, "Flooding");
+                    PushMission("Flooding");
                     GameStateManager.Instance.StartMission(new MissionFlooding());
                     State.stateID = (int) States.MissionActive;
                     break;
@@ -68,9 +72,37 @@ namespace Missions
                     State.stateID = (int)States.MissionActive;
                     AdvanceState();
                     break;
+                case "Penalty25":
+                    ScoreScript.Penalty(-25);
+                    break;
+                case "Penalty200":
+                    ScoreScript.Penalty(-200);
+                    break;
+                case "RespawnIfNotAccepted":
+                    if (State.stateID != (int) States.MissionActive) SpawnMayorDialogue();
+                    break;
             }
         }
 
+        private void SpawnMayorDialogue()
+        {
+            Debug.Assert(State.missions.Count != 0);
+            string missionName = State.missions[0];
+
+            switch (missionName)
+            {
+                // Spawn the starting mayor dialogue
+                case "Sabotage":
+                    InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "Sabotage1Dialogue");
+                    break;
+                case "Flooding":
+                    InstantiateDialogueTriggerFromPrefab("Missions/Flooding/Triggers/", "Flooding1Dialogue");
+                    break;
+                case "Drought":
+                    break;
+            }
+        }
+        
         public void FinishMission(bool complete)
         {
             Debug.Assert(State.stateID == (int)States.MissionActive);
@@ -83,6 +115,11 @@ namespace Missions
             // if catastrophe -> go to sidequest
             State.stateID = (int) States.PrepareMission;
             AdvanceState();
+        }
+
+        public void PushMission(string missionName)
+        {
+            State.missions.Insert(0, missionName);
         }
     }
 }

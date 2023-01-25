@@ -6,17 +6,17 @@ namespace Missions
 {
     public sealed class MissionSabotage : Mission
     {
-        public MissionSabotage() : base("Sabotage", 500, 1000, 5, true)
-        {}
+        public MissionSabotage() : base("Sabotage", true)
+        {
+            BaseScore = 500;
+            TimeScoreMax = 1000;
+            MissionMaxTime = 5;
+            State.timeLeft = MissionMaxTime;
+        }
 
         public enum States
         {
             Init,
-            NotAccepted,
-            NotAcceptedNextDialogue,
-            NotAcceptedAgain,
-            NotAcceptedAgainDialogue,
-            Accepted,
             ServerCrashed,
             ServerFixed,
             MissionComplete,
@@ -28,19 +28,6 @@ namespace Missions
             switch (State.stateID)
             {
                 case (int) States.Init:
-                    InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "Sabotage1Dialogue");
-                    break;
-                case (int) States.NotAcceptedNextDialogue:
-                    // rewind to NotAccepted if saved in this state
-                    State.stateID = (int)States.NotAccepted;
-                    AdvanceState();
-                    break;
-                case (int) States.NotAcceptedAgainDialogue:
-                    // rewind to NotAcceptedAgain if saved in this state
-                    State.stateID = (int)States.NotAcceptedAgain;
-                    AdvanceState();
-                    break;
-                case (int) States.Accepted:
                     InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "Panel1Sign");
                     break;
                 case (int) States.ServerCrashed:
@@ -64,25 +51,6 @@ namespace Missions
             switch (State.stateID)
             {
                 case (int) States.Init:
-                    InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "Sabotage1Dialogue");
-                    break;
-                case (int) States.NotAccepted:
-                    GameStateManager.Instance.SetMissionAdvanceTimer(5);
-                    State.stateID = (int) States.NotAcceptedNextDialogue;
-                    break;
-                case (int) States.NotAcceptedNextDialogue:
-                    // dialoguedisplay could be invalid at this point
-                    GameStateManager.Instance.dialogueDisplay.StartNewDialogue("Missions/Sabotage/sabotage_2");
-                    break;
-                case (int) States.NotAcceptedAgain:
-                    GameStateManager.Instance.SetMissionAdvanceTimer(5);
-                    State.stateID = (int) States.NotAcceptedAgainDialogue;
-                    break;
-                case (int) States.NotAcceptedAgainDialogue:
-                    // dialoguedisplay could be invalid at this point
-                    GameStateManager.Instance.dialogueDisplay.StartNewDialogue("Missions/Sabotage/sabotage_3");
-                    break;
-                case (int) States.Accepted:
                     InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "Panel1Sign");
                     break;
                 case (int) States.ServerCrashed:
@@ -97,20 +65,6 @@ namespace Missions
 
             switch (action)
             {
-                case "Start":
-                    State.stateID = (int) States.Accepted;
-                    AdvanceState();
-                    break;
-                case "Delay":
-                    // some negative environmental impact
-                    State.stateID = (int) States.NotAccepted;
-                    AdvanceState();
-                    break;
-                case "DelayAgain":
-                    // some more negative impact
-                    State.stateID = (int) States.NotAcceptedAgain;
-                    AdvanceState();
-                    break;
                 case "Server":
                     State.stateID = (int)States.ServerCrashed;
                     AdvanceState();

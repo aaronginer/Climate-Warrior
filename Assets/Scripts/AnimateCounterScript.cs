@@ -41,9 +41,9 @@ public class AnimateCounterScript : MonoBehaviour
         }
     }
 
-    public void StartAnimate(int countTo)
+    public void StartAnimate(int addScore)
     {
-        StartCoroutine(YieldLoop(countTo));
+        StartCoroutine(YieldLoop(addScore));
     }
 
     IEnumerator YieldLoop(int countTo)

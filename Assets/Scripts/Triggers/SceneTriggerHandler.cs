@@ -19,7 +19,7 @@ namespace Triggers
 
         public void Update()
         {
-            if (!Input.GetKeyDown("f") || _triggerScript == null) return;
+            if (!Input.GetKeyDown("f") || _triggerScript == null || !UIStateManager.UISM.IsNone()) return;
             
             textPopup.SetActive(false);
             TriggerActivate();
@@ -30,7 +30,7 @@ namespace Triggers
         {
             _triggerScript = col.GetComponent<SceneTrigger>();
 
-            if (_triggerScript == null) return;
+            if (_triggerScript == null || !UIStateManager.UISM.IsNone()) return;
 
             if (_triggerScript.manual)
             {

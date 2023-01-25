@@ -35,7 +35,7 @@ public class UIStateManager : MonoBehaviour
         return uIState is UIState.None or UIState.Inventory;
     }
 
-    public bool CanStartDialogue()
+    public bool IsNone()
     {
         return uIState is UIState.None;
     }

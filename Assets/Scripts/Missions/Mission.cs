@@ -10,22 +10,16 @@ namespace Missions
         public MissionState State;
         public readonly GameObject ClimateScoreObject;
         
-        public readonly float MissionMaxTime;
+        public float MissionMaxTime;
         public int DeductionsDecisions;
         public int BaseScore;
         public int TimeScoreMax;
         
         private bool _currentGameCompleted;
 
-        protected Mission(string name, int baseScore=0, int timeScoreMax=0, float missionTime=120, bool climateScoreEnabled=false)
+        protected Mission(string name, bool climateScoreEnabled=false)
         {
-            BaseScore = baseScore;
-            TimeScoreMax = timeScoreMax;
-            MissionMaxTime = missionTime;
-            State = new MissionState(name)
-            {
-                timeLeft = missionTime
-            };
+            State = new MissionState(name);
 
             // Instantiate the climate score canvas object for every mission that is not the MissionTree (base mission) 
             if (!climateScoreEnabled) return;
@@ -104,7 +98,7 @@ namespace Missions
             Mission mission = missionName switch
             {
                 "Sabotage" => new MissionSabotage(),
-                "Flooding" => new MissionSabotage(),
+                "Flooding" => new MissionFlooding(),
                 _ => null
             };
 

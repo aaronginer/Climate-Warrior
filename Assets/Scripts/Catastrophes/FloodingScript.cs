@@ -17,9 +17,9 @@ namespace Catastrophes
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
-        public void ToggleRain()
+        public void ToggleRain(bool state)
         {
-            _active = !_active;
+            _active = state;
             SetActive();
         }
 

@@ -1,0 +1,5 @@
+﻿#npc-name:Mayor
+1"[player-name]! We desperately need your help! Ms. Remming is stuck our in the field because of the flood and can't get to safety! Please go help her before it is too late."::0"Poor Ms. Remming, I'm on my way!"::2"I don't care."
+#actions:StartNextMission,Penalty200
+2"Have you lost your mind... the poor Ms. Remming..."
+#end-action:RespawnIfNotAccepted
