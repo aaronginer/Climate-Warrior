@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScoreBoard : MonoBehaviour
 {
@@ -11,8 +12,8 @@ public class ScoreBoard : MonoBehaviour
     public bool running = false;
     private int score;
     private PlayerMove player;
-    private TMPro.TextMeshProUGUI timeText;
-    private TMPro.TextMeshProUGUI scoreText;
+    private Text timeText;
+    private Text scoreText;
     private GameEnd gameEndScreen;
     private void Awake()
     {
@@ -20,8 +21,8 @@ public class ScoreBoard : MonoBehaviour
         {
             instance = this;
             player = GameObject.Find("Player").GetComponent<PlayerMove>();
-            timeText = GameObject.Find("TimeValue").GetComponent<TMPro.TextMeshProUGUI>();
-            scoreText = GameObject.Find("ScoreValue").GetComponent<TMPro.TextMeshProUGUI>();
+            timeText = GameObject.Find("TimeValue").GetComponent<Text>();
+            scoreText = GameObject.Find("ScoreValue").GetComponent<Text>();
             timeText.text = timeRemaining.ToString();
             gameEndScreen = GameObject.Find("EndScreen").GetComponent<GameEnd>();   
             scoreText.text = "0";

@@ -55,10 +55,7 @@ public class GameEnd : MonoBehaviour
 
     public void BackToMenu()
     {
-        if (ScoreBoard.instance.GetScore() >= ScoreBoard.instance.minScore)
-        {
-            GameStateManager.Instance.gameState.playerData.CompleteMiniGame(MiniGame.jumpAndRunCollectTurbineParts);
-        }
+        
         SceneManager.LoadScene(returnToMenu);
     }
 
@@ -76,6 +73,10 @@ public class GameEnd : MonoBehaviour
     {
         wonText.gameObject.SetActive(true);
         backToVillage.gameObject.SetActive(true);
+        if (ScoreBoard.instance.GetScore() >= ScoreBoard.instance.minScore)
+        {
+            GameStateManager.Instance.gameState.playerData.CompleteMiniGame(MiniGame.jumpAndRunCollectTurbineParts);
+        }
     }
 
     public void Lost()
@@ -92,12 +93,8 @@ public class GameEnd : MonoBehaviour
     {
         ScoreBoard.instance.running = false;
         ScoreBoard.instance.timerRunning = false;
-
-        if (ScoreBoard.instance.GetScore() >= ScoreBoard.instance.minScore)
-        {
-            this.Won();
-        }
-        else if(ScoreBoard.instance.timeRemaining <= 0f)
+        
+        if(ScoreBoard.instance.timeRemaining <= 0f)
         {
             this.TimeOut();
             ShowButtonsLost();
@@ -106,6 +103,10 @@ public class GameEnd : MonoBehaviour
         {
             this.Fell();
             ShowButtonsLost();
+        }
+        else if (ScoreBoard.instance.GetScore() >= ScoreBoard.instance.minScore)
+        {
+            this.Won();
         }
         else
         {

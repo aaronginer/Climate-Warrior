@@ -66,8 +66,6 @@ public class PlayerMove : MonoBehaviour
             return;
         }
 
-        
-
         HandleMovement();
 
         if (IsGrounded() && Input.GetKeyDown(KeyCode.Space)) rigidbodyComponent.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
@@ -106,7 +104,6 @@ public class PlayerMove : MonoBehaviour
                 animator.SetBool("isMoving", true);
                 animator.SetBool("LeftRight", true);
             }
-
         }
         else
         {
