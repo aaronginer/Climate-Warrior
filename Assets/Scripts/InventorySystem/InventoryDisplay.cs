@@ -1,6 +1,8 @@
+using System;
 using Items;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace InventorySystem
@@ -22,6 +24,8 @@ namespace InventorySystem
         private Inventory _inventory;
         private InventorySlot _handSlot;
         private bool _active = true;
+        
+        public static event UnityAction<ItemType> itemPickedUp;
 
         public void Start()
         {
@@ -138,6 +142,7 @@ namespace InventorySystem
         public void AddItem(int itemType)
         {
             _inventory.AddItem((ItemType) itemType);
+            InventoryDisplay.itemPickedUp((ItemType) itemType);
             UpdateInventory();
         }
         

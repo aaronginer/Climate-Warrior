@@ -9,6 +9,7 @@ namespace Missions
     {
         public MissionState State;
         public readonly GameObject ClimateScoreObject;
+        public string name;
         
         public float MissionMaxTime;
         public int DeductionsDecisions;
@@ -20,6 +21,7 @@ namespace Missions
 
         protected Mission(string name, bool climateScoreEnabled=false)
         {
+            this.name = name;
             State = new MissionState(name);
 
             // Instantiate the climate score canvas object for every mission that is not the MissionTree (base mission) 
@@ -34,7 +36,12 @@ namespace Missions
         public virtual void AdvanceState() {}
         public virtual void HandleAction(string action) {}
 
-        protected void InstantiateDialogueTriggerFromPrefab(string path, string name)
+        public virtual string GetCurrentTask()
+        {
+            return "";
+        }
+
+        protected void InstantiateDialogueTriggerFromPrefab(string path, string name, string dialoguePath = null)
         {
             string sceneName = SceneManager.GetActiveScene().name;
 
@@ -50,6 +57,10 @@ namespace Missions
             
             var newObj = Object.Instantiate(obj, parent.transform);
             newObj.name = name;
+            if (dialoguePath != null)
+            {
+                newObj.GetComponent<DialogueTrigger>().dialoguePath = dialoguePath;
+            }
         }
         
         protected void InstantiateSceneTriggerFromPrefab(string path, string name)
@@ -98,6 +109,7 @@ namespace Missions
         {
             Mission mission = missionName switch
             {
+                "WindTurbine" => new MissionWindTurbine(),
                 "Sabotage" => new MissionSabotage(),
                 "Flooding" => new MissionFlooding(),
                 _ => null

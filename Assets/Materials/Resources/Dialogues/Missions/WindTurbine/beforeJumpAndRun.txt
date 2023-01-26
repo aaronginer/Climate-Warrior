@@ -1,0 +1,3 @@
+﻿#npc-name:Mayor
+1"Hey, [player-name]! The temperature is rising! Make sure to up go north to the forest to get the first parts for the wind turbine!"::0"On my way!"
+#actions:none

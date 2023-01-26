@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Scoring;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -11,8 +12,11 @@ namespace Missions
         {
             State.missions = new List<string>(new[]
             {
+                "WindTurbine",
                 "Sabotage",
+                // TODO: add missions here 
             });
+            State.completedMissions = new List<string>();
         }
 
         public enum States
@@ -20,6 +24,11 @@ namespace Missions
             PrepareMission,
             MissionActive,
             GameFinished,
+        }
+
+        private string CurrentOrNextMissionName()
+        {
+            return State.missions[0];
         }
 
         public override void Setup()
@@ -37,6 +46,25 @@ namespace Missions
             }
         }
         
+        // this is the message before a mission
+        // based on State.missions array
+        public string GetCurrentTaskBeforeMission()
+        {
+            string nextMissionName = CurrentOrNextMissionName();
+            switch (nextMissionName)
+            {
+                case "WindTurbine":
+                    return "find the major";
+                case "Sabotage":
+                    return "find sabotage mission";
+                case "Flooding":
+                    return "find flooding mission";
+                case "Drought":
+                    return "find flooding mission";
+            }
+            return "";
+        }
+        
         public override void AdvanceState()
         {
             switch (State.stateID)
@@ -51,6 +79,7 @@ namespace Missions
                     Debug.Log("Finished the game");
                     break;
             }
+            GameStateManager.Instance.UpdateCurrentTask();
         }
 
         public override void HandleAction(string action)
@@ -59,6 +88,11 @@ namespace Missions
             
             switch (action)
             {
+                case "MissionWindTurbine":
+                    PushMission("WindTurbine");
+                    GameStateManager.Instance.StartMission(new MissionWindTurbine());
+                    State.stateID = (int) States.MissionActive;
+                    break;
                 case "MissionSabotage":
                     PushMission("Sabotage");
                     GameStateManager.Instance.StartMission(new MissionSabotage());
@@ -83,6 +117,7 @@ namespace Missions
                     if (State.stateID != (int) States.MissionActive) SpawnMayorDialogue();
                     break;
             }
+            GameStateManager.Instance.UpdateCurrentTask();
         }
 
         private void SpawnMayorDialogue()
@@ -93,6 +128,9 @@ namespace Missions
             switch (missionName)
             {
                 // Spawn the starting mayor dialogue
+                case "WindTurbine":
+                    InstantiateDialogueTriggerFromPrefab("Missions/WindTurbine/Triggers/", "WindTurbine1Dialogue");
+                    break;
                 case "Sabotage":
                     InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "Sabotage1Dialogue");
                     break;
@@ -103,13 +141,19 @@ namespace Missions
                     break;
             }
         }
+
+        public bool IsMissionCompleted(string missionName)
+        {
+            return State.completedMissions.Contains(missionName);
+        }
         
-        public void FinishMission(bool complete)
+        public void FinishCurrentMission(bool complete)
         {
             Debug.Assert(State.stateID == (int)States.MissionActive);
 
             if (complete)
             {
+                State.completedMissions.Add(State.missions[0]);
                 State.missions.RemoveAt(0);
             }
 
@@ -119,6 +163,7 @@ namespace Missions
             AdvanceState();
         }
 
+        // TODO: define mission "tree" in base mission
         public void PushMission(string missionName)
         {
             State.missions.Insert(0, missionName);

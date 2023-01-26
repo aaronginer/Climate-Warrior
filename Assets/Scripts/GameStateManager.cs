@@ -2,6 +2,8 @@ using System;
 using System.IO;
 using Dialogue;
 using Missions;
+using TMPro;
+using Triggers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,6 +22,7 @@ public class GameStateManager : MonoBehaviour
     
     private string _persistentPath = "";
     private string _openSave = "";
+    // private TextMeshProUGUI currentTaskTextBox;
 
     private void Awake()
     {
@@ -28,12 +31,11 @@ public class GameStateManager : MonoBehaviour
             Destroy(this);
             return;
         }
-        // register callback
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        
         
         Instance = this;
         _persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar;
-
+        
         BaseMission = new BaseMission();
         gameState = new GameState
         {
@@ -41,6 +43,18 @@ public class GameStateManager : MonoBehaviour
         };
 
         DontDestroyOnLoad(this);
+        
+        // register callback
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    public bool CheckIfMissionAndState(string name, int missionState)
+    {
+        if (CurrentMission == null)
+        {
+            return false;
+        }
+        return CurrentMission.name == name && CurrentMission.State.stateID == missionState;
     }
 
     private void Update()
@@ -53,6 +67,30 @@ public class GameStateManager : MonoBehaviour
         if (missionTimer > 0) return;
         missionTimerActive = false;
         CurrentMission?.AdvanceState();
+    }
+
+    private string GetCurrentTaskStringBasedOnState()
+    {
+        switch (BaseMission.State.stateID)
+        {
+            case (int) BaseMission.States.PrepareMission:
+                return BaseMission.GetCurrentTaskBeforeMission();
+                break;
+            case (int) BaseMission.States.MissionActive:
+                return CurrentMission.GetCurrentTask();
+        }
+        return "none";
+    }
+    
+    public void UpdateCurrentTask()
+    {
+        TextMeshProUGUI currentTaskTextBox = GameObject.Find("CurrentTask")?.GetComponentInChildren<TextMeshProUGUI>();
+        if (currentTaskTextBox == null)
+        {
+            return;
+        }
+        string currentTaskString = GetCurrentTaskStringBasedOnState();
+        currentTaskTextBox.text = $"Current task:\n {currentTaskString}";
     }
 
     public void SaveToDisk()
@@ -143,12 +181,33 @@ public class GameStateManager : MonoBehaviour
         missionTimer = time;
         missionTimerActive = true;
     }
+    
+    public void SetMayorDialogPath(string path)
+    {
+        DialogueTrigger mayorDialogueTrigger = GameObject.Find("StartMayorDialogue")?.GetComponent<DialogueTrigger>();
+        if (mayorDialogueTrigger != null)
+        {
+            mayorDialogueTrigger.dialoguePath = path;
+        }
+    }
+
+    private void CheckAndSetMayorDialogueInVillage()
+    {
+        bool isInVillage = SceneManager.GetActiveScene().name == Constants.SceneNames.village;
+        if (isInVillage && BaseMission?.IsMissionCompleted("MissionWindTurbine") == true)
+        {
+            SetMayorDialogPath("Missions/WindTurbine/completedFirstMission");
+        }
+    }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         BaseMission?.Setup();
         CurrentMission?.Setup();
         Cursor.visible = true;
+        UpdateCurrentTask();
+
+        CheckAndSetMayorDialogueInVillage();
     }
 
     public static void Destroy()

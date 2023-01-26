@@ -61,7 +61,7 @@ public class GamePipesEnd : MonoBehaviour
     {
         wonText.gameObject.SetActive(true);
         wonLevelButton.gameObject.SetActive(true);
-        GameStateManager.Instance.gameState.playerData.CompleteMission(MiniGame.pipes);
+        GameStateManager.Instance.gameState.playerData.CompleteMiniGame(MiniGame.pipes);
     }
 
     public void Lost()

@@ -8,7 +8,8 @@ namespace Items
         Turbine,
         Bow,
         Sword,
-        Arrow
+        Arrow,
+        Cable,
     }
 
     sealed class Item
@@ -20,6 +21,7 @@ namespace Items
             {ItemType.Bow, Resources.Load<Sprite>("Items/bow_standby")},
             {ItemType.Sword, Resources.Load<Sprite>("Items/iron_sword")},
             {ItemType.Arrow, Resources.Load<Sprite>("Items/arrow")},
+            {ItemType.Cable, Resources.Load<Sprite>("Items/cable")},
         };
 
         public static Sprite GetSprite(ItemType itemType)

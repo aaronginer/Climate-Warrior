@@ -1,0 +1,3 @@
+﻿#npc-name:Mayor
+1"Great job in picking up the parts, [player-name]! Some parts are still scattered across the village, please also find those parts!"::0"Roger that, I will look through the village to find the rest of the parts!"
+#actions:ActionAfterJumpAndRunSearchParts

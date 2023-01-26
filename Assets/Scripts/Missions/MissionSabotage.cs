@@ -38,13 +38,29 @@ namespace Missions
                     break;
                 case (int) States.MissionComplete:
                     MissionCompleteScript.MissionComplete();
-                    GameStateManager.Instance.BaseMission.FinishMission(true);
+                    GameStateManager.Instance.BaseMission.FinishCurrentMission(true);
                     break;
                 case (int) States.MissionFailed:
                     MissionFailedScript.MissionFailed();
-                    GameStateManager.Instance.BaseMission.FinishMission(false);
+                    GameStateManager.Instance.BaseMission.FinishCurrentMission(false);
                     break;
             }
+        }
+        
+        public override string GetCurrentTask()
+        {
+            switch (State.stateID)
+            {
+                case (int) States.Init:
+                    return "sabotage initialize state";
+                case (int) States.ServerCrashed:
+                    return "fix the server\n (TODO:location?)";
+                case (int) States.ServerFixed:
+                    return "server fixed \n(TODO:next?)";
+                // MISSION COMPLETE AND FAILED NO STATE NEEDED SINCE MISSION NOT ACTIVE (?)
+                // SEE GAME STATE MANAGER
+            }
+            return "";
         }
         
         public override void AdvanceState()
@@ -58,6 +74,7 @@ namespace Missions
                     InstantiateSceneTriggerFromPrefab("Missions/Sabotage/Triggers/", "InspectServers");
                     break;
             }
+            GameStateManager.Instance.UpdateCurrentTask();
         }
 
         public override void HandleAction(string action)
@@ -71,6 +88,7 @@ namespace Missions
                     AdvanceState();
                     break;
             }
+            GameStateManager.Instance.UpdateCurrentTask();
         }
     }
 }
