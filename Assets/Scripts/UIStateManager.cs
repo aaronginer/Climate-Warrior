@@ -5,7 +5,8 @@ public enum UIState
     None,
     Inventory,
     Dialogue,
-    MissionFinish
+    MissionFinish,
+    QuestMenu
 }
 public class UIStateManager : MonoBehaviour
 {
@@ -33,6 +34,11 @@ public class UIStateManager : MonoBehaviour
     public bool CanToggleInventory()
     {
         return uIState is UIState.None or UIState.Inventory;
+    }
+
+    public bool CanToggleQuestMenu()
+    {
+        return uIState is UIState.None or UIState.QuestMenu;
     }
 
     public bool IsNone()
