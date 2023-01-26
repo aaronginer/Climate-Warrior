@@ -19,7 +19,7 @@ public class PlayerData
     public string sceneName;
     public string name;
 
-    public int[] missions = new int[2];
+    public int[] missions = new int[3];
 
 
     public PlayerData(string name)
@@ -34,10 +34,10 @@ public class PlayerData
         Debug.Log("PlayerData:");
         Debug.Log(" - name: " + name);
     }
-    public void CompleteMission(MiniGame miniGame) {
+    public void CompleteMiniGame(MiniGame miniGame) {
         missions[(int)miniGame] = 1;
     }
-    public bool CheckMissionCompleted(MiniGame miniGame) {
+    public bool CheckMiniGameCompleted(MiniGame miniGame) {
         return (missions[(int)miniGame] == 1);
     }
 }

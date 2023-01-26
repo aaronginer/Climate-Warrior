@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using Dialogue;
 using Missions;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,6 +21,7 @@ public class GameStateManager : MonoBehaviour
     
     private string _persistentPath = "";
     private string _openSave = "";
+    // private TextMeshProUGUI currentTaskTextBox;
 
     private void Awake()
     {
@@ -28,12 +30,11 @@ public class GameStateManager : MonoBehaviour
             Destroy(this);
             return;
         }
-        // register callback
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        
         
         Instance = this;
         _persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar;
-
+        
         BaseMission = new BaseMission();
         gameState = new GameState
         {
@@ -41,6 +42,9 @@ public class GameStateManager : MonoBehaviour
         };
 
         DontDestroyOnLoad(this);
+        
+        // register callback
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void Update()
@@ -53,6 +57,30 @@ public class GameStateManager : MonoBehaviour
         if (missionTimer > 0) return;
         missionTimerActive = false;
         CurrentMission?.AdvanceState();
+    }
+
+    private string GetCurrentTaskStringBasedOnState()
+    {
+        switch (BaseMission.State.stateID)
+        {
+            case (int) BaseMission.States.PrepareMission:
+                return BaseMission.GetCurrentTaskBeforeMission();
+                break;
+            case (int) BaseMission.States.MissionActive:
+                return CurrentMission.GetCurrentTask();
+        }
+        return "none";
+    }
+    
+    public void UpdateCurrentTask()
+    {
+        TextMeshProUGUI currentTaskTextBox = GameObject.Find("CurrentTask")?.GetComponentInChildren<TextMeshProUGUI>();
+        if (currentTaskTextBox == null)
+        {
+            return;
+        }
+        string currentTaskString = GetCurrentTaskStringBasedOnState();
+        currentTaskTextBox.text = $"Current task:\n {currentTaskString}";
     }
 
     public void SaveToDisk()
@@ -149,6 +177,7 @@ public class GameStateManager : MonoBehaviour
         BaseMission?.Setup();
         CurrentMission?.Setup();
         Cursor.visible = true;
+        UpdateCurrentTask();
     }
 
     public static void Destroy()

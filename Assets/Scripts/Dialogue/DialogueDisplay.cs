@@ -77,6 +77,17 @@ namespace Dialogue
             
             DialogueUpdate();
         }
+        
+        public void StartNewDialogueForce(string dialogueName)
+        {
+            Start();
+            UIStateManager.UISM.uIState = UIState.Dialogue;
+            
+            _dialogueReader = new DialogueReader(dialogueName);
+            _next = State.NpcSpeak;
+            
+            DialogueUpdate();
+        }
 
         public void OnClick(int index)
         {

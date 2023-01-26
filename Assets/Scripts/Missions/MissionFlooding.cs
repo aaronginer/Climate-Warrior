@@ -35,7 +35,7 @@ namespace Missions
                     break;
                 case (int) States.MissionComplete:
                     MissionCompleteScript.MissionComplete();
-                    GameStateManager.Instance.BaseMission.FinishMission(true);
+                    GameStateManager.Instance.BaseMission.FinishCurrentMission(true);
                     break;
                 case (int) States.MissionFailed:
                     break;

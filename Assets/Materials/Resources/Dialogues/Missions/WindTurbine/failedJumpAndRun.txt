@@ -1,0 +1,3 @@
+﻿#npc-name:Mayor (calling)
+1"The turbine parts in the forest need to be picked up [player-name]! Make sure to go there and pick them up!"::0"Roger that!"::0"I dont care.."
+#actions:none,Penalty50

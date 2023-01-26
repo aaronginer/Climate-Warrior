@@ -47,7 +47,7 @@ public class GameTurbineEnd : MonoBehaviour
     }
     public void BackToButtonClick()
     {
-        if (GameStateManager.Instance.gameState.playerData.CheckMissionCompleted(MiniGame.buildAWindTurbine))
+        if (GameStateManager.Instance.gameState.playerData.CheckMiniGameCompleted(MiniGame.buildAWindTurbine))
         {
             GameStateManager.Instance.gameState.playerData.inventory.AddItem(ItemType.Turbine);
         }
@@ -63,7 +63,7 @@ public class GameTurbineEnd : MonoBehaviour
     {
         wonText.gameObject.SetActive(true);
         wonLevelButton.gameObject.SetActive(true);
-        GameStateManager.Instance.gameState.playerData.CompleteMission(MiniGame.buildAWindTurbine);
+        GameStateManager.Instance.gameState.playerData.CompleteMiniGame(MiniGame.buildAWindTurbine);
     }
 
     public void Lost()

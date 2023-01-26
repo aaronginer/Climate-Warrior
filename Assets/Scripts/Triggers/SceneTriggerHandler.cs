@@ -53,7 +53,7 @@ namespace Triggers
         {
             // return if the required mission for this trigger has not yet been 
             if (_triggerScript.requireCompleted != MiniGame.None
-                && !GameStateManager.Instance.gameState.playerData.CheckMissionCompleted(_triggerScript.requireCompleted))
+                && !GameStateManager.Instance.gameState.playerData.CheckMiniGameCompleted(_triggerScript.requireCompleted))
                 return;
 
             if (_triggerScript.setStartPosition)
