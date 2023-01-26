@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 3154545048504334673}
   - component: {fileID: 3451579133904586963}
   - component: {fileID: 2277426010344069776}
-  - component: {fileID: 1181943579510409761}
   - component: {fileID: 3680909511035690254}
   - component: {fileID: 1382467476}
+  - component: {fileID: 725811690144490747}
   - component: {fileID: 1382467475}
   - component: {fileID: 2799438046930718990}
   - component: {fileID: 1181943579510409752}
@@ -34,7 +34,7 @@ Transform:
   m_GameObject: {fileID: 430049181123127994}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.1064, y: -0.0931, z: 0}
-  m_LocalScale: {x: 6, y: 6, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -113,39 +113,6 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!60 &1181943579510409761
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 430049181123127994}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
-    newSize: {x: 0.48, y: 0.48}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.026746683, y: -0.12749158}
-      - {x: -0.05226838, y: -0.13000622}
-      - {x: -0.04766696, y: -0.15589106}
-      - {x: -0.03883348, y: -0.17435518}
-      - {x: 0.054601416, y: -0.17159432}
-      - {x: 0.06502922, y: -0.14472453}
-      - {x: 0.06226837, y: -0.12871657}
-      - {x: 0.023065545, y: -0.12841189}
 --- !u!95 &3680909511035690254
 Animator:
   serializedVersion: 4
@@ -196,6 +163,32 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!61 &725811690144490747
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430049181123127994}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0020416565, y: -0.062270746}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.16, y: 0.16}
+    newSize: {x: 0.48, y: 0.48}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.053833492, y: 0.023208529}
+  m_EdgeRadius: 0
 --- !u!114 &1382467475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,6 +217,7 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   collisionOffset: 0.05
+  savePositionOnStart: 1
 --- !u!114 &2799438046930718990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,7 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd3c832cf5e121488e7cee626594fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryDisplayObj: {fileID: 5432240246606302712, guid: ff918fbf8898f4e49a27b83e613c12f2, type: 3}
+  inventoryDisplayObj: {fileID: 2941027346242215131, guid: b2291bc2f68cbdf46b6e4d439f057dc8, type: 3}
 --- !u!114 &1181943579510409752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,7 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ec82e16c3fa124e909ae8f28222e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textPopup: {fileID: 0}
+  textPopup: {fileID: 3942187748018588781, guid: 676a413564842134d81151cfb92d41cd, type: 3}
 --- !u!114 &1181943579510409753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,4 +257,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueObject: {fileID: 5432240246606302712, guid: ff918fbf8898f4e49a27b83e613c12f2, type: 3}
-  textPopup: {fileID: 0}
+  textPopup: {fileID: 3942187748018588781, guid: 676a413564842134d81151cfb92d41cd, type: 3}

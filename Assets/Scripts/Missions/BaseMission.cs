@@ -12,8 +12,8 @@ namespace Missions
         {
             State.missions = new List<string>(new[]
             {
-                "WindTurbine",
                 "Sabotage",
+                "WindTurbine",
                 // TODO: add missions here 
             });
             State.completedMissions = new List<string>();

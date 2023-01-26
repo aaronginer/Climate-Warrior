@@ -50,16 +50,15 @@ namespace Dialogue
 
         if (fileContent == null)
         {
-            Debug.Log("is null");
             return false;
         }
 
         // https://stackoverflow.com/questions/1547476/easiest-way-to-split-a-string-on-newlines-in-net
         string[] lines = fileContent.text.Split(
-            new [] { Environment.NewLine },
+            new string[] { "\r\n", "\r", "\n" },
             StringSplitOptions.None
         );
-
+        
         DialogueNode previous = null;
         foreach (string line in lines)
         {
