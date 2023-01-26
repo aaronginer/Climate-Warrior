@@ -6,11 +6,11 @@ public class ScoreBoard : MonoBehaviour
 {
     // Start is called before the first frame update
     public static ScoreBoard instance;
-    public bool timerRunning = true;
+    public bool timerRunning = false;
     public int minScore = 0;
 
     public float timeRemaining;
-    public bool running = true;
+    public bool running = false;
     private int score;
     private PlayerMove player;
     private TMPro.TextMeshProUGUI timeText;
@@ -25,7 +25,7 @@ public class ScoreBoard : MonoBehaviour
             timeText = GameObject.Find("TimeValue").GetComponent<TMPro.TextMeshProUGUI>();
             scoreText = GameObject.Find("ScoreValue").GetComponent<TMPro.TextMeshProUGUI>();
             timeText.text = timeRemaining.ToString();
-            gameEndScreen = GameObject.Find("EndScreen").GetComponent<GameEnd>();
+            gameEndScreen = GameObject.Find("EndScreen").GetComponent<GameEnd>();   
             scoreText.text = "0";
         }
         else

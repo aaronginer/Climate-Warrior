@@ -8,7 +8,9 @@ public class GameEnd : MonoBehaviour
 {
     public string returnToMenu;
     public string restartGame;
-    private Button[] buttons;
+    private Button leaveGame;
+    private Button retryGame;
+    private Button backToVillage;
     private TMPro.TextMeshProUGUI fellText;
     private TMPro.TextMeshProUGUI timeOutText;
     private TMPro.TextMeshProUGUI lostText;
@@ -17,9 +19,11 @@ public class GameEnd : MonoBehaviour
 
     private void Awake()
     {
-        buttons = GetComponentsInChildren<Button>();
-        textFields = GetComponentsInChildren<TMPro.TextMeshProUGUI>();
+        leaveGame = GameObject.Find("MainMenu").GetComponent<Button>();
+        retryGame = GameObject.Find("RestartLevel").GetComponent<Button>();
+        backToVillage = GameObject.Find("BackToVillage").GetComponent<Button>();
 
+        textFields = GetComponentsInChildren<TMPro.TextMeshProUGUI>();
 
         fellText = GameObject.Find("FellOffText").GetComponentInChildren<TMPro.TextMeshProUGUI>();
         timeOutText = GameObject.Find("TimeOutText").GetComponentInChildren<TMPro.TextMeshProUGUI>();
@@ -32,10 +36,9 @@ public class GameEnd : MonoBehaviour
 
     void HideButtons()
     {
-        foreach(var button in buttons)
-        {
-            button.gameObject.SetActive(false);
-        }
+        leaveGame.gameObject.SetActive(false);
+        retryGame.gameObject.SetActive(false);
+        backToVillage.gameObject.SetActive(false);
     }
 
     void HideText()
@@ -46,12 +49,10 @@ public class GameEnd : MonoBehaviour
         wonText.gameObject.SetActive(false);
     }
 
-    public void ShowButtons()
+    public void ShowButtonsLost()
     {
-        foreach(var button in buttons)
-        {
-            button.gameObject.SetActive(true);
-        }
+        leaveGame.gameObject.SetActive(true);
+        retryGame.gameObject.SetActive(true);
     }
 
     public void BackToMenu()
@@ -76,6 +77,7 @@ public class GameEnd : MonoBehaviour
     public void Won()
     {
         wonText.gameObject.SetActive(true);
+        backToVillage.gameObject.SetActive(true);
     }
 
     public void Lost()
@@ -92,7 +94,6 @@ public class GameEnd : MonoBehaviour
     {
         ScoreBoard.instance.running = false;
         ScoreBoard.instance.timerRunning = false;
-        ShowButtons();
 
         if (ScoreBoard.instance.GetScore() >= ScoreBoard.instance.minScore)
         {
@@ -101,14 +102,17 @@ public class GameEnd : MonoBehaviour
         else if(ScoreBoard.instance.timeRemaining <= 0f)
         {
             this.TimeOut();
+            ShowButtonsLost();
         }
         else if(fell)
         {
             this.Fell();
+            ShowButtonsLost();
         }
         else
         {
             this.Lost();
+            ShowButtonsLost();
         }
     }
 
