@@ -12,6 +12,7 @@ namespace Missions
             TimeScoreMax = 1000;
             MissionMaxTime = 120;
             State.timeLeft = MissionMaxTime;
+            _description = "Placeholder sabotage mission description";
         }
 
         public enum States

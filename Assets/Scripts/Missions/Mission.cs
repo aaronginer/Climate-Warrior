@@ -15,6 +15,7 @@ namespace Missions
         public int DeductionsDecisions;
         public int BaseScore;
         public int TimeScoreMax;
+        public string _description;
         
         private bool _currentGameCompleted;
 
