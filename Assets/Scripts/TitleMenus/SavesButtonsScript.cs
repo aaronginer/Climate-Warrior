@@ -15,7 +15,7 @@ namespace TitleMenus
             
             if (lgs.selectedSaveText != null)
             {
-                lgs.selectedSaveText.color = Color.black;
+                lgs.selectedSaveText.color = Color.white;
             }
             
             if (lgs.selectedSave == textComponent.text)

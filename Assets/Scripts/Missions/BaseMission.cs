@@ -50,6 +50,7 @@ namespace Missions
         // based on State.missions array
         public string GetCurrentTaskBeforeMission()
         {
+            if (State.missions.Count == 0) return "";
             string nextMissionName = CurrentOrNextMissionName();
             switch (nextMissionName)
             {
@@ -122,7 +123,7 @@ namespace Missions
 
         private void SpawnMayorDialogue()
         {
-            Debug.Assert(State.missions.Count != 0);
+            if (State.missions.Count == 0) return;
             string missionName = State.missions[0];
 
             switch (missionName)
