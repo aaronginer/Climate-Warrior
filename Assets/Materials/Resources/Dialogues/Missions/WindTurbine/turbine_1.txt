@@ -1,8 +1,0 @@
-﻿#npc-name:Mayor
-1"Hello [player-name]! One of our electricians at the hydro-plant told me that one of the machines was malfunctioning... Do you know anything about that?"::2"No... That's weird."::3"Do you want me to take a look?"
-2"Could you please take a look for me? Shouldn't be a problem for a [player-gender] like you, right?"::0"Sure, I'll take a look!"::4"I don't have time right now, maybe later..."
-#actions:StartNextMission,Penalty25
-3"Yes, please. That would be fantastic! You know, if we can't get it to work in time we will have to reactivate the old coal-fired power station..."::0"On my way."::0"Not a problem!"
-#actions:StartNextMission,StartNextMission
-4"Please do it as fast as possible, otherwise we may have to reactivate the old coal-fired power station!"
-#end-action:RespawnIfNotAccepted

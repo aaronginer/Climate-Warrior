@@ -16,6 +16,7 @@ namespace Missions
                 "Sabotage",
                 // TODO: add missions here 
             });
+            State.completedMissions = new List<string>();
         }
 
         public enum States
@@ -143,7 +144,6 @@ namespace Missions
 
         public bool IsMissionCompleted(string missionName)
         {
-            return true;
             return State.completedMissions.Contains(missionName);
         }
         
