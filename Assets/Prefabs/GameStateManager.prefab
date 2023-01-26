@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 493435982362120475}
   - component: {fileID: 5646926872565327590}
+  - component: {fileID: 8692892682056343805}
   m_Layer: 0
   m_Name: GameStateManager
   m_TagString: Untagged
@@ -49,5 +50,37 @@ MonoBehaviour:
       inventory:
         slots: []
       position: {x: 0, y: 0, z: 0}
+      sceneName: Village
       name: 
       missions: 
+    baseMissionState:
+      missionName: 
+      stateID: 0
+      timeLeft: 0
+      missions: []
+      completedMissions: []
+    missionState:
+      missionName: 
+      stateID: 0
+      timeLeft: 0
+      missions: []
+      completedMissions: []
+    catastropheState:
+      state: 0
+    score: 0
+  dialogueDisplay: {fileID: 0}
+  missionTimer: 0
+  missionTimerActive: 0
+--- !u!114 &8692892682056343805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8829955906241618380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f40977fffc6ca1d48a60aa582aaeb4a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thunder: {fileID: 8300000, guid: 093b5e33b32c8fb46b76f9db47b8f3c5, type: 3}
