@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bca12aef434c188468e006986d158799
+guid: 113ff9469b8ad834096e21e910843346
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -45,7 +45,7 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
+  alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -129,13 +129,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Grass hill tiles v.2_1
+      name: Clouds_0
       rect:
         serializedVersion: 2
-        x: 50
-        y: 50
-        width: 12
-        height: 12
+        x: 21
+        y: 228
+        width: 75
+        height: 20
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,20 +143,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eadbc5215f2cc694297a6944dc27bc9b
-      internalID: -1270079076
+      spriteID: d59472894a2ce964984df6342131995c
+      internalID: -2147298014
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grass hill tiles v.2_2
+      name: Clouds_1
       rect:
         serializedVersion: 2
-        x: 15
-        y: 50
-        width: 18
-        height: 13
+        x: 129
+        y: 206
+        width: 158
+        height: 47
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,50 +164,134 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a4f7c3e3ad48914c9e64348dc717f27
-      internalID: 1498366757
+      spriteID: 66588c7fcd4555945a66a89ddc3fbe47
+      internalID: -1185701522
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grass hill tiles v.2_3 right
+      name: Clouds_2
       rect:
         serializedVersion: 2
-        x: 33
-        y: 50
-        width: 12
-        height: 13
+        x: 193
+        y: 160
+        width: 62
+        height: 30
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 3, z: 0, w: 3}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7dd6386dffeea374a9327d77702fabfd
-      internalID: 813319809
+      spriteID: 57f13cda3f321c144b972d5e18ca0d3f
+      internalID: -163164967
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Grass hill tiles v.2_0 left
+      name: Clouds_3
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 231
+        width: 32
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f66ed9aa5d76bfe4c8a5e2b7dd770af8
+      internalID: -1162206057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Clouds_4
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 161
+        width: 71
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bedc3d8cb58b5e4d882bf63075cc5b8
+      internalID: 1521105115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Clouds_5
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 129
+        width: 74
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10c7772d53a93cc4dbb74939bfd2ec21
+      internalID: -1032185894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Clouds_6
       rect:
         serializedVersion: 2
         x: 3
-        y: 50
-        width: 12
-        height: 13
+        y: 96
+        width: 172
+        height: 62
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 3, z: 0, w: 4}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d76697af0a605c498951f5d81c7da60
-      internalID: 914282759
+      spriteID: e917268e4931a744db6be7f1067d5231
+      internalID: 95937803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Clouds_7
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 32
+        width: 170
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1beb74600c67d94fbb6ef8085231890
+      internalID: 481343268
       vertices: []
       indices: 
       edges: []
@@ -216,17 +300,22 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Grass hill tiles v.2_0 left: 914282759
-      Grass hill tiles v.2_3 right: 813319809
-      Grass hill tiles v.2_1: -1270079076
-      Grass hill tiles v.2_2: 1498366757
+      Clouds_4: 1521105115
+      Clouds_8: 607967735
+      Clouds_0: -2147298014
+      Clouds_1: -1185701522
+      Clouds_3: -1162206057
+      Clouds_5: -1032185894
+      Clouds_6: 95937803
+      Clouds_7: 481343268
+      Clouds_2: -163164967
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
