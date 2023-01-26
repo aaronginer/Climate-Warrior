@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bca12aef434c188468e006986d158799
+guid: e964c9da2f0e984479cf9c1ac88b1a7d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -46,13 +46,13 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 9
-  spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePivot: {x: 0.23574571, y: 0.81601536}
+  spritePixelsToUnits: 35
+  spriteBorder: {x: 50, y: 186, z: 182, w: 39}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: -1
+  spriteTessellationDetail: 0
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -129,34 +129,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Grass hill tiles v.2_1
+      name: wind-turbine_0
       rect:
         serializedVersion: 2
         x: 50
-        y: 50
-        width: 12
-        height: 12
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eadbc5215f2cc694297a6944dc27bc9b
-      internalID: -1270079076
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Grass hill tiles v.2_2
-      rect:
-        serializedVersion: 2
-        x: 15
-        y: 50
+        y: 186
         width: 18
-        height: 13
+        height: 25
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,55 +143,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a4f7c3e3ad48914c9e64348dc717f27
-      internalID: 1498366757
+      spriteID: 02d22ad1d16ead046a82a2b5178268b0
+      internalID: 991765826
       vertices: []
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Grass hill tiles v.2_3 right
-      rect:
-        serializedVersion: 2
-        x: 33
-        y: 50
-        width: 12
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 3, z: 0, w: 3}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7dd6386dffeea374a9327d77702fabfd
-      internalID: 813319809
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Grass hill tiles v.2_0 left
-      rect:
-        serializedVersion: 2
-        x: 3
-        y: 50
-        width: 12
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 3, z: 0, w: 4}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0d76697af0a605c498951f5d81c7da60
-      internalID: 914282759
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    outline: []
+    outline:
+    - - {x: -60, y: 63}
+      - {x: -60, y: 62}
+      - {x: -61, y: 62}
+      - {x: -61, y: 61}
+      - {x: -71, y: 61}
+      - {x: -71, y: 62}
+      - {x: -72, y: 62}
+      - {x: -72, y: 63}
+      - {x: -73, y: 63}
+      - {x: -73, y: 64}
+      - {x: -74, y: 64}
+      - {x: -74, y: 66}
+      - {x: -75, y: 66}
+      - {x: -75, y: 81}
+      - {x: -74, y: 81}
+      - {x: -74, y: 83}
+      - {x: -73, y: 83}
+      - {x: -73, y: 84}
+      - {x: -72, y: 84}
+      - {x: -72, y: 85}
+      - {x: -71, y: 85}
+      - {x: -71, y: 86}
+      - {x: -69, y: 86}
+      - {x: -61, y: 86}
+      - {x: -61, y: 85}
+      - {x: -60, y: 85}
+      - {x: -60, y: 84}
+      - {x: -59, y: 84}
+      - {x: -59, y: 83}
+      - {x: -58, y: 83}
+      - {x: -58, y: 81}
+      - {x: -57, y: 81}
+      - {x: -57, y: 66}
+      - {x: -58, y: 66}
+      - {x: -58, y: 64}
+      - {x: -59, y: 64}
+      - {x: -59, y: 63}
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
@@ -223,10 +197,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Grass hill tiles v.2_0 left: 914282759
-      Grass hill tiles v.2_3 right: 813319809
-      Grass hill tiles v.2_1: -1270079076
-      Grass hill tiles v.2_2: 1498366757
+      wind-turbine_0: 991765826
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
