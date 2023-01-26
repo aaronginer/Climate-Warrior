@@ -140,6 +140,12 @@ namespace Missions
                     break;
             }
         }
+
+        public bool IsMissionCompleted(string missionName)
+        {
+            return true;
+            return State.completedMissions.Contains(missionName);
+        }
         
         public void FinishCurrentMission(bool complete)
         {
@@ -147,6 +153,7 @@ namespace Missions
 
             if (complete)
             {
+                State.completedMissions.Add(State.missions[0]);
                 State.missions.RemoveAt(0);
             }
 

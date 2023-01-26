@@ -40,7 +40,7 @@ namespace Missions
             return "";
         }
 
-        protected void InstantiateDialogueTriggerFromPrefab(string path, string name)
+        protected void InstantiateDialogueTriggerFromPrefab(string path, string name, string dialoguePath = null)
         {
             string sceneName = SceneManager.GetActiveScene().name;
 
@@ -56,6 +56,10 @@ namespace Missions
             
             var newObj = Object.Instantiate(obj, parent.transform);
             newObj.name = name;
+            if (dialoguePath != null)
+            {
+                newObj.GetComponent<DialogueTrigger>().dialoguePath = dialoguePath;
+            }
         }
         
         protected void InstantiateSceneTriggerFromPrefab(string path, string name)

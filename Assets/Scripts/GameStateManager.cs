@@ -3,6 +3,7 @@ using System.IO;
 using Dialogue;
 using Missions;
 using TMPro;
+using Triggers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -45,6 +46,15 @@ public class GameStateManager : MonoBehaviour
         
         // register callback
         SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    public bool CheckIfMissionAndState(string name, int missionState)
+    {
+        if (CurrentMission == null)
+        {
+            return false;
+        }
+        return CurrentMission.name == name && CurrentMission.State.stateID == missionState;
     }
 
     private void Update()
@@ -171,6 +181,24 @@ public class GameStateManager : MonoBehaviour
         missionTimer = time;
         missionTimerActive = true;
     }
+    
+    public void SetMayorDialogPath(string path)
+    {
+        DialogueTrigger mayorDialogueTrigger = GameObject.Find("StartMayorDialogue")?.GetComponent<DialogueTrigger>();
+        if (mayorDialogueTrigger != null)
+        {
+            mayorDialogueTrigger.dialoguePath = path;
+        }
+    }
+
+    private void CheckAndSetMayorDialogueInVillage()
+    {
+        bool isInVillage = SceneManager.GetActiveScene().name == Constants.SceneNames.village;
+        if (isInVillage && BaseMission?.IsMissionCompleted("MissionWindTurbine") == true)
+        {
+            SetMayorDialogPath("Missions/WindTurbine/completedFirstMission");
+        }
+    }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -178,6 +206,8 @@ public class GameStateManager : MonoBehaviour
         CurrentMission?.Setup();
         Cursor.visible = true;
         UpdateCurrentTask();
+
+        CheckAndSetMayorDialogueInVillage();
     }
 
     public static void Destroy()

@@ -1,4 +1,5 @@
 using Dialogue;
+using Mono.Cecil.Cil;
 using TMPro;
 using UnityEngine;
 
@@ -58,9 +59,11 @@ namespace Triggers
         private void TriggerActivate()
         {
             // return if the required mission for this trigger has not yet been 
-            if (_triggerScript.requireCompleted != MiniGame.None
-                && !GameStateManager.Instance.gameState.playerData.CheckMiniGameCompleted(_triggerScript.requireCompleted))
+            if (_triggerScript.ShouldBlockTriggerByRequiredMission())
+            {
+                Debug.Log("BLOCKING DIALOGUE TRIGER BECAUSE OF MISSION CHECK");
                 return;
+            } 
 
             _dialogueDisplay.StartNewDialogue(_triggerScript.dialoguePath);
 

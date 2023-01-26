@@ -51,11 +51,13 @@ namespace Triggers
 
         private void TriggerActivate()
         {
-            // return if the required mission for this trigger has not yet been 
-            if (_triggerScript.requireCompleted != MiniGame.None
-                && !GameStateManager.Instance.gameState.playerData.CheckMiniGameCompleted(_triggerScript.requireCompleted))
+            // return if not in the correct mission state
+            if (_triggerScript.ShouldBlockTriggerByRequiredMission())
+            {
+                Debug.Log("BLOCKING SCENE TRIGER BECAUSE OF MISSION CHECK");
                 return;
-
+            } 
+            
             if (_triggerScript.setStartPosition)
             {
                 GameStateManager.Instance.gameState.playerData.position = _triggerScript.startPosition;

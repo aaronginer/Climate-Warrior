@@ -10,6 +10,7 @@ namespace Missions
         public int stateID;
         public float timeLeft; // for normal mission only
         public List<string> missions; // for base mission only
+        public List<string> completedMissions; // for base mission only
 
         public MissionState(string name)
         {

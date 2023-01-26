@@ -61,6 +61,19 @@ namespace InventorySystem
                 }
             }
         }
+
+        public int CountInventoryItem(ItemType itemType)
+        {
+            for (int i = 0; i < slots.Length; i++)
+            {
+                if (slots[i] != null && slots[i].itemType == itemType)
+                {
+                    return slots[i].amount;
+                }
+            }
+
+            return 0;
+        }
         
         public void PrintInventory()
         {

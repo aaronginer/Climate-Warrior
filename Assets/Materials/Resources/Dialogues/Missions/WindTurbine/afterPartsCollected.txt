@@ -1,0 +1,3 @@
+﻿#npc-name:Mayor
+1"Thank you for gathering the parts, you are now ready to build the wind turbine! Your next task is to find the platform where it is build. Little tip, its not far from here"::0"On my way!"
+#actions:StartFindingWindTurbinePlatform

@@ -1,0 +1,3 @@
+﻿#npc-name:Mayor
+1"Great job, [player-name]! The wind turbine has been build!"::0"Youre welcome!"
+#actions:none
