@@ -22,7 +22,6 @@ namespace Triggers
         public bool ShouldBlockTriggerByRequiredMission()
         {
             bool checksForMissionAndState = ChecksForMissionAndState();
-            Debug.Log($"checksForMissionAndState {checksForMissionAndState}");
             if (!checksForMissionAndState)
             {
                 return false;
@@ -30,11 +29,9 @@ namespace Triggers
             bool isInMissionAndState = checksForMissionAndState &&
                                        GameStateManager.Instance.CheckIfMissionAndState(requiredMission,
                                            requiredMissionState);
-            Debug.Log($"isInMissionAndState {isInMissionAndState}");
             bool shouldBlock = checksForMissionAndState &&
                    (isReverseCheckForMissionState ? isInMissionAndState : !isInMissionAndState);
 
-            Debug.Log($"shouldBlock {shouldBlock}");
             return shouldBlock;
         }
         

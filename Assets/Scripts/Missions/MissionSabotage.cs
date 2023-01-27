@@ -52,11 +52,11 @@ namespace Missions
             switch (State.stateID)
             {
                 case (int) States.Init:
-                    return "sabotage initialize state";
+                    return "go to the powerplant";
                 case (int) States.ServerCrashed:
-                    return "fix the server\n (TODO:location?)";
+                    return "fix the server";
                 case (int) States.ServerFixed:
-                    return "server fixed \n(TODO:next?)";
+                    return "";
                 // MISSION COMPLETE AND FAILED NO STATE NEEDED SINCE MISSION NOT ACTIVE (?)
                 // SEE GAME STATE MANAGER
             }
