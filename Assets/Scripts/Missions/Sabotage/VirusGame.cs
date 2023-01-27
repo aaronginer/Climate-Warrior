@@ -159,5 +159,10 @@ namespace Missions.Sabotage
         {
             knifeSelected = false;
         }
+
+        public void ExitGame()
+        {
+            SceneManager.LoadScene("HydroPlantUpper");
+        }
     }   
 }
