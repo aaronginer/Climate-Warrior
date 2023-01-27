@@ -14,7 +14,7 @@ public class GameState
 
     public GameState()
     {
-        playerData = new PlayerData("default");
+        playerData = new PlayerData("Warrior");
         baseMissionState = null;
         missionState = null;
         catastropheState = new CatastropheState();

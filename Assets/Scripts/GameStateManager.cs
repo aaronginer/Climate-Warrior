@@ -114,6 +114,7 @@ public class GameStateManager : MonoBehaviour
         string json = JsonUtility.ToJson(gameState);
 
         writer.Write(json);
+        writer.Close();
         
         gameState.playerData.inventory.CleanInventory();
 
@@ -141,6 +142,7 @@ public class GameStateManager : MonoBehaviour
             
         using StreamReader reader = new StreamReader(savePath);
         string json = reader.ReadToEnd();
+        reader.Close();
         gameState = JsonUtility.FromJson<GameState>(json);
 
         Debug.Log("Game state loaded.");

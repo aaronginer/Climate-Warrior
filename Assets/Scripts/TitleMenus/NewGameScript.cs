@@ -17,10 +17,9 @@ namespace TitleMenus
 
         public void StartGame()
         {
-            GameStateManager.Instance.gameState = new GameState
-            {
-                playerData = new PlayerData(_nameTextField.text)
-            };
+            Time.timeScale = 1;
+            GameStateManager.Instance.gameState.playerData.name = _nameTextField.text;
+            GameStateManager.Instance.gameState.playerData.gender = PlayerData.Gender.Male;
             GameStateManager.Instance.SaveToDisk();
 
             PersistentCanvasScript.SpawnPersistentCanvas();

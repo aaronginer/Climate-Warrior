@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Dialogue
@@ -97,10 +98,13 @@ namespace Dialogue
                     // Parse NPC test
                     if (i == 0)
                     {
+                        PlayerData pData = GameStateManager.Instance.gameState.playerData;
+                        string name = pData.name;
+                        string addressAs = pData.gender == PlayerData.Gender.Male ? "man"
+                            : pData.gender == PlayerData.Gender.Female ? "woman" : pData.name;
                         id = int.Parse(match.Groups[1].ToString());
                         message = match.Groups[2].ToString().Replace("[player-name]", 
-                            GameStateManager.Instance.gameState.playerData.name).Replace("[player-gender]", 
-                            "man");
+                            pData.name).Replace("[player-gender]", addressAs);
                     }
                     // Parse Answer options
                     else 

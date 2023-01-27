@@ -14,10 +14,18 @@ public enum MiniGame
 [Serializable]
 public class PlayerData
 {
+    public enum Gender
+    {
+        Male,
+        Female,
+        Diverse
+    }
+    
     public Inventory inventory;
     public Vector3 position;
     public string sceneName;
     public string name;
+    public Gender gender;
 
     public int[] missions = new int[3];
 
