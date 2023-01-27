@@ -159,8 +159,9 @@ namespace Missions
 
             if (complete)
             {
-                State.completedMissions.Add(State.missions[0]);
-                State.missions.RemoveAt(0);
+                string mission = GameStateManager.Instance.CurrentMission.name;
+                State.completedMissions.Add(mission);
+                State.missions.Remove(mission);
             }
 
             // if catastrophe -> go to sidequest
