@@ -75,6 +75,8 @@ public class GameTurbineEnd : MonoBehaviour
         //wonLevelButton.gameObject.SetActive(true);
         endViewContainer.SetActive(true);
         endViewText.text = wonTest;
+        wonLevelButton.gameObject.SetActive(true);
+
         GameStateManager.Instance.gameState.playerData.CompleteMiniGame(MiniGame.buildAWindTurbine);
         GameStateManager.Instance.CurrentMission.State.stateID = (int)MissionWindTurbine.States.WindTurbineBuilt;
     }
