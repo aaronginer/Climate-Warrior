@@ -8,95 +8,51 @@ using UnityEngine.SceneManagement;
 public class PauseScript : MonoBehaviour
 {
     // Start is called before the first frame update
-    public PauseScript instance;
+    static public PauseScript instance;
 
     public string backTo;
     public bool gamePaused = false;
-    private Button resumeGame;
-    private Button backToVillage;
-    private TMPro.TextMeshProUGUI taskText;
-    private TMPro.TextMeshProUGUI leftControlText;
-    private TMPro.TextMeshProUGUI rightControlText;
-    private TMPro.TextMeshProUGUI jumpControlText;
+
+    public GameObject menueContainer;
+    public GameObject controlsLayout;
+    public GameObject taskDescription;
 
     void Start()
     {
-        if(instance == null)
+        
+        if (instance == null)
         {
-            resumeGame = GameObject.Find("ResumeGame").GetComponent<Button>();
-            backToVillage = GameObject.Find("PauseBackToVillage").GetComponent<Button>();
-
-            taskText = GameObject.Find("PauseTask").GetComponentInChildren<TMPro.TextMeshProUGUI>();
-            leftControlText = GameObject.Find("PauseControllesLeft").GetComponentInChildren<TMPro.TextMeshProUGUI>();
-            rightControlText = GameObject.Find("PauseControllesRight").GetComponentInChildren<TMPro.TextMeshProUGUI>();
-            jumpControlText = GameObject.Find("PauseControllesJump").GetComponentInChildren<TMPro.TextMeshProUGUI>();
-
+            menueContainer.SetActive(gamePaused);
+            taskDescription.SetActive(gamePaused);
+            controlsLayout.SetActive(gamePaused);
             instance = this;
-            HideButtons();
-            HideText();
         }
     }
 
-    void HideButtons()
-    {
-        resumeGame.gameObject.SetActive(false);
-        backToVillage.gameObject.SetActive(false);
-    }
-
-    void HideText()
-    {
-        taskText.gameObject.SetActive(false);
-        leftControlText.gameObject.SetActive(false);
-        rightControlText.gameObject.SetActive(false);
-        jumpControlText.gameObject.SetActive(false);
-    }
-
-    void ShowButtons()
-    {
-        resumeGame.gameObject.SetActive(true);
-        backToVillage.gameObject.SetActive(true);
-    }
-
-    void ShowText()
-    {
-        taskText.gameObject.SetActive(true);
-        leftControlText.gameObject.SetActive(true);
-        rightControlText.gameObject.SetActive(true);
-        jumpControlText.gameObject.SetActive(true);
-    }
-    
-    public void returnToVillage()
+    public void ReturnToVillage()
     {
         SceneManager.LoadScene(backTo);
     }
 
-    public void PauseGame()
+    public void ShowContols()
     {
-        ShowButtons();
-        ShowText();
-        ScoreBoard.instance.timerRunning = false;
-        gamePaused = true;
-    }
-
-    public void UnPauseGame()
-    {
-        HideButtons();
-        HideText();
-        ScoreBoard.instance.timerRunning = true;
-        gamePaused = false;
-    }
-
-    public void TogglePause()
-    {
-        if (gamePaused)
-            UnPauseGame();
-        else
-            PauseGame();
+        menueContainer.SetActive(false);
+        controlsLayout.SetActive(true);
+        taskDescription.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
-            
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            gamePaused = !gamePaused;
+
+
+
+            menueContainer.SetActive(gamePaused);
+            controlsLayout.SetActive(false);
+            taskDescription.SetActive(false);            
+        }
     }
 }
