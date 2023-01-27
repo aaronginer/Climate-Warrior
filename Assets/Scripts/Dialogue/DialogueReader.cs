@@ -101,7 +101,7 @@ namespace Dialogue
                         PlayerData pData = GameStateManager.Instance.gameState.playerData;
                         string name = pData.name;
                         string addressAs = pData.gender == PlayerData.Gender.Male ? "man"
-                            : pData.gender == PlayerData.Gender.Female ? "woman" : pData.name;
+                            : pData.gender == PlayerData.Gender.Female ? "woman" : "person";
                         id = int.Parse(match.Groups[1].ToString());
                         message = match.Groups[2].ToString().Replace("[player-name]", 
                             pData.name).Replace("[player-gender]", addressAs);

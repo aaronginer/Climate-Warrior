@@ -407,7 +407,7 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -415,6 +415,27 @@ TextureImporter:
       bones: []
       spriteID: a510c28ccc959f94392ef2ee579b474e
       internalID: -2039236956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: toggle
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 209
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b5630fd6ef76bc4096db2637413e1d1
+      internalID: 1325497659
       vertices: []
       indices: 
       edges: []
@@ -434,6 +455,7 @@ TextureImporter:
       button: 1533801021
       mission_complete_window: 1846457560
       score_bar: 1822851825
+      toggle: 1325497659
       separator_line_horizontal: -188143099
       blue_ba: 1951336498
       dialogue_box: -1832729064
