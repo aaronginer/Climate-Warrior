@@ -41,17 +41,17 @@ namespace Missions
             return "";
         }
 
-        protected void InstantiateDialogueTriggerFromPrefab(string path, string name, string dialoguePath = null)
+        protected GameObject InstantiateDialogueTriggerFromPrefab(string path, string name, string dialoguePath = null)
         {
             string sceneName = SceneManager.GetActiveScene().name;
 
             var obj = Resources.Load(path + name) as GameObject;
-            if (obj == null) return;
+            if (obj == null) return null;
 
             DialogueTrigger triggerScript = obj.GetComponent<DialogueTrigger>();
-            if (triggerScript is null) return;
+            if (triggerScript is null) return null;
 
-            if (sceneName != triggerScript.scene) return;
+            if (sceneName != triggerScript.scene) return null;
             
             var parent = GameObject.Find("DialogueTriggers");
             
@@ -61,26 +61,30 @@ namespace Missions
             {
                 newObj.GetComponent<DialogueTrigger>().dialoguePath = dialoguePath;
             }
+
+            return newObj;
         }
         
-        protected void InstantiateSceneTriggerFromPrefab(string path, string name)
+        protected GameObject InstantiateSceneTriggerFromPrefab(string path, string name)
         {
             string sceneName = SceneManager.GetActiveScene().name;
 
             var obj = Resources.Load(path + name) as GameObject;
             
-            if (obj == null) return;
+            if (obj == null) return null;
             
             SceneTrigger triggerScript = obj.GetComponent<SceneTrigger>();
-            if (triggerScript == null) return;
+            if (triggerScript == null) return null;
 
-            if (sceneName != triggerScript.scene) return;
+            if (sceneName != triggerScript.scene) return null;
 
             
             var parent = GameObject.Find("SceneTriggers");
             
             var newObj = Object.Instantiate(obj, parent.transform);
             newObj.name = name;
+            
+            return newObj;
         }
 
         public void CompleteCurrentGame()

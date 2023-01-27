@@ -10,7 +10,7 @@ namespace Missions
         {
             BaseScore = 500;
             TimeScoreMax = 1000;
-            MissionMaxTime = 10;
+            MissionMaxTime = 120;
             State.timeLeft = MissionMaxTime;
             _description = "Placeholder sabotage mission description";
         }

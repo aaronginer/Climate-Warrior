@@ -6,12 +6,8 @@ public class SoundsScript : MonoBehaviour
 
     public static SoundsScript Instance;
 
-    private void Awake()
+    private void Start()
     {
-        if (Instance != null)
-        {
-            Debug.Log("WARNING: Multiple Instances of SoundsScript!");
-        }
         Instance = this;
     }
 

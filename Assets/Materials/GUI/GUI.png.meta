@@ -398,6 +398,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: path_indicator
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 260
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a510c28ccc959f94392ef2ee579b474e
+      internalID: -2039236956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -417,6 +438,7 @@ TextureImporter:
       blue_ba: 1951336498
       dialogue_box: -1832729064
       left_arrow: -1798862310
+      path_indicator: -2039236956
       ui_container: 1306900814
       blue_bar: 1040017081
       separator: -536498141

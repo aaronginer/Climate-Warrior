@@ -1,4 +1,5 @@
-﻿using Catastrophes;
+﻿using System.IO;
+using Catastrophes;
 using Missions.Flooding;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -21,6 +22,7 @@ namespace Missions
         public enum States
         {
             Init,
+            SavingGranny,
             GrandmaSaved,
             MissionComplete,
             MissionFailed
@@ -28,10 +30,12 @@ namespace Missions
 
         public override void Setup()
         {
+            PathIndicatorScript.Instance.Disable();
             switch (State.stateID)
             {
                 case (int) States.Init:
-                    InstantiateSceneTriggerFromPrefab("Missions/Flooding/Triggers/", "FloodingStart");
+                    GameObject trigger = InstantiateSceneTriggerFromPrefab("Missions/Flooding/Triggers/", "FloodingStart");
+                    if (trigger != null) PathIndicatorScript.Instance.Enable(trigger.transform.position);
                     break;
                 case (int) States.MissionComplete:
                     MissionCompleteScript.MissionComplete();
@@ -44,10 +48,12 @@ namespace Missions
         
         public override void AdvanceState()
         {
+            PathIndicatorScript.Instance.Disable();
             switch (State.stateID)
             {
                 case (int) States.Init:
-                    InstantiateSceneTriggerFromPrefab("Missions/Flooding/Triggers/", "FloodingStart");
+                    GameObject trigger = InstantiateSceneTriggerFromPrefab("Missions/Flooding/Triggers/", "FloodingStart");
+                    PathIndicatorScript.Instance.Enable(trigger.transform.position);
                     break;
                 case (int) States.GrandmaSaved:
                     InstantiateDialogueTriggerFromPrefab("Missions/Flooding/Triggers/", "GrandmaDialogue2");
