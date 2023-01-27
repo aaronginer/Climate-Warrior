@@ -32,7 +32,9 @@ namespace MenuGameOverlay
                 if (_active == false) {
                     controlsLayout.SetActive(false);
                 }
-                // Time.timeScale = _active ? 0 : 1;
+
+                UIStateManager.UISM.uIState = _active ? UIState.Menu : UIState.None;
+                Time.timeScale = _active ? 0 : 1;
             }
         }
 
