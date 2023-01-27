@@ -27,12 +27,8 @@ public class GameStateManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log(Instance?.GetHashCode());
-        Debug.Log(GetHashCode());
-        
         if (Instance != null && Instance != this)
         {
-            Debug.Log("destroyed");
             Destroy(gameObject);
             Destroy(this);
             return;
@@ -42,7 +38,6 @@ public class GameStateManager : MonoBehaviour
         Instance = this;
         _persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar;
 
-        Debug.Log("reached");
         BaseMission = new BaseMission();
         gameState = new GameState
         {
@@ -197,7 +192,6 @@ public class GameStateManager : MonoBehaviour
     
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("SceneLoaded: " + GetHashCode());
         BaseMission?.Setup();
         CurrentMission?.Setup();
         Cursor.visible = true;
