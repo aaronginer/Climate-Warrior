@@ -69,6 +69,7 @@ namespace Missions
         
         public override void AdvanceState()
         {
+            Debug.Log("advancing");
             switch (State.stateID)
             {
                 case (int) States.PrepareMission:

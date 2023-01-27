@@ -6,7 +6,6 @@ public class PlayerMove : MonoBehaviour
     public float jumpAmount = 10;
     public float forceUp = 1;
     public float forceDown = 1;
-    public int counter = 0;
     public float movement = 5;
     [SerializeField] private LayerMask platformLayerMask;
 
@@ -15,27 +14,24 @@ public class PlayerMove : MonoBehaviour
     private BoxCollider2D boxCollider;
     private Animator animator;
     private SpriteRenderer playerSprite;
-    private GameEnd gameEndScreen;
-    private PauseScript pauseScreen;
     private BoxCollider2D finishSign;
-    private Canvas startScreen;
-    private bool gameStarted = false;
+    private GameManager manager;
 
     void Start()
     {
-        startScreen.enabled = true;
+
     }
 
     private void Awake()
     {
-        startScreen = GameObject.Find("StartScreen").GetComponent<Canvas>();
+        finishSign = GameObject.Find("Finish").GetComponent<BoxCollider2D>();
+        manager = GameObject.Find("Overlay").GetComponent<GameManager>();
+
         rigidbodyComponent = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
         playerSprite = GetComponent<SpriteRenderer>();
-        finishSign = GameObject.Find("Finish").GetComponent<BoxCollider2D>();
-        gameEndScreen = GameObject.Find("EndScreen").GetComponent<GameEnd>();
-        pauseScreen = GameObject.Find("PauseScreen").GetComponent<PauseScript>();
+        
         animator.speed = 1;
 
     }
@@ -43,30 +39,11 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            pauseScreen.instance.TogglePause();
-        }
-        if (pauseScreen.instance.gamePaused)
-            return;
-
-        if (!gameStarted)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                gameStarted = true;
-                startScreen.enabled = false;
-                ScoreBoard.instance.timerRunning = true;
-            }
-            return;
-        }
-        if (ScoreBoard.instance.running == false)
+        if (PauseScript.instance.gamePaused || manager.gameRunning== false)
         {
             animator.SetBool("isMoving", false);
             return;
         }
-
-        
 
         HandleMovement();
 
@@ -74,8 +51,8 @@ public class PlayerMove : MonoBehaviour
         if (rigidbodyComponent.velocity.y >= 0) rigidbodyComponent.gravityScale = forceUp;
         if (rigidbodyComponent.velocity.y < 0) rigidbodyComponent.gravityScale = forceDown;
 
-        if(this.gameObject.transform.position.x >= finishSign.transform.position.x)
-            gameEndScreen.ShowEndScreen(false);
+        if (this.gameObject.transform.position.x >= finishSign.transform.position.x)
+            manager.EndGame(false);
     }
 
 
@@ -106,7 +83,6 @@ public class PlayerMove : MonoBehaviour
                 animator.SetBool("isMoving", true);
                 animator.SetBool("LeftRight", true);
             }
-
         }
         else
         {
@@ -122,7 +98,7 @@ public class PlayerMove : MonoBehaviour
         if (transform.position.y < -5)
         {
             Destroy(gameObject);
-            gameEndScreen.ShowEndScreen(true);
+            manager.EndGame(true);
         }
     }
 
@@ -131,7 +107,7 @@ public class PlayerMove : MonoBehaviour
         Collectible coin = collision.gameObject.GetComponent<Collectible>();
         if (coin != null)
         {
-            ScoreBoard.instance.UpdateScore(coin.value);
+            manager.AddScore(coin.value);
             coin.MakeSound();
             Destroy(coin.gameObject);
         }
@@ -139,8 +115,5 @@ public class PlayerMove : MonoBehaviour
 
     private void OnDestroy()
     {
-        //gameEndScreen.ShowEndScreen(true);
-        gameStarted = false;
-        ScoreBoard.instance.timerRunning = false;
     }
 }

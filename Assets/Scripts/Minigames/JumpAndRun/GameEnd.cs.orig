@@ -75,12 +75,15 @@ public class GameEnd : MonoBehaviour
     {
         endViewText.text = wonText;
         backToVillage.gameObject.SetActive(true);
+<<<<<<< HEAD
+        GameStateManager.Instance.CurrentMission.State.stateID =
+            (int)MissionWindTurbine.States.AfterJumpAndRunCompletedGoBackToMayor;
+=======
         if (manager.GetScore() >= manager.minScore)
         {
-            GameStateManager.Instance.CurrentMission.State.stateID =
-                (int)MissionWindTurbine.States.AfterJumpAndRunCompletedGoBackToMayor;
             GameStateManager.Instance.gameState.playerData.CompleteMiniGame(MiniGame.jumpAndRunCollectTurbineParts);
         }
+>>>>>>> mw_minigame_jmpNrun
     }
 
     public void Lost()
