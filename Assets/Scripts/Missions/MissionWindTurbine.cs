@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+﻿using System.Collections.Generic;
 using InventorySystem;
 using Items;
-using Triggers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

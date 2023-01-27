@@ -1,6 +1,4 @@
 using System;
-using Missions;
-using UnityEngine;
 
 namespace Catastrophes
 {

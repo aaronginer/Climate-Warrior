@@ -1,10 +1,8 @@
 using System;
 using System.IO;
-using System.Security.Cryptography;
 using Dialogue;
 using Missions;
 using TMPro;
-using Triggers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

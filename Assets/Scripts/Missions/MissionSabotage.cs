@@ -1,8 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-
-namespace Missions
+﻿namespace Missions
 {
     public sealed class MissionSabotage : Mission
     {

@@ -1,6 +1,4 @@
-﻿using UnityEngine.SceneManagement;
-
-namespace Missions
+﻿namespace Missions
 {
     public sealed class Drought : Mission
     {

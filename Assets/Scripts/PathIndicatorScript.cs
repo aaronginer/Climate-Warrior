@@ -1,10 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem.WebGL;
 using UnityEngine.UI;
 
 public class PathIndicatorScript : MonoBehaviour

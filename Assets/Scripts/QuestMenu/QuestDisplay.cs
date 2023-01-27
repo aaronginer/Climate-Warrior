@@ -1,7 +1,5 @@
-using Items;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace QuestSystem
 {
