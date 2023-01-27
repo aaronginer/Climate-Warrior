@@ -265,7 +265,7 @@ MonoBehaviour:
     build one!
 
 
-    But you only have 60 seconds to do so!'
+    But you only have 70 seconds to do so!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
@@ -8771,7 +8771,7 @@ MonoBehaviour:
   fellText: That was quite a fall! Do you want to try again?
   timeOutText: Oh no! You ran out of time! Do you want to try again?
   lostText: You did not collect enough coins, want to try again?
-  wonText: Congrats! You collected enough coins!  Do you want to try again anyways?
+  wonText: Congrats! You collected enough coins!
 --- !u!1 &1230589713 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3490738266425358227, guid: e6214dd34b4960d45ac616b62ab3c9e3, type: 3}
@@ -14207,7 +14207,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2043984598}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.24644566, y: 0.048644066, z: -11.7642355}
+  m_LocalPosition: {x: -0.24778748, y: 0.048640728, z: -11.7642355}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14310,7 +14310,7 @@ MonoBehaviour:
     build one!
 
 
-    But you only have 60 seconds to do so!'
+    But you only have 70 seconds to do so!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
