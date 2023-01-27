@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Cryptography;
 using InventorySystem;
 using Items;
 using UnityEngine;
@@ -35,6 +36,7 @@ namespace Missions
         
         public override string GetCurrentTask()
         {
+            Debug.Log("State id: " + State.stateID);
             switch (State.stateID)
             {
                 case (int) States.SearchingForJumpAndRun:
