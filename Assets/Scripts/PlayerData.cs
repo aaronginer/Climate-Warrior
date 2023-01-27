@@ -27,7 +27,7 @@ public class PlayerData
     public string name;
     public Gender gender;
 
-    public int[] missions = new int[3];
+    public int[] missions = new int[4];
 
 
     public PlayerData(string name)

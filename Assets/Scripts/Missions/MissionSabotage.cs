@@ -10,7 +10,7 @@ namespace Missions
         {
             BaseScore = 500;
             TimeScoreMax = 1000;
-            MissionMaxTime = 120;
+            MissionMaxTime = 300;
             State.timeLeft = MissionMaxTime;
             _description = "Placeholder sabotage mission description";
         }
@@ -20,6 +20,7 @@ namespace Missions
             Init,
             ServerCrashed,
             ServerFixed,
+            PipesFixed,
             MissionComplete,
             MissionFailed,
         }
@@ -35,10 +36,11 @@ namespace Missions
                     InstantiateSceneTriggerFromPrefab("Missions/Sabotage/Triggers/", "InspectServers");
                     break;
                 case (int) States.ServerFixed:
+                    InstantiateSceneTriggerFromPrefab("Missions/Sabotage/Triggers/", "PipesStart");
                     break;
-                case (int) States.MissionComplete:
-                    MissionCompleteScript.MissionComplete();
-                    GameStateManager.Instance.BaseMission.FinishCurrentMission(true);
+                case (int) States.PipesFixed:
+                    InstantiateDialogueTriggerFromPrefab("Missions/", "StartMayorDialogue",
+                        "Missions/Sabotage/sabotage_2");
                     break;
                 case (int) States.MissionFailed:
                     MissionFailedScript.MissionFailed();
@@ -56,9 +58,9 @@ namespace Missions
                 case (int) States.ServerCrashed:
                     return "fix the server";
                 case (int) States.ServerFixed:
-                    return "";
-                // MISSION COMPLETE AND FAILED NO STATE NEEDED SINCE MISSION NOT ACTIVE (?)
-                // SEE GAME STATE MANAGER
+                    return "have a look around \nmaybe you can find \nother issues";
+                case (int) States.PipesFixed:
+                    return "talk to the mayor";
             }
             return "";
         }
@@ -73,6 +75,13 @@ namespace Missions
                 case (int) States.ServerCrashed:
                     InstantiateSceneTriggerFromPrefab("Missions/Sabotage/Triggers/", "InspectServers");
                     break;
+                case (int) States.ServerFixed:
+                    InstantiateSceneTriggerFromPrefab("Missions/Sabotage/Triggers/", "PipesStart");
+                    break;
+                case (int) States.MissionComplete:
+                    MissionCompleteScript.MissionComplete();
+                    GameStateManager.Instance.BaseMission.FinishCurrentMission(true);
+                    break;
             }
             GameStateManager.Instance.UpdateCurrentTask();
         }
@@ -85,6 +94,10 @@ namespace Missions
             {
                 case "Server":
                     State.stateID = (int)States.ServerCrashed;
+                    AdvanceState();
+                    break;
+                case "SabotageMissionFinished":
+                    State.stateID = (int)States.MissionComplete;
                     AdvanceState();
                     break;
             }

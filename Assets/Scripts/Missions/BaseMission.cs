@@ -133,14 +133,13 @@ namespace Missions
                 // Spawn the starting mayor dialogue
                 case "WindTurbine":
                     InstantiateDialogueTriggerFromPrefab("Missions/", "StartMayorDialogue",
-                        "mayordialogue");
+                        "Missions/WindTurbine/turbine_1");
                     break;
                 case "Sabotage":
                     InstantiateDialogueTriggerFromPrefab("Missions/", "StartMayorDialogue",
                         "Missions/Sabotage/sabotage_1");
                     break;
                 case "Flooding":
-                    
                     InstantiateDialogueTriggerFromPrefab("Missions/", "StartMayorDialogue",
                         "Missions/Flooding/flooding_1");
                     break;

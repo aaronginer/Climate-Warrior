@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Items;
+using Missions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -49,7 +50,7 @@ public class GamePipesEnd : MonoBehaviour
     }
     public void BackToButtonClick()
     {
-        SceneManager.LoadScene(Constants.SceneNames.village);
+        SceneManager.LoadScene("HydroPlantLower");
     }
 
     public void RestartGame()
@@ -62,6 +63,7 @@ public class GamePipesEnd : MonoBehaviour
         wonText.gameObject.SetActive(true);
         wonLevelButton.gameObject.SetActive(true);
         GameStateManager.Instance.gameState.playerData.CompleteMiniGame(MiniGame.pipes);
+        GameStateManager.Instance.CurrentMission?.UpdateCurrentMissionState((int) MissionSabotage.States.PipesFixed);
     }
 
     public void Lost()

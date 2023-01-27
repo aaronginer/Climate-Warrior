@@ -47,8 +47,8 @@ namespace Missions.Flooding
             grandma.transform.localPosition = new Vector3(0, 0.1f, 0);
             _phase2 = true;
             
-            GameStateManager.Instance.CurrentMission.State.stateID = (int)MissionFlooding.States.GrandmaSaved;
-            GameStateManager.Instance.CurrentMission.AdvanceState();
+            GameStateManager.Instance.CurrentMission?.UpdateCurrentMissionState((int)MissionFlooding.States.GrandmaSaved);
+            GameStateManager.Instance.CurrentMission?.AdvanceState();
 
             StartCoroutine(FadeOutTiles());
         }
@@ -65,8 +65,8 @@ namespace Missions.Flooding
                 if (_phase2) grandma.GetComponent<SpriteRenderer>().color = color;  
                 yield return new WaitForSeconds(seconds/100f);
             }
-            
-            GameStateManager.Instance.CurrentMission.State.stateID = (int)MissionFlooding.States.Init;
+
+            GameStateManager.Instance.CurrentMission?.UpdateCurrentMissionState((int)MissionFlooding.States.Init);
             SceneManager.LoadScene("Village");
         }
         

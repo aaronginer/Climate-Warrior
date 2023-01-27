@@ -5,7 +5,7 @@ using Object = UnityEngine.Object;
 
 namespace Missions
 {
-    public class Mission : IMission
+    public class Mission
     {
         public MissionState State;
         public readonly GameObject ClimateScoreObject;
@@ -41,6 +41,11 @@ namespace Missions
             return "";
         }
 
+        public void UpdateCurrentMissionState(int state)
+        {
+            State.stateID = state;
+        }
+        
         protected GameObject InstantiateDialogueTriggerFromPrefab(string path, string name, string dialoguePath = null)
         {
             string sceneName = SceneManager.GetActiveScene().name;

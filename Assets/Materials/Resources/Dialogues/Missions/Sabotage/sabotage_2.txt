@@ -1,0 +1,3 @@
+﻿#npc-name:Mayor
+1"Thank you so much [player-name]! You were able to avert a catastrophe!"::0"No biggie."::0"That's what I am here for!"
+#end-action:SabotageMissionFinished
