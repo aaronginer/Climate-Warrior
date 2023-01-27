@@ -27,9 +27,12 @@ public class InstantiateTurbineTower : MonoBehaviour
     private static float X_COORD_LOSE_MAX = 0.12f;
     private static int NUM_BLOCKS_WIN = 15;
     private int blockSpawnCount = 0;
+    private float gravity;
     
 
     private List<GameObject> gameObjectsToMove = new List<GameObject>();
+
+    private TurbineManager manager;
     
 
     private enum StateEnum
@@ -50,6 +53,7 @@ public class InstantiateTurbineTower : MonoBehaviour
         gameObjectsToMove.Add(GameObject.Find("TilemapTower"));
         SpawnNewWallBlock(true);
         gameEnd = GameObject.Find("EndScreen").GetComponent<GameTurbineEnd>();
+        manager = GameObject.Find("Overlay").GetComponent<TurbineManager>();
     }
 
     void SpawnNewWallBlock(bool isFirstSpawn = false)
@@ -69,7 +73,7 @@ public class InstantiateTurbineTower : MonoBehaviour
         gameObjectsToMove.Add(currentWallBlockToMove);
 
         rigidbodyComponent = currentWallBlockToMove.GetComponent<Rigidbody2D>();
-
+        gravity = rigidbodyComponent.gravityScale;
         speed += 0.05f;
         currentState = positionX > 0 ? StateEnum.movingLeft : StateEnum.movingRight;
     }
@@ -156,20 +160,16 @@ public class InstantiateTurbineTower : MonoBehaviour
             gameEnd.Lost();
         } else
         {
-
             // coollision OK, spawning new block
             if(!CheckWin())
             {
                 SpawnNewWallBlock();
             }
-            
         }
-
     }
 
     void CheckCollisionState()
     {
-
         if (currentWallBlockToMove == null) return;
         if (currentState == StateEnum.released && didCollide)
         {
@@ -210,6 +210,7 @@ public class InstantiateTurbineTower : MonoBehaviour
 
     private void FixedUpdate()
     {
+  
         CheckTimeout();
         if (getIsMovingLeft())
         {
@@ -231,9 +232,16 @@ public class InstantiateTurbineTower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool isMoving = getIsMovingLeft() || getIsMovingRight();
+        if (PauseScript.instance.gamePaused || !manager.gameRunning)
+        {
+            rigidbodyComponent.gravityScale = 0.0f;
+            return;
+        } 
+  
+        rigidbodyComponent.gravityScale = gravity;
 
-        if (Input.GetKeyDown("space") && isMoving)
+        bool isMoving = getIsMovingLeft() || getIsMovingRight();
+        if (Input.GetKeyDown(KeyCode.Space) && isMoving)
         {
             currentState = StateEnum.released;
         }
