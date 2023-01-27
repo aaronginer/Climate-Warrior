@@ -29,7 +29,7 @@ namespace Missions.Sabotage
         private bool _hasDiagnosed;
 
         private int _numSpiders;
-        private const int MaxSpiders = 1;
+        private const int MaxSpiders = 4;
         
         void Start()
         {
