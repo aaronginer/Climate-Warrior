@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Scoring;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.SceneManagement;
 
 namespace Missions
 {
@@ -34,6 +35,9 @@ namespace Missions
 
         public override void Setup()
         {
+            // (temporary)
+            if (State.missions.Count == 0) State.stateID = (int) States.GameFinished;
+            
             switch (State.stateID)
             {
                 case (int) States.PrepareMission:
@@ -42,7 +46,8 @@ namespace Missions
                 case (int) States.MissionActive:
                     break;
                 case (int) States.GameFinished:
-                    Debug.Log("Finished the game");
+                    InstantiateDialogueTriggerFromPrefab("Missions/", "StartMayorDialogue",
+                        "gamefinished");
                     break;
             }
         }
@@ -51,7 +56,7 @@ namespace Missions
         // based on State.missions array
         public string GetCurrentTaskBeforeMission()
         {
-            if (State.missions.Count == 0) return "";
+            if (State.missions.Count == 0) return "The mayor wants to\n talk to you";
             string nextMissionName = CurrentOrNextMissionName();
             switch (nextMissionName)
             {
@@ -69,7 +74,9 @@ namespace Missions
         
         public override void AdvanceState()
         {
-            Debug.Log("advancing");
+            // (temporary)
+            if (State.missions.Count == 0) State.stateID = (int) States.GameFinished;
+            
             switch (State.stateID)
             {
                 case (int) States.PrepareMission:
@@ -79,7 +86,8 @@ namespace Missions
                     GameStateManager.Instance.StartMission(LoadMission(State.missions[0]));
                     break;
                 case (int) States.GameFinished:
-                    Debug.Log("Finished the game");
+                    InstantiateDialogueTriggerFromPrefab("Missions/", "StartMayorDialogue",
+                        "gamefinished");
                     break;
             }
             GameStateManager.Instance.UpdateCurrentTask();
@@ -118,6 +126,10 @@ namespace Missions
                     break;
                 case "RespawnIfNotAccepted":
                     if (State.stateID != (int) States.MissionActive) SpawnMayorDialogue();
+                    break;
+                case "GameFinished":
+                    PersistentCanvasScript.DestroyPersistentCanvas();
+                    SceneManager.LoadScene(Constants.SceneNames.credits);
                     break;
             }
             GameStateManager.Instance.UpdateCurrentTask();
