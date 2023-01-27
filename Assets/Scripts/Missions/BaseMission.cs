@@ -135,10 +135,13 @@ namespace Missions
                         "mayordialogue");
                     break;
                 case "Sabotage":
-                    InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "Sabotage1Dialogue");
+                    InstantiateDialogueTriggerFromPrefab("Missions/", "StartMayorDialogue",
+                        "Missions/Sabotage/sabotage_1");
                     break;
                 case "Flooding":
-                    InstantiateDialogueTriggerFromPrefab("Missions/Flooding/Triggers/", "Flooding1Dialogue");
+                    
+                    InstantiateDialogueTriggerFromPrefab("Missions/", "StartMayorDialogue",
+                        "Missions/Flooding/flooding_1");
                     break;
                 case "Drought":
                     break;
