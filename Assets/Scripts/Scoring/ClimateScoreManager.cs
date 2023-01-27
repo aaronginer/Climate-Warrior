@@ -53,8 +53,12 @@ namespace Scoring
                 {
                     _currentMissionState.stateID = (int)MissionSabotage.States.MissionFailed;
                 }
-                    
-                SceneManager.LoadScene(GameStateManager.Instance.gameState.playerData.sceneName);
+                else if (_currentMissionState.missionName == "WindTurbine")
+                {
+                    _currentMissionState.stateID = (int)MissionWindTurbine.States.MissionFailed;
+                }
+                
+                SceneManager.LoadScene(GameStateManager.Instance.gameState.playerData.sceneName, LoadSceneMode.Single);
             }
         }
 
