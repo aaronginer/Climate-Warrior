@@ -20,13 +20,13 @@ namespace InventorySystem
         // playerscript as member
 
         private Inventory _inventory;
-        private InventorySlot _handSlot;
+        private readonly InventorySlot _handSlot = new(0, ItemType.None);
         private bool _active = true;
 
         public void Start()
         {
             _inventory = GameStateManager.Instance.gameState.playerData.inventory;
-            _inventory.CleanInventory();
+            // _inventory.CleanInventory();
 
             _itemImage = new Image[9];
             _itemText = new TextMeshProUGUI[9];
@@ -57,80 +57,64 @@ namespace InventorySystem
         {
             _active = !_active;
             // if there is an item left in hand when the inventory is closed, just add it to the inventory
-            if (!_active && _handSlot != null)
+            if (!_active && !_handSlot.IsEmpty())
             {
                 _inventory.AddItem(_handSlot.itemType, _handSlot.amount);
-                _handSlot = null;
+                _handSlot.Clear();
                 UpdateInventory();
             }
             
             titleText.SetActive(_active);
             inventoryLayout.SetActive(_active);
-            hand.SetActive(_handSlot != null);
+            hand.SetActive(!_handSlot.IsEmpty());
 
             UIStateManager.UISM.uIState = _active ? UIState.Inventory : UIState.None;
         }
 
         // Updates the inventory UI elements
         // call this function every time something about the inventory changes
-        public void UpdateInventory()
+        private void UpdateInventory()
         {
             // --------------------------------------------------
             // sprite and text setters
             for (var i = 0; i < _itemImage.Length; i++)
             {
                 var slot = _inventory.GetSlot(i);
-                if (slot != null)
-                {
-                    _itemImage[i].sprite = Item.GetSprite(slot.itemType);
-                    _itemText[i].text = "" + slot.amount;
-                }
+                _itemImage[i].sprite = slot.GetSprite();
+                _itemText[i].text = slot.GetAmountString();
             }
-            if (_handSlot != null)
-            {
-                _handImage.sprite = Item.GetSprite(_handSlot.itemType);
-                _handText.text = "" + _handSlot.amount;
-                hand.SetActive(_active);
-            }
+
+            _handImage.sprite = _handSlot.GetSprite();
+            _handText.text = _handSlot.GetAmountString();
+            hand.SetActive(_active);
+            
             // --------------------------------------------------
             // enabled / disabled setters
             // display inventory settings
             for (var i = 0; i < _itemImage.Length; i++)
             {
                 var slot = _inventory.GetSlot(i);
-                var color = _itemImage[i].color;
-                color.a = slot != null ? 1 : 0;
-                _itemImage[i].color = color;
-                _itemText[i].enabled = slot != null;
+                _itemImage[i].color = slot.IsEmpty() ? new Color(1, 1,1, 0) : new Color(1, 1, 1, 1);
             }
                 
-            _handImage.enabled = _handSlot != null;
-            _handText.enabled = _handSlot != null;
+            _handImage.color = _handSlot.IsEmpty() ? new Color(1, 1,1, 0) : new Color(1, 1, 1, 1);
             // --------------------------------------------------
         }
 
         public void SlotClick(int slotId)
         {
             var slot = _inventory.GetSlot(slotId);
-            if (_handSlot != null)
+            Debug.Log("Slot: " + slot.IsEmpty());
+            Debug.Log("Hand: " + _handSlot.IsEmpty());
+            
+            if (_handSlot.IsEmpty() ^ slot.IsEmpty())
             {
-                if (slot == null)
-                {
-                    _inventory.SetSlot(slotId, _handSlot);
-                    _handSlot = null;
-                }
+                Debug.Log("xored");
+                _handSlot.Exchange(slot);
+                // update is handled by Update() function of HandScript, but that can be too slow so the item seems to jump
+                _handScript.UpdatePosition();
             }
-            else
-            {
-                if (slot != null)
-                {
-                    _handSlot = _inventory.GetSlot(slotId);
-                    _inventory.SetSlot(slotId, null);
-                    
-                    // update is handled by Update() function of HandScript, but that can be too slow so the item seems to jump
-                    _handScript.UpdatePosition();
-                }
-            }
+            
             UpdateInventory();
         }
 

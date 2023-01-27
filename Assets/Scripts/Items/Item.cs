@@ -5,6 +5,7 @@ namespace Items
 {
     public enum ItemType
     {
+        None,
         Turbine,
         Bow,
         Sword,

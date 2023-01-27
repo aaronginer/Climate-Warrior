@@ -50,6 +50,7 @@ namespace TitleMenus
             {
                 return;
             }
+            Time.timeScale = 1;
             
             GameStateManager.Instance.LoadFromDisk(selectedSave);
             PersistentCanvasScript.SpawnPersistentCanvas();

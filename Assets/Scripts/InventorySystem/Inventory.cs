@@ -14,6 +14,10 @@ namespace InventorySystem
         {
             Size = size;
             slots = new InventorySlot[size];
+            for (var i = 0; i < size; i++)
+            {
+                slots[i] = new InventorySlot(0, ItemType.None);
+            }
         }
 
         public InventorySlot GetSlot(int index)
@@ -31,7 +35,7 @@ namespace InventorySystem
             // if same item already existed in some slot, add amount to it
             foreach (InventorySlot slot in slots)
             {
-                if (slot != null && slot.itemType == itemType)
+                if (!slot.IsEmpty() && slot.itemType == itemType)
                 {
                     slot.amount += amount;
                     return;
@@ -39,36 +43,34 @@ namespace InventorySystem
             }
 
             // add item in first available slot
-            for (int i = 0; i < slots.Length; i++)
+            foreach (var t in slots)
             {
-                if (slots[i] == null)
+                if (t.IsEmpty())
                 {
-                    slots[i] = new InventorySlot(amount, itemType);
+                    t.SetItem(itemType, amount);
                     return;
                 }
             }
+            
             Debug.Log("Inventory full.");
         }
 
         // ugly hack, change later (inventory is default initialized when saving it to disk)
         public void CleanInventory()
         {
-            for (int i = 0; i < slots.Length; i++)
+            foreach (var t in slots)
             {
-                if (slots[i] != null && slots[i].amount == 0)
-                {
-                    slots[i] = null;
-                }
+                t.Clear();
             }
         }
 
         public int CountInventoryItem(ItemType itemType)
         {
-            for (int i = 0; i < slots.Length; i++)
+            foreach (var t in slots)
             {
-                if (slots[i] != null && slots[i].itemType == itemType)
+                if (t.itemType == itemType)
                 {
-                    return slots[i].amount;
+                    return t.amount;
                 }
             }
 
@@ -80,7 +82,7 @@ namespace InventorySystem
             Debug.Log(GetHashCode());
             for (int i = 0; i < slots.Length; i++)
             {
-                if (slots[i] != null)
+                if (!slots[i].IsEmpty())
                 {
                     Debug.Log(slots[i] + ": " + slots[i].itemType + " - " + slots[i].amount);
                 }
