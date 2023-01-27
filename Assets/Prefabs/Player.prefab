@@ -218,6 +218,7 @@ MonoBehaviour:
     maxNormalAngle: 0
   collisionOffset: 0.05
   savePositionOnStart: 1
+  pathIndicator: {fileID: 0}
 --- !u!114 &2799438046930718990
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -35,6 +35,7 @@ namespace Missions
 
         void Start()
         {
+            UIStateManager.UISM.uIState = UIState.MissionFinish;
             StartCoroutine(ShowMissionResults());
         }
 

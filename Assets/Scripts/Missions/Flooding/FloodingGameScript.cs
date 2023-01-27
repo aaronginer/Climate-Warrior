@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,6 +28,11 @@ namespace Missions.Flooding
             int randomVariation = r.Next(0, 3);
             _activeVariation = gridVariations[randomVariation].GetComponent<Tilemap>();
             gridVariations[randomVariation].SetActive(true);
+        }
+
+        private void Start()
+        {
+            PathIndicatorScript.Instance.Disable();
         }
 
         private void OnTriggerEnter2D(Collider2D col)

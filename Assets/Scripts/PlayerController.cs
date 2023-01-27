@@ -87,6 +87,8 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Down", true);
             animator.SetBool("LeftRight", false);
         }
+        
+        PathIndicatorScript.Instance.UpdatePosition(transform.position);
 
         if (savePositionOnStart)
         {
