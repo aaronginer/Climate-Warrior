@@ -63,8 +63,9 @@ namespace Triggers
             {
                 Debug.Log("BLOCKING DIALOGUE TRIGER BECAUSE OF MISSION CHECK");
                 return;
-            } 
+            }
 
+            Debug.Log("Starting");
             _dialogueDisplay.StartNewDialogue(_triggerScript.dialoguePath);
 
             if (_triggerScript.destroy)

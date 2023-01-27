@@ -1,3 +1,4 @@
+using Missions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -76,6 +77,8 @@ public class GameEnd : MonoBehaviour
     {
         wonText.gameObject.SetActive(true);
         backToVillage.gameObject.SetActive(true);
+        GameStateManager.Instance.CurrentMission.State.stateID =
+            (int)MissionWindTurbine.States.AfterJumpAndRunCompletedGoBackToMayor;
     }
 
     public void Lost()

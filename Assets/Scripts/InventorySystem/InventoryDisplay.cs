@@ -24,8 +24,6 @@ namespace InventorySystem
         private Inventory _inventory;
         private InventorySlot _handSlot;
         private bool _active = true;
-        
-        public static event UnityAction<ItemType> itemPickedUp;
 
         public void Start()
         {
@@ -142,7 +140,6 @@ namespace InventorySystem
         public void AddItem(int itemType)
         {
             _inventory.AddItem((ItemType) itemType);
-            InventoryDisplay.itemPickedUp((ItemType) itemType);
             UpdateInventory();
         }
         

@@ -53,12 +53,11 @@ namespace TitleMenus
             }
             
             GameStateManager.Instance.LoadFromDisk(selectedSave);
+            PersistentCanvasScript.SpawnPersistentCanvas();
+            GameStateManager.Instance.LoadMission();
+            GameStateManager.Instance.LoadBaseMission();
             
             SceneManager.LoadScene(GameStateManager.Instance.gameState.playerData.sceneName);
-
-            PersistentCanvasScript.SpawnPersistentCanvas();
-            GameStateManager.Instance.LoadBaseMission();
-            GameStateManager.Instance.LoadMission();
         }
 
         public void BackToMainMenu()

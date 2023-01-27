@@ -43,7 +43,7 @@ namespace Scoring
             {
                 catastropheHappened = true;
                 GameObject.Find("Flooding")?.GetComponent<FloodingScript>().ToggleRain(true);
-                SoundsScript.Instance.SoundThunder();
+                GameStateManager.Instance.GetSoundScript().SoundThunder();
                 GameStateManager.Instance.BaseMission.PushMission("Flooding");
                 GameStateManager.Instance.gameState.catastropheState.state = CatastropheState.States.Flooding;
             }

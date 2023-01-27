@@ -75,7 +75,6 @@ public class GameStateManager : MonoBehaviour
         {
             case (int) BaseMission.States.PrepareMission:
                 return BaseMission.GetCurrentTaskBeforeMission();
-                break;
             case (int) BaseMission.States.MissionActive:
                 return CurrentMission.GetCurrentTask();
         }
@@ -147,7 +146,7 @@ public class GameStateManager : MonoBehaviour
         CurrentMission = mission;
         gameState.missionState = mission.State;
         
-        mission?.AdvanceState();
+        mission.AdvanceState();
     }
 
     public void LoadBaseMission()
@@ -161,12 +160,15 @@ public class GameStateManager : MonoBehaviour
     
     public void LoadMission()
     {
+        Debug.Log(gameState.missionState.missionName);
         var m = Mission.LoadMission(gameState.missionState.missionName);
         if (m == null)
         {
+            Debug.Log("missionwa s null");
             return;
         }
         m.State = gameState.missionState;
+        Debug.Log(m);
         CurrentMission = m;
     }
     
@@ -181,33 +183,18 @@ public class GameStateManager : MonoBehaviour
         missionTimer = time;
         missionTimerActive = true;
     }
+
+    public SoundsScript GetSoundScript()
+    {
+        return GetComponent<SoundsScript>();
+    }
     
-    public void SetMayorDialogPath(string path)
-    {
-        DialogueTrigger mayorDialogueTrigger = GameObject.Find("StartMayorDialogue")?.GetComponent<DialogueTrigger>();
-        if (mayorDialogueTrigger != null)
-        {
-            mayorDialogueTrigger.dialoguePath = path;
-        }
-    }
-
-    private void CheckAndSetMayorDialogueInVillage()
-    {
-        bool isInVillage = SceneManager.GetActiveScene().name == Constants.SceneNames.village;
-        if (isInVillage && BaseMission?.IsMissionCompleted("MissionWindTurbine") == true)
-        {
-            SetMayorDialogPath("Missions/WindTurbine/completedFirstMission");
-        }
-    }
-
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         BaseMission?.Setup();
         CurrentMission?.Setup();
         Cursor.visible = true;
         UpdateCurrentTask();
-
-        CheckAndSetMayorDialogueInVillage();
     }
 
     public static void Destroy()

@@ -1,4 +1,5 @@
 using Items;
+using Missions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -64,6 +65,7 @@ public class GameTurbineEnd : MonoBehaviour
         wonText.gameObject.SetActive(true);
         wonLevelButton.gameObject.SetActive(true);
         GameStateManager.Instance.gameState.playerData.CompleteMiniGame(MiniGame.buildAWindTurbine);
+        GameStateManager.Instance.CurrentMission.State.stateID = (int)MissionWindTurbine.States.WindTurbineBuilt;
     }
 
     public void Lost()

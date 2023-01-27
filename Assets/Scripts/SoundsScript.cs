@@ -1,15 +1,9 @@
+using System;
 using UnityEngine;
 
 public class SoundsScript : MonoBehaviour
 {
     public AudioClip thunder;
-
-    public static SoundsScript Instance;
-
-    private void Start()
-    {
-        Instance = this;
-    }
 
     public void SoundThunder()
     {
