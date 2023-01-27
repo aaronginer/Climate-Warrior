@@ -56,13 +56,13 @@ namespace Missions
             switch (nextMissionName)
             {
                 case "WindTurbine":
-                    return "find the major";
+                    return "find the mayor";
                 case "Sabotage":
-                    return "find sabotage mission";
+                    return "talk to the mayor";
                 case "Flooding":
-                    return "find flooding mission";
+                    return "talk to the mayor";
                 case "Drought":
-                    return "find flooding mission";
+                    return "not implemented";
             }
             return "";
         }

@@ -43,11 +43,11 @@ namespace Missions
                 case (int) States.SearchingForJumpAndRun:
                     return "go north in\nthe forest";
                 case (int) States.AfterJumpAndRunCompletedGoBackToMayor:
-                    return "go back to\nthe major";
+                    return "go back to\nthe mayor";
                 case (int) States.SearchingForAdditionalParts:
                     return GetSearchingPartsString();
                 case (int) States.AllPartsCollectedGoBackToMayor:
-                    return "all parts found\ngo back to major";
+                    return "all parts found\ngo back to mayor";
                 case (int) States.SearchingForWindTurbinePlatform:
                     return "find the turbine \nplatform and start\nbuilding the turbine";
                 case (int) States.WindTurbineBuilt:

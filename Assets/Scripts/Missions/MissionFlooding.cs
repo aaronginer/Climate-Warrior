@@ -46,6 +46,16 @@ namespace Missions
             }
         }
         
+        public override string GetCurrentTask()
+        {
+            switch (State.stateID)
+            {
+                case (int) States.Init:
+                    return "find Ms. Remming";
+            }
+            return "";
+        }
+        
         public override void AdvanceState()
         {
             PathIndicatorScript.Instance.Disable();
