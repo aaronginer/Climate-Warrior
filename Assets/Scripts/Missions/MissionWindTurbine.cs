@@ -122,8 +122,6 @@ namespace Missions
                     break;
                 case (int) States.SearchingForWindTurbinePlatform:
                     InstantiateSceneTriggerFromPrefab("Missions/WindTurbine/Triggers/", "StartTurbineMinigame");
-                    InstantiateDialogueTriggerFromPrefab("Missions/", "StartMayorDialogue",
-                        "Missions/WindTurbine/completedFirstMission");
                     break;
                 case (int) States.MissionComplete:
                     MissionCompleteScript.MissionComplete();

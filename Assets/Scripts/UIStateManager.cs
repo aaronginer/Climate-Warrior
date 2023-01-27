@@ -6,7 +6,8 @@ public enum UIState
     Inventory,
     Dialogue,
     MissionFinish,
-    QuestMenu
+    QuestMenu,
+    Menu
 }
 public class UIStateManager : MonoBehaviour
 {

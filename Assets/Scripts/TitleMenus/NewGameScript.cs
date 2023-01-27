@@ -23,10 +23,9 @@ namespace TitleMenus
             };
             GameStateManager.Instance.SaveToDisk();
 
-            SceneManager.LoadScene(Constants.SceneNames.openingcutscene, LoadSceneMode.Single);
-            
-            GameStateManager.Instance.BaseMission = new BaseMission();
             PersistentCanvasScript.SpawnPersistentCanvas();
+            
+            SceneManager.LoadScene(Constants.SceneNames.openingcutscene, LoadSceneMode.Single);
         }
 
         public void BackToMainMenu()

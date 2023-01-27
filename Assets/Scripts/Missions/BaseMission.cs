@@ -10,6 +10,7 @@ namespace Missions
     {
         public BaseMission() : base("BaseMission")
         {
+            Debug.Log("Init basemission");
             State.missions = new List<string>(new[]
             {
                 "WindTurbine",
