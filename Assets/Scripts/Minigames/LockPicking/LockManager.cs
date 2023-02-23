@@ -26,7 +26,7 @@ public class LockManager : MonoBehaviour
     private enum GameState {Won, Lost, Unfinished}
     private GameState state;
 
-    private LockPickingEnd gameEnd;
+    private GameEnd gameEnd;
     
 
     void Start()
@@ -39,7 +39,7 @@ public class LockManager : MonoBehaviour
         SetUpGame();
         ShuffleArray();
 
-        gameEnd = GameObject.Find("EndScreen").GetComponent<LockPickingEnd>();
+        gameEnd = GameObject.Find("EndScreen").GetComponent<GameEnd>();
         PauseScript.instance.gamePaused = true;
         PauseScript.instance.ShowContols();
 

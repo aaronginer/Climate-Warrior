@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameEnd : MonoBehaviour
+public class GameEndJmpNRun : MonoBehaviour
 {
     public string returnToMenu;
     public string restartGame;
@@ -13,11 +13,6 @@ public class GameEnd : MonoBehaviour
     private Button leaveGame;
     private Button retryGame;
     private Button backToVillage;
-
-    /*private TMPro.TextMeshProUGUI fellText;
-    private TMPro.TextMeshProUGUI timeOutText;
-    private TMPro.TextMeshProUGUI lostText;
-    private TMPro.TextMeshProUGUI wonText;*/
 
     public string fellText;
     public string timeOutText;
@@ -115,16 +110,5 @@ public class GameEnd : MonoBehaviour
             this.Lost();
             ShowButtonsLost();
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

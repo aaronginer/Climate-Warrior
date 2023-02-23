@@ -15,7 +15,7 @@ public class InstantiateTurbineTower : MonoBehaviour
     private Rigidbody2D rigidbodyComponent = null;
 
     private float speed = 0.3f;
-    private GameTurbineEnd gameEnd;
+    private GameEnd gameEnd;
     
     private StateEnum currentState = StateEnum.still;
 
@@ -52,8 +52,8 @@ public class InstantiateTurbineTower : MonoBehaviour
         gameObjectsToMove.Add(GameObject.Find("TilesGrass"));
         gameObjectsToMove.Add(GameObject.Find("TilemapTower"));
         SpawnNewWallBlock(true);
-        gameEnd = GameObject.Find("EndScreen").GetComponent<GameTurbineEnd>();
-        manager = GameObject.Find("Overlay").GetComponent<TurbineManager>();
+        gameEnd = GameObject.Find("EndScreen").GetComponent<GameEnd>();
+        manager = GameObject.Find("Canvas").GetComponent<TurbineManager>();
     }
 
     void SpawnNewWallBlock(bool isFirstSpawn = false)
@@ -144,7 +144,8 @@ public class InstantiateTurbineTower : MonoBehaviour
         {
             currentState = StateEnum.win;
             progressBar.fillAmount = 1.0f;
-            gameEnd.Won();
+            gameEnd.DiplayEndView(manager.wonText);
+            gameEnd.ShowButtonWon();
             return true;
         }
         return false;
@@ -157,7 +158,8 @@ public class InstantiateTurbineTower : MonoBehaviour
         {
             // collision x value bad,, lost
             currentState = StateEnum.lost;
-            gameEnd.Lost();
+            gameEnd.DiplayEndView(manager.lostText);
+            gameEnd.ShowButtonsLost();
         } else
         {
             // coollision OK, spawning new block
@@ -204,7 +206,8 @@ public class InstantiateTurbineTower : MonoBehaviour
         if (isMoving && getCurrentY() < Y_COORD_TIMEOUT)
         {
             currentState = StateEnum.timeout;
-            gameEnd.TimeOut();
+            gameEnd.DiplayEndView(manager.timeOutText);
+            gameEnd.ShowButtonsLost();
         }
     }
 
@@ -232,7 +235,7 @@ public class InstantiateTurbineTower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PauseScript.instance.gamePaused || !manager.gameRunning)
+        if (PauseScript.instance.gamePaused)
         {
             rigidbodyComponent.gravityScale = 0.0f;
             return;

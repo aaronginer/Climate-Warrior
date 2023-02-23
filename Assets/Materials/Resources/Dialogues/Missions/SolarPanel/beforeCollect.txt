@@ -1,0 +1,6 @@
+﻿#npc-name:Mayor
+1"[player-name]! One of the solar panels seems to be broken, can you help us fix it?"::2"Yes!"::3"Let me have a break first..."
+2"The door to the shed where the solar panels are installed is locked and we can not find the key. You have to search for some lock picking tools first!"
+#actions:StartNextMission,StartNextMission
+3"Make it a short one though..."
+#end-action:RespawnIfNotAccepted
