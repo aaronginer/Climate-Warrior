@@ -14,9 +14,8 @@ public class PauseScript : MonoBehaviour
     public GameObject controlsLayout;
     public GameObject taskDescription;
 
-    void Start()
+    void Awake()
     {
-        
         if (instance == null)
         {
             menueContainer.SetActive(gamePaused);
@@ -44,8 +43,6 @@ public class PauseScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             gamePaused = !gamePaused;
-
-
 
             menueContainer.SetActive(gamePaused);
             controlsLayout.SetActive(false);
