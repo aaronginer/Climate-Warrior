@@ -8,7 +8,7 @@
             TimeScoreMax = 1000;
             MissionMaxTime = 300;
             State.timeLeft = MissionMaxTime;
-            _description = "Placeholder sabotage mission description";
+            _description = "Trouble at the hydropower plant. There seem to be several mysterious issues. Help the electricians fix the problems, otherwise the city will have to reactivate the old coal-fired power plant...";
         }
 
         public enum States

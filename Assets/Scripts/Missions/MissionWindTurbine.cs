@@ -15,6 +15,7 @@ namespace Missions
             TimeScoreMax = 1000;
             MissionMaxTime = 420;
             State.timeLeft = MissionMaxTime;
+            _description = "The city is planning on building a wind turbine, but resources are still missing. Help the city get all the parts they need.";
         }
 
         public enum States

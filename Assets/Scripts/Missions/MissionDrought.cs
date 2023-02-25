@@ -1,9 +1,13 @@
-﻿namespace Missions
+﻿using TMPro;
+
+namespace Missions
 {
     public sealed class Drought : Mission
     {
         public Drought() : base("Drought")
-        {}
+        {
+            _description = "Many areas surrounding the city are flooded. Help people in need get to safety.";
+        }
 
         public enum States
         {

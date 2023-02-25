@@ -107,6 +107,8 @@ namespace Dialogue
         {
             if (_dialogueReader == null)
             {
+                _current = State.Finished;
+                _next = State.Finished;
                 return;
             }
 
