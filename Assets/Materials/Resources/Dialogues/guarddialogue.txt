@@ -1,0 +1,2 @@
+#npc-name:Security Guard
+1"Oh my... I really need to pee!"

@@ -1,0 +1,9 @@
+#npc-name:Security Guard
+1"Do you have some beer for me? Alcohol-free, of course!"::2"I don't, unfortunately. Can I ask you a few questions?"::3"I can get you some later, but first I need your help with something."
+2"Anytime. Nothing's happening here all day, so I'm happy to have something else to do..."::4"It seems that we've had a saboteur in here! Someone installed a virus on one of the servers and almost destroyed some of the pipes downstairs. Have you seen something, perhaps?"
+3"Sure, go ahead. I'm bored out of my mind anyway!"::4"It seems that we've had a saboteur in here! Someone installed a virus on one of the servers and almost destroyed some of the pipes downstairs. Have you seen something, perhaps?"
+4"I've been here all day... if someone came in here that I didn't know, I would remember."::5"Have you been here at all times? Maybe you took a bathroom break?"
+5"Mhm, now that I think about it, I did get some coffee early in the morning."::6"Can you remember when exactly that was?"
+6"I can't, but I kept the receipt... Give me a second - *rummages in his pockets and pulls out crumpled piece of paper* - Ahhh, here it is!"::7"What does it say?"
+7"It says 6:55. I was alone in the store, so I got it really quickly. Couldn't have been longer than one or two minutes. One minute each direction, so I was gone for four minutes at most!"::0"Thank you so much for your help"::8"Thanks a lot! Where can I review the security footage?"
+8"Not a problem. Just downstairs at the left console! What a bad security guard I am..."
