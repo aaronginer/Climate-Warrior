@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Missions;
 
 public class PipesGame : MonoBehaviour
 {
@@ -7,14 +8,25 @@ public class PipesGame : MonoBehaviour
     public string wonText;
     public string lostText;
 
+    public EndStates endState;
+    public MiniGame miniGame;
+
     private List<GameObject> pipeObjects;
     private GameEnd gameEnd;
     
     public bool timerRunning = true;
-    private float timeRemaining = 01.0f;
+    private float timeRemaining = 60.0f;
     private TMPro.TextMeshProUGUI timeText;
 
-    
+    public enum EndStates
+    {
+        SabotagePipesFixed = MissionSabotage.States.PipesFixed,
+        SolarPanelPipesFixed = MissionSolarPanel.States.PipesFixed,
+    }
+
+
+
+
     void Start()
     {
         pipeObjects = CollectPipeObjects();
@@ -81,6 +93,8 @@ public class PipesGame : MonoBehaviour
             timerRunning = false;
             gameEnd.DiplayEndView(wonText);
             gameEnd.ShowButtonWon();
+            GameStateManager.Instance.CurrentMission?.UpdateCurrentMissionState((int)endState);
+            GameStateManager.Instance.gameState.playerData.CompleteMiniGame(miniGame);
         }
     }
 }

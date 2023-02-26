@@ -1,3 +1,0 @@
-﻿#npc-name:Mayor
-1"Good, it looks like you found all the tools. Go and find the house with the broken solar panel."::0"On my way!"
-#actions:none

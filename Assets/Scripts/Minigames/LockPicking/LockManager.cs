@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Missions;
 
 public class LockManager : MonoBehaviour
 {
@@ -89,6 +90,9 @@ public class LockManager : MonoBehaviour
     {
         gameEnd.DiplayEndView(wonText);
         gameEnd.ShowButtonWon();
+        GameStateManager.Instance.CurrentMission.State.stateID =
+            (int)MissionSolarPanel.States.FixingPipes;
+        GameStateManager.Instance.gameState.playerData.CompleteMiniGame(MiniGame.solarPanelLockPick);
     }
 
     private void ShuffleArray()

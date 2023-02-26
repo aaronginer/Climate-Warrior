@@ -1,0 +1,3 @@
+﻿#npc-name:Mayor
+1"Great, you found all lockpicks! Go search for the house with the broken solar panel"::0"On my way!"
+#actions:StartSearchSolarPanel

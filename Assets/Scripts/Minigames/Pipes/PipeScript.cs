@@ -5,7 +5,7 @@ public class PipeScript : MonoBehaviour
 {
 
     public bool isStaticPipe;
-    
+
     private float[] rotations = { 0, 90, 180, 270 };
 
     private float rotationSet;

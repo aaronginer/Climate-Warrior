@@ -8,6 +8,8 @@ public enum MiniGame
     None,
     buildAWindTurbine,
     jumpAndRunCollectTurbineParts,
+    solarPanelLockPick,
+    solarPipes,
     pipes,
 }
 
@@ -27,7 +29,7 @@ public class PlayerData
     public string name;
     public Gender gender;
 
-    public int[] missions = new int[4];
+    public int[] missions = new int[5];
 
 
     public PlayerData(string name)

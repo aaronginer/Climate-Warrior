@@ -11,6 +11,11 @@ namespace Items
         Sword,
         Arrow,
         Cable,
+        LockPick1,
+        LockPick2,
+        LockPick3,
+        LockPick4,
+        LockPick5,
     }
 
     sealed class Item
@@ -23,6 +28,11 @@ namespace Items
             {ItemType.Sword, Resources.Load<Sprite>("Items/iron_sword")},
             {ItemType.Arrow, Resources.Load<Sprite>("Items/arrow")},
             {ItemType.Cable, Resources.Load<Sprite>("Items/cable")},
+            {ItemType.LockPick1, Resources.Load<Sprite>("Items/lockpick_1")},
+            {ItemType.LockPick2, Resources.Load<Sprite>("Items/lockpick_2")},
+            {ItemType.LockPick3, Resources.Load<Sprite>("Items/lockpick_3")},
+            {ItemType.LockPick4, Resources.Load<Sprite>("Items/lockpick_4")},
+            {ItemType.LockPick5, Resources.Load<Sprite>("Items/lockpick_5")},
         };
 
         public static Sprite GetSprite(ItemType itemType)

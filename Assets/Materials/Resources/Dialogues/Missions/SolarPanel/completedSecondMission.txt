@@ -1,3 +1,0 @@
-﻿#npc-name:Mayor
-1"Thanks to you quickly intervening the solar panel works again and we do not have to start the old coal plant!"::0"No worries!"
-#end-action:MissionSolarPanelComplete
