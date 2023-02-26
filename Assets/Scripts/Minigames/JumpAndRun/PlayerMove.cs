@@ -25,7 +25,7 @@ public class PlayerMove : MonoBehaviour
     private void Awake()
     {
         finishSign = GameObject.Find("Finish").GetComponent<BoxCollider2D>();
-        manager = GameObject.Find("Canvas").GetComponent<GameManager>();
+        manager = GameObject.Find("Scripts").GetComponent<GameManager>();
 
         rigidbodyComponent = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();

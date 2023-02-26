@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Missions;
 
 public class InstantiateTurbineTower : MonoBehaviour
 {
@@ -53,7 +54,7 @@ public class InstantiateTurbineTower : MonoBehaviour
         gameObjectsToMove.Add(GameObject.Find("TilemapTower"));
         SpawnNewWallBlock(true);
         gameEnd = GameObject.Find("EndScreen").GetComponent<GameEnd>();
-        manager = GameObject.Find("Canvas").GetComponent<TurbineManager>();
+        manager = GameObject.Find("Scripts").GetComponent<TurbineManager>();
     }
 
     void SpawnNewWallBlock(bool isFirstSpawn = false)
@@ -146,6 +147,8 @@ public class InstantiateTurbineTower : MonoBehaviour
             progressBar.fillAmount = 1.0f;
             gameEnd.DiplayEndView(manager.wonText);
             gameEnd.ShowButtonWon();
+            GameStateManager.Instance.gameState.playerData.CompleteMiniGame(MiniGame.buildAWindTurbine);
+            GameStateManager.Instance.CurrentMission.State.stateID = (int)MissionWindTurbine.States.WindTurbineBuilt;
             return true;
         }
         return false;

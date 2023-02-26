@@ -85,6 +85,8 @@ public class GameManager : MonoBehaviour
     {
         if (PauseScript.instance.gamePaused)
             return;
+        if (!gameRunning)
+            return;
         timeRemaining -= Time.deltaTime;
         timeValue.text = Mathf.CeilToInt(timeRemaining).ToString();
 
