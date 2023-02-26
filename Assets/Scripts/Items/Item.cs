@@ -11,6 +11,7 @@ namespace Items
         Sword,
         Arrow,
         Cable,
+        FloppyDisk,
     }
 
     sealed class Item
@@ -23,6 +24,7 @@ namespace Items
             {ItemType.Sword, Resources.Load<Sprite>("Items/iron_sword")},
             {ItemType.Arrow, Resources.Load<Sprite>("Items/arrow")},
             {ItemType.Cable, Resources.Load<Sprite>("Items/cable")},
+            {ItemType.FloppyDisk, Resources.Load<Sprite>("Items/floppy_disk")},
         };
 
         public static Sprite GetSprite(ItemType itemType)

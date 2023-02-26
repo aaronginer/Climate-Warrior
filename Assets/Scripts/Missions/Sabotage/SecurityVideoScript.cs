@@ -7,8 +7,14 @@ namespace Missions.Sabotage
 {
     public class SecurityVideoScript : MonoBehaviour
     {
+        public GameObject footageView;
         public VideoPlayer videoPlayer;
 
+        public void PlayVideo(VideoClip clip)
+        {
+            
+        }
+        
         public void SetVideoSpeed(float speed)
         {
             videoPlayer.playbackSpeed = speed;
@@ -22,6 +28,12 @@ namespace Missions.Sabotage
         public void ResumeVideo()
         {
             videoPlayer.Play();
+        }
+
+        public void Back()
+        {
+            footageView.SetActive(true);
+            gameObject.SetActive(false);
         }
     }
 }
