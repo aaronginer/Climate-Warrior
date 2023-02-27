@@ -1,5 +1,5 @@
 ﻿#npc-name:Officer Mike
-1"Hi young man. I'm officer Mike Protein. What can I do for you?"::2"Hello, a saboteur has tried to disable the the hydro power plant!"
+1"Hi young man. I'm officer Mike Protein. What can I do for you?"::2"Hello, a saboteur has tried to disable the hydro power plant!"
 2"Really? Do you know who did it?"::3"Yes, I actually found the security footage as well. Here you go!"
 3"What did the saboteur damage? How do you know it was him?"::4"The saboteur installed a virus on one of our servers and broke a few pipes on the lower level."
 4"Mhm... it seems like we found our culprit... It's good old Jimmy, who would've thought. Thank you for bringing this to me, good work!"
