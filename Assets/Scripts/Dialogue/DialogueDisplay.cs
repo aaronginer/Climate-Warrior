@@ -31,7 +31,8 @@ namespace Dialogue
             NpcSpeak,
             PlayerOptions,
             PlayerSpeak,
-            Finished
+            Finished,
+            Disabled
         }
         
         // Start is called before the first frame update
@@ -58,8 +59,8 @@ namespace Dialogue
             _choiceObjs[3] = choice4Obj;
 
             _dialogueReader = null;
-            _current = State.Finished;
-            _next = State.Finished;
+            _current = State.Disabled;
+            _next = State.Disabled;
             _choice = 0;
 
             GameStateManager.Instance.dialogueDisplay = this;
@@ -68,7 +69,7 @@ namespace Dialogue
         // TODO: if a dialogue is currently active and a mission tries to start a new important dialogue, it will not display and mission status will be halted until restart
         public void StartNewDialogue(string dialogueName)
         {
-            if (_current != State.Finished || !UIStateManager.UISM.IsNone()) return;
+            if (_current != State.Disabled || !UIStateManager.UISM.IsNone()) return;
             
             UIStateManager.UISM.uIState = UIState.Dialogue;
             
@@ -99,16 +100,17 @@ namespace Dialogue
         {
             if (Input.GetKeyDown(KeyCode.Space) && _current != State.PlayerOptions)
             {
+                Debug.Log("Space pressed");
                 DialogueUpdate();
             }
         }
 
         private void DialogueUpdate()
         {
-            if (_dialogueReader == null)
+            if (_dialogueReader == null || _next == State.Disabled)
             {
-                _current = State.Finished;
-                _next = State.Finished;
+                _current = State.Disabled;
+                _next = State.Disabled;
                 return;
             }
 
@@ -169,6 +171,8 @@ namespace Dialogue
                     }
                     
                     UIStateManager.UISM.uIState = UIState.None;
+
+                    _next = State.Disabled;
                     break;
                 default:
                     Debug.Log("An error occured updating the dialogue. Invalid State.");
