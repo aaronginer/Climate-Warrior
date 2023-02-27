@@ -2,15 +2,6 @@
 using InventorySystem;
 using UnityEngine;
 
-
-public enum MiniGame
-{
-    None,
-    buildAWindTurbine,
-    jumpAndRunCollectTurbineParts,
-    pipes,
-}
-
 [Serializable]
 public class PlayerData
 {
@@ -20,15 +11,12 @@ public class PlayerData
         Female,
         Diverse
     }
-    
+
     public Inventory inventory;
     public Vector3 position;
     public string sceneName;
     public string name;
     public Gender gender;
-
-    public int[] missions = new int[4];
-
 
     public PlayerData(string name)
     {
@@ -41,11 +29,5 @@ public class PlayerData
     {
         Debug.Log("PlayerData:");
         Debug.Log(" - name: " + name);
-    }
-    public void CompleteMiniGame(MiniGame miniGame) {
-        missions[(int)miniGame] = 1;
-    }
-    public bool CheckMiniGameCompleted(MiniGame miniGame) {
-        return (missions[(int)miniGame] == 1);
     }
 }

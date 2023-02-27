@@ -57,7 +57,11 @@ namespace Scoring
                 {
                     _currentMissionState.stateID = (int)MissionWindTurbine.States.MissionFailed;
                 }
-                
+                else if (_currentMissionState.missionName == "SolarPanel")
+                {
+                    _currentMissionState.stateID = (int)MissionSolarPanel.States.MissionFailed;
+                }
+
                 SceneManager.LoadScene(GameStateManager.Instance.gameState.playerData.sceneName, LoadSceneMode.Single);
             }
         }

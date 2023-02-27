@@ -25,7 +25,7 @@ public class PlayerMove : MonoBehaviour
     private void Awake()
     {
         finishSign = GameObject.Find("Finish").GetComponent<BoxCollider2D>();
-        manager = GameObject.Find("Overlay").GetComponent<GameManager>();
+        manager = GameObject.Find("Scripts").GetComponent<GameManager>();
 
         rigidbodyComponent = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
@@ -39,7 +39,7 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PauseScript.instance.gamePaused || manager.gameRunning== false)
+        if (PauseScript.instance.gamePaused || !manager.gameRunning)
         {
             animator.SetBool("isMoving", false);
             return;

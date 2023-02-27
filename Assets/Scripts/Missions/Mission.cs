@@ -121,6 +121,7 @@ namespace Missions
                 "WindTurbine" => new MissionWindTurbine(),
                 "Sabotage" => new MissionSabotage(),
                 "Flooding" => new MissionFlooding(),
+                "SolarPanel" => new MissionSolarPanel(),
                 _ => null
             };
 

@@ -13,6 +13,7 @@ namespace Missions
             {
                 "WindTurbine",
                 "Sabotage",
+                "SolarPanel",
                 
                 // TODO: add missions here 
             });
@@ -60,6 +61,8 @@ namespace Missions
             {
                 case "WindTurbine":
                     return "find the mayor";
+                case "SolarPanel":
+                    return "talk to the mayor";
                 case "Sabotage":
                     return "talk to the mayor";
                 case "Flooding":
@@ -94,12 +97,17 @@ namespace Missions
         public override void HandleAction(string action)
         {
             if (action == "") return;
-            
+            Debug.Log(action);
             switch (action)
             {
                 case "MissionWindTurbine":
                     PushMission("WindTurbine");
                     GameStateManager.Instance.StartMission(new MissionWindTurbine());
+                    State.stateID = (int) States.MissionActive;
+                    break;
+                case "MissionSolarPanel":
+                    PushMission("SolarPanel");
+                    GameStateManager.Instance.StartMission(new MissionSolarPanel());
                     State.stateID = (int) States.MissionActive;
                     break;
                 case "MissionSabotage":
@@ -144,6 +152,10 @@ namespace Missions
                 case "WindTurbine":
                     InstantiateDialogueTriggerFromPrefab("Missions/", "StartMayorDialogue",
                         "Missions/WindTurbine/turbine_1");
+                    break;
+                case "SolarPanel":
+                    InstantiateDialogueTriggerFromPrefab("Missions/", "StartMayorDialogue", 
+                        "Missions/SolarPanel/solarpanel_1");
                     break;
                 case "Sabotage":
                     InstantiateDialogueTriggerFromPrefab("Missions/", "StartMayorDialogue",

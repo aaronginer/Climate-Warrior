@@ -1,26 +1,32 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Missions;
 
 public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public GameObject startScreen;
     public Text scoreValue;
     public Text timeValue;
 
-    public bool gameRunning = false;
     public int minScore;
     public float timeRemaining = 60;
+
+    public string wonText;
+    public string lostText;
+    public string fellText;
+    public string timeOutText;
+
+    public bool gameRunning = true;
 
     private int score;
     private GameEnd gameEnd;
 
-
     void Start()
     {
-        startScreen.SetActive(true);
-        gameRunning = false;
+        PauseScript.instance.gamePaused = true;
+        PauseScript.instance.ShowContols();
+        
         gameEnd = GameObject.Find("EndScreen").GetComponent<GameEnd>();
     }
 
@@ -40,19 +46,45 @@ public class GameManager : MonoBehaviour
     public void EndGame(bool fell)
     {
         gameRunning = false;
-        gameEnd.ShowEndScreen(fell);
-
+        if (timeRemaining <= 0f)
+        {
+            gameEnd.DiplayEndView(timeOutText);
+            gameEnd.ShowButtonsLost();
+        }
+        else if (fell)
+        {
+            gameEnd.DiplayEndView(fellText);
+            gameEnd.ShowButtonsLost();
+        }
+        else if (GetScore() >= minScore)
+        {
+            gameEnd.DiplayEndView(wonText);
+            gameEnd.ShowButtonWon();
+            this.Won();
+        }
+        else
+        {
+            gameEnd.DiplayEndView(lostText);
+            gameEnd.ShowButtonsLost();
+        }
     }
+
+    public void Won()
+    {
+
+        if (GetScore() >= minScore)
+        {
+            GameStateManager.Instance.CurrentMission.State.stateID =
+                (int)MissionWindTurbine.States.AfterJumpAndRunCompletedGoBackToMayor;
+        }
+    }
+
 
     void Update()
     {
-        if(!gameRunning && Input.GetKey(KeyCode.Space))
-        {
-            gameRunning = true;
-            startScreen.SetActive(false);
+        if (PauseScript.instance.gamePaused)
             return;
-        }
-        if (!gameRunning || PauseScript.instance.gamePaused)
+        if (!gameRunning)
             return;
         timeRemaining -= Time.deltaTime;
         timeValue.text = Mathf.CeilToInt(timeRemaining).ToString();

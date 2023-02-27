@@ -5,7 +5,7 @@ public class PipeScript : MonoBehaviour
 {
 
     public bool isStaticPipe;
-    
+
     private float[] rotations = { 0, 90, 180, 270 };
 
     private float rotationSet;
@@ -27,7 +27,7 @@ public class PipeScript : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (!isStaticPipe)
+        if (!isStaticPipe && !PauseScript.instance.gamePaused)
         {
             rotationSet += 90;
             transform.Rotate(new Vector3(0,0,90));

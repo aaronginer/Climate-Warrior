@@ -1,29 +1,44 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Missions;
 
 public class PipesGame : MonoBehaviour
 {
     // Start is called before the first frame update
+    public string wonText;
+    public string lostText;
+
+    public EndStates endState;
 
     private List<GameObject> pipeObjects;
-    private GamePipesEnd gameEnd;
+    private GameEnd gameEnd;
     
     public bool timerRunning = true;
     private float timeRemaining = 60.0f;
     private TMPro.TextMeshProUGUI timeText;
 
-    
+    public enum EndStates
+    {
+        SabotagePipesFixed = MissionSabotage.States.PipesFixed,
+        SolarPanelPipesFixed = MissionSolarPanel.States.PipesFixed,
+    }
+
+
+
+
     void Start()
     {
         pipeObjects = CollectPipeObjects();
-        gameEnd = GameObject.Find("EndScreen").GetComponent<GamePipesEnd>();
+        gameEnd = GameObject.Find("EndScreen").GetComponent<GameEnd>();
         timeText = GameObject.Find("TimeValue").GetComponent<TMPro.TextMeshProUGUI>();
         timeText.text = timeRemaining.ToString();
+        PauseScript.instance.gamePaused = true;
+        PauseScript.instance.ShowContols();
     }
     
     void Update()
     {
-        if (timerRunning)
+        if (timerRunning && !PauseScript.instance.gamePaused)
         {
             timeRemaining -= Time.deltaTime;
             timeText.text = Mathf.CeilToInt(timeRemaining).ToString();
@@ -31,7 +46,8 @@ public class PipesGame : MonoBehaviour
             {
                 timeText.text = "0";
                 timerRunning = false;
-                gameEnd.Lost();
+                gameEnd.DiplayEndView(lostText);
+                gameEnd.ShowButtonsLost();
             }
         }
     }
@@ -74,7 +90,9 @@ public class PipesGame : MonoBehaviour
         if (didWin)
         {
             timerRunning = false;
-            gameEnd.Won();
+            gameEnd.DiplayEndView(wonText);
+            gameEnd.ShowButtonWon();
+            GameStateManager.Instance.CurrentMission?.UpdateCurrentMissionState((int)endState);
         }
     }
 }
