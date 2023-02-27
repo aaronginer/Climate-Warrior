@@ -25,6 +25,7 @@ namespace TitleMenus
             GameStateManager.Instance.gameState.playerData.gender = toggleMale.isOn ? PlayerData.Gender.Male : 
                     toggleFemale.isOn ? PlayerData.Gender.Female : PlayerData.Gender.Diverse;
             GameStateManager.Instance.SaveToDisk();
+            GameStateManager.Instance.gameState.playerData.inventory.CleanInventory();
 
             PersistentCanvasScript.SpawnPersistentCanvas();
             

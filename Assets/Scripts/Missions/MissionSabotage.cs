@@ -1,4 +1,8 @@
-﻿namespace Missions
+﻿using UnityEditor.U2D;
+using UnityEngine;
+using UnityEngine.Assertions;
+
+namespace Missions
 {
     public sealed class MissionSabotage : Mission
     {
@@ -17,6 +21,10 @@
             ServerCrashed,
             ServerFixed,
             PipesFixed,
+            TalkedToGuard,
+            GotCorrectTape,
+            GotIncorrectTape,
+            DeliveredCorrectTape,
             MissionComplete,
             MissionFailed,
         }
@@ -35,6 +43,18 @@
                     InstantiateSceneTriggerFromPrefab("Missions/Sabotage/Triggers/", "PipesStart");
                     break;
                 case (int) States.PipesFixed:
+                    InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "SabotageGuardDialogue");
+                    break;
+                case (int) States.TalkedToGuard:
+                    InstantiateSceneTriggerFromPrefab("Missions/Sabotage/Triggers/", "ViewSecurityFootage");
+                    break;
+                case (int) States.GotCorrectTape:
+                    InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "PoliceCorrectDiskDialogue");
+                    break;
+                case (int) States.GotIncorrectTape:
+                    InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "PoliceWrongDiskDialogue");
+                    break;
+                case (int) States.DeliveredCorrectTape:
                     InstantiateDialogueTriggerFromPrefab("Missions/", "StartMayorDialogue",
                         "Missions/Sabotage/sabotage_2");
                     break;
@@ -56,6 +76,14 @@
                 case (int) States.ServerFixed:
                     return "have a look around \nmaybe you can find \nother issues";
                 case (int) States.PipesFixed:
+                    return "talk to the security guard";
+                case (int) States.TalkedToGuard:
+                    return "review the security \nfootage";
+                case (int) States.GotCorrectTape:
+                    return "deliver the disk to \nthe police";
+                case (int) States.GotIncorrectTape:
+                    return "deliver the disk to \nthe police";
+                case (int) States.DeliveredCorrectTape:
                     return "talk to the mayor";
             }
             return "";
@@ -73,6 +101,10 @@
                     break;
                 case (int) States.ServerFixed:
                     InstantiateSceneTriggerFromPrefab("Missions/Sabotage/Triggers/", "PipesStart");
+                    break;
+                case (int) States.DeliveredCorrectTape:
+                    InstantiateDialogueTriggerFromPrefab("Missions/", "StartMayorDialogue",
+                        "Missions/Sabotage/sabotage_2");
                     break;
                 case (int) States.MissionComplete:
                     MissionCompleteScript.MissionComplete();
@@ -94,6 +126,19 @@
                     break;
                 case "SabotageMissionFinished":
                     State.stateID = (int)States.MissionComplete;
+                    AdvanceState();
+                    break;
+                case "TalkedToGuard":
+                    State.stateID = (int)States.TalkedToGuard;
+                    break;
+                case "CorrectDisk":
+                    GameStateManager.Instance.inventoryDisplay.CleanInventory();
+                    State.stateID = (int)States.DeliveredCorrectTape;
+                    AdvanceState();
+                    break;
+                case "WrongDisk":
+                    GameStateManager.Instance.inventoryDisplay.CleanInventory();
+                    State.stateID = (int)States.TalkedToGuard;
                     AdvanceState();
                     break;
             }

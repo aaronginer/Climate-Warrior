@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using Dialogue;
+using InventorySystem;
 using Missions;
 using TMPro;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class GameStateManager : MonoBehaviour
     public GameState gameState;
 
     public DialogueDisplay dialogueDisplay;
+    public InventoryDisplay inventoryDisplay;
     
     public BaseMission BaseMission;
     public Mission CurrentMission;
@@ -108,8 +110,6 @@ public class GameStateManager : MonoBehaviour
 
         writer.Write(json);
         writer.Close();
-        
-        gameState.playerData.inventory.CleanInventory();
 
         if (_openSave != "") // if a save is open, delete it and create new save
         {

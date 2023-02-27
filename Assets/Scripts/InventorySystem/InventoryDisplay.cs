@@ -26,6 +26,7 @@ namespace InventorySystem
         public void Start()
         {
             _inventory = GameStateManager.Instance.gameState.playerData.inventory;
+            GameStateManager.Instance.inventoryDisplay = this;
             // _inventory.CleanInventory();
 
             _itemImage = new Image[9];
@@ -122,6 +123,13 @@ namespace InventorySystem
         public void AddItem(int itemType)
         {
             _inventory.AddItem((ItemType) itemType);
+            UpdateInventory();
+        }
+        
+        // wrapper that clears the inventory and updates the display
+        public void CleanInventory()
+        {
+            _inventory.CleanInventory();
             UpdateInventory();
         }
         

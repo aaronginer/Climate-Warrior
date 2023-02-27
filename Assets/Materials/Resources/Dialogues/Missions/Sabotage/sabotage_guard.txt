@@ -7,3 +7,4 @@
 6"I can't, but I kept the receipt... Give me a second - *rummages in his pockets and pulls out crumpled piece of paper* - Ahhh, here it is!"::7"What does it say?"
 7"It says 6:55. I was alone in the store, so I got it really quickly. Couldn't have been longer than one or two minutes. One minute each direction, so I was gone for four minutes at most!"::0"Thank you so much for your help"::8"Thanks a lot! Where can I review the security footage?"
 8"Not a problem. Just downstairs at the left console! What a bad security guard I am..."
+#end-action:TalkedToGuard

@@ -86,15 +86,17 @@ namespace Missions.Sabotage
             }
             
             GameStateManager.Instance.gameState.playerData.inventory.AddItem(ItemType.FloppyDisk);
-            SceneManager.LoadScene("Village");
             if (_correctIndex == _selectedSlotIdx)
             {
                 // state correct
+                GameStateManager.Instance.CurrentMission.State.stateID = (int)MissionSabotage.States.GotCorrectTape;
             }
             else
             {
                 // state incorrect
+                GameStateManager.Instance.CurrentMission.State.stateID = (int)MissionSabotage.States.GotIncorrectTape;
             }
+            SceneManager.LoadScene(GameStateManager.Instance.gameState.playerData.sceneName);
         }
     }
 }
