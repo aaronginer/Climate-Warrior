@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Missions;
+using UnityEngine.Tilemaps;
 
 public class InstantiateTurbineTower : MonoBehaviour
 {
@@ -11,13 +12,16 @@ public class InstantiateTurbineTower : MonoBehaviour
 
     // Reference to the wall block Prefab.
     public GameObject wallBlock;
+    public GameObject ProgressBar;
+    public float moveUpSpeed = 0.55f;
 
     private GameObject currentWallBlockToMove = null;
     private Rigidbody2D rigidbodyComponent = null;
+    private GameObject SkyDome = null;
 
     private float speed = 0.3f;
     private GameEnd gameEnd;
-    
+
     private StateEnum currentState = StateEnum.still;
 
     private bool didCollide = false;
@@ -31,7 +35,7 @@ public class InstantiateTurbineTower : MonoBehaviour
     private float gravity;
     
 
-    private List<GameObject> gameObjectsToMove = new List<GameObject>();
+    private List<GameObject> TowerObjects = new List<GameObject>();
 
     private TurbineManager manager;
     
@@ -50,58 +54,49 @@ public class InstantiateTurbineTower : MonoBehaviour
 
     void Start()
     {
-        gameObjectsToMove.Add(GameObject.Find("TilesGrass"));
-        gameObjectsToMove.Add(GameObject.Find("TilemapTower"));
         SpawnNewWallBlock(true);
+
+        for (int i = 0; i < NUM_BLOCKS_WIN; i++)
+        {
+            GameObject TowerObject = GameObject.Find("WindTurbinePiece (" + i.ToString() + ")");
+            TowerObjects.Add(TowerObject);
+            TowerObject.SetActive(false);
+        }
+
         gameEnd = GameObject.Find("EndScreen").GetComponent<GameEnd>();
         manager = GameObject.Find("Scripts").GetComponent<TurbineManager>();
+        SkyDome = GameObject.Find("SkyDome");
     }
 
     void SpawnNewWallBlock(bool isFirstSpawn = false)
     {
+        
         float positionX = Random.Range(-X_COORD_BOUND, X_COORD_BOUND);
 
         if(!isFirstSpawn)
         {
-            MoveOtherGameObjectsDown();
+            MoveCameraUp();
         }
             
 
-        currentWallBlockToMove = Instantiate(wallBlock, new Vector3(positionX, 0.2f, 0), Quaternion.identity);
+        currentWallBlockToMove = Instantiate(wallBlock, new Vector3(positionX, 0.2f + moveUpSpeed * blockSpawnCount, 0), Quaternion.identity);
         blockSpawnCount += 1;
         didCollide = false;
-
-        gameObjectsToMove.Add(currentWallBlockToMove);
 
         rigidbodyComponent = currentWallBlockToMove.GetComponent<Rigidbody2D>();
         gravity = rigidbodyComponent.gravityScale;
         speed += 0.05f;
         currentState = positionX > 0 ? StateEnum.movingLeft : StateEnum.movingRight;
+
     }
 
-    void MoveOtherGameObjectsDown()
-    {
-        int numGameObjects = gameObjectsToMove.Count;
-        if (numGameObjects > 4)
-        {
-            GameObject blockOnTop = gameObjectsToMove[numGameObjects - 1];
-            GameObject blockBelowTop = gameObjectsToMove[numGameObjects - 2];
-            GameObject blockToRemove = gameObjectsToMove[numGameObjects - 3];
-            Vector3 posTopBlock = blockOnTop.transform.position;
-            Vector3 posBlockBelowTop = blockBelowTop.transform.position;
-            Vector3 posBlockToRemove = blockToRemove.transform.position;
-            Destroy(blockToRemove);
-            gameObjectsToMove.RemoveAt(numGameObjects - 3);
-            blockOnTop.transform.position = new Vector3(posTopBlock.x, posBlockBelowTop.y, posTopBlock.z);
-            blockBelowTop.transform.position = new Vector3(posBlockBelowTop.x, posBlockToRemove.y, posBlockBelowTop.z);
-        } else
-        {
-            foreach (GameObject obj in gameObjectsToMove)
-            {
-                obj.transform.position -= new Vector3(0, 0.6f, 0);
-            }
-        }
-        
+    void MoveCameraUp()
+    {   
+        Camera.main.transform.position += new Vector3(0, moveUpSpeed, 0);
+        SkyDome.transform.position += new Vector3(0, moveUpSpeed, 0);
+        ProgressBar.transform.position += new Vector3(0, moveUpSpeed, 0);
+        Destroy(currentWallBlockToMove);
+        TowerObjects[blockSpawnCount - 1].SetActive(true);        
     }
 
     void MoveLeft()
