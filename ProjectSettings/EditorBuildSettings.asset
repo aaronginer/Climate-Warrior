@@ -65,4 +65,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Missions/Sabotage/SecurityFootage.unity
     guid: 8a63e53f72ed8d94b8de6b7c7b5326ed
+  - enabled: 1
+    path: Assets/Scenes/TitleScenes/HighScores.unity
+    guid: df714af8f0a1c7d499b51b947249990d
   m_configObjects: {}

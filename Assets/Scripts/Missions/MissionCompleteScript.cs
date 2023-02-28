@@ -1,4 +1,5 @@
 using System.Collections;
+using HighScore;
 using UnityEngine;
 
 namespace Missions
@@ -56,6 +57,7 @@ namespace Missions
 
             // update the global score
             GameStateManager.Instance.gameState.score += _finalScore;
+            HighScoresManager.SaveHighScore(GameStateManager.Instance.gameState.playerData.name, _finalScore, currentMission.Name);
             
             Destroy(currentMission.ClimateScoreObject);
             
@@ -67,8 +69,8 @@ namespace Missions
             yield return new WaitForSeconds(1.5f);
             
             timeText.SetActive(true);
-            this.timeScore.SetActive(true);
-            this.timeScore.GetComponent<AnimateCounterScript>().StartAnimate(scoreTime);
+            timeScore.SetActive(true);
+            timeScore.GetComponent<AnimateCounterScript>().StartAnimate(scoreTime);
 
             yield return new WaitForSeconds(1.5f);
             

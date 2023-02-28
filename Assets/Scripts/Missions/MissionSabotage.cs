@@ -11,7 +11,7 @@ namespace Missions
             TimeScoreMax = 1000;
             MissionMaxTime = 300;
             State.timeLeft = MissionMaxTime;
-            _description = "Trouble at the hydropower plant. There seem to be several mysterious issues. Help the electricians fix the problems, otherwise the city will have to reactivate the old coal-fired power plant...";
+            _description = "Trouble at the hydro-power plant. There seem to be several mysterious issues. Help the electricians fix the problems, otherwise the city will have to reactivate the old coal-fired power plant...";
         }
 
         public enum States
@@ -71,7 +71,7 @@ namespace Missions
             switch (State.stateID)
             {
                 case (int) States.Init:
-                    return "Find the hydro-power plant.";
+                    return "Find the hydro-power plant and have a look around.";
                 case (int) States.ServerCrashed:
                     return "Try to restart the server.";
                 case (int) States.ServerFixed:

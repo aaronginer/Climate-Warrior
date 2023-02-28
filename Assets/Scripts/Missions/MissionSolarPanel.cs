@@ -8,7 +8,7 @@ namespace Missions
 {
     public sealed class MissionSolarPanel : Mission
     {
-        public MissionSolarPanel() : base("SolarPanel", true)
+        public MissionSolarPanel() : base("Solar Panel", true)
         {
             BaseScore = 500;
             TimeScoreMax = 1000;
