@@ -53,11 +53,11 @@ namespace Scoring
                 {
                     _currentMissionState.stateID = (int)MissionSabotage.States.MissionFailed;
                 }
-                else if (_currentMissionState.missionName == "WindTurbine")
+                else if (_currentMissionState.missionName == "Wind Turbine")
                 {
                     _currentMissionState.stateID = (int)MissionWindTurbine.States.MissionFailed;
                 }
-                else if (_currentMissionState.missionName == "SolarPanel")
+                else if (_currentMissionState.missionName == "Solar Panel")
                 {
                     _currentMissionState.stateID = (int)MissionSolarPanel.States.MissionFailed;
                 }
