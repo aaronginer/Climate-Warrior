@@ -7,7 +7,7 @@ namespace Missions
 {
     public sealed class BaseMission : Mission
     {
-        public BaseMission() : base("BaseMission")
+        public BaseMission() : base("")
         {
             State.missions = new List<string>(new[]
             {
@@ -53,20 +53,20 @@ namespace Missions
         
         // this is the message before a mission
         // based on State.missions array
-        public string GetCurrentTaskBeforeMission()
+        public override string GetCurrentTask()
         {
             if (State.missions.Count == 0) return "The mayor wants to\n talk to you";
             string nextMissionName = CurrentOrNextMissionName();
             switch (nextMissionName)
             {
                 case "WindTurbine":
-                    return "find the mayor";
+                    return "Talk to the mayor.";
                 case "SolarPanel":
-                    return "talk to the mayor";
+                    return "Talk to the mayor.";
                 case "Sabotage":
-                    return "talk to the mayor";
+                    return "Talk to the mayor.";
                 case "Flooding":
-                    return "talk to the mayor";
+                    return "Talk to the mayor.";
                 case "Drought":
                     return "not implemented";
             }
@@ -91,7 +91,7 @@ namespace Missions
                         "gamefinished");
                     break;
             }
-            GameStateManager.Instance.UpdateCurrentTask();
+            GameStateManager.Instance.ShowCurrentTask();
         }
 
         public override void HandleAction(string action)
@@ -138,7 +138,7 @@ namespace Missions
                     SceneManager.LoadScene(Constants.SceneNames.credits);
                     break;
             }
-            GameStateManager.Instance.UpdateCurrentTask();
+            GameStateManager.Instance.ShowCurrentTask();
         }
 
         private void SpawnMayorDialogue()
@@ -181,7 +181,7 @@ namespace Missions
 
             if (complete)
             {
-                string mission = GameStateManager.Instance.CurrentMission.name;
+                string mission = GameStateManager.Instance.CurrentMission.Name;
                 State.completedMissions.Add(mission);
                 State.missions.Remove(mission);
             }

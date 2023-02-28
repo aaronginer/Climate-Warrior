@@ -49,7 +49,7 @@ namespace Missions
             switch (State.stateID)
             {
                 case (int) States.Init:
-                    return "find Ms. Remming";
+                    return "Find Ms. Remming.";
             }
             return "";
         }

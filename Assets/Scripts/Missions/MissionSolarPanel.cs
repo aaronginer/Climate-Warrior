@@ -42,6 +42,7 @@ namespace Missions
                     ResapwnPartsToCollect();
                     break;
                 case (int) States.FoundLockpickGoBackToMayor:
+                    ItemPickup.ClearEventList();
                     InstantiateDialogueTriggerFromPrefab("Missions/", "StartMayorDialogue",
                         "Missions/SolarPanel/afterPartsCollected");
                     break;
@@ -64,7 +65,7 @@ namespace Missions
                     GameStateManager.Instance.BaseMission.FinishCurrentMission(false);
                     break;
             }
-            GameStateManager.Instance.UpdateCurrentTask();
+            GameStateManager.Instance.ShowCurrentTask();
         }
 
         public override string GetCurrentTask()
@@ -74,13 +75,13 @@ namespace Missions
                 case (int) States.SearchForLockpick:
                     return GetSearchingPartsString();
                 case (int) States.FoundLockpickGoBackToMayor:
-                    return "go back to\nthe mayor";
+                    return "Go back to the mayor.";
                 case (int) States.SearchingForSolarPanel:
-                    return "find the house\nwith the broken\nsolar panel";
+                    return "Find the house with the broken solar panel.";
                 case (int)States.FixingPipes:
-                    return "fix the pipe system\nof the broken\nsolar panel";
+                    return "Fix the pipe system of the broken solar panel.";
                 case (int)States.PipesFixed:
-                    return "go back to the\n mayor";
+                    return "Talk to the mayor.";
             }
             return "";
         }
@@ -94,6 +95,7 @@ namespace Missions
                     State.stateID = (int)States.SearchForLockpick;
                     break;
                 case (int)States.FoundLockpickGoBackToMayor:
+                    ItemPickup.ClearEventList();
                     InstantiateDialogueTriggerFromPrefab("Missions/", "StartMayorDialogue",
                         "Missions/SolarPanel/afterPartsCollected");
                     break;
@@ -117,7 +119,7 @@ namespace Missions
                     break;
 
             }
-            GameStateManager.Instance.UpdateCurrentTask();
+            GameStateManager.Instance.ShowCurrentTask();
         }
 
         public override void HandleAction(string action)
@@ -135,12 +137,12 @@ namespace Missions
                     AdvanceState();
                     break;
             }
-            GameStateManager.Instance.UpdateCurrentTask();
+            GameStateManager.Instance.ShowCurrentTask();
         }
 
         private string GetSearchingPartsString()
         {
-            return $"search the map\nfor lockpicks\nfound {NUM_PARTS_SPAWNED - _items.Count} of {NUM_PARTS_SPAWNED}";
+            return $"Search the map for lockpicks. \nFound {NUM_PARTS_SPAWNED - _items.Count} of {NUM_PARTS_SPAWNED}.";
         }
 
         private void CollectPart(Vector3 position, ItemType item)
@@ -165,10 +167,10 @@ namespace Missions
 
         private void SpawnPartsToCollect()
         {
-            ItemPickup.ItemPickedUp += (position, type) =>
+            ItemPickup.MissionItemPickUp += (position, type) =>
             {
                 CollectPart(position, type);
-                GameStateManager.Instance.UpdateCurrentTask();
+                GameStateManager.Instance.ShowCurrentTask();
             };
 
             SpawnItem(new Vector3(4.9f, 2.33f, 0), ItemType.LockPick1);

@@ -9,7 +9,7 @@ namespace Missions
     {
         public MissionState State;
         public readonly GameObject ClimateScoreObject;
-        public string name;
+        public readonly string Name;
         
         public float MissionMaxTime;
         public int DeductionsDecisions;
@@ -21,7 +21,7 @@ namespace Missions
 
         protected Mission(string name, bool climateScoreEnabled=false)
         {
-            this.name = name;
+            this.Name = name;
             State = new MissionState(name);
 
             // Instantiate the climate score canvas object for every mission that is not the MissionTree (base mission) 
@@ -90,18 +90,6 @@ namespace Missions
             newObj.name = name;
             
             return newObj;
-        }
-
-        public void CompleteCurrentGame()
-        {
-            _currentGameCompleted = true;
-        }
-
-        public bool IsCurrentGameCompleted()
-        {
-            bool completed = _currentGameCompleted;
-            _currentGameCompleted = false;
-            return completed;
         }
 
         public void UpdateTime()

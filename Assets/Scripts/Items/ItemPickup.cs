@@ -8,7 +8,12 @@ namespace Items
     {
         public GameObject inventoryDisplayObj;
         private InventoryDisplay _inventoryDisplay;
-        public static event UnityAction<Vector3, ItemType> ItemPickedUp = delegate {  };
+        public static event UnityAction<Vector3, ItemType> MissionItemPickUp = delegate {  };
+
+        public static void ClearEventList()
+        {
+            MissionItemPickUp = null;
+        }
         
         private void Start()
         {
@@ -22,7 +27,7 @@ namespace Items
             {
                 int type = int.Parse(obj.name);
                 _inventoryDisplay.AddItem(int.Parse(obj.name));
-                ItemPickedUp(obj.transform.position, (ItemType) type);
+                MissionItemPickUp(obj.transform.position, (ItemType) type);
                 Destroy(obj);
             }
         }

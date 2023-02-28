@@ -1,6 +1,4 @@
-﻿using TMPro;
-
-namespace Missions
+﻿namespace Missions
 {
     public sealed class Drought : Mission
     {

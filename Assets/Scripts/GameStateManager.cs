@@ -3,7 +3,7 @@ using System.IO;
 using Dialogue;
 using InventorySystem;
 using Missions;
-using TMPro;
+using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,6 +15,7 @@ public class GameStateManager : MonoBehaviour
 
     public DialogueDisplay dialogueDisplay;
     public InventoryDisplay inventoryDisplay;
+    public CurrentTaskDisplay currentTaskDisplay;
     
     public BaseMission BaseMission;
     public Mission CurrentMission;
@@ -56,7 +57,7 @@ public class GameStateManager : MonoBehaviour
         {
             return false;
         }
-        return CurrentMission.name == name && CurrentMission.State.stateID == missionState;
+        return CurrentMission.Name == name && CurrentMission.State.stateID == missionState;
     }
 
     private void Update()
@@ -69,29 +70,6 @@ public class GameStateManager : MonoBehaviour
         if (missionTimer > 0) return;
         missionTimerActive = false;
         CurrentMission?.AdvanceState();
-    }
-
-    private string GetCurrentTaskStringBasedOnState()
-    {
-        switch (BaseMission.State.stateID)
-        {
-            case (int) BaseMission.States.PrepareMission:
-                return BaseMission.GetCurrentTaskBeforeMission();
-            case (int) BaseMission.States.MissionActive:
-                return CurrentMission.GetCurrentTask();
-        }
-        return "none";
-    }
-    
-    public void UpdateCurrentTask()
-    {
-        TextMeshProUGUI currentTaskTextBox = GameObject.Find("CurrentTask")?.GetComponentInChildren<TextMeshProUGUI>();
-        if (currentTaskTextBox == null)
-        {
-            return;
-        }
-        string currentTaskString = GetCurrentTaskStringBasedOnState();
-        currentTaskTextBox.text = $"Current task:\n {currentTaskString}";
     }
 
     public void SaveToDisk()
@@ -175,6 +153,8 @@ public class GameStateManager : MonoBehaviour
     {
         CurrentMission = null;
         gameState.missionState = null;
+        currentTaskDisplay.Enable();
+        ShowCurrentTask();
     }
 
     public void SetMissionAdvanceTimer(float time)
@@ -187,13 +167,21 @@ public class GameStateManager : MonoBehaviour
     {
         return GetComponent<SoundsScript>();
     }
+
+    public void ShowCurrentTask()
+    {
+        if (currentTaskDisplay != null)
+        {
+            currentTaskDisplay.ShowCurrentTask();
+        }
+    }
     
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         BaseMission?.Setup();
         CurrentMission?.Setup();
         Cursor.visible = true;
-        UpdateCurrentTask();
+        ShowCurrentTask();
     }
 
     public static void Destroy()

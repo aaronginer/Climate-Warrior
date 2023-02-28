@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Security.Cryptography;
 using InventorySystem;
 using Items;
 using UnityEngine;
@@ -41,24 +40,24 @@ namespace Missions
             switch (State.stateID)
             {
                 case (int) States.SearchingForJumpAndRun:
-                    return "go north in\nthe forest";
+                    return "Go north to the forest.";
                 case (int) States.AfterJumpAndRunCompletedGoBackToMayor:
-                    return "go back to\nthe mayor";
+                    return "Talk to the mayor.";
                 case (int) States.SearchingForAdditionalParts:
                     return GetSearchingPartsString();
                 case (int) States.AllPartsCollectedGoBackToMayor:
-                    return "all parts found\ngo back to mayor";
+                    return "All parts found. Return to the mayor.";
                 case (int) States.SearchingForWindTurbinePlatform:
-                    return "find the turbine \nplatform and start\nbuilding the turbine";
+                    return "Find the wind turbine platform and starting building it.";
                 case (int) States.WindTurbineBuilt:
-                    return "go back to the \nmayor";
+                    return "Talk to the mayor.";
             }
             return "";
         }
 
         private string GetSearchingPartsString()
         {
-            return $"search the map\nfor parts\nfound {NUM_PARTS_SPAWNED-_items.Count} of {NUM_PARTS_SPAWNED}";
+            return $"Search the map for parts. \nFound {NUM_PARTS_SPAWNED-_items.Count} of {NUM_PARTS_SPAWNED}.";
         }
 
         public override void Setup()
@@ -82,6 +81,7 @@ namespace Missions
                     RespawnPartsToCollect();
                     break;
                 case (int) States.AllPartsCollectedGoBackToMayor:
+                    ItemPickup.ClearEventList();
                     InstantiateDialogueTriggerFromPrefab("Missions/", "StartMayorDialogue",
                         "Missions/WindTurbine/afterPartsCollected");
                     break;
@@ -101,7 +101,7 @@ namespace Missions
                     GameStateManager.Instance.BaseMission.FinishCurrentMission(false);
                     break;
             }
-            GameStateManager.Instance.UpdateCurrentTask();
+            GameStateManager.Instance.ShowCurrentTask();
         }
         
         public override void AdvanceState()
@@ -117,6 +117,7 @@ namespace Missions
                     State.stateID = (int)States.SearchingForAdditionalParts;
                     break;
                 case (int) States.AllPartsCollectedGoBackToMayor:
+                    ItemPickup.ClearEventList();
                     InstantiateDialogueTriggerFromPrefab("Missions/", "StartMayorDialogue",
                         "Missions/WindTurbine/afterPartsCollected");
                     break;
@@ -132,7 +133,7 @@ namespace Missions
                     GameStateManager.Instance.BaseMission.FinishCurrentMission(false);
                     break;
             }
-            GameStateManager.Instance.UpdateCurrentTask();
+            GameStateManager.Instance.ShowCurrentTask();
         }
 
         void SpawnCableItem(Vector3 position)
@@ -153,10 +154,10 @@ namespace Missions
 
         private void SpawnPartsToCollect()
         {
-            ItemPickup.ItemPickedUp += (position, type) =>
+            ItemPickup.MissionItemPickUp += (position, type) =>
             {
                 CollectPart(position);
-                GameStateManager.Instance.UpdateCurrentTask();
+                GameStateManager.Instance.ShowCurrentTask();
             };
             
             SpawnCableItem(new Vector3(0.8f, 1.8f, 0));
@@ -205,7 +206,7 @@ namespace Missions
                     AdvanceState();
                     break;
             }
-            GameStateManager.Instance.UpdateCurrentTask();
+            GameStateManager.Instance.ShowCurrentTask();
         }
     }
 }

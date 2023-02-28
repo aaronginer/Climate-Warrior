@@ -1,8 +1,4 @@
-﻿using UnityEditor.U2D;
-using UnityEngine;
-using UnityEngine.Assertions;
-
-namespace Missions
+﻿namespace Missions
 {
     public sealed class MissionSabotage : Mission
     {
@@ -70,21 +66,21 @@ namespace Missions
             switch (State.stateID)
             {
                 case (int) States.Init:
-                    return "go to the powerplant";
+                    return "Find the hydro-power plant.";
                 case (int) States.ServerCrashed:
-                    return "fix the server";
+                    return "Try to restart the server.";
                 case (int) States.ServerFixed:
-                    return "have a look around \nmaybe you can find \nother issues";
+                    return "Have a look around. Maybe you can find other issues.";
                 case (int) States.PipesFixed:
-                    return "talk to the security guard";
+                    return "Talk to the security guard.";
                 case (int) States.TalkedToGuard:
-                    return "review the security \nfootage";
+                    return "Review the security footage.";
                 case (int) States.GotCorrectTape:
-                    return "deliver the disk to \nthe police";
+                    return "Deliver the disk to the police.";
                 case (int) States.GotIncorrectTape:
-                    return "deliver the disk to \nthe police";
+                    return "Deliver the disk to the police.";
                 case (int) States.DeliveredCorrectTape:
-                    return "talk to the mayor";
+                    return "Talk to the mayor.";
             }
             return "";
         }
@@ -111,7 +107,7 @@ namespace Missions
                     GameStateManager.Instance.BaseMission.FinishCurrentMission(true);
                     break;
             }
-            GameStateManager.Instance.UpdateCurrentTask();
+            GameStateManager.Instance.ShowCurrentTask();
         }
 
         public override void HandleAction(string action)
@@ -142,7 +138,7 @@ namespace Missions
                     AdvanceState();
                     break;
             }
-            GameStateManager.Instance.UpdateCurrentTask();
+            GameStateManager.Instance.ShowCurrentTask();
         }
     }
 }
