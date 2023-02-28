@@ -8,7 +8,7 @@ namespace Missions
 {
     public sealed class MissionWindTurbine : Mission
     {
-        public MissionWindTurbine() : base("WindTurbine", true)
+        public MissionWindTurbine() : base("Wind Turbine", true)
         {
             BaseScore = 500;
             TimeScoreMax = 1000;

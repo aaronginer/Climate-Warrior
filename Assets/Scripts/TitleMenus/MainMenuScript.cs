@@ -15,6 +15,11 @@ namespace TitleMenus
             SceneManager.LoadScene(Constants.SceneNames.loadGame, LoadSceneMode.Single);
         }
 
+        public void HighScores()
+        {
+            SceneManager.LoadScene("HighScores", LoadSceneMode.Single);
+        }
+        
         public void OpenCredits()
         {
             SceneManager.LoadScene(Constants.SceneNames.credits, LoadSceneMode.Single);

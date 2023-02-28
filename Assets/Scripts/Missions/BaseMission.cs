@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using HighScore;
 using Scoring;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -99,12 +100,12 @@ namespace Missions
                     AdvanceState();
                     break;
                 case "MissionWindTurbine":
-                    PushMission("WindTurbine");
+                    PushMission("Wind Turbine");
                     GameStateManager.Instance.StartMission(new MissionWindTurbine());
                     State.stateID = (int) States.MissionActive;
                     break;
                 case "MissionSolarPanel":
-                    PushMission("SolarPanel");
+                    PushMission("Solar Panel");
                     GameStateManager.Instance.StartMission(new MissionSolarPanel());
                     State.stateID = (int) States.MissionActive;
                     break;
@@ -133,6 +134,7 @@ namespace Missions
                     break;
                 case "GameFinished":
                     PersistentCanvasScript.DestroyPersistentCanvas();
+                    HighScoresManager.SaveHighScore(GameStateManager.Instance.gameState.playerData.name, GameStateManager.Instance.gameState.score, "overallhighscores");
                     SceneManager.LoadScene(Constants.SceneNames.credits);
                     break;
             }
