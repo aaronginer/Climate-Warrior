@@ -1,4 +1,7 @@
-﻿namespace Missions
+﻿using Unity.VisualScripting;
+using UnityEngine;
+
+namespace Missions
 {
     public sealed class MissionSabotage : Mission
     {
@@ -40,6 +43,8 @@
                     break;
                 case (int) States.PipesFixed:
                     InstantiateDialogueTriggerFromPrefab("Missions/Sabotage/Triggers/", "SabotageGuardDialogue");
+                    var gd = GameObject.Find("GuardDialogue"); // quick fix
+                    if (gd != null) gd.SetActive(false); // quick fix
                     break;
                 case (int) States.TalkedToGuard:
                     InstantiateSceneTriggerFromPrefab("Missions/Sabotage/Triggers/", "ViewSecurityFootage");
@@ -97,6 +102,8 @@
                     break;
                 case (int) States.ServerFixed:
                     InstantiateSceneTriggerFromPrefab("Missions/Sabotage/Triggers/", "PipesStart");
+                    var gd = GameObject.Find("GuardDialogue"); // quick fix
+                    if (gd != null) gd.SetActive(false); // quick fix
                     break;
                 case (int) States.DeliveredCorrectTape:
                     InstantiateDialogueTriggerFromPrefab("Missions/", "StartMayorDialogue",

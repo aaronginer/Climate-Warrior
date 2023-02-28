@@ -153,7 +153,6 @@ public class GameStateManager : MonoBehaviour
     {
         CurrentMission = null;
         gameState.missionState = null;
-        currentTaskDisplay.Enable();
         ShowCurrentTask();
     }
 
@@ -175,13 +174,25 @@ public class GameStateManager : MonoBehaviour
             currentTaskDisplay.ShowCurrentTask();
         }
     }
+
+    public void SetCurrentTaskActive(bool active)
+    {
+        if (currentTaskDisplay == null) return;
+        if (active)
+        {
+            currentTaskDisplay.Enable();
+        }
+        else
+        {
+            currentTaskDisplay.Disable();
+        }
+    }
     
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         BaseMission?.Setup();
         CurrentMission?.Setup();
         Cursor.visible = true;
-        ShowCurrentTask();
     }
 
     public static void Destroy()

@@ -8,14 +8,16 @@ namespace UI
     {
         public TextMeshProUGUI currentMission;
         public TextMeshProUGUI currentTask;
-        private void Start()
+        private void Awake()
         {
+            Debug.Log("Set currenttaskDisplay");
             GameStateManager.Instance.currentTaskDisplay = this;
-            ShowCurrentTask();
+            gameObject.SetActive(false);
         }
 
         private void OnDestroy()
         {
+            Debug.Log("Nulled currenttaskdisplay");
             GameStateManager.Instance.currentTaskDisplay = null;
         }
 
@@ -37,6 +39,8 @@ namespace UI
 
             currentMission.text = m.Name;
             currentTask.text = m.GetCurrentTask();
+            
+            if (currentTask.text != "") Enable();
         }
     }
 }

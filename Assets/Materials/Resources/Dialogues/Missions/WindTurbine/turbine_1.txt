@@ -1,8 +1,6 @@
 #npc-name:Mayor
-1"You must be the new city planner we hired. [player-name], right? Welcome to the village!"::2"Yes I am, sir!"::3"Don't feel like talking to you, old man."
-2"Are you ready for your first task?"::4"Of course!"::5"I'd like to explore the village more."
-3"Youngsters these days have no manners..."
-4"Great! See that path on the left that leads to the forest? Up north you can find raw materials for building our city's first wind turbine. I must warn you, the path may be a bit tricky to walk on..."::0"On my way."::0"Not a problem!"
+1"Are you ready for your first task?"::2"Of course!"::3"I'd like to explore the village more."
+2"Great! See that path on the left that leads to the forest? Up north you can find raw materials for building our city's first wind turbine. I must warn you, the path may be a bit tricky to walk on..."::0"On my way."::0"Not a problem!"
 #actions:StartNextMission,StartNextMission
-5"Come to me when you're ready."
+3"Come to me when you're ready."
 #end-action:RespawnIfNotAccepted

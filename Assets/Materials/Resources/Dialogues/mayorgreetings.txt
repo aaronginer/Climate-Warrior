@@ -1,0 +1,5 @@
+#npc-name:Mayor
+1"You must be the new city planner we hired. [player-name], right? Welcome to the village!"::2"Yes I am, sir!"::3"Don't feel like talking to you, old man."
+2"I'm so happy you are here. We are really shorthanded and need any help we can get. Just come back to me whenever you're ready to do some work!"
+3"Youngsters these days have no manners... Come back when you're ready."
+#end-action:InitDone
