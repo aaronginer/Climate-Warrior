@@ -449,7 +449,7 @@ TextureImporter:
         width: 26
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -457,6 +457,27 @@ TextureImporter:
       bones: []
       spriteID: 170aaee072e2b8542a598df330330691
       internalID: 1742849843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MissionMenu
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 177
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e831b6a58377a334a8b90461eba54b15
+      internalID: 373259698
       vertices: []
       indices: 
       edges: []
@@ -475,6 +496,7 @@ TextureImporter:
       right_arrow: 1279093876
       button: 1533801021
       mission_complete_window: 1846457560
+      MissionMenu: 373259698
       score_bar: 1822851825
       box_1: 1742849843
       toggle: 1325497659

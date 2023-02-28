@@ -96,7 +96,7 @@ namespace Missions
         // Spawns a mission complete window. Use when mission is completed. Stat calculations happen automatically.
         public static void MissionComplete()
         {
-            GameStateManager.Instance.currentTaskDisplay.Disable();
+            GameStateManager.Instance.SetCurrentTaskActive(false);
             var missionCompletePrefab = Resources.Load("Missions/MissionComplete") as GameObject;
             Instantiate(missionCompletePrefab, GameObject.Find("Canvas").transform);
         }

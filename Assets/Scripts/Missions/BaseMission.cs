@@ -22,6 +22,7 @@ namespace Missions
 
         public enum States
         {
+            Init,
             PrepareMission,
             MissionActive,
             GameFinished,
@@ -39,6 +40,10 @@ namespace Missions
             
             switch (State.stateID)
             {
+                case (int) States.Init:
+                    InstantiateDialogueTriggerFromPrefab("Missions/", "StartMayorDialogue",
+                        "mayorgreetings");
+                    break;
                 case (int) States.PrepareMission:
                     SpawnMayorDialogue();
                     break;
@@ -49,28 +54,15 @@ namespace Missions
                         "gamefinished");
                     break;
             }
+            GameStateManager.Instance.ShowCurrentTask();
         }
         
         // this is the message before a mission
         // based on State.missions array
         public override string GetCurrentTask()
         {
-            if (State.missions.Count == 0) return "The mayor wants to\n talk to you";
-            string nextMissionName = CurrentOrNextMissionName();
-            switch (nextMissionName)
-            {
-                case "WindTurbine":
-                    return "Talk to the mayor.";
-                case "SolarPanel":
-                    return "Talk to the mayor.";
-                case "Sabotage":
-                    return "Talk to the mayor.";
-                case "Flooding":
-                    return "Talk to the mayor.";
-                case "Drought":
-                    return "not implemented";
-            }
-            return "";
+            Debug.Log("finished");
+            return State.stateID == (int)States.GameFinished ? "The mayor wants to talk to you." : "";
         }
         
         public override void AdvanceState()
@@ -91,6 +83,8 @@ namespace Missions
                         "gamefinished");
                     break;
             }
+
+            Debug.Log("State: " + (State.stateID == (int) States.GameFinished));
             GameStateManager.Instance.ShowCurrentTask();
         }
 
@@ -100,6 +94,10 @@ namespace Missions
             Debug.Log(action);
             switch (action)
             {
+                case "InitDone":
+                    State.stateID = (int) States.PrepareMission;
+                    AdvanceState();
+                    break;
                 case "MissionWindTurbine":
                     PushMission("WindTurbine");
                     GameStateManager.Instance.StartMission(new MissionWindTurbine());
@@ -185,9 +183,10 @@ namespace Missions
                 State.completedMissions.Add(mission);
                 State.missions.Remove(mission);
             }
-
-            // if catastrophe -> go to sidequest
             
+            GameStateManager.Instance.gameState.playerData.inventory.CleanInventory();
+            
+            // if catastrophe -> go to sidequest
             State.stateID = State.missions.Count == 0 ? (int) States.GameFinished : (int) States.PrepareMission;
             AdvanceState();
         }

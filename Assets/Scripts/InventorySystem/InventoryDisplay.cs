@@ -1,4 +1,6 @@
+using System;
 using Items;
+using Missions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,7 +29,10 @@ namespace InventorySystem
         {
             _inventory = GameStateManager.Instance.gameState.playerData.inventory;
             GameStateManager.Instance.inventoryDisplay = this;
-            // _inventory.CleanInventory();
+            if (GameStateManager.Instance.BaseMission.State.stateID != (int) BaseMission.States.MissionActive)
+            {
+                _inventory.CleanInventory();
+            }
 
             _itemImage = new Image[9];
             _itemText = new TextMeshProUGUI[9];

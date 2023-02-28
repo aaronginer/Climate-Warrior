@@ -62,7 +62,6 @@ namespace Missions
 
         public override void Setup()
         {
-            Debug.Log("SETUP CALLED IN MISSION WIND TURBINE");
             switch (State.stateID)
             {
                 case (int) States.SearchingForJumpAndRun:
@@ -106,6 +105,7 @@ namespace Missions
         
         public override void AdvanceState()
         {
+            Debug.Log(GameStateManager.Instance.currentTaskDisplay);
             switch (State.stateID)
             {
                 case (int) States.SearchingForJumpAndRun:

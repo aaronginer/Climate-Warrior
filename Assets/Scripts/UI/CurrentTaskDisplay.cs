@@ -6,17 +6,12 @@ namespace UI
 {
     public class CurrentTaskDisplay : MonoBehaviour
     {
-        public TextMeshProUGUI currentMission;
         public TextMeshProUGUI currentTask;
-        private void Start()
+        private void Awake()
         {
+            Debug.Log("Set currenttaskDisplay");
             GameStateManager.Instance.currentTaskDisplay = this;
-            ShowCurrentTask();
-        }
-
-        private void OnDestroy()
-        {
-            GameStateManager.Instance.currentTaskDisplay = null;
+            gameObject.SetActive(false);
         }
 
         public void Disable()
@@ -35,8 +30,9 @@ namespace UI
                 ? GameStateManager.Instance.BaseMission
                 : GameStateManager.Instance.CurrentMission;
 
-            currentMission.text = m.Name;
             currentTask.text = m.GetCurrentTask();
+            
+            if (currentTask.text != "") Enable();
         }
     }
 }
