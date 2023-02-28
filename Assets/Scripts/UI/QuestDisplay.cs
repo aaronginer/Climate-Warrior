@@ -6,7 +6,8 @@ namespace UI
     public class QuestDisplay : MonoBehaviour
     {
         public GameObject questMenuLayout;
-        public TextMeshProUGUI questText;
+        public TextMeshProUGUI questDescriptionText;
+        public TextMeshProUGUI questNameText;
         
         // playerscript as member
         private bool _active = true;
@@ -23,11 +24,15 @@ namespace UI
         {
             if (Input.GetKeyDown("q") && UIStateManager.UISM.CanToggleQuestMenu())
             {
-                if (GameStateManager.Instance.CurrentMission != null) {
-                    questText.text = GameStateManager.Instance.CurrentMission._description;
+                if (GameStateManager.Instance.CurrentMission != null)
+                {
+                    questNameText.text = GameStateManager.Instance.CurrentMission.Name;
+                    questDescriptionText.text = GameStateManager.Instance.CurrentMission._description;
                 }
-                else {
-                    questText.text = "You have no active mission. Explore the village in search of a new quest!";
+                else
+                {
+                    questNameText.text = "";
+                    questDescriptionText.text = "You have no active mission. Explore the village or talk to the mayor when you are ready for your next mission!";
                 }
                 
                 ToggleQuestMenu();

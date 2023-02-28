@@ -60,8 +60,7 @@ namespace MenuGameOverlay
         {
             controlsText.text = "ESC -> close this menu\nWASD -> walk around\nQ -> open/close quest menu\nE -> open/close inventory\nspace bar -> advance dialogue\nleft click -> choose dialogue option";
             controlsLayout.SetActive(true);
-
-            
+            menuContainer.SetActive(false);
         }
     }       
 }

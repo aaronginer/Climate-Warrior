@@ -25,11 +25,6 @@ namespace InventorySystem
         private readonly InventorySlot _handSlot = new(0, ItemType.None);
         private bool _active = true;
 
-        private void OnDestroy()
-        {
-            GameStateManager.Instance.dialogueDisplay = null;
-        }
-
         public void Start()
         {
             _inventory = GameStateManager.Instance.gameState.playerData.inventory;
