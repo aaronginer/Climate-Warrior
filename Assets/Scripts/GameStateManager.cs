@@ -22,7 +22,7 @@ public class GameStateManager : MonoBehaviour
     public float missionTimer;
     public bool missionTimerActive;
     
-    private string _persistentPath = "";
+    public string persistentPath = "";
     private string _openSave = "";
     // private TextMeshProUGUI currentTaskTextBox;
 
@@ -37,7 +37,7 @@ public class GameStateManager : MonoBehaviour
         
         
         Instance = this;
-        _persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar;
+        persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar;
 
         BaseMission = new BaseMission();
         gameState = new GameState
@@ -81,7 +81,7 @@ public class GameStateManager : MonoBehaviour
         }
 
         var dateTime = DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss");
-        string path = _persistentPath + "save_" + Instance.gameState.playerData.name + "_" + dateTime + ".json";  
+        string path = persistentPath + "save_" + Instance.gameState.playerData.name + "_" + dateTime + ".json";  
         
         using StreamWriter writer = new StreamWriter(path);
         string json = JsonUtility.ToJson(gameState);
@@ -101,7 +101,7 @@ public class GameStateManager : MonoBehaviour
 
     public void LoadFromDisk(string saveFile)
     {
-        string savePath = _persistentPath + "save_" + saveFile + ".json";
+        string savePath = persistentPath + "save_" + saveFile + ".json";
 
         if (!File.Exists(savePath))
         {
