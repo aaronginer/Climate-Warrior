@@ -194,7 +194,7 @@ public class InstantiateTurbineTower : MonoBehaviour
 
     void FillProgressBar()
     {
-        progressBar.fillAmount = (float)blockSpawnCount / NUM_BLOCKS_WIN;
+        progressBar.fillAmount = (float)(blockSpawnCount-1) / (NUM_BLOCKS_WIN-1);
     }
 
     void CheckTimeout()

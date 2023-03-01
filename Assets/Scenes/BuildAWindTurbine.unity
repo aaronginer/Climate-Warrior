@@ -1292,8 +1292,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00012207031, y: -0.0000076293945}
-  m_SizeDelta: {x: -0.059936523, y: -0.05999756}
+  m_AnchoredPosition: {x: 0.036999702, y: -0.016098022}
+  m_SizeDelta: {x: -13.3937, y: -14.9047}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &318734758
 MonoBehaviour:
@@ -1682,7 +1682,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressBar: {fileID: 318734758}
   wallBlock: {fileID: 2294881248163102024, guid: b74f490cb69ca7e43a169a37c5a0a953, type: 3}
-  ProgressBar: {fileID: 1991626997}
+  ProgressBar: {fileID: 2085639331}
   moveUpSpeed: 0.55
 --- !u!4 &813988599
 Transform:
@@ -1713,7 +1713,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startScreen: {fileID: 1897256774}
   wonText: Congrats! You were able to build the turbine!
-  lostText: This block went off a little too far... Wanny try again?
+  lostText: This block went off a little too far... Want to try again?
   timeOutText: You have waited too long. Wanna try again?
   gameRunning: 0
   minScore: 0
@@ -2065,18 +2065,18 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1013558005}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.000000035995438}
-  m_LocalScale: {x: 1.0000002, y: 1.0000002, z: 1.0000002}
+  m_LocalPosition: {x: 0, y: 0, z: 9.045717}
+  m_LocalScale: {x: 1.3494431, y: 1.3494431, z: 1.3494431}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 318734757}
-  m_Father: {fileID: 1991627001}
+  m_Father: {fileID: 2085639335}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 8.797852, y: -4.336014}
-  m_SizeDelta: {x: 0.1602, y: 0.7052}
+  m_AnchoredPosition: {x: 359, y: -247}
+  m_SizeDelta: {x: 20, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1013558007
 MonoBehaviour:
@@ -2091,14 +2091,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -536498141, guid: 43fd9617fdc0f9b44bc7d8e5e23d740f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3671,17 +3671,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac174b55789542143a5736fa1a12cb0a, type: 3}
---- !u!224 &1897256773 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7069179802660453418, guid: ac174b55789542143a5736fa1a12cb0a, type: 3}
-  m_PrefabInstance: {fileID: 1897256772}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1897256774 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8207172710041894602, guid: ac174b55789542143a5736fa1a12cb0a, type: 3}
   m_PrefabInstance: {fileID: 1897256772}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1991626997
+--- !u!1 &2085639331
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3689,10 +3684,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1991627001}
-  - component: {fileID: 1991627000}
-  - component: {fileID: 1991626999}
-  - component: {fileID: 1991626998}
+  - component: {fileID: 2085639335}
+  - component: {fileID: 2085639334}
+  - component: {fileID: 2085639333}
+  - component: {fileID: 2085639332}
   m_Layer: 5
   m_Name: ProgressBarCanvas
   m_TagString: Untagged
@@ -3700,13 +3695,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1991626998
+--- !u!114 &2085639332
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1991626997}
+  m_GameObject: {fileID: 2085639331}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
@@ -3717,19 +3712,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1991626999
+--- !u!114 &2085639333
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1991626997}
+  m_GameObject: {fileID: 2085639331}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -3740,16 +3735,16 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
---- !u!223 &1991627000
+--- !u!223 &2085639334
 Canvas:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1991626997}
+  m_GameObject: {fileID: 2085639331}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 2
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -3761,24 +3756,24 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!224 &1991627001
+--- !u!224 &2085639335
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1991626997}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 7.475799}
-  m_LocalScale: {x: 1.1152419, y: 1.1152419, z: 1.1152419}
+  m_GameObject: {fileID: 2085639331}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1013558006}
-  m_Father: {fileID: 1897256773}
-  m_RootOrder: 3
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -8.126221, y: 5.26828}
-  m_SizeDelta: {x: 0.4162, y: 0.1026}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
