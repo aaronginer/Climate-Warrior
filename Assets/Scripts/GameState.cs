@@ -11,6 +11,7 @@ public class GameState
     public MissionState missionState;
     public CatastropheState catastropheState;
     public int score;
+    public bool displayTurbine;
 
     public GameState()
     {

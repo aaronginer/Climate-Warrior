@@ -143,6 +143,7 @@ public class InstantiateTurbineTower : MonoBehaviour
             gameEnd.DiplayEndView(manager.wonText);
             gameEnd.ShowButtonWon();
             GameStateManager.Instance.CurrentMission.State.stateID = (int)MissionWindTurbine.States.WindTurbineBuilt;
+            GameStateManager.Instance.gameState.displayTurbine = true;
             return true;
         }
         return false;
