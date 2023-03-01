@@ -12,6 +12,7 @@ public class GameState
     public CatastropheState catastropheState;
     public int score;
     public bool displayTurbine;
+    public bool catastropheHappened;
 
     public GameState()
     {

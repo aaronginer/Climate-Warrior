@@ -12,9 +12,9 @@ namespace Missions
         {
             State.missions = new List<string>(new[]
             {
-                "WindTurbine",
+                "Wind Turbine",
                 "Sabotage",
-                "SolarPanel",
+                "Solar Panel",
                 
                 // TODO: add missions here 
             });
@@ -149,11 +149,11 @@ namespace Missions
             switch (missionName)
             {
                 // Spawn the starting mayor dialogue
-                case "WindTurbine":
+                case "Wind Turbine":
                     InstantiateDialogueTriggerFromPrefab("Missions/", "StartMayorDialogue",
                         "Missions/WindTurbine/turbine_1");
                     break;
-                case "SolarPanel":
+                case "Solar Panel":
                     InstantiateDialogueTriggerFromPrefab("Missions/", "StartMayorDialogue", 
                         "Missions/SolarPanel/solarpanel_1");
                     break;

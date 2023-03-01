@@ -21,7 +21,7 @@ namespace Missions
 
         protected Mission(string name, bool climateScoreEnabled=false)
         {
-            this.Name = name;
+            Name = name;
             State = new MissionState(name);
 
             // Instantiate the climate score canvas object for every mission that is not the MissionTree (base mission) 
@@ -106,10 +106,10 @@ namespace Missions
         {
             Mission mission = missionName switch
             {
-                "WindTurbine" => new MissionWindTurbine(),
+                "Wind Turbine" => new MissionWindTurbine(),
                 "Sabotage" => new MissionSabotage(),
                 "Flooding" => new MissionFlooding(),
-                "SolarPanel" => new MissionSolarPanel(),
+                "Solar Panel" => new MissionSolarPanel(),
                 _ => null
             };
 

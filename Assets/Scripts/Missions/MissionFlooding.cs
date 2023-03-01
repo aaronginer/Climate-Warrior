@@ -36,6 +36,7 @@ namespace Missions
                     if (trigger != null) PathIndicatorScript.Instance.Enable(trigger.transform.position);
                     break;
                 case (int) States.MissionComplete:
+                    GameStateManager.Instance.gameState.catastropheHappened = false;
                     MissionCompleteScript.MissionComplete();
                     GameStateManager.Instance.BaseMission.FinishCurrentMission(true);
                     break;

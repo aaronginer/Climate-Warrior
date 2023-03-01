@@ -16,8 +16,6 @@ namespace Scoring
         private float _catastropheSeconds;
 
         private const float MaxDegrees = 4.0f;
-        
-        public bool catastropheHappened;
 
         private MissionState _currentMissionState;
         private Transform _front;
@@ -39,9 +37,9 @@ namespace Scoring
 
             Debug.Assert(_catastropheSeconds < _totalSeconds);
             if (_currentMissionState.timeLeft <= _totalSeconds / 2
-                && !catastropheHappened)
+                && !GameStateManager.Instance.gameState.catastropheHappened)
             {
-                catastropheHappened = true;
+                GameStateManager.Instance.gameState.catastropheHappened = true;
                 GameObject.Find("Flooding")?.GetComponent<FloodingScript>().ToggleRain(true);
                 GameStateManager.Instance.GetSoundScript().SoundThunder();
                 GameStateManager.Instance.BaseMission.PushMission("Flooding");
