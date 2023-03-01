@@ -15,9 +15,9 @@ namespace TitleMenus
             SceneManager.LoadScene(Constants.SceneNames.loadGame, LoadSceneMode.Single);
         }
 
-        public void HighScores()
+        public void Leaderboard()
         {
-            SceneManager.LoadScene("HighScores", LoadSceneMode.Single);
+            SceneManager.LoadScene("Leaderboard", LoadSceneMode.Single);
         }
         
         public void OpenCredits()

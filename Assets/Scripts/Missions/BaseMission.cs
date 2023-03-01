@@ -134,7 +134,7 @@ namespace Missions
                     break;
                 case "GameFinished":
                     PersistentCanvasScript.DestroyPersistentCanvas();
-                    HighScoresManager.SaveHighScore(GameStateManager.Instance.gameState.playerData.name, GameStateManager.Instance.gameState.score, "overallhighscores");
+                    HighScoresManager.SaveHighScore(GameStateManager.Instance.gameState.playerData.name, GameStateManager.Instance.gameState.score, "overallleaderboard");
                     SceneManager.LoadScene(Constants.SceneNames.credits);
                     break;
             }
