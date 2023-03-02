@@ -12,7 +12,7 @@ namespace Missions
         {
             BaseScore = 500;
             TimeScoreMax = 1000;
-            MissionMaxTime = 420;
+            MissionMaxTime = 480;
             State.timeLeft = MissionMaxTime;
             _description = "The city is planning on building a wind turbine, but resources are still missing. Help the city get all the parts they need.";
         }
@@ -48,7 +48,7 @@ namespace Missions
                 case (int) States.AllPartsCollectedGoBackToMayor:
                     return "All parts found. Return to the mayor.";
                 case (int) States.SearchingForWindTurbinePlatform:
-                    return "Find the wind turbine platform and starting building it.";
+                    return "Find the wind turbine platform and start building it.";
                 case (int) States.WindTurbineBuilt:
                     return "Talk to the mayor.";
             }

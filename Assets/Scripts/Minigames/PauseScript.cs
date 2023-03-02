@@ -27,7 +27,7 @@ public class PauseScript : MonoBehaviour
 
     public void ReturnToVillage()
     {
-        SceneManager.LoadScene(backTo);
+        SceneManager.LoadScene(GameStateManager.Instance.gameState.playerData.sceneName);
     }
 
     public void ShowContols()

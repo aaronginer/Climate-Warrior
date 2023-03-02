@@ -2283,6 +2283,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2612039343482088462, guid: ac174b55789542143a5736fa1a12cb0a, type: 3}
+      propertyPath: backTo
+      value: HydroPlantLower
+      objectReference: {fileID: 0}
     - target: {fileID: 4584357803322318050, guid: ac174b55789542143a5736fa1a12cb0a, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25

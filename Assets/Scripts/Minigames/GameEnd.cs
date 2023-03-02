@@ -47,7 +47,7 @@ public class GameEnd : MonoBehaviour
 
     public void BackToMenu()
     {
-        SceneManager.LoadScene(returnTo);
+        SceneManager.LoadScene(GameStateManager.Instance.gameState.playerData.sceneName);
     }
 
     public void RestartGame()
