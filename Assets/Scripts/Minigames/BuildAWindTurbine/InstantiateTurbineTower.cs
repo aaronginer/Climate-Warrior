@@ -12,6 +12,8 @@ public class InstantiateTurbineTower : MonoBehaviour
 
     // Reference to the wall block Prefab.
     public GameObject wallBlock;
+    public GameObject EndPiece;
+
     public GameObject ProgressBar;
     public float moveUpSpeed = 0.55f;
 
@@ -77,9 +79,9 @@ public class InstantiateTurbineTower : MonoBehaviour
         {
             MoveCameraUp();
         }
-            
 
-        currentWallBlockToMove = Instantiate(wallBlock, new Vector3(positionX, 0.2f + moveUpSpeed * blockSpawnCount, 0), Quaternion.identity);
+        GameObject spawnBlock = blockSpawnCount == NUM_BLOCKS_WIN - 1 ? EndPiece : wallBlock;
+        currentWallBlockToMove = Instantiate(spawnBlock, new Vector3(positionX, 0.2f + moveUpSpeed * blockSpawnCount, 0), Quaternion.identity);
         blockSpawnCount += 1;
         didCollide = false;
 
@@ -136,7 +138,7 @@ public class InstantiateTurbineTower : MonoBehaviour
 
     bool CheckWin()
     {
-        if (blockSpawnCount >= NUM_BLOCKS_WIN-1)
+        if (blockSpawnCount >= NUM_BLOCKS_WIN)
         {
             currentState = StateEnum.win;
             progressBar.fillAmount = 1.0f;
