@@ -36,6 +36,7 @@ namespace Missions.Sabotage
             if (!gameScript.knifeSelected) return;
 
             gameScript.Squish();
+            GameStateManager.Instance.GetSoundScript().SoundVirusKill();
             
             _squished = true;
             

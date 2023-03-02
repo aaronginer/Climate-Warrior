@@ -29,6 +29,7 @@ public class PipeScript : MonoBehaviour
     {
         if (!isStaticPipe && !PauseScript.instance.gamePaused)
         {
+            GameStateManager.Instance.GetSoundScript().SoundRotatePipe();
             rotationSet += 90;
             transform.Rotate(new Vector3(0,0,90));
             PipesGame pipesGame = GameObject.Find("Scripts").GetComponent<PipesGame>();
