@@ -32,7 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/JumpAndRun.unity
     guid: 3e06726596fdad146bd177876d5b4858
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TitleScenes/Credits.unity
     guid: dc241b4e454a9924aa531ed34f90b46e
   - enabled: 1

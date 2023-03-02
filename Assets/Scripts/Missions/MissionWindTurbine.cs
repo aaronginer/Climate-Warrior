@@ -12,7 +12,7 @@ namespace Missions
         {
             BaseScore = 500;
             TimeScoreMax = 1000;
-            MissionMaxTime = 480;
+            MissionMaxTime = 360;
             State.timeLeft = MissionMaxTime;
             _description = "The city is planning on building a wind turbine, but resources are still missing. Help the city get all the parts they need.";
         }

@@ -9,7 +9,7 @@ namespace Missions
         {
             BaseScore = 500;
             TimeScoreMax = 1000;
-            MissionMaxTime = 450;
+            MissionMaxTime = 360;
             State.timeLeft = MissionMaxTime;
             _description = "Trouble at the hydro-power plant. There seem to be several mysterious issues. Help the electricians fix the problems, otherwise the city will have to reactivate the old coal-fired power plant...";
         }
