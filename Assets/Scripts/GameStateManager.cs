@@ -16,6 +16,7 @@ public class GameStateManager : MonoBehaviour
     public DialogueDisplay dialogueDisplay;
     public InventoryDisplay inventoryDisplay;
     public CurrentTaskDisplay currentTaskDisplay;
+    public MusicScript mainMusicScript;
     
     public BaseMission BaseMission;
     public Mission CurrentMission;
@@ -193,6 +194,7 @@ public class GameStateManager : MonoBehaviour
         BaseMission?.Setup();
         CurrentMission?.Setup();
         Cursor.visible = true;
+        mainMusicScript.Play(scene.name);
     }
 
     public static void Destroy()

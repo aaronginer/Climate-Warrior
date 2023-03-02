@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 493435982362120475}
   - component: {fileID: 5646926872565327590}
+  - component: {fileID: 7516757513012643046}
   - component: {fileID: 8692892682056343805}
+  - component: {fileID: 7359018954885684696}
   m_Layer: 0
   m_Name: GameStateManager
   m_TagString: Untagged
@@ -25,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8829955906241618380}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.1984761, y: 0.009122093, z: 0.01124225}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -52,7 +54,7 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       sceneName: Village
       name: 
-      missions: 
+      gender: 0
     baseMissionState:
       missionName: 
       stateID: 0
@@ -68,9 +70,111 @@ MonoBehaviour:
     catastropheState:
       state: 0
     score: 0
+    displayTurbine: 0
+    catastropheHappened: 0
   dialogueDisplay: {fileID: 0}
+  inventoryDisplay: {fileID: 0}
+  currentTaskDisplay: {fileID: 0}
+  mainMusicScript: {fileID: 7359018954885684696}
   missionTimer: 0
   missionTimerActive: 0
+  persistentPath: 
+--- !u!82 &7516757513012643046
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8829955906241618380}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: f2721968c4577554b98a918be471b99a, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.04
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &8692892682056343805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,3 +188,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thunder: {fileID: 8300000, guid: 093b5e33b32c8fb46b76f9db47b8f3c5, type: 3}
+--- !u!114 &7359018954885684696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8829955906241618380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35a7322ef2b547baaf034031c08a9993, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scenes:
+  - Village
+  - HydroPlantUpper
+  - HydroPlantLower
+  - River
+  audioSource: {fileID: 7516757513012643046}
