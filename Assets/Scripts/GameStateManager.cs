@@ -127,6 +127,9 @@ public class GameStateManager : MonoBehaviour
 
     public void StartMission(Mission mission)
     {
+        // destroy MayorDialogue if there is one there currently (used for mission manager)
+        Destroy(GameObject.Find("StartMayorDialogue"));
+        
         if (CurrentMission != null) return;
 
         CurrentMission = mission;
