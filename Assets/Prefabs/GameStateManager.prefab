@@ -207,4 +207,9 @@ MonoBehaviour:
   - HydroPlantUpper
   - HydroPlantLower
   - River
+  - Leaderboard
+  - MainMenu
+  - NewGame
+  - LoadGame
+  - ScrollingCredits
   audioSource: {fileID: 7516757513012643046}
