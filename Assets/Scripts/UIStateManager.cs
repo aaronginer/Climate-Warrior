@@ -49,6 +49,6 @@ public class UIStateManager : MonoBehaviour
 
     public bool CanOpenMenuOverlay()
     {
-        return uIState is not UIState.MissionFinish;
+        return uIState is UIState.None or UIState.Menu;
     }
 }

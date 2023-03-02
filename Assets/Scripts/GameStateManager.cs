@@ -40,11 +40,7 @@ public class GameStateManager : MonoBehaviour
         Instance = this;
         persistentPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar;
 
-        BaseMission = new BaseMission();
-        gameState = new GameState
-        {
-            baseMissionState = BaseMission.State
-        };
+        Init();
 
         DontDestroyOnLoad(this);
         
@@ -52,6 +48,15 @@ public class GameStateManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    public void Init()
+    {
+        BaseMission = new BaseMission();
+        gameState = new GameState()
+        {
+            baseMissionState = BaseMission.State
+        };
+    }
+    
     public bool CheckIfMissionAndState(string name, int missionState)
     {
         if (CurrentMission == null)

@@ -21,6 +21,8 @@ namespace TitleMenus
         public void StartGame()
         {
             Time.timeScale = 1;
+            
+            GameStateManager.Instance.Init();
             GameStateManager.Instance.gameState.playerData.name = _nameTextField.text;
             GameStateManager.Instance.gameState.playerData.gender = toggleMale.isOn ? PlayerData.Gender.Male : 
                     toggleFemale.isOn ? PlayerData.Gender.Female : PlayerData.Gender.Diverse;
