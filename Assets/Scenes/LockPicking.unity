@@ -1831,7 +1831,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 170.96396, y: 268.49997}
+  m_AnchoredPosition: {x: 148.96396, y: 199.49994}
   m_SizeDelta: {x: 156.6521, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1322956499
@@ -2032,7 +2032,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 20, y: 268.49997}
+  m_AnchoredPosition: {x: -2, y: 199.5}
   m_SizeDelta: {x: 156.6521, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1799565779
@@ -2291,6 +2291,10 @@ PrefabInstance:
       value: 'You have to crack the lock within the given time.
 
 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563446757128957705, guid: ac174b55789542143a5736fa1a12cb0a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -2.499878
       objectReference: {fileID: 0}
     - target: {fileID: 5768767263339793593, guid: ac174b55789542143a5736fa1a12cb0a, type: 3}
       propertyPath: restartGame

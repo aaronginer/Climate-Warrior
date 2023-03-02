@@ -64,7 +64,7 @@ namespace Missions.Sabotage
         private void HandleCommandLineInput(string input)
         {
             TextMeshProUGUI outField = outputFieldCommandLine.GetComponent<TextMeshProUGUI>();
-            switch (input)
+            switch (input.ToLower())
             {
                 case "help":
                     outField.color = Color.white;
