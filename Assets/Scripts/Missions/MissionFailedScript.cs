@@ -57,7 +57,7 @@ namespace Missions
         // Spawns a mission failed window. Use when mission is completed. Stat calculations happen automatically.
         public static void MissionFailed()
         {
-            Debug.Log(GameStateManager.Instance.currentTaskDisplay);
+            GameStateManager.Instance.GetSoundScript().SoundMissionFail();
             GameStateManager.Instance.SetCurrentTaskActive(false);
             var missionCompletePrefab = Resources.Load("Missions/MissionFailed") as GameObject;
             Instantiate(missionCompletePrefab, GameObject.Find("Canvas").transform);

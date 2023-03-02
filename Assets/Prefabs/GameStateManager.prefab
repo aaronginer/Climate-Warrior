@@ -190,6 +190,8 @@ MonoBehaviour:
   thunder: {fileID: 8300000, guid: 093b5e33b32c8fb46b76f9db47b8f3c5, type: 3}
   virusKill: {fileID: 8300000, guid: e497a8e22f2053e4db5fb2bc59790133, type: 3}
   rotatePipe: {fileID: 8300000, guid: 7d15c4a22d2c7dc499d417adad871ae1, type: 3}
+  missionFail: {fileID: 8300000, guid: 89299b3578a61de4aafd1c1d0f7f836b, type: 3}
+  missionSuccess: {fileID: 8300000, guid: c3d653e8eb9cb0a46ad63fdc8d831193, type: 3}
 --- !u!114 &7359018954885684696
 MonoBehaviour:
   m_ObjectHideFlags: 0
