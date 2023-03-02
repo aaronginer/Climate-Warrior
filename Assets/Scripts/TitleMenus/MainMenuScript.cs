@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,6 +6,11 @@ namespace TitleMenus
 {
     public class MainMenuScript : MonoBehaviour
     {
+        private void Start()
+        {
+            Time.timeScale = 1.0f;
+        }
+
         public void NewGame()
         {
             SceneManager.LoadScene(Constants.SceneNames.newGame, LoadSceneMode.Single);
