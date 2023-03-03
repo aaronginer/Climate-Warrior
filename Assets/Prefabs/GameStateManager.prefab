@@ -214,4 +214,5 @@ MonoBehaviour:
   - NewGame
   - LoadGame
   - ScrollingCredits
+  - OpeningCutscene
   audioSource: {fileID: 7516757513012643046}
