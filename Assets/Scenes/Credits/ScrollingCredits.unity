@@ -340,7 +340,11 @@ MonoBehaviour:
 
 
 
-    Environment Assets
+    Environment/Item Assets
+
+
+
+
 
 
 
@@ -543,6 +547,14 @@ MonoBehaviour:
 
     https://www.reddit.com/r/PixelArt/comments/kgpzry/skull_16x16/
 
+    https://www.flaticon.com/free-icon/screens_92867
+
+    https://www.flaticon.com/free-icon/diskette_167489
+
+    http://pixelartmaker.com/art/9dac0e0536ebeae
+
+    https://assetstore.unity.com/packages/2d/fonts/free-pixel-font-thaleah-140059
+
 
     https://mounirtohami.itch.io/pixel-art-gui-elements
 
@@ -553,7 +565,17 @@ MonoBehaviour:
 
     https://pixabay.com/sound-effects/thunder-25689/
 
-    https://pixabay.com/sound-effects/soft-rain-ambient-111154/'
+    https://pixabay.com/sound-effects/soft-rain-ambient-111154/
+
+    https://pixabay.com/sound-effects/roomtone03-24954/
+
+    https://pixabay.com/sound-effects/knife-stab-sound-effect-36354/
+
+    https://pixabay.com/sound-effects/click-for-game-menu-131903/
+
+    https://pixabay.com/sound-effects/success-fanfare-trumpets-6185/
+
+    https://pixabay.com/sound-effects/failfare-86009/'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e6bd816034aa78f498a4907915736555, type: 2}
   m_sharedMaterial: {fileID: 6434253008268325871, guid: e6bd816034aa78f498a4907915736555, type: 2}
@@ -665,7 +687,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1852}
+  m_AnchoredPosition: {x: 0, y: -2196}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &435290317
@@ -1178,7 +1200,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1202}
+  m_AnchoredPosition: {x: 0, y: -1520}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2000218231
